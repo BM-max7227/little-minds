@@ -7,13 +7,14 @@ const topicCards = [
   { id: "anxiety", title: "Anxiety", icon: "🌊" },
   { id: "stress", title: "Stress About School", icon: "📚" },
   { id: "sad", title: "Sad or Low", icon: "🌧️" },
-  { id: "sleep", title: "Trouble Sleeping", icon: "😴" },
-  { id: "conflict", title: "Family or Friend Conflict", icon: "💔" },
-  { id: "online", title: "Online or Social Media Pressure", icon: "📱" },
-  { id: "angry", title: "Feeling Angry a Lot", icon: "😠" },
-  { id: "body", title: "Body Image Worries", icon: "🪞" },
+  { id: "sleep", title: "Trouble Sleeping", icon: "🌙" },
+  { id: "conflict", title: "Family or Friend Conflict", icon: "💬" },
+  { id: "socialmedia", title: "Online or Social Media Pressure", icon: "📱" },
+  { id: "anger", title: "Feeling Angry a Lot", icon: "🔥" },
+  { id: "bodyimage", title: "Body Image Worries", icon: "💪" },
   { id: "bullying", title: "Bullying", icon: "🛡️" },
-  { id: "other", title: "Other", icon: "💭" },
+  { id: "grief", title: "Grief and Loss", icon: "🕊️" },
+  { id: "other", title: "Other", icon: "🌈" },
 ];
 
 export default function KidHome() {

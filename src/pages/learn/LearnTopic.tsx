@@ -44,11 +44,7 @@ export default function LearnTopic() {
 
           <section className="mb-8">
             <h2 className="text-2xl font-semibold mb-4">What It Is</h2>
-            <div className="space-y-4">
-              {topic.whatItIs.map((paragraph, index) => (
-                <p key={index} className="text-base leading-relaxed">{paragraph}</p>
-              ))}
-            </div>
+            <p className="text-base leading-relaxed">{topic.description}</p>
           </section>
 
           <Separator className="my-8" />
@@ -63,7 +59,7 @@ export default function LearnTopic() {
                 </CardHeader>
                 <CardContent>
                   <ul className="space-y-2">
-                    {topic.howItLooks.feelings.map((feeling, index) => (
+                    {topic.howItFeels.feelings.map((feeling, index) => (
                       <li key={index} className="text-sm flex items-start gap-2">
                         <span className="text-primary mt-1">•</span>
                         <span>{feeling}</span>
@@ -79,7 +75,7 @@ export default function LearnTopic() {
                 </CardHeader>
                 <CardContent>
                   <ul className="space-y-2">
-                    {topic.howItLooks.behaviors.map((behavior, index) => (
+                    {topic.howItFeels.behaviors.map((behavior, index) => (
                       <li key={index} className="text-sm flex items-start gap-2">
                         <span className="text-primary mt-1">•</span>
                         <span>{behavior}</span>
@@ -95,7 +91,7 @@ export default function LearnTopic() {
                 </CardHeader>
                 <CardContent>
                   <ul className="space-y-2">
-                    {topic.howItLooks.bodySigns.map((sign, index) => (
+                    {topic.howItFeels.bodySigns.map((sign, index) => (
                       <li key={index} className="text-sm flex items-start gap-2">
                         <span className="text-primary mt-1">•</span>
                         <span>{sign}</span>

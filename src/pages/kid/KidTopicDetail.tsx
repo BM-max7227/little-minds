@@ -156,7 +156,19 @@ export default function KidTopicDetail() {
         <div className="mt-12 space-y-6">
           <Card className="bg-primary/5 border-primary/20">
             <CardContent className="pt-6">
-              <p className="text-center text-lg font-medium italic">"Asking for help isn't a sigh of weakness, its a sign of strength" - Barack Obama</p>
+              <p className="text-center text-lg font-medium italic">
+                {topicId === "anxiety" && "Asking for help is not a sign of weakness, it is a sign of strength"}
+                {topicId === "stress" && "Taking breaks is part of working hard"}
+                {topicId === "sad" && "It is okay to not be okay sometimes"}
+                {topicId === "sleep" && "You deserve good rest every night"}
+                {topicId === "conflict" && "Every problem can be talked through"}
+                {topicId === "socialmedia" && "You are good enough just as you are"}
+                {topicId === "anger" && "Calming down takes strength and practice"}
+                {topicId === "bodyimage" && "You are more than how you look"}
+                {topicId === "bullying" && "You do not have to face this alone"}
+                {topicId === "grief" && "You can heal while keeping their memory close"}
+                {topicId === "other" && "Every feeling is worth listening to"}
+              </p>
             </CardContent>
           </Card>
 
@@ -164,6 +176,11 @@ export default function KidTopicDetail() {
             <Button onClick={() => navigate(`/learn/${topicId}`)} variant="outline" size="lg">
               Learn more about this topic
             </Button>
+          </div>
+
+          <div className="text-center text-sm text-muted-foreground pt-8 border-t">
+            <p>Made with care by Bode Munk</p>
+            <p>This is a non profit project to help kids parents and people learn about mental health and ways to help</p>
           </div>
         </div>
       </main>

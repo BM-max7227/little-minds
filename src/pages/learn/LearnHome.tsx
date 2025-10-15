@@ -22,7 +22,7 @@ export default function LearnHome() {
                 <CardHeader>
                   <CardTitle className="text-xl">{topic.title}</CardTitle>
                   <CardDescription className="line-clamp-3">
-                    {topic.whatItIs[0].substring(0, 120)}...
+                    {topic.description.substring(0, 120)}...
                   </CardDescription>
                 </CardHeader>
               </Card>
