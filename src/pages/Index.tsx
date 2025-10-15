@@ -1,9 +1,20 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import heroImage from "@/assets/hero-kids-mental-health.jpg";
-import { Heart, Smile, Users, BookOpen, Sparkles, Shield } from "lucide-react";
+import { Heart } from "lucide-react";
+import { ChallengeDetailDialog } from "@/components/ChallengeDetailDialog";
+import { challengeData } from "@/data/challengeData";
+import { useState } from "react";
 
 const Index = () => {
+  const [selectedChallenge, setSelectedChallenge] = useState<typeof challengeData[0] | null>(null);
+  const [dialogOpen, setDialogOpen] = useState(false);
+
+  const handleChallengeClick = (challenge: typeof challengeData[0]) => {
+    setSelectedChallenge(challenge);
+    setDialogOpen(true);
+  };
+
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
@@ -51,78 +62,35 @@ const Index = () => {
           </div>
 
           <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-            <Card className="border-2 hover:shadow-lg transition-shadow">
-              <CardHeader>
-                <Smile className="h-12 w-12 text-primary mb-4" />
-                <CardTitle>Anxiety & Worry</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-muted-foreground">
-                  Feeling nervous or worried about school, friends, or new situations is common. Persistent worry may need support.
-                </p>
-              </CardContent>
-            </Card>
-
-            <Card className="border-2 hover:shadow-lg transition-shadow">
-              <CardHeader>
-                <Heart className="h-12 w-12 text-secondary mb-4" />
-                <CardTitle>Sadness & Low Mood</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-muted-foreground">
-                  Occasional sadness is normal, but prolonged low mood, loss of interest, or withdrawal may signal depression.
-                </p>
-              </CardContent>
-            </Card>
-
-            <Card className="border-2 hover:shadow-lg transition-shadow">
-              <CardHeader>
-                <Users className="h-12 w-12 text-accent mb-4" />
-                <CardTitle>Social Challenges</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-muted-foreground">
-                  Difficulty making friends, peer pressure, or bullying can significantly impact a child's mental wellbeing.
-                </p>
-              </CardContent>
-            </Card>
-
-            <Card className="border-2 hover:shadow-lg transition-shadow">
-              <CardHeader>
-                <Sparkles className="h-12 w-12 text-primary mb-4" />
-                <CardTitle>Emotional Regulation</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-muted-foreground">
-                  Learning to manage big feelings like anger, frustration, or excitement is an important developmental skill.
-                </p>
-              </CardContent>
-            </Card>
-
-            <Card className="border-2 hover:shadow-lg transition-shadow">
-              <CardHeader>
-                <Shield className="h-12 w-12 text-secondary mb-4" />
-                <CardTitle>Trauma & Stress</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-muted-foreground">
-                  Experiencing difficult events can affect children deeply. Professional support can help them process and heal.
-                </p>
-              </CardContent>
-            </Card>
-
-            <Card className="border-2 hover:shadow-lg transition-shadow">
-              <CardHeader>
-                <BookOpen className="h-12 w-12 text-accent mb-4" />
-                <CardTitle>Learning Difficulties</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-muted-foreground">
-                  Struggling with school can affect self-esteem. Understanding and accommodations can make a huge difference.
-                </p>
-              </CardContent>
-            </Card>
+            {challengeData.map((challenge) => (
+              <Card 
+                key={challenge.id}
+                className="border-2 hover:shadow-lg transition-all cursor-pointer hover:scale-105"
+                onClick={() => handleChallengeClick(challenge)}
+              >
+                <CardHeader>
+                  <div className={challenge.color}>
+                    {challenge.icon}
+                  </div>
+                  <CardTitle className="mt-4">{challenge.title}</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-muted-foreground mb-4">
+                    {challenge.description}
+                  </p>
+                  <Button variant="outline" size="sm" className="w-full">
+                    Learn More & Get Help
+                  </Button>
+                </CardContent>
+              </Card>
+            ))}
           </div>
+
+          <ChallengeDetailDialog
+            challenge={selectedChallenge}
+            open={dialogOpen}
+            onOpenChange={setDialogOpen}
+          />
         </div>
       </section>
 
