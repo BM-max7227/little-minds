@@ -17,6 +17,7 @@ export function Header({ audience }: HeaderProps) {
           { label: "Guides", path: "/parent/quick-guide" },
           { label: "Find Support", path: "/parent/find-support" },
           { label: "Tools", path: "/parent/tools" },
+          { label: "About Us", path: "/about" },
           { label: "FAQ", path: "/faq" },
         ];
       case "kid":
@@ -24,12 +25,14 @@ export function Header({ audience }: HeaderProps) {
           { label: "Home", path: "/kid" },
           { label: "Pick a Topic", path: "/kid" },
           { label: "Try This", path: "/kid/try-this" },
+          { label: "About Us", path: "/about" },
           { label: "FAQ", path: "/faq" },
         ];
       case "learn":
         return [
           { label: "Home", path: "/learn" },
           { label: "Topics", path: "/learn" },
+          { label: "About Us", path: "/about" },
           { label: "FAQ", path: "/faq" },
         ];
       default:

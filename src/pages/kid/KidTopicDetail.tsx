@@ -187,6 +187,26 @@ export default function KidTopicDetail() {
             </Card>
           </TabsContent>
         </Tabs>
+
+        <div className="mt-12 space-y-6">
+          <Card className="bg-primary/5 border-primary/20">
+            <CardContent className="pt-6">
+              <p className="text-center text-lg font-medium italic">
+                "It's okay to ask for help — it means you're strong."
+              </p>
+            </CardContent>
+          </Card>
+
+          <div className="flex justify-center">
+            <Button
+              onClick={() => navigate(`/learn/${topicId}`)}
+              variant="outline"
+              size="lg"
+            >
+              Learn more about this topic
+            </Button>
+          </div>
+        </div>
       </main>
     </div>
   );
