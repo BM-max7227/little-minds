@@ -12,6 +12,10 @@ import ConversationStarters from "./pages/parent/ConversationStarters";
 import FindSupport from "./pages/parent/FindSupport";
 import Tools from "./pages/parent/Tools";
 import KidHome from "./pages/kid/KidHome";
+import KidTopicDetail from "./pages/kid/KidTopicDetail";
+import TryThis from "./pages/kid/TryThis";
+import LearnHome from "./pages/learn/LearnHome";
+import LearnTopic from "./pages/learn/LearnTopic";
 import FAQ from "./pages/FAQ";
 
 const queryClient = new QueryClient();
@@ -30,6 +34,10 @@ const App = () => (
           <Route path="/parent/find-support" element={<FindSupport />} />
           <Route path="/parent/tools" element={<Tools />} />
           <Route path="/kid" element={<KidHome />} />
+          <Route path="/kid/:topicId" element={<KidTopicDetail />} />
+          <Route path="/kid/try-this" element={<TryThis />} />
+          <Route path="/learn" element={<LearnHome />} />
+          <Route path="/learn/:topicId" element={<LearnTopic />} />
           <Route path="/faq" element={<FAQ />} />
           <Route path="*" element={<NotFound />} />
         </Routes>

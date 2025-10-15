@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { AlertCircle, Phone, MessageSquare, ExternalLink } from "lucide-react";
 import { Link } from "react-router-dom";
+import { AccessibilityControls } from "@/components/AccessibilityControls";
 
 interface HeaderProps {
   audience?: "parent" | "kid" | "learn";
@@ -59,6 +60,7 @@ export function Header({ audience }: HeaderProps) {
         )}
 
         <div className="flex items-center space-x-2">
+          <AccessibilityControls />
           <Sheet>
             <SheetTrigger asChild>
               <Button variant="destructive" size="sm">
