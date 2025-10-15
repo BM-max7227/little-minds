@@ -8,31 +8,29 @@ import { Timer } from "@/components/Timer";
 import { topics } from "@/data/kidTopics";
 import { useState, useEffect } from "react";
 import { ArrowLeft } from "lucide-react";
-
 export default function KidTopicDetail() {
-  const { topicId } = useParams<{ topicId: string }>();
+  const {
+    topicId
+  } = useParams<{
+    topicId: string;
+  }>();
   const navigate = useNavigate();
   const topic = topicId ? topics[topicId] : null;
-
   const [journalEntry, setJournalEntry] = useState("");
-
   useEffect(() => {
     if (topicId) {
       const saved = localStorage.getItem(`journal-${topicId}`);
       if (saved) setJournalEntry(saved);
     }
   }, [topicId]);
-
   const saveJournal = (value: string) => {
     setJournalEntry(value);
     if (topicId) {
       localStorage.setItem(`journal-${topicId}`, value);
     }
   };
-
   if (!topic) {
-    return (
-      <div className="min-h-screen bg-background">
+    return <div className="min-h-screen bg-background">
         <Header audience="kid" />
         <main className="container mx-auto px-4 py-8">
           <p>Topic not found</p>
@@ -41,19 +39,12 @@ export default function KidTopicDetail() {
             Back to Topics
           </Button>
         </main>
-      </div>
-    );
+      </div>;
   }
-
-  return (
-    <div className="min-h-screen bg-background">
+  return <div className="min-h-screen bg-background">
       <Header audience="kid" />
       <main className="container mx-auto px-4 py-8 max-w-4xl">
-        <Button
-          variant="ghost"
-          onClick={() => navigate("/kid")}
-          className="mb-4"
-        >
+        <Button variant="ghost" onClick={() => navigate("/kid")} className="mb-4">
           <ArrowLeft className="w-4 h-4 mr-2" />
           Back to Topics
         </Button>
@@ -79,8 +70,7 @@ export default function KidTopicDetail() {
               Quick actions you can do right now to feel better
             </p>
             <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-              {topic.quickActions.map((action, index) => (
-                <Card key={index}>
+              {topic.quickActions.map((action, index) => <Card key={index}>
                   <CardHeader>
                     <CardTitle className="text-lg">{action.title}</CardTitle>
                     <CardDescription>{action.time} min</CardDescription>
@@ -88,8 +78,7 @@ export default function KidTopicDetail() {
                   <CardContent>
                     <p className="text-sm">{action.description}</p>
                   </CardContent>
-                </Card>
-              ))}
+                </Card>)}
             </div>
           </TabsContent>
 
@@ -97,50 +86,38 @@ export default function KidTopicDetail() {
             <p className="text-muted-foreground mb-4">
               Practice these skills to build long-term coping strategies
             </p>
-            {topic.skills.map((skill, index) => (
-              <Card key={index}>
+            {topic.skills.map((skill, index) => <Card key={index}>
                 <CardHeader>
                   <CardTitle>{skill.title}</CardTitle>
                   <CardDescription>{skill.description} • {skill.time} min</CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <ol className="list-decimal list-inside space-y-2">
-                    {skill.steps.map((step, stepIndex) => (
-                      <li key={stepIndex} className="text-sm">{step}</li>
-                    ))}
+                    {skill.steps.map((step, stepIndex) => <li key={stepIndex} className="text-sm">{step}</li>)}
                   </ol>
                   <Timer presetMinutes={skill.time} />
                 </CardContent>
-              </Card>
-            ))}
+              </Card>)}
           </TabsContent>
 
           <TabsContent value="videos" className="space-y-6 mt-6">
             <p className="text-muted-foreground mb-4">
               Short videos to help you understand and cope
             </p>
-            {topic.videos.map((video, index) => (
-              <Card key={index}>
+            {topic.videos.map((video, index) => <Card key={index}>
                 <CardHeader>
                   <CardTitle>{video.title}</CardTitle>
                   <CardDescription>{video.summary}</CardDescription>
                 </CardHeader>
                 <CardContent>
                   <div className="aspect-video w-full bg-muted rounded-md flex items-center justify-center">
-                    <iframe
-                      className="w-full h-full rounded-md"
-                      src={video.url}
-                      title={video.title}
-                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                      allowFullScreen
-                    />
+                    <iframe className="w-full h-full rounded-md" src={video.url} title={video.title} allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen />
                   </div>
                   <p className="text-sm text-muted-foreground mt-2">
                     All videos include captions
                   </p>
                 </CardContent>
-              </Card>
-            ))}
+              </Card>)}
           </TabsContent>
 
           <TabsContent value="journal" className="space-y-4 mt-6">
@@ -155,31 +132,19 @@ export default function KidTopicDetail() {
                 <div className="space-y-2">
                   <h3 className="font-medium">Prompts to help you reflect:</h3>
                   <ul className="list-disc list-inside space-y-1 text-sm text-muted-foreground">
-                    {topic.journalPrompts.map((prompt, index) => (
-                      <li key={index}>{prompt}</li>
-                    ))}
+                    {topic.journalPrompts.map((prompt, index) => <li key={index}>{prompt}</li>)}
                   </ul>
                 </div>
-                <Textarea
-                  placeholder="Start writing here..."
-                  value={journalEntry}
-                  onChange={(e) => saveJournal(e.target.value)}
-                  className="min-h-[200px]"
-                  aria-label="Journal entry"
-                />
+                <Textarea placeholder="Start writing here..." value={journalEntry} onChange={e => saveJournal(e.target.value)} className="min-h-[200px]" aria-label="Journal entry" />
                 <div className="flex justify-between items-center">
                   <p className="text-xs text-muted-foreground">
                     Auto-saved to your device only
                   </p>
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    onClick={() => {
-                      if (confirm("Are you sure you want to clear this journal entry?")) {
-                        saveJournal("");
-                      }
-                    }}
-                  >
+                  <Button variant="outline" size="sm" onClick={() => {
+                  if (confirm("Are you sure you want to clear this journal entry?")) {
+                    saveJournal("");
+                  }
+                }}>
                     Clear Entry
                   </Button>
                 </div>
@@ -191,23 +156,16 @@ export default function KidTopicDetail() {
         <div className="mt-12 space-y-6">
           <Card className="bg-primary/5 border-primary/20">
             <CardContent className="pt-6">
-              <p className="text-center text-lg font-medium italic">
-                "It's okay to ask for help — it means you're strong."
-              </p>
+              <p className="text-center text-lg font-medium italic">"Asking for help isn't a sigh of weakness, its a sign of strength" - Barack Obama</p>
             </CardContent>
           </Card>
 
           <div className="flex justify-center">
-            <Button
-              onClick={() => navigate(`/learn/${topicId}`)}
-              variant="outline"
-              size="lg"
-            >
+            <Button onClick={() => navigate(`/learn/${topicId}`)} variant="outline" size="lg">
               Learn more about this topic
             </Button>
           </div>
         </div>
       </main>
-    </div>
-  );
+    </div>;
 }
