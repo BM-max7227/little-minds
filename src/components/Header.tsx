@@ -110,7 +110,7 @@ export function Header({
                 </div>
 
                 <div className="space-y-3">
-                  <h3 className="font-semibold">Crisis Hotlines</h3>
+                  <h3 className="font-semibold">NHS Mental health services</h3>
                   <div className="space-y-2">
                     <Button variant="outline" className="w-full justify-start" asChild>
                       <a href="tel:placeholder1">
@@ -119,30 +119,19 @@ export function Header({
                       </a>
                     </Button>
                     <Button variant="outline" className="w-full justify-start" asChild>
-                      <a href="tel:placeholder2">
-                        <Phone className="mr-2 h-4 w-4" />
-                        Crisis Hotline 2 (Add Number)
-                      </a>
+                      
                     </Button>
                   </div>
                 </div>
 
                 <div className="space-y-3">
-                  <h3 className="font-semibold">Text Chat Support</h3>
+                  
                   <div className="space-y-2">
                     <Button variant="outline" className="w-full justify-start" asChild>
-                      <a href="#" target="_blank" rel="noopener noreferrer">
-                        <MessageSquare className="mr-2 h-4 w-4" />
-                        Text Chat 1 (Add Link)
-                        <ExternalLink className="ml-auto h-3 w-3" />
-                      </a>
+                      
                     </Button>
                     <Button variant="outline" className="w-full justify-start" asChild>
-                      <a href="#" target="_blank" rel="noopener noreferrer">
-                        <MessageSquare className="mr-2 h-4 w-4" />
-                        Text Chat 2 (Add Link)
-                        <ExternalLink className="ml-auto h-3 w-3" />
-                      </a>
+                      
                     </Button>
                   </div>
                 </div>
