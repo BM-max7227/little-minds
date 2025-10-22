@@ -4,10 +4,8 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Link } from "react-router-dom";
 import { professionalSupportTypes, choosingTherapist, insuranceAndCost } from "@/data/parentContent";
 import { ExternalLink } from "lucide-react";
-
 export default function FindSupport() {
-  return (
-    <div className="min-h-screen flex flex-col">
+  return <div className="min-h-screen flex flex-col">
       <Header audience="parent" />
       
       <main className="flex-1 py-12">
@@ -22,8 +20,7 @@ export default function FindSupport() {
           <section className="mb-12">
             <h2 className="text-2xl font-bold mb-6">Types of Professional Help</h2>
             <div className="grid md:grid-cols-2 gap-6">
-              {professionalSupportTypes.map((type) => (
-                <Card key={type.title}>
+              {professionalSupportTypes.map(type => <Card key={type.title}>
                   <CardHeader>
                     <CardTitle>{type.title}</CardTitle>
                     <CardDescription>{type.description}</CardDescription>
@@ -33,8 +30,7 @@ export default function FindSupport() {
                       <span className="font-semibold">When to use:</span> {type.when}
                     </p>
                   </CardContent>
-                </Card>
-              ))}
+                </Card>)}
             </div>
           </section>
 
@@ -47,27 +43,21 @@ export default function FindSupport() {
                 <div>
                   <h3 className="font-semibold mb-3">Check Credentials and Training</h3>
                   <ul className="space-y-2 text-muted-foreground">
-                    {choosingTherapist.credentials.map((item, index) => (
-                      <li key={index}>• {item}</li>
-                    ))}
+                    {choosingTherapist.credentials.map((item, index) => <li key={index}>• {item}</li>)}
                   </ul>
                 </div>
 
                 <div>
                   <h3 className="font-semibold mb-3">Consider Fit and Comfort</h3>
                   <ul className="space-y-2 text-muted-foreground">
-                    {choosingTherapist.fitAndComfort.map((item, index) => (
-                      <li key={index}>• {item}</li>
-                    ))}
+                    {choosingTherapist.fitAndComfort.map((item, index) => <li key={index}>• {item}</li>)}
                   </ul>
                 </div>
 
                 <div>
                   <h3 className="font-semibold mb-3">Questions for the First Meeting</h3>
                   <ul className="space-y-2 text-muted-foreground">
-                    {choosingTherapist.firstMeetingQuestions.map((item, index) => (
-                      <li key={index}>• {item}</li>
-                    ))}
+                    {choosingTherapist.firstMeetingQuestions.map((item, index) => <li key={index}>• {item}</li>)}
                   </ul>
                 </div>
               </CardContent>
@@ -81,9 +71,7 @@ export default function FindSupport() {
               </CardHeader>
               <CardContent>
                 <ul className="space-y-2 text-muted-foreground">
-                  {insuranceAndCost.tips.map((tip, index) => (
-                    <li key={index}>• {tip}</li>
-                  ))}
+                  {insuranceAndCost.tips.map((tip, index) => <li key={index}>• {tip}</li>)}
                 </ul>
               </CardContent>
             </Card>
@@ -110,18 +98,7 @@ export default function FindSupport() {
                     <ExternalLink className="h-4 w-4" />
                   </a>
                 </Button>
-                <div className="pt-4">
-                  <p className="text-sm text-muted-foreground mb-2">Search by location:</p>
-                  <input
-                    type="text"
-                    placeholder="Enter your city or zip code"
-                    className="w-full p-2 border rounded-md"
-                    disabled
-                  />
-                  <p className="text-xs text-muted-foreground mt-2">
-                    Location search connects to external directory services
-                  </p>
-                </div>
+                
               </CardContent>
             </Card>
           </section>
@@ -133,6 +110,5 @@ export default function FindSupport() {
           </div>
         </div>
       </main>
-    </div>
-  );
+    </div>;
 }
