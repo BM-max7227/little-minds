@@ -29,9 +29,7 @@ export default function AboutUs() {
               This is a non-profit project, made only to share knowledge, tools, and hope. Everything here is free to use and designed with kindness first.
             </p>
 
-            <p>
-              Our mission is to make learning about mental health easy, safe, and real. Whether you are a parent, a kid, or someone who wants to help, you are part of the change just by being here.
-            </p>
+            <p>Our mission is to make learning about mental health easy and safe. Whether you are a parent, a kid, or someone who wants to help, you are part of the change just by being here.</p>
 
             <p className="text-muted-foreground italic">
               If you would like to support, share ideas, or help make the site better, there will soon be a contact link so you can reach out safely.
