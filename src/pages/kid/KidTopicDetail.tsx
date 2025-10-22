@@ -180,7 +180,7 @@ export default function KidTopicDetail() {
 
           <div className="text-center text-sm text-muted-foreground pt-8 border-t">
             <p>Made with care by Bode Munk</p>
-            <p>This is a non profit project to help kids, parents and people learn about mental health and ways to help</p>
+            <p>This is a non profit project to help kids, parents, and people learn about mental health and ways to help</p>
           </div>
         </div>
       </main>
