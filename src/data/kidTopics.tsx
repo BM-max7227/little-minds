@@ -78,14 +78,14 @@ export const topics: Record<string, Topic> = {
     ],
     videos: [
       {
-        title: "Understanding Anxiety",
-        url: "https://www.youtube.com/embed/placeholder1",
-        summary: "Learn what anxiety is and why it happens",
+        title: "10 Anxiety Coping Skills for Kids",
+        url: "https://www.youtube.com/embed/uiKtq1Q3Cwg",
+        summary: "Learn powerful science backed anxiety coping skills that take 5 minutes or less",
       },
       {
-        title: "Quick Calming Techniques",
-        url: "https://www.youtube.com/embed/placeholder2",
-        summary: "Three fast ways to calm down when you're feeling anxious",
+        title: "Brain Basics: Anxiety for Kids",
+        url: "https://www.youtube.com/embed/eD1wliuHxHI",
+        summary: "Discover how anxiety works in your brain and tips to calm down",
       },
     ],
     journalPrompts: [
@@ -143,14 +143,14 @@ export const topics: Record<string, Topic> = {
     ],
     videos: [
       {
-        title: "Managing School Stress",
-        url: "https://www.youtube.com/embed/placeholder3",
-        summary: "How to handle homework, tests, and pressure",
+        title: "Stress Management Tips for Kids and Teens",
+        url: "https://www.youtube.com/embed/3Nf2Pzcketg",
+        summary: "Learn the definition of stress and five helpful ways of coping",
       },
       {
-        title: "Study Skills That Actually Work",
-        url: "https://www.youtube.com/embed/placeholder4",
-        summary: "Science-backed ways to study better in less time",
+        title: "Managing Stress for Kids",
+        url: "https://www.youtube.com/embed/VdFYeY3RkAA",
+        summary: "Identify situations that may lead to stress and ways to manage it",
       },
     ],
     journalPrompts: [
@@ -207,14 +207,14 @@ export const topics: Record<string, Topic> = {
     ],
     videos: [
       {
-        title: "Why Do I Feel Sad?",
-        url: "https://www.youtube.com/embed/placeholder5",
-        summary: "Understanding sadness and depression in teens",
+        title: "Coping Skills for Managing Big Feelings",
+        url: "https://www.youtube.com/embed/Vs-MyQgfH3A",
+        summary: "Learn how to manage big emotions and feel better",
       },
       {
-        title: "Things That Can Help",
-        url: "https://www.youtube.com/embed/placeholder6",
-        summary: "Practical strategies when you're feeling low",
+        title: "Circle of Control for Good Mental Health",
+        url: "https://www.youtube.com/embed/L9zwduYp9G0",
+        summary: "Focus on what you can control to reduce worry and stress",
       },
     ],
     journalPrompts: [
@@ -272,14 +272,14 @@ export const topics: Record<string, Topic> = {
     ],
     videos: [
       {
-        title: "How to Calm Your Mind Before Sleep",
-        url: "https://www.youtube.com/embed/placeholder7",
-        summary: "Simple ways to settle your thoughts at bedtime",
+        title: "Make A Sleep Routine",
+        url: "https://www.youtube.com/embed/CbXRlLk5Ihk",
+        summary: "Learn about making a sleep routine you can stick to each night",
       },
       {
-        title: "Why Bedtime Routines Help Your Brain Rest",
-        url: "https://www.youtube.com/embed/placeholder8",
-        summary: "Learn what happens in your brain when you sleep",
+        title: "Calm Down Activities to Help You Sleep",
+        url: "https://www.youtube.com/embed/ORRdf_nLc_I",
+        summary: "Quick calming activity to help your mind and body relax before bed",
       },
     ],
     journalPrompts: [
@@ -336,14 +336,14 @@ export const topics: Record<string, Topic> = {
     ],
     videos: [
       {
-        title: "Talking It Out Without Yelling",
-        url: "https://www.youtube.com/embed/placeholder9",
-        summary: "Learn to have calm conversations even when upset",
+        title: "Getting Along: Respect and Conflict Resolution",
+        url: "https://www.youtube.com/embed/Kl8jhIU-w2g",
+        summary: "Learn how to resolve conflicts and get along well with others",
       },
       {
-        title: "How Friends Can Fix Problems Together",
-        url: "https://www.youtube.com/embed/placeholder10",
-        summary: "Real examples of resolving disagreements",
+        title: "Conflict Resolution for Kids: 5 Ways to Work Things Out",
+        url: "https://www.youtube.com/embed/rpIsjkgUPsM",
+        summary: "Five strategies to resolve everyday challenges without fighting",
       },
     ],
     journalPrompts: [
@@ -400,14 +400,14 @@ export const topics: Record<string, Topic> = {
     ],
     videos: [
       {
-        title: "Seeing the Real World Beyond the Screen",
-        url: "https://www.youtube.com/embed/placeholder11",
-        summary: "Why real life is better than edited photos",
+        title: "Social Media and Mental Health for Teens",
+        url: "https://www.youtube.com/embed/zuaeyV29-Cs",
+        summary: "Learn how screen time affects your emotions and what you can do about it",
       },
       {
-        title: "Healthy Ways to Use Social Media",
-        url: "https://www.youtube.com/embed/placeholder12",
-        summary: "Tips for staying safe and happy online",
+        title: "Understanding Your Digital Wellbeing",
+        url: "https://www.youtube.com/embed/L9zwduYp9G0",
+        summary: "Focus on what you can control to feel better about social media",
       },
     ],
     journalPrompts: [
@@ -464,14 +464,14 @@ export const topics: Record<string, Topic> = {
     ],
     videos: [
       {
-        title: "Cooling Down When Angry",
-        url: "https://www.youtube.com/embed/placeholder13",
-        summary: "Techniques to calm down in the moment",
+        title: "Understanding the Anger Iceberg",
+        url: "https://www.youtube.com/embed/AQIQCOY_Im0",
+        summary: "Discover what causes anger and how to understand your feelings better",
       },
       {
-        title: "Kids Share How They Stay Calm",
-        url: "https://www.youtube.com/embed/placeholder14",
-        summary: "Real stories from other kids about managing anger",
+        title: "7 Minute Activity to Help Kids Calm Down",
+        url: "https://www.youtube.com/embed/ORRdf_nLc_I",
+        summary: "Quick emotion regulating activity to help you shake off big feelings",
       },
     ],
     journalPrompts: [
@@ -528,14 +528,14 @@ export const topics: Record<string, Topic> = {
     ],
     videos: [
       {
-        title: "Learning to Like Yourself",
-        url: "https://www.youtube.com/embed/placeholder15",
-        summary: "Building confidence from the inside out",
+        title: "Building Body Confidence and Self Esteem",
+        url: "https://www.youtube.com/embed/Vs-MyQgfH3A",
+        summary: "Learn to manage feelings about yourself and build confidence",
       },
       {
-        title: "What Real Confidence Looks Like",
-        url: "https://www.youtube.com/embed/placeholder16",
-        summary: "Stories from kids about feeling comfortable in their own skin",
+        title: "What Your Body Can Do",
+        url: "https://www.youtube.com/embed/uiKtq1Q3Cwg",
+        summary: "Focus on being healthy and proud of what your body helps you do",
       },
     ],
     journalPrompts: [
@@ -592,14 +592,14 @@ export const topics: Record<string, Topic> = {
     ],
     videos: [
       {
-        title: "What to Do If You Are Bullied",
-        url: "https://www.youtube.com/embed/placeholder17",
-        summary: "Steps to take when bullying happens",
+        title: "Getting Along: What to Do About Bullying",
+        url: "https://www.youtube.com/embed/Kl8jhIU-w2g",
+        summary: "Learn how to respond when someone is being unkind to you or others",
       },
       {
-        title: "How to Support a Friend Who Is Bullied",
-        url: "https://www.youtube.com/embed/placeholder18",
-        summary: "Being a good friend when someone needs help",
+        title: "3 Conflict Resolution Strategies for Kids",
+        url: "https://www.youtube.com/embed/YOwtV9Aeb2M",
+        summary: "Three fun and easy ways to manage conflict and stand up for yourself",
       },
     ],
     journalPrompts: [
@@ -656,14 +656,14 @@ export const topics: Record<string, Topic> = {
     ],
     videos: [
       {
-        title: "Talking About Loss",
-        url: "https://www.youtube.com/embed/placeholder19",
-        summary: "Why it helps to share how you feel",
+        title: "Coping With Grief for Kids",
+        url: "https://www.youtube.com/embed/g5Rqc2IA-lE",
+        summary: "Different ways to cope with grief after losing someone you love",
       },
       {
-        title: "Remembering Someone with Love",
-        url: "https://www.youtube.com/embed/placeholder20",
-        summary: "Ways to honor someone you miss",
+        title: "Helping Children Deal with Grief",
+        url: "https://www.youtube.com/embed/8xbm3_IWthQ",
+        summary: "Learn how to process grief and feel safe while healing",
       },
     ],
     journalPrompts: [
@@ -720,14 +720,14 @@ export const topics: Record<string, Topic> = {
     ],
     videos: [
       {
-        title: "When You Cannot Name Your Feeling",
-        url: "https://www.youtube.com/embed/placeholder21",
-        summary: "How to understand confusing emotions",
+        title: "Emotion Management for Kids",
+        url: "https://www.youtube.com/embed/s9MLn4upP50",
+        summary: "Learn about emotional self regulation and expressing feelings appropriately",
       },
       {
-        title: "Learning to Open Up",
-        url: "https://www.youtube.com/embed/placeholder22",
-        summary: "Why talking about feelings helps",
+        title: "Managing All Your Feelings",
+        url: "https://www.youtube.com/embed/Vs-MyQgfH3A",
+        summary: "How to notice and manage any emotion that comes up",
       },
     ],
     journalPrompts: [
