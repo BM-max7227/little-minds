@@ -3,6 +3,7 @@ import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { AlertCircle, Phone, MessageSquare, ExternalLink } from "lucide-react";
 import { Link } from "react-router-dom";
 import { AccessibilityControls } from "@/components/AccessibilityControls";
+import logo from "@/assets/logo.png";
 interface HeaderProps {
   audience?: "parent" | "kid" | "learn";
 }
@@ -69,8 +70,7 @@ export function Header({
   return <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container flex h-16 items-center justify-between px-4">
         <Link to="/" className="flex items-center space-x-2">
-          <div className="h-8 w-8 rounded-full bg-primary" />
-          <span className="font-semibold text-lg">Little Minds</span>
+          <img src={logo} alt="Little Minds Logo" className="h-10 w-auto" />
         </Link>
 
         {audience && <nav className="hidden md:flex items-center space-x-6">
