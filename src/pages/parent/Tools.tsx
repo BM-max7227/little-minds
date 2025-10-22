@@ -3,7 +3,6 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Link } from "react-router-dom";
 import { Download, FileText } from "lucide-react";
-
 export default function Tools() {
   const handlePrint = (content: string) => {
     const printWindow = window.open('', '', 'width=800,height=600');
@@ -28,7 +27,6 @@ export default function Tools() {
       printWindow.print();
     }
   };
-
   const observationChecklistContent = `
     <h1>Observation Checklist</h1>
     <p>Use this checklist to track changes in your child's behavior and wellbeing over time.</p>
@@ -79,7 +77,6 @@ export default function Tools() {
     <p>How long have they persisted? _______________________________</p>
     <p>Additional observations: _______________________________</p>
   `;
-
   const conversationPlanContent = `
     <h1>Conversation Plan</h1>
     <p>Use this template to prepare for an important conversation with your child.</p>
@@ -122,7 +119,6 @@ export default function Tools() {
     <p>Next steps we agreed on: _______________________________</p>
     <p>Follow-up conversation scheduled for: _______________________________</p>
   `;
-
   const supportPlanContent = `
     <h1>Weekly Support Plan</h1>
     <p>Create a simple plan to support your child this week.</p>
@@ -175,9 +171,7 @@ export default function Tools() {
     <p>What worked well: _______________________________</p>
     <p>What to adjust next week: _______________________________</p>
   `;
-
-  return (
-    <div className="min-h-screen flex flex-col">
+  return <div className="min-h-screen flex flex-col">
       <Header audience="parent" />
       
       <main className="flex-1 py-12">
@@ -199,10 +193,7 @@ export default function Tools() {
                 </CardDescription>
               </CardHeader>
               <CardContent>
-                <Button 
-                  className="w-full"
-                  onClick={() => handlePrint(observationChecklistContent)}
-                >
+                <Button className="w-full" onClick={() => handlePrint(observationChecklistContent)}>
                   <Download className="mr-2 h-4 w-4" />
                   Download / Print
                 </Button>
@@ -218,10 +209,7 @@ export default function Tools() {
                 </CardDescription>
               </CardHeader>
               <CardContent>
-                <Button 
-                  className="w-full"
-                  onClick={() => handlePrint(conversationPlanContent)}
-                >
+                <Button className="w-full" onClick={() => handlePrint(conversationPlanContent)}>
                   <Download className="mr-2 h-4 w-4" />
                   Download / Print
                 </Button>
@@ -237,10 +225,7 @@ export default function Tools() {
                 </CardDescription>
               </CardHeader>
               <CardContent>
-                <Button 
-                  className="w-full"
-                  onClick={() => handlePrint(supportPlanContent)}
-                >
+                <Button className="w-full" onClick={() => handlePrint(supportPlanContent)}>
                   <Download className="mr-2 h-4 w-4" />
                   Download / Print
                 </Button>
@@ -255,7 +240,7 @@ export default function Tools() {
             <CardContent>
               <ul className="space-y-2 text-muted-foreground">
                 <li>• Download and print the tools that feel most helpful</li>
-                <li>• Use them as starting points—adapt them to fit your family</li>
+                <li>• Use them as starting points</li>
                 <li>• Share with your child's therapist or school counselor if appropriate</li>
                 <li>• Review and update regularly as situations change</li>
               </ul>
@@ -269,6 +254,5 @@ export default function Tools() {
           </div>
         </div>
       </main>
-    </div>
-  );
+    </div>;
 }
