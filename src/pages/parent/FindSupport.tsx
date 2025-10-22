@@ -93,10 +93,7 @@ export default function FindSupport() {
                   </a>
                 </Button>
                 <Button variant="outline" className="w-full justify-between" asChild>
-                  <a href="#" target="_blank" rel="noopener noreferrer">
-                    SAMHSA Treatment Locator (Add Link)
-                    <ExternalLink className="h-4 w-4" />
-                  </a>
+                  
                 </Button>
                 
               </CardContent>
