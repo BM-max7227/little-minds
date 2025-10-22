@@ -80,14 +80,7 @@ export function Header({
           </nav>}
 
         <div className="flex items-center space-x-2">
-          <Button 
-            variant="outline" 
-            size="sm"
-            onClick={() => window.location.replace('https://www.google.com')}
-            aria-label="Quick exit to safe page"
-          >
-            Quick Exit
-          </Button>
+          
           <AccessibilityControls />
           <Sheet>
             <SheetTrigger asChild>
