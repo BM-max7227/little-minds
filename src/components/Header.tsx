@@ -80,6 +80,14 @@ export function Header({
           </nav>}
 
         <div className="flex items-center space-x-2">
+          <Button 
+            variant="outline" 
+            size="sm"
+            onClick={() => window.location.replace('https://www.google.com')}
+            aria-label="Quick exit to safe page"
+          >
+            Quick Exit
+          </Button>
           <AccessibilityControls />
           <Sheet>
             <SheetTrigger asChild>
@@ -110,16 +118,13 @@ export function Header({
                 </div>
 
                 <div className="space-y-3">
-                  <h3 className="font-semibold">NHS Mental health services</h3>
+                  <h3 className="font-semibold">NHS Mental Health Services</h3>
                   <div className="space-y-2">
                     <Button variant="outline" className="w-full justify-start" asChild>
-                      <a href="tel:placeholder1">
-                        <Phone className="mr-2 h-4 w-4" />
-                        Crisis Hotline 1 (Add Number)
+                      <a href="https://www.nhs.uk/nhs-services/mental-health-services/" target="_blank" rel="noopener noreferrer">
+                        <ExternalLink className="mr-2 h-4 w-4" />
+                        NHS Mental Health Services
                       </a>
-                    </Button>
-                    <Button variant="outline" className="w-full justify-start" asChild>
-                      
                     </Button>
                   </div>
                 </div>
