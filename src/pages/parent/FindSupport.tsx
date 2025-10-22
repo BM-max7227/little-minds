@@ -87,8 +87,8 @@ export default function FindSupport() {
               </CardHeader>
               <CardContent className="space-y-3">
                 <Button variant="outline" className="w-full justify-between" asChild>
-                  <a href="#" target="_blank" rel="noopener noreferrer">
-                    Psychology Today Therapist Directory (Add Link)
+                  <a href="https://www.counselling-directory.org.uk/city/london" target="_blank" rel="noopener noreferrer">
+                    Counselling Directory - London
                     <ExternalLink className="h-4 w-4" />
                   </a>
                 </Button>
