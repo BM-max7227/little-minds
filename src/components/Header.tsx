@@ -3,64 +3,81 @@ import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { AlertCircle, Phone, MessageSquare, ExternalLink } from "lucide-react";
 import { Link } from "react-router-dom";
 import { AccessibilityControls } from "@/components/AccessibilityControls";
-
 interface HeaderProps {
   audience?: "parent" | "kid" | "learn";
 }
-
-export function Header({ audience }: HeaderProps) {
+export function Header({
+  audience
+}: HeaderProps) {
   const getNavLinks = () => {
     switch (audience) {
       case "parent":
-        return [
-          { label: "Home", path: "/parent" },
-          { label: "Guides", path: "/parent/quick-guide" },
-          { label: "Find Support", path: "/parent/find-support" },
-          { label: "Tools", path: "/parent/tools" },
-          { label: "About Us", path: "/about" },
-          { label: "FAQ", path: "/faq" },
-        ];
+        return [{
+          label: "Home",
+          path: "/parent"
+        }, {
+          label: "Guides",
+          path: "/parent/quick-guide"
+        }, {
+          label: "Find Support",
+          path: "/parent/find-support"
+        }, {
+          label: "Tools",
+          path: "/parent/tools"
+        }, {
+          label: "About Us",
+          path: "/about"
+        }, {
+          label: "FAQ",
+          path: "/faq"
+        }];
       case "kid":
-        return [
-          { label: "Home", path: "/kid" },
-          { label: "Pick a Topic", path: "/kid" },
-          { label: "Try This", path: "/kid/try-this" },
-          { label: "About Us", path: "/about" },
-          { label: "FAQ", path: "/faq" },
-        ];
+        return [{
+          label: "Home",
+          path: "/kid"
+        }, {
+          label: "Pick a Topic",
+          path: "/kid"
+        }, {
+          label: "Try This",
+          path: "/kid/try-this"
+        }, {
+          label: "About Us",
+          path: "/about"
+        }, {
+          label: "FAQ",
+          path: "/faq"
+        }];
       case "learn":
-        return [
-          { label: "Home", path: "/learn" },
-          { label: "Topics", path: "/learn" },
-          { label: "About Us", path: "/about" },
-          { label: "FAQ", path: "/faq" },
-        ];
+        return [{
+          label: "Home",
+          path: "/learn"
+        }, {
+          label: "Topics",
+          path: "/learn"
+        }, {
+          label: "About Us",
+          path: "/about"
+        }, {
+          label: "FAQ",
+          path: "/faq"
+        }];
       default:
         return [];
     }
   };
-
-  return (
-    <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+  return <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container flex h-16 items-center justify-between px-4">
         <Link to="/" className="flex items-center space-x-2">
           <div className="h-8 w-8 rounded-full bg-primary" />
           <span className="font-semibold text-lg">Little Minds</span>
         </Link>
 
-        {audience && (
-          <nav className="hidden md:flex items-center space-x-6">
-            {getNavLinks().map((link) => (
-              <Link
-                key={link.path}
-                to={link.path}
-                className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
-              >
+        {audience && <nav className="hidden md:flex items-center space-x-6">
+            {getNavLinks().map(link => <Link key={link.path} to={link.path} className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
                 {link.label}
-              </Link>
-            ))}
-          </nav>
-        )}
+              </Link>)}
+          </nav>}
 
         <div className="flex items-center space-x-2">
           <AccessibilityControls />
@@ -133,25 +150,10 @@ export function Header({ audience }: HeaderProps) {
             </SheetContent>
           </Sheet>
 
-          <Button
-            variant="ghost"
-            size="sm"
-            asChild
-            className="text-muted-foreground"
-          >
-            <a
-              href="https://www.google.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              onClick={() => {
-                window.history.replaceState(null, "", "/");
-              }}
-            >
-              Quick Exit
-            </a>
+          <Button variant="ghost" size="sm" asChild className="text-muted-foreground">
+            
           </Button>
         </div>
       </div>
-    </header>
-  );
+    </header>;
 }
