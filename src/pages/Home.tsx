@@ -2,8 +2,10 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Header } from "@/components/Header";
 import { Heart, Sparkles, BookOpen } from "lucide-react";
 import { Link } from "react-router-dom";
+
 export default function Home() {
-  return <div className="min-h-screen flex flex-col bg-background">
+  return (
+    <div className="min-h-screen flex flex-col bg-background">
       <Header />
       
       <main className="flex-1 flex items-center justify-center p-4">
@@ -74,8 +76,11 @@ export default function Home() {
           <p className="mb-2">
             This site is for information only and is not a substitute for medical advice.
           </p>
-          <p>If you are in danger or thinking about harming yourselfget help now.</p>
+          <p>
+            If you are in danger or thinking about harming yourself, get help now.
+          </p>
         </div>
       </footer>
-    </div>;
+    </div>
+  );
 }
