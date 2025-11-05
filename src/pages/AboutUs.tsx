@@ -31,9 +31,7 @@ export default function AboutUs() {
 
             <p>Our mission is to make learning about mental health easy and safe. Whether you are a parent, a kid, or someone who wants to help, you are part of the change just by being here.</p>
 
-            <p className="text-muted-foreground italic">
-              If you would like to support, share ideas, or help make the site better, there will soon be a contact link so you can reach out safely.
-            </p>
+            <p className="text-muted-foreground italic">If you would like to support, share ideas, or help make the site better, there will soon be a contact link so you can reach out.</p>
           </div>
 
           
