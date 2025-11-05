@@ -405,9 +405,9 @@ export const topics: Record<string, Topic> = {
         summary: "Learn how screen time affects your emotions and what you can do about it",
       },
       {
-        title: "Understanding Your Digital Wellbeing",
-        url: "https://www.youtube.com/embed/L9zwduYp9G0",
-        summary: "Focus on what you can control to feel better about social media",
+        title: "Social Media and Mental Health for Teens",
+        url: "https://www.youtube.com/embed/EKCkxhAI9Sk",
+        summary: "Understanding how social media affects your mental health and wellbeing",
       },
     ],
     journalPrompts: [
@@ -469,9 +469,9 @@ export const topics: Record<string, Topic> = {
         summary: "Discover what causes anger and how to understand your feelings better",
       },
       {
-        title: "7 Minute Activity to Help Kids Calm Down",
-        url: "https://www.youtube.com/embed/ORRdf_nLc_I",
-        summary: "Quick emotion regulating activity to help you shake off big feelings",
+        title: "Anger Management Techniques For Kids",
+        url: "https://www.youtube.com/embed/lxxpDF45TPA",
+        summary: "5 strategies to help you calm down when your temper rises",
       },
     ],
     journalPrompts: [
@@ -528,14 +528,14 @@ export const topics: Record<string, Topic> = {
     ],
     videos: [
       {
-        title: "Building Body Confidence and Self Esteem",
-        url: "https://www.youtube.com/embed/Vs-MyQgfH3A",
-        summary: "Learn to manage feelings about yourself and build confidence",
+        title: "Confidence and Self-Esteem for Kids",
+        url: "https://www.youtube.com/embed/pdjaxS4ME2A",
+        summary: "Learn five simple tips to improve your confidence and self-esteem",
       },
       {
-        title: "What Your Body Can Do",
-        url: "https://www.youtube.com/embed/uiKtq1Q3Cwg",
-        summary: "Focus on being healthy and proud of what your body helps you do",
+        title: "10 Ways To Build Self-Esteem",
+        url: "https://www.youtube.com/embed/5BuHC8wBdBU",
+        summary: "Actions and thoughts to boost your confidence and feel good about yourself",
       },
     ],
     journalPrompts: [
@@ -592,14 +592,14 @@ export const topics: Record<string, Topic> = {
     ],
     videos: [
       {
-        title: "Getting Along: What to Do About Bullying",
-        url: "https://www.youtube.com/embed/Kl8jhIU-w2g",
-        summary: "Learn how to respond when someone is being unkind to you or others",
+        title: "What is Bullying and How to Stop It",
+        url: "https://www.youtube.com/embed/ffzIhWoi5ac",
+        summary: "Learn about different types of bullying and how to respond and prevent it",
       },
       {
-        title: "3 Conflict Resolution Strategies for Kids",
-        url: "https://www.youtube.com/embed/YOwtV9Aeb2M",
-        summary: "Three fun and easy ways to manage conflict and stand up for yourself",
+        title: "Protect Yourself Rules - Bullying",
+        url: "https://www.youtube.com/embed/4mrE5zgEvt4",
+        summary: "What to do when confronted with bullying and how to stay safe",
       },
     ],
     journalPrompts: [
@@ -725,9 +725,9 @@ export const topics: Record<string, Topic> = {
         summary: "Learn about emotional self regulation and expressing feelings appropriately",
       },
       {
-        title: "Managing All Your Feelings",
-        url: "https://www.youtube.com/embed/Vs-MyQgfH3A",
-        summary: "How to notice and manage any emotion that comes up",
+        title: "Emotional Triggers and Self-Regulation",
+        url: "https://www.youtube.com/embed/Bd46PH9ChC0",
+        summary: "Learn fun and easy strategies to manage your emotions and feel in control",
       },
     ],
     journalPrompts: [
