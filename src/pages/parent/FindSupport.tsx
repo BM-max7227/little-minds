@@ -93,7 +93,10 @@ export default function FindSupport() {
                   </a>
                 </Button>
                 <Button variant="outline" className="w-full justify-between" asChild>
-                  
+                  <a href="https://www.nhs.uk/mental-health/children-and-young-adults/mental-health-support/" target="_blank" rel="noopener noreferrer">
+                    NHS Mental Health Support for Children & Young Adults
+                    <ExternalLink className="h-4 w-4" />
+                  </a>
                 </Button>
                 
               </CardContent>

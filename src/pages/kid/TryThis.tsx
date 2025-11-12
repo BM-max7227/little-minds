@@ -66,10 +66,14 @@ export default function TryThis() {
 
         <div className="flex flex-wrap gap-4 mb-8">
           <div className="space-y-2">
-            
+            <p className="text-sm font-medium">Time available:</p>
             <div className="flex gap-2">
-              
-              {timeOptions.map(option => {})}
+              <Button variant={timeFilter === null ? "default" : "outline"} size="sm" onClick={() => setTimeFilter(null)}>
+                All
+              </Button>
+              {timeOptions.map(option => <Button key={option.value} variant={timeFilter === option.value ? "default" : "outline"} size="sm" onClick={() => setTimeFilter(option.value)}>
+                  {option.label}
+                </Button>)}
             </div>
           </div>
 
