@@ -3,6 +3,8 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Link } from "react-router-dom";
 import { Download, FileText } from "lucide-react";
+import logo from "@/assets/logo.png";
+
 export default function Tools() {
   const handlePrint = (content: string) => {
     const printWindow = window.open('', '', 'width=800,height=600');
@@ -10,17 +12,28 @@ export default function Tools() {
       printWindow.document.write(`
         <html>
           <head>
-            <title>${content}</title>
+            <title>Little Minds</title>
             <style>
               body { font-family: system-ui, sans-serif; padding: 40px; line-height: 1.6; }
+              .logo-header { display: flex; align-items: center; margin-bottom: 30px; padding-bottom: 20px; border-bottom: 2px solid #e5e7eb; }
+              .logo-header img { height: 80px; width: auto; }
               h1 { color: #333; margin-bottom: 20px; }
               h2 { color: #555; margin-top: 30px; margin-bottom: 15px; }
               ul { margin-left: 20px; }
               li { margin-bottom: 10px; }
               .checkbox { display: inline-block; width: 20px; height: 20px; border: 2px solid #333; margin-right: 10px; }
+              .footer { margin-top: 40px; padding-top: 20px; border-top: 1px solid #e5e7eb; text-align: center; color: #666; font-size: 12px; }
             </style>
           </head>
-          <body>${content}</body>
+          <body>
+            <div class="logo-header">
+              <img src="${logo}" alt="Little Minds Logo" />
+            </div>
+            ${content}
+            <div class="footer">
+              <p>Little Minds - Supporting Children's Mental Health</p>
+            </div>
+          </body>
         </html>
       `);
       printWindow.document.close();
