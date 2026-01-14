@@ -1,9 +1,11 @@
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { AlertCircle, Phone, MessageSquare, ExternalLink } from "lucide-react";
+import { AlertCircle, ExternalLink } from "lucide-react";
 import { Link } from "react-router-dom";
 import { AccessibilityControls } from "@/components/AccessibilityControls";
+import { GlobalSearch } from "@/components/GlobalSearch";
 import logo from "@/assets/logo.png";
+
 interface HeaderProps {
   audience?: "parent" | "kid" | "learn";
 }
@@ -80,7 +82,7 @@ export function Header({
           </nav>}
 
         <div className="flex items-center space-x-2">
-          
+          <GlobalSearch />
           <AccessibilityControls />
           <Sheet>
             <SheetTrigger asChild>
