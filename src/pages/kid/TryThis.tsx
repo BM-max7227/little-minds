@@ -2,16 +2,20 @@ import { useState } from "react";
 import { Header } from "@/components/Header";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import { topics, QuickAction, Skill } from "@/data/kidTopics";
-import { Clock } from "lucide-react";
+import { Clock, Search } from "lucide-react";
+
 type ActionItem = (QuickAction | Skill) & {
   topicId: string;
   topicTitle: string;
   type: "quick" | "skill";
 };
+
 export default function TryThis() {
   const [timeFilter, setTimeFilter] = useState<number | null>(null);
   const [feelingFilter, setFeelingFilter] = useState<string | null>(null);
+  const [searchQuery, setSearchQuery] = useState("");
   const allActions: ActionItem[] = [];
   Object.entries(topics).forEach(([topicId, topic]) => {
     topic.quickActions.forEach(action => {
@@ -32,8 +36,18 @@ export default function TryThis() {
     });
   });
   const filteredActions = allActions.filter(action => {
-    if (timeFilter && action.time > timeFilter) return false;
+    // Time filter: show actions that fit within the selected time
+    if (timeFilter !== null && action.time > timeFilter) return false;
+    // Feeling filter
     if (feelingFilter && action.topicId !== feelingFilter) return false;
+    // Search filter
+    if (searchQuery) {
+      const query = searchQuery.toLowerCase();
+      const matchesTitle = action.title.toLowerCase().includes(query);
+      const matchesDescription = action.description.toLowerCase().includes(query);
+      const matchesTopic = action.topicTitle.toLowerCase().includes(query);
+      if (!matchesTitle && !matchesDescription && !matchesTopic) return false;
+    }
     return true;
   });
   const timeOptions = [{
@@ -64,16 +78,41 @@ export default function TryThis() {
           <p className="text-lg text-muted-foreground">Find quick actions and skills based on what you're feeling</p>
         </div>
 
+        {/* Search Input */}
+        <div className="mb-6">
+          <div className="relative max-w-md">
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+            <Input
+              type="text"
+              placeholder="Search activities..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="pl-10"
+            />
+          </div>
+        </div>
+
         <div className="flex flex-wrap gap-4 mb-8">
           <div className="space-y-2">
             <p className="text-sm font-medium">Time available:</p>
             <div className="flex gap-2">
-              <Button variant={timeFilter === null ? "default" : "outline"} size="sm" onClick={() => setTimeFilter(null)}>
-                All
+              <Button 
+                variant={timeFilter === null ? "default" : "outline"} 
+                size="sm" 
+                onClick={() => setTimeFilter(null)}
+              >
+                Any
               </Button>
-              {timeOptions.map(option => <Button key={option.value} variant={timeFilter === option.value ? "default" : "outline"} size="sm" onClick={() => setTimeFilter(option.value)}>
-                  {option.label}
-                </Button>)}
+              {timeOptions.map(option => (
+                <Button 
+                  key={option.value} 
+                  variant={timeFilter === option.value ? "default" : "outline"} 
+                  size="sm" 
+                  onClick={() => setTimeFilter(option.value)}
+                >
+                  ≤ {option.label}
+                </Button>
+              ))}
             </div>
           </div>
 
