@@ -16,7 +16,7 @@ export default function Tools() {
             <style>
               body { font-family: system-ui, sans-serif; padding: 40px; line-height: 1.6; }
               .logo-header { display: flex; align-items: center; margin-bottom: 30px; padding-bottom: 20px; border-bottom: 2px solid #e5e7eb; }
-              .logo-header img { height: 120px; width: auto; }
+              .logo-header img { height: 160px; width: auto; }
               h1 { color: #333; margin-bottom: 20px; }
               h2 { color: #555; margin-top: 30px; margin-bottom: 15px; }
               ul { margin-left: 20px; }
