@@ -36,8 +36,8 @@ export default function TryThis() {
     });
   });
   const filteredActions = allActions.filter(action => {
-    // Time filter: show actions that fit within the selected time
-    if (timeFilter !== null && action.time > timeFilter) return false;
+    // Time filter: show only activities with exact time match
+    if (timeFilter !== null && action.time !== timeFilter) return false;
     // Feeling filter
     if (feelingFilter && action.topicId !== feelingFilter) return false;
     // Search filter
@@ -110,7 +110,7 @@ export default function TryThis() {
                   size="sm" 
                   onClick={() => setTimeFilter(option.value)}
                 >
-                  ≤ {option.label}
+                  {option.label}
                 </Button>
               ))}
             </div>
