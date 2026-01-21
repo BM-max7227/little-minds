@@ -5,8 +5,7 @@ import { Link } from "react-router-dom";
 import { Heart, ExternalLink, Users, BookOpen } from "lucide-react";
 
 export default function Donate() {
-  // Replace these with your actual fundraising page URLs
-  const JUSTGIVING_URL = "https://www.justgiving.com"; // Replace with your JustGiving campaign URL
+  // Replace this with your actual GoFundMe campaign URL
   const GOFUNDME_URL = "https://www.gofundme.com"; // Replace with your GoFundMe campaign URL
 
   return (
@@ -32,30 +31,10 @@ export default function Donate() {
 
         <section className="py-16">
           <div className="container px-4">
-            <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+            <div className="max-w-md mx-auto">
               <Card className="border-2 hover:border-primary/50 transition-colors">
-                <CardHeader>
-                  <CardTitle className="flex items-center gap-2">
-                    <Heart className="h-5 w-5 text-primary" />
-                    JustGiving
-                  </CardTitle>
-                  <CardDescription>
-                    Donate through JustGiving - a trusted UK charity platform
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <Button className="w-full" size="lg" asChild>
-                    <a href={JUSTGIVING_URL} target="_blank" rel="noopener noreferrer">
-                      Donate via JustGiving
-                      <ExternalLink className="ml-2 h-4 w-4" />
-                    </a>
-                  </Button>
-                </CardContent>
-              </Card>
-
-              <Card className="border-2 hover:border-primary/50 transition-colors">
-                <CardHeader>
-                  <CardTitle className="flex items-center gap-2">
+                <CardHeader className="text-center">
+                  <CardTitle className="flex items-center justify-center gap-2">
                     <Heart className="h-5 w-5 text-primary" />
                     GoFundMe
                   </CardTitle>
