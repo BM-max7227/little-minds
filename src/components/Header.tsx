@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { AlertCircle, ExternalLink } from "lucide-react";
+import { AlertCircle, ExternalLink, Heart } from "lucide-react";
 import { Link } from "react-router-dom";
 import { AccessibilityControls } from "@/components/AccessibilityControls";
 import { GlobalSearch } from "@/components/GlobalSearch";
@@ -84,6 +84,12 @@ export function Header({
         <div className="flex items-center space-x-2">
           <GlobalSearch />
           <AccessibilityControls />
+          <Button variant="outline" size="sm" asChild className="text-primary border-primary hover:bg-primary hover:text-primary-foreground">
+            <Link to="/donate">
+              <Heart className="mr-2 h-4 w-4" />
+              Donate
+            </Link>
+          </Button>
           <Sheet>
             <SheetTrigger asChild>
               <Button variant="destructive" size="sm">
