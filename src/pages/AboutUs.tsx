@@ -36,8 +36,7 @@ export default function AboutUs() {
               <div className="text-center sm:text-left">
                 <p className="font-medium">Want to get in touch?</p>
                 <p className="text-muted-foreground">
-                  Email us at <a href="mailto:bodemunk2010@gmail.com" className="text-primary hover:underline font-medium">bodemunk2010@gmail.com</a> or visit our{" "}
-                  <Link to="/contact" className="text-primary hover:underline font-medium">Contact page</Link>
+                  Visit our <Link to="/contact" className="text-primary hover:underline font-medium">Contact page</Link> to send us a message
                 </p>
               </div>
             </div>
