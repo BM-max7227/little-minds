@@ -19,6 +19,7 @@ import LearnTopic from "./pages/learn/LearnTopic";
 import FAQ from "./pages/FAQ";
 import AboutUs from "./pages/AboutUs";
 import Donate from "./pages/Donate";
+import Contact from "./pages/Contact";
 
 const queryClient = new QueryClient();
 
@@ -43,6 +44,7 @@ const App = () => (
           <Route path="/faq" element={<FAQ />} />
           <Route path="/about" element={<AboutUs />} />
           <Route path="/donate" element={<Donate />} />
+          <Route path="/contact" element={<Contact />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
