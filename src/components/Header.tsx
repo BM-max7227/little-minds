@@ -31,6 +31,9 @@ export function Header({
           label: "About Us",
           path: "/about"
         }, {
+          label: "Contact",
+          path: "/contact"
+        }, {
           label: "FAQ",
           path: "/faq"
         }];
@@ -48,6 +51,9 @@ export function Header({
           label: "About Us",
           path: "/about"
         }, {
+          label: "Contact",
+          path: "/contact"
+        }, {
           label: "FAQ",
           path: "/faq"
         }];
@@ -61,6 +67,9 @@ export function Header({
         }, {
           label: "About Us",
           path: "/about"
+        }, {
+          label: "Contact",
+          path: "/contact"
         }, {
           label: "FAQ",
           path: "/faq"
