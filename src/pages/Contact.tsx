@@ -186,16 +186,6 @@ export default function Contact() {
                   )}
                 </CardContent>
               </Card>
-
-              <div className="mt-8 text-center">
-                <p className="text-muted-foreground mb-2">Or email us directly at:</p>
-                <a 
-                  href="mailto:bodemunk2010@gmail.com" 
-                  className="text-primary hover:underline font-medium text-lg"
-                >
-                  bodemunk2010@gmail.com
-                </a>
-              </div>
             </div>
           </div>
         </section>
