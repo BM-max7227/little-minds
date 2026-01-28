@@ -2,7 +2,7 @@ import { Header } from "@/components/Header";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Link } from "react-router-dom";
-import { Heart, Users, Award } from "lucide-react";
+import { Heart, Mail } from "lucide-react";
 export default function AboutUs() {
   return <div className="min-h-screen flex flex-col">
       <Header />
@@ -31,7 +31,16 @@ export default function AboutUs() {
 
             <p>Our mission is to make learning about mental health easy and safe. Whether you are a parent, a kid, or someone who wants to help, you are part of the change just by being here.</p>
 
-            <p className="text-muted-foreground italic">If you would like to support, share ideas, or help make the site better, there will soon be a contact link so you can reach out.</p>
+            <div className="flex flex-col sm:flex-row items-center gap-4 p-6 bg-primary/5 rounded-lg border">
+              <Mail className="h-8 w-8 text-primary flex-shrink-0" />
+              <div className="text-center sm:text-left">
+                <p className="font-medium">Want to get in touch?</p>
+                <p className="text-muted-foreground">
+                  Email us at <a href="mailto:bodemunk2010@gmail.com" className="text-primary hover:underline font-medium">bodemunk2010@gmail.com</a> or visit our{" "}
+                  <Link to="/contact" className="text-primary hover:underline font-medium">Contact page</Link>
+                </p>
+              </div>
+            </div>
           </div>
 
           
