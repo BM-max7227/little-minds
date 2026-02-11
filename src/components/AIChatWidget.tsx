@@ -215,18 +215,23 @@ export function AIChatWidget() {
           </div>
 
           {/* Input */}
-          <div className="border-t px-3 py-2 flex gap-2">
-            <input
-              value={input}
-              onChange={(e) => setInput(e.target.value)}
-              onKeyDown={(e) => e.key === "Enter" && !e.shiftKey && sendMessage()}
-              placeholder="Ask me anything about wellbeing..."
-              className="flex-1 text-sm bg-transparent outline-none placeholder:text-muted-foreground"
-              disabled={isLoading}
-            />
-            <Button size="icon" variant="ghost" onClick={sendMessage} disabled={isLoading || !input.trim()}>
-              <Send className="h-4 w-4" />
-            </Button>
+          <div className="border-t">
+            <div className="px-3 py-2 flex gap-2">
+              <input
+                value={input}
+                onChange={(e) => setInput(e.target.value)}
+                onKeyDown={(e) => e.key === "Enter" && !e.shiftKey && sendMessage()}
+                placeholder="Ask me anything about wellbeing..."
+                className="flex-1 text-sm bg-transparent outline-none placeholder:text-muted-foreground"
+                disabled={isLoading}
+              />
+              <Button size="icon" variant="ghost" onClick={sendMessage} disabled={isLoading || !input.trim()}>
+                <Send className="h-4 w-4" />
+              </Button>
+            </div>
+            <p className="text-[10px] text-muted-foreground text-center pb-2 px-3">
+              Little Minds Helper can make mistakes. Always check important information with a trusted adult or professional.
+            </p>
           </div>
         </div>
       )}
