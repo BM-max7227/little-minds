@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect, useCallback } from "react";
 import { Button } from "@/components/ui/button";
-import { MessageCircle, X, Send, Bot, User, ShieldCheck } from "lucide-react";
+import { MessageCircle, X, Send, Bot, User, ShieldCheck, Maximize2, Minimize2 } from "lucide-react";
 import ReactMarkdown from "react-markdown";
 
 type Msg = { role: "user" | "assistant"; content: string };
@@ -9,6 +9,7 @@ const CHAT_URL = `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/mental-healt
 
 export function AIChatWidget() {
   const [open, setOpen] = useState(false);
+  const [fullscreen, setFullscreen] = useState(false);
   const [messages, setMessages] = useState<Msg[]>([]);
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -128,7 +129,11 @@ export function AIChatWidget() {
 
       {/* Chat panel */}
       {open && (
-        <div className="fixed bottom-4 right-4 z-50 w-[360px] max-w-[calc(100vw-2rem)] h-[520px] max-h-[calc(100vh-2rem)] flex flex-col rounded-2xl border bg-background shadow-2xl overflow-hidden">
+        <div className={`fixed z-50 flex flex-col rounded-2xl border bg-background shadow-2xl overflow-hidden transition-all ${
+          fullscreen
+            ? "inset-2 w-auto h-auto max-w-none max-h-none"
+            : "bottom-4 right-4 w-[360px] max-w-[calc(100vw-2rem)] h-[520px] max-h-[calc(100vh-2rem)]"
+        }`}>
           {/* Header */}
           <div className="flex items-center justify-between bg-primary px-4 py-3 text-primary-foreground">
             <div className="flex items-center gap-2">
@@ -138,9 +143,14 @@ export function AIChatWidget() {
                 <p className="text-xs opacity-80">Here to help with wellbeing</p>
               </div>
             </div>
-            <button onClick={() => setOpen(false)} className="hover:bg-primary-foreground/20 rounded p-1 transition">
-              <X className="h-4 w-4" />
-            </button>
+            <div className="flex items-center gap-1">
+              <button onClick={() => setFullscreen(!fullscreen)} className="hover:bg-primary-foreground/20 rounded p-1 transition" aria-label={fullscreen ? "Exit fullscreen" : "Fullscreen"}>
+                {fullscreen ? <Minimize2 className="h-4 w-4" /> : <Maximize2 className="h-4 w-4" />}
+              </button>
+              <button onClick={() => { setOpen(false); setFullscreen(false); }} className="hover:bg-primary-foreground/20 rounded p-1 transition">
+                <X className="h-4 w-4" />
+              </button>
+            </div>
           </div>
 
           {/* Trust banner */}
