@@ -123,7 +123,7 @@ export function AIChatWidget() {
           aria-label="Open chat assistant"
         >
           <MessageCircle className="h-5 w-5" />
-          <span className="text-sm font-medium hidden sm:inline">Need help? Chat with us</span>
+          <span className="text-sm font-medium hidden sm:inline">Need help? Ask Little Minds Helper</span>
         </button>
       )}
 
