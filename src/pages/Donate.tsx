@@ -78,8 +78,12 @@ export default function Donate() {
               <h1 className="text-4xl md:text-5xl font-bold mb-6">
                 Support Little Minds
               </h1>
-              <p className="text-xl text-muted-foreground mb-8">
+              <p className="text-xl text-muted-foreground mb-4">
                 Your donation helps us provide free mental health resources for children and families who need them most.
+              </p>
+              <p className="text-sm text-muted-foreground/80 inline-flex items-center gap-1.5 bg-muted/50 rounded-full px-4 py-1.5">
+                <Heart className="h-3.5 w-3.5 text-primary" />
+                Little Minds is a registered nonprofit organisation
               </p>
             </div>
           </div>
