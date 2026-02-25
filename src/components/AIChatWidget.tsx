@@ -119,11 +119,10 @@ export function AIChatWidget() {
       {!open && (
         <button
           onClick={() => setOpen(true)}
-          className="fixed bottom-6 right-6 z-50 flex items-center gap-2 rounded-full bg-primary px-5 py-3 text-primary-foreground shadow-lg hover:bg-primary/90 transition-all hover:scale-105"
+          className="fixed bottom-6 right-6 z-50 flex items-center justify-center rounded-full bg-primary h-14 w-14 text-primary-foreground shadow-lg hover:bg-primary/90 transition-all hover:scale-105"
           aria-label="Open chat assistant"
         >
-          <MessageCircle className="h-5 w-5" />
-          <span className="text-sm font-medium hidden sm:inline">Need help? Ask Little Minds Helper</span>
+          <MessageCircle className="h-6 w-6" />
         </button>
       )}
 
