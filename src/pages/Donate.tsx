@@ -81,9 +81,9 @@ export default function Donate() {
               <p className="text-xl text-muted-foreground mb-4">
                 Your donation helps us provide free mental health resources for children and families who need them most.
               </p>
-              <p className="text-sm text-muted-foreground/80 inline-flex items-center gap-1.5 bg-muted/50 rounded-full px-4 py-1.5">
+              <p className="text-sm font-bold text-muted-foreground inline-flex items-center gap-1.5 bg-muted/50 rounded-full px-4 py-1.5">
                 <Heart className="h-3.5 w-3.5 text-primary" />
-                Little Minds is a registered nonprofit organisation
+                Little Minds is a nonprofit organisation
               </p>
             </div>
           </div>
