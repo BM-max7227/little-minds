@@ -64,16 +64,19 @@ export function GlobalSearch() {
 
   // Static pages
   const staticPages: SearchResult[] = [
-    { id: "home", title: "Home", description: "Welcome page", path: "/", category: "Pages" },
-    { id: "parent-home", title: "Parent Home", description: "Resources for parents", path: "/parent", category: "Pages" },
-    { id: "kid-home", title: "Kid Home", description: "Resources for kids", path: "/kid", category: "Pages" },
-    { id: "learn-home", title: "Learn Home", description: "Educational resources", path: "/learn", category: "Pages" },
-    { id: "try-this", title: "Try This", description: "Quick activities and skills", path: "/kid/try-this", category: "Pages" },
-    { id: "find-support", title: "Find Support", description: "Professional help resources", path: "/parent/find-support", category: "Pages" },
-    { id: "quick-guide", title: "Quick Guides", description: "Parenting guides", path: "/parent/quick-guide", category: "Pages" },
-    { id: "tools", title: "Tools", description: "Helpful tools for parents", path: "/parent/tools", category: "Pages" },
-    { id: "about", title: "About Us", description: "Learn about Little Minds", path: "/about", category: "Pages" },
-    { id: "faq-page", title: "FAQ", description: "Frequently asked questions", path: "/faq", category: "Pages" },
+    { id: "home", title: "Home", description: "Welcome to Little Minds", path: "/", category: "Pages" },
+    { id: "parent-home", title: "Parent Home", description: "Resources and guides for parents", path: "/parent", category: "Pages" },
+    { id: "kid-home", title: "Kid Home", description: "Resources and activities for kids", path: "/kid", category: "Pages" },
+    { id: "learn-home", title: "Learn Home", description: "Educational mental health resources", path: "/learn", category: "Pages" },
+    { id: "try-this", title: "Try This", description: "Quick activities and coping skills", path: "/kid/try-this", category: "Pages" },
+    { id: "find-support", title: "Find Support", description: "Find professional help and support services", path: "/parent/find-support", category: "Pages" },
+    { id: "quick-guide", title: "Quick Guides", description: "Parenting guides for mental health", path: "/parent/quick-guide", category: "Pages" },
+    { id: "conversation-starters", title: "Conversation Starters", description: "How to talk to your child about mental health", path: "/parent/conversation-starters", category: "Pages" },
+    { id: "tools", title: "Tools", description: "Helpful tools and resources for parents", path: "/parent/tools", category: "Pages" },
+    { id: "about", title: "About Us", description: "Learn about Little Minds and our mission", path: "/about", category: "Pages" },
+    { id: "faq-page", title: "FAQ", description: "Frequently asked questions about mental health", path: "/faq", category: "Pages" },
+    { id: "donate", title: "Donate", description: "Support Little Minds with a donation — we are a nonprofit", path: "/donate", category: "Pages" },
+    { id: "contact", title: "Contact", description: "Get in touch with the Little Minds team", path: "/contact", category: "Pages" },
   ];
 
   searchResults.push(...staticPages);
