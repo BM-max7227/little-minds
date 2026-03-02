@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Search } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -20,73 +20,103 @@ interface SearchResult {
   description: string;
   path: string;
   category: string;
+  keywords?: string[];
 }
+
+const normalize = (text: string) => text.toLowerCase().trim();
+
+const scoreResult = (result: SearchResult, query: string) => {
+  if (!query) return 1;
+
+  const q = normalize(query);
+  const title = normalize(result.title);
+  const description = normalize(result.description);
+  const category = normalize(result.category);
+  const path = normalize(result.path);
+  const keywords = (result.keywords ?? []).map(normalize);
+
+  const searchable = [title, description, category, path, ...keywords].join(" ");
+  if (!searchable.includes(q)) return 0;
+
+  let score = 10;
+
+  if (title === q) score += 120;
+  if (title.startsWith(q)) score += 80;
+  if (title.split(" ").some((word) => word.startsWith(q))) score += 40;
+  if (path.includes(`/${q}`)) score += 30;
+  if (description.includes(q)) score += 20;
+  if (keywords.some((keyword) => keyword === q)) score += 40;
+  if (keywords.some((keyword) => keyword.includes(q))) score += 20;
+
+  return score;
+};
 
 export function GlobalSearch() {
   const [open, setOpen] = useState(false);
+  const [query, setQuery] = useState("");
   const navigate = useNavigate();
 
-  // Build search index
-  const searchResults: SearchResult[] = [];
+  const searchResults = useMemo(() => {
+    const results: SearchResult[] = [];
 
-  // Kid topics
-  Object.entries(topics).forEach(([id, topic]) => {
-    searchResults.push({
-      id: `kid-${id}`,
-      title: topic.title,
-      description: topic.subtitle,
-      path: `/kid/${id}`,
-      category: "Kids Topics",
+    Object.entries(topics).forEach(([id, topic]) => {
+      results.push({
+        id: `kid-${id}`,
+        title: topic.title,
+        description: topic.subtitle,
+        path: `/kid/${id}`,
+        category: "Kids Topics",
+        keywords: ["kids", "children", "feelings", id],
+      });
     });
-  });
 
-  // Learn topics
-  Object.entries(learnTopics).forEach(([id, topic]) => {
-    searchResults.push({
-      id: `learn-${id}`,
-      title: topic.title,
-      description: topic.description.slice(0, 100) + "...",
-      path: `/learn/${id}`,
-      category: "Learn Topics",
+    Object.entries(learnTopics).forEach(([id, topic]) => {
+      results.push({
+        id: `learn-${id}`,
+        title: topic.title,
+        description: topic.description.slice(0, 120) + "...",
+        path: `/learn/${id}`,
+        category: "Learn Topics",
+        keywords: ["learn", "education", "mental health", id],
+      });
     });
-  });
 
-  // FAQ items
-  faqData.forEach((faq, index) => {
-    searchResults.push({
-      id: `faq-${index}`,
-      title: faq.question,
-      description: faq.answer.slice(0, 100) + "...",
-      path: "/faq",
-      category: "FAQ",
+    faqData.forEach((faq, index) => {
+      results.push({
+        id: `faq-${index}`,
+        title: faq.question,
+        description: faq.answer.slice(0, 120) + "...",
+        path: "/faq",
+        category: "FAQ",
+        keywords: ["faq", "questions", "help"],
+      });
     });
-  });
 
-  // Static pages
-  const staticPages: SearchResult[] = [
-    { id: "home", title: "Home", description: "Welcome to Little Minds", path: "/", category: "Pages" },
-    { id: "parent-home", title: "Parent Home", description: "Resources and guides for parents", path: "/parent", category: "Pages" },
-    { id: "kid-home", title: "Kid Home", description: "Resources and activities for kids", path: "/kid", category: "Pages" },
-    { id: "learn-home", title: "Learn Home", description: "Educational mental health resources", path: "/learn", category: "Pages" },
-    { id: "try-this", title: "Try This", description: "Quick activities and coping skills", path: "/kid/try-this", category: "Pages" },
-    { id: "find-support", title: "Find Support", description: "Find professional help and support services", path: "/parent/find-support", category: "Pages" },
-    { id: "quick-guide", title: "Quick Guides", description: "Parenting guides for mental health", path: "/parent/quick-guide", category: "Pages" },
-    { id: "conversation-starters", title: "Conversation Starters", description: "How to talk to your child about mental health", path: "/parent/conversation-starters", category: "Pages" },
-    { id: "tools", title: "Tools", description: "Helpful tools and resources for parents", path: "/parent/tools", category: "Pages" },
-    { id: "about", title: "About Us", description: "Learn about Little Minds and our mission", path: "/about", category: "Pages" },
-    { id: "faq-page", title: "FAQ", description: "Frequently asked questions about mental health", path: "/faq", category: "Pages" },
-    { id: "donate", title: "Donate", description: "Support Little Minds with a donation — we are a nonprofit", path: "/donate", category: "Pages" },
-    { id: "contact", title: "Contact", description: "Get in touch with the Little Minds team", path: "/contact", category: "Pages" },
-  ];
+    const staticPages: SearchResult[] = [
+      { id: "home", title: "Home", description: "Welcome to Little Minds", path: "/", category: "Pages", keywords: ["landing", "start"] },
+      { id: "parent-home", title: "Parent Home", description: "Resources and guides for parents", path: "/parent", category: "Pages", keywords: ["parent", "caregiver", "family"] },
+      { id: "kid-home", title: "Kid Home", description: "Resources and activities for kids", path: "/kid", category: "Pages", keywords: ["kid", "child", "children"] },
+      { id: "learn-home", title: "Learn Home", description: "Educational mental health resources", path: "/learn", category: "Pages", keywords: ["learn", "education", "articles"] },
+      { id: "try-this", title: "Try This", description: "Quick activities and coping skills", path: "/kid/try-this", category: "Pages", keywords: ["activities", "skills", "coping"] },
+      { id: "find-support", title: "Find Support", description: "Find professional help and support services", path: "/parent/find-support", category: "Pages", keywords: ["support", "help", "therapy", "counselor"] },
+      { id: "quick-guide", title: "Quick Guides", description: "Parenting guides for mental health", path: "/parent/quick-guide", category: "Pages", keywords: ["guide", "tips", "parenting"] },
+      { id: "conversation-starters", title: "Conversation Starters", description: "How to talk to your child about mental health", path: "/parent/conversation-starters", category: "Pages", keywords: ["talk", "conversation", "communication"] },
+      { id: "tools", title: "Tools", description: "Helpful tools and resources for parents", path: "/parent/tools", category: "Pages", keywords: ["tools", "resources", "parent help"] },
+      { id: "about", title: "About Us", description: "Learn about Little Minds and our mission", path: "/about", category: "Pages", keywords: ["about", "mission", "team", "nonprofit"] },
+      { id: "faq-page", title: "FAQ", description: "Frequently asked questions about mental health", path: "/faq", category: "Pages", keywords: ["faq", "questions", "answers"] },
+      { id: "donate", title: "Donate", description: "Support Little Minds with a donation", path: "/donate", category: "Pages", keywords: ["donation", "give", "support", "fund"] },
+      { id: "contact", title: "Contact", description: "Get in touch with the Little Minds team", path: "/contact", category: "Pages", keywords: ["contact", "email", "message", "reach out"] },
+    ];
 
-  searchResults.push(...staticPages);
+    results.push(...staticPages);
+    return results;
+  }, []);
 
-  // Keyboard shortcut
   useEffect(() => {
     const down = (e: KeyboardEvent) => {
       if (e.key === "k" && (e.metaKey || e.ctrlKey)) {
         e.preventDefault();
-        setOpen((open) => !open);
+        setOpen((prev) => !prev);
       }
     };
 
@@ -94,19 +124,34 @@ export function GlobalSearch() {
     return () => document.removeEventListener("keydown", down);
   }, []);
 
+  const rankedResults = useMemo(() => {
+    const q = normalize(query);
+
+    return searchResults
+      .map((result) => ({ result, score: scoreResult(result, q) }))
+      .filter((item) => item.score > 0)
+      .sort((a, b) => b.score - a.score || a.result.title.localeCompare(b.result.title))
+      .slice(0, 50)
+      .map((item) => item.result);
+  }, [searchResults, query]);
+
+  const groupedResults = useMemo(
+    () =>
+      rankedResults.reduce((acc, result) => {
+        if (!acc[result.category]) {
+          acc[result.category] = [];
+        }
+        acc[result.category].push(result);
+        return acc;
+      }, {} as Record<string, SearchResult[]>),
+    [rankedResults],
+  );
+
   const handleSelect = (path: string) => {
     setOpen(false);
+    setQuery("");
     navigate(path);
   };
-
-  // Group results by category
-  const groupedResults = searchResults.reduce((acc, result) => {
-    if (!acc[result.category]) {
-      acc[result.category] = [];
-    }
-    acc[result.category].push(result);
-    return acc;
-  }, {} as Record<string, SearchResult[]>);
 
   return (
     <>
@@ -123,8 +168,18 @@ export function GlobalSearch() {
         </kbd>
       </Button>
 
-      <CommandDialog open={open} onOpenChange={setOpen}>
-        <CommandInput placeholder="Search topics, pages, FAQs..." />
+      <CommandDialog
+        open={open}
+        onOpenChange={(nextOpen) => {
+          setOpen(nextOpen);
+          if (!nextOpen) setQuery("");
+        }}
+      >
+        <CommandInput
+          value={query}
+          onValueChange={setQuery}
+          placeholder="Search the whole site (pages, topics, FAQs)..."
+        />
         <CommandList>
           <CommandEmpty>No results found.</CommandEmpty>
           {Object.entries(groupedResults).map(([category, results]) => (
@@ -132,12 +187,12 @@ export function GlobalSearch() {
               {results.map((result) => (
                 <CommandItem
                   key={result.id}
-                  value={`${result.title} ${result.description}`}
+                  value={result.title}
                   onSelect={() => handleSelect(result.path)}
                 >
                   <div className="flex flex-col">
                     <span className="font-medium">{result.title}</span>
-                    <span className="text-xs text-muted-foreground line-clamp-1">
+                    <span className="line-clamp-1 text-xs text-muted-foreground">
                       {result.description}
                     </span>
                   </div>
@@ -150,3 +205,4 @@ export function GlobalSearch() {
     </>
   );
 }
+
