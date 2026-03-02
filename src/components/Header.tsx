@@ -1,6 +1,7 @@
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { AlertCircle, ExternalLink, Heart } from "lucide-react";
+import { AlertCircle, ExternalLink, Heart, Menu } from "lucide-react";
 import { Link } from "react-router-dom";
 import { AccessibilityControls } from "@/components/AccessibilityControls";
 import { GlobalSearch } from "@/components/GlobalSearch";
@@ -9,101 +10,97 @@ import logo from "@/assets/logo.png";
 interface HeaderProps {
   audience?: "parent" | "kid" | "learn";
 }
-export function Header({
-  audience
-}: HeaderProps) {
+
+export function Header({ audience }: HeaderProps) {
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
   const getNavLinks = () => {
     switch (audience) {
       case "parent":
-        return [{
-          label: "Home",
-          path: "/parent"
-        }, {
-          label: "Guides",
-          path: "/parent/quick-guide"
-        }, {
-          label: "Find Support",
-          path: "/parent/find-support"
-        }, {
-          label: "Tools",
-          path: "/parent/tools"
-        }, {
-          label: "About Us",
-          path: "/about"
-        }, {
-          label: "Contact",
-          path: "/contact"
-        }, {
-          label: "FAQ",
-          path: "/faq"
-        }];
+        return [
+          { label: "Home", path: "/parent" },
+          { label: "Guides", path: "/parent/quick-guide" },
+          { label: "Find Support", path: "/parent/find-support" },
+          { label: "Tools", path: "/parent/tools" },
+          { label: "About Us", path: "/about" },
+          { label: "Contact", path: "/contact" },
+          { label: "FAQ", path: "/faq" },
+        ];
       case "kid":
-        return [{
-          label: "Home",
-          path: "/kid"
-        }, {
-          label: "Pick a Topic",
-          path: "/kid"
-        }, {
-          label: "Try This",
-          path: "/kid/try-this"
-        }, {
-          label: "About Us",
-          path: "/about"
-        }, {
-          label: "Contact",
-          path: "/contact"
-        }, {
-          label: "FAQ",
-          path: "/faq"
-        }];
+        return [
+          { label: "Home", path: "/kid" },
+          { label: "Pick a Topic", path: "/kid" },
+          { label: "Try This", path: "/kid/try-this" },
+          { label: "About Us", path: "/about" },
+          { label: "Contact", path: "/contact" },
+          { label: "FAQ", path: "/faq" },
+        ];
       case "learn":
-        return [{
-          label: "Home",
-          path: "/learn"
-        }, {
-          label: "Topics",
-          path: "/learn"
-        }, {
-          label: "About Us",
-          path: "/about"
-        }, {
-          label: "Contact",
-          path: "/contact"
-        }, {
-          label: "FAQ",
-          path: "/faq"
-        }];
+        return [
+          { label: "Home", path: "/learn" },
+          { label: "Topics", path: "/learn" },
+          { label: "About Us", path: "/about" },
+          { label: "Contact", path: "/contact" },
+          { label: "FAQ", path: "/faq" },
+        ];
       default:
         return [];
     }
   };
-  return <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+
+  const navLinks = getNavLinks();
+
+  return (
+    <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container flex h-16 items-center justify-between px-4">
-        <Link to="/" className="flex items-center space-x-2">
-          <img src={logo} alt="Little Minds Logo" className="h-32 w-auto" />
+        {/* Logo */}
+        <Link to="/" className="flex-shrink-0">
+          <img src={logo} alt="Little Minds Logo" className="h-20 sm:h-32 w-auto" />
         </Link>
 
-        {audience && <nav className="hidden md:flex items-center space-x-6">
-            {getNavLinks().map(link => <Link key={link.path} to={link.path} className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
+        {/* Desktop nav */}
+        {audience && (
+          <nav className="hidden lg:flex items-center space-x-6">
+            {navLinks.map((link) => (
+              <Link
+                key={link.path + link.label}
+                to={link.path}
+                className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
+              >
                 {link.label}
-              </Link>)}
-          </nav>}
+              </Link>
+            ))}
+          </nav>
+        )}
 
-        <div className="flex items-center space-x-2">
+        {/* Right side actions */}
+        <div className="flex items-center gap-1.5 sm:gap-2">
           <GlobalSearch />
-          <AccessibilityControls />
-          <Button variant="outline" size="sm" asChild className="text-primary border-primary hover:bg-primary hover:text-primary-foreground">
+
+          {/* Accessibility - hide on very small screens */}
+          <div className="hidden sm:block">
+            <AccessibilityControls />
+          </div>
+
+          {/* Donate - icon only on mobile, full on sm+ */}
+          <Button
+            variant="outline"
+            size="sm"
+            asChild
+            className="text-primary border-primary hover:bg-primary hover:text-primary-foreground h-9 w-9 p-0 sm:w-auto sm:px-3"
+          >
             <Link to="/donate">
-              <Heart className="mr-2 h-4 w-4" />
-              Donate
+              <Heart className="h-4 w-4 sm:mr-2" />
+              <span className="hidden sm:inline">Donate</span>
             </Link>
           </Button>
+
+          {/* Help Now */}
           <Sheet>
             <SheetTrigger asChild>
-              <Button variant="destructive" size="sm">
-                <AlertCircle className="mr-2 h-4 w-4" />
-                Help Now
+              <Button variant="destructive" size="sm" className="h-9 w-9 p-0 sm:w-auto sm:px-3">
+                <AlertCircle className="h-4 w-4 sm:mr-2" />
+                <span className="hidden sm:inline">Help Now</span>
               </Button>
             </SheetTrigger>
             <SheetContent className="w-full sm:max-w-md">
@@ -131,22 +128,14 @@ export function Header({
                   <h3 className="font-semibold">NHS Mental Health Services</h3>
                   <div className="space-y-2">
                     <Button variant="outline" className="w-full justify-start" asChild>
-                      <a href="https://www.nhs.uk/nhs-services/mental-health-services/" target="_blank" rel="noopener noreferrer">
+                      <a
+                        href="https://www.nhs.uk/nhs-services/mental-health-services/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
                         <ExternalLink className="mr-2 h-4 w-4" />
                         NHS Mental Health Services
                       </a>
-                    </Button>
-                  </div>
-                </div>
-
-                <div className="space-y-3">
-                  
-                  <div className="space-y-2">
-                    <Button variant="outline" className="w-full justify-start" asChild>
-                      
-                    </Button>
-                    <Button variant="outline" className="w-full justify-start" asChild>
-                      
                     </Button>
                   </div>
                 </div>
@@ -154,10 +143,39 @@ export function Header({
             </SheetContent>
           </Sheet>
 
-          <Button variant="ghost" size="sm" asChild className="text-muted-foreground">
-            
-          </Button>
+          {/* Mobile hamburger menu for nav links */}
+          {audience && (
+            <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
+              <SheetTrigger asChild>
+                <Button variant="ghost" size="sm" className="lg:hidden h-9 w-9 p-0">
+                  <Menu className="h-5 w-5" />
+                  <span className="sr-only">Menu</span>
+                </Button>
+              </SheetTrigger>
+              <SheetContent side="right" className="w-72">
+                <nav className="flex flex-col gap-4 pt-8">
+                  {navLinks.map((link) => (
+                    <Link
+                      key={link.path + link.label}
+                      to={link.path}
+                      onClick={() => setMobileMenuOpen(false)}
+                      className="text-base font-medium text-foreground hover:text-primary transition-colors py-2 border-b border-border"
+                    >
+                      {link.label}
+                    </Link>
+                  ))}
+
+                  {/* Show accessibility on mobile menu too */}
+                  <div className="pt-4 sm:hidden">
+                    <p className="text-sm text-muted-foreground mb-2">Accessibility</p>
+                    <AccessibilityControls />
+                  </div>
+                </nav>
+              </SheetContent>
+            </Sheet>
+          )}
         </div>
       </div>
-    </header>;
+    </header>
+  );
 }
