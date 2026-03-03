@@ -58,6 +58,14 @@ const handler = async (req: Request): Promise<Response> => {
       );
     }
 
+    const amountNum = parseInt(amount, 10);
+    if (isNaN(amountNum) || amountNum < 1 || amountNum > 100000) {
+      return new Response(
+        JSON.stringify({ error: "Amount must be a whole number between 1 and 100,000" }),
+        { status: 400, headers: { "Content-Type": "application/json", ...corsHeaders } }
+      );
+    }
+
     // Validate email format
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(donorEmail)) {
