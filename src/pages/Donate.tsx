@@ -33,6 +33,16 @@ export default function Donate() {
       return;
     }
 
+    const amountNum = parseInt(formData.amount, 10);
+    if (isNaN(amountNum) || amountNum < 1 || amountNum > 100000) {
+      toast({
+        title: "Invalid Amount",
+        description: "Please enter a whole number between £1 and £100,000.",
+        variant: "destructive",
+      });
+      return;
+    }
+
     setIsSubmitting(true);
 
     try {
@@ -152,14 +162,19 @@ export default function Donate() {
                         <Label htmlFor="amount">Donation Amount (£) *</Label>
                         <Input
                           id="amount"
-                          type="text"
+                          type="number"
                           placeholder="10"
+                          min={1}
+                          max={100000}
+                          step={1}
                           value={formData.amount}
                           onChange={(e) => {
-                            const value = e.target.value.replace(/[^0-9.]/g, "");
-                            setFormData({ ...formData, amount: value });
+                            const value = e.target.value.replace(/[^0-9]/g, "");
+                            const num = parseInt(value, 10);
+                            if (value === "" || (num >= 0 && num <= 100000)) {
+                              setFormData({ ...formData, amount: value });
+                            }
                           }}
-                          maxLength={10}
                           required
                         />
                       </div>
