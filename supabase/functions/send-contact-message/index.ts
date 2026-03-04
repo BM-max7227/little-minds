@@ -57,7 +57,7 @@ const handler = async (req: Request): Promise<Response> => {
     }
 
     // Validate email format
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
     if (!emailRegex.test(email)) {
       return new Response(
         JSON.stringify({ error: "Invalid email format" }),

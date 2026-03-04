@@ -21,15 +21,18 @@ export default function Contact() {
   });
   const { toast } = useToast();
 
+  const isValidEmail = (email: string) => /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(email);
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
     if (!formData.name.trim() || !formData.email.trim() || !formData.message.trim()) {
-      toast({
-        title: "Missing Information",
-        description: "Please fill in your name, email, and message.",
-        variant: "destructive",
-      });
+      toast({ title: "Missing Information", description: "Please fill in your name, email, and message.", variant: "destructive" });
+      return;
+    }
+
+    if (!isValidEmail(formData.email.trim())) {
+      toast({ title: "Invalid Email", description: "Please enter a valid email address (e.g. name@example.com).", variant: "destructive" });
       return;
     }
 

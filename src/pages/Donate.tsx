@@ -21,25 +21,24 @@ export default function Donate() {
   });
   const { toast } = useToast();
 
+  const isValidEmail = (email: string) => /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(email);
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
     if (!formData.donorName.trim() || !formData.donorEmail.trim() || !formData.amount.trim()) {
-      toast({
-        title: "Missing Information",
-        description: "Please fill in your name, email, and donation amount.",
-        variant: "destructive",
-      });
+      toast({ title: "Missing Information", description: "Please fill in your name, email, and donation amount.", variant: "destructive" });
+      return;
+    }
+
+    if (!isValidEmail(formData.donorEmail.trim())) {
+      toast({ title: "Invalid Email", description: "Please enter a valid email address (e.g. name@example.com).", variant: "destructive" });
       return;
     }
 
     const amountNum = parseInt(formData.amount, 10);
     if (isNaN(amountNum) || amountNum < 1 || amountNum > 100000) {
-      toast({
-        title: "Invalid Amount",
-        description: "Please enter a whole number between £1 and £100,000.",
-        variant: "destructive",
-      });
+      toast({ title: "Invalid Amount", description: "Please enter a whole number between £1 and £100,000.", variant: "destructive" });
       return;
     }
 
