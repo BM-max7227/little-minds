@@ -37,7 +37,13 @@ export default function Tools() {
         </html>
       `);
       printWindow.document.close();
-      printWindow.print();
+      const logoImg = printWindow.document.querySelector('.logo-header img') as HTMLImageElement;
+      if (logoImg && !logoImg.complete) {
+        logoImg.onload = () => printWindow.print();
+        logoImg.onerror = () => printWindow.print();
+      } else {
+        printWindow.print();
+      }
     }
   };
   const observationChecklistContent = `
