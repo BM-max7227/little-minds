@@ -19,20 +19,15 @@ export default function ParentHome() {
               <p className="text-xl text-muted-foreground mb-8">
                 Simple steps, real resources, and ways to talk about tough topics
               </p>
-              <div className="flex justify-center">
-                <Button size="lg" asChild>
-                  <Link to="/parent/quick-guide">
-                    <BookOpen className="mr-2 h-5 w-5" />
-                    Start with a Quick Guide
-                  </Link>
-                </Button>
-              </div>
+              <Button size="lg" variant="outline" onClick={() => document.getElementById('toolkit')?.scrollIntoView({ behavior: 'smooth' })}>
+                Explore Your Toolkit ↓
+              </Button>
             </div>
           </div>
         </section>
 
         {/* Quick Access Guides Section */}
-        <section className="py-16">
+        <section id="toolkit" className="py-16">
           <div className="container px-4">
             <div className="max-w-5xl mx-auto">
               <h2 className="text-3xl font-bold mb-2 text-center">Your Toolkit</h2>
