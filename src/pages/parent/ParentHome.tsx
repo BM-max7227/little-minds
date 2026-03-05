@@ -19,17 +19,11 @@ export default function ParentHome() {
               <p className="text-xl text-muted-foreground mb-8">
                 Simple steps, real resources, and ways to talk about tough topics
               </p>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <div className="flex justify-center">
                 <Button size="lg" asChild>
                   <Link to="/parent/quick-guide">
                     <BookOpen className="mr-2 h-5 w-5" />
                     Start with a Quick Guide
-                  </Link>
-                </Button>
-                <Button size="lg" variant="outline" asChild>
-                  <Link to="/parent/find-support">
-                    <Users className="mr-2 h-5 w-5" />
-                    Find Professional Support
                   </Link>
                 </Button>
               </div>
