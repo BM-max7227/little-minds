@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Header } from "@/components/Header";
 import { Link } from "react-router-dom";
-import { BookOpen, Users, Wrench, MessageCircle } from "lucide-react";
+import { BookOpen, Users, Wrench, MessageCircle, Eye, FileText, ArrowRight } from "lucide-react";
 
 export default function ParentHome() {
   return (
@@ -37,38 +37,92 @@ export default function ParentHome() {
           </div>
         </section>
 
+        {/* Quick Access Guides Section */}
         <section className="py-16">
           <div className="container px-4">
-            <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
-              <Card>
-                <CardHeader>
-                  <MessageCircle className="h-8 w-8 text-primary mb-2" />
-                  <CardTitle>Conversation Starters</CardTitle>
-                  <CardDescription>
-                    Age-appropriate phrases to help you start difficult conversations
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <Button variant="outline" asChild className="w-full">
-                    <Link to="/parent/conversation-starters">Get Conversation Ideas</Link>
-                  </Button>
-                </CardContent>
-              </Card>
+            <div className="max-w-5xl mx-auto">
+              <h2 className="text-3xl font-bold mb-2 text-center">Your Toolkit</h2>
+              <p className="text-muted-foreground text-center mb-10">
+                Everything you need, one tap away
+              </p>
 
-              <Card>
-                <CardHeader>
-                  <Wrench className="h-8 w-8 text-primary mb-2" />
-                  <CardTitle>Tools for You</CardTitle>
-                  <CardDescription>
-                    Downloadable checklists and planning templates
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <Button variant="outline" asChild className="w-full">
-                    <Link to="/parent/tools">View Tools</Link>
-                  </Button>
-                </CardContent>
-              </Card>
+              <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+                <Link to="/parent/quick-guide" className="group">
+                  <Card className="h-full transition-all duration-200 hover:shadow-lg hover:border-primary/40 group-hover:-translate-y-1">
+                    <CardHeader className="pb-3">
+                      <div className="h-12 w-12 rounded-xl bg-primary/10 flex items-center justify-center mb-3">
+                        <Eye className="h-6 w-6 text-primary" />
+                      </div>
+                      <CardTitle className="text-lg">Quick Guide</CardTitle>
+                      <CardDescription>
+                        4 key steps to support your child
+                      </CardDescription>
+                    </CardHeader>
+                    <CardContent className="pt-0">
+                      <span className="text-sm font-medium text-primary inline-flex items-center gap-1 group-hover:gap-2 transition-all">
+                        Read guide <ArrowRight className="h-3.5 w-3.5" />
+                      </span>
+                    </CardContent>
+                  </Card>
+                </Link>
+
+                <Link to="/parent/conversation-starters" className="group">
+                  <Card className="h-full transition-all duration-200 hover:shadow-lg hover:border-primary/40 group-hover:-translate-y-1">
+                    <CardHeader className="pb-3">
+                      <div className="h-12 w-12 rounded-xl bg-primary/10 flex items-center justify-center mb-3">
+                        <MessageCircle className="h-6 w-6 text-primary" />
+                      </div>
+                      <CardTitle className="text-lg">Conversation Starters</CardTitle>
+                      <CardDescription>
+                        Age-appropriate phrases to open up
+                      </CardDescription>
+                    </CardHeader>
+                    <CardContent className="pt-0">
+                      <span className="text-sm font-medium text-primary inline-flex items-center gap-1 group-hover:gap-2 transition-all">
+                        Get ideas <ArrowRight className="h-3.5 w-3.5" />
+                      </span>
+                    </CardContent>
+                  </Card>
+                </Link>
+
+                <Link to="/parent/find-support" className="group">
+                  <Card className="h-full transition-all duration-200 hover:shadow-lg hover:border-primary/40 group-hover:-translate-y-1">
+                    <CardHeader className="pb-3">
+                      <div className="h-12 w-12 rounded-xl bg-primary/10 flex items-center justify-center mb-3">
+                        <Users className="h-6 w-6 text-primary" />
+                      </div>
+                      <CardTitle className="text-lg">Find Support</CardTitle>
+                      <CardDescription>
+                        Professional help & how to choose
+                      </CardDescription>
+                    </CardHeader>
+                    <CardContent className="pt-0">
+                      <span className="text-sm font-medium text-primary inline-flex items-center gap-1 group-hover:gap-2 transition-all">
+                        Explore options <ArrowRight className="h-3.5 w-3.5" />
+                      </span>
+                    </CardContent>
+                  </Card>
+                </Link>
+
+                <Link to="/parent/tools" className="group">
+                  <Card className="h-full transition-all duration-200 hover:shadow-lg hover:border-primary/40 group-hover:-translate-y-1">
+                    <CardHeader className="pb-3">
+                      <div className="h-12 w-12 rounded-xl bg-primary/10 flex items-center justify-center mb-3">
+                        <Wrench className="h-6 w-6 text-primary" />
+                      </div>
+                      <CardTitle className="text-lg">Tools & Templates</CardTitle>
+                      <CardDescription>
+                        Checklists & planning downloads
+                      </CardDescription>
+                    </CardHeader>
+                    <CardContent className="pt-0">
+                      <span className="text-sm font-medium text-primary inline-flex items-center gap-1 group-hover:gap-2 transition-all">
+                        View tools <ArrowRight className="h-3.5 w-3.5" />
+                      </span>
+                    </CardContent>
+                  </Card>
+                </Link>
+              </div>
             </div>
           </div>
         </section>
