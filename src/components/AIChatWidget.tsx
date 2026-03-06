@@ -267,7 +267,19 @@ export function AIChatWidget() {
                 placeholder="Ask me anything about wellbeing..."
                 className="flex-1 text-sm bg-transparent outline-none placeholder:text-muted-foreground"
                 disabled={isLoading}
-              />
+               />
+              {supportsVoice && (
+                <Button
+                  size="icon"
+                  variant="ghost"
+                  onClick={toggleListening}
+                  disabled={isLoading}
+                  className={isListening ? "text-destructive animate-pulse" : ""}
+                  aria-label={isListening ? "Stop listening" : "Voice input"}
+                >
+                  {isListening ? <MicOff className="h-4 w-4" /> : <Mic className="h-4 w-4" />}
+                </Button>
+              )}
               <Button size="icon" variant="ghost" onClick={sendMessage} disabled={isLoading || !input.trim()}>
                 <Send className="h-4 w-4" />
               </Button>
