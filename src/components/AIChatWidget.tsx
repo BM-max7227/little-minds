@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect, useCallback } from "react";
 import { Button } from "@/components/ui/button";
-import { MessageCircle, X, Send, Bot, User, ShieldCheck, Maximize2, Minimize2 } from "lucide-react";
+import { MessageCircle, X, Send, Bot, User, ShieldCheck, Maximize2, Minimize2, Mic, MicOff } from "lucide-react";
 import ReactMarkdown from "react-markdown";
 
 type Msg = { role: "user" | "assistant"; content: string };
@@ -13,7 +13,41 @@ export function AIChatWidget() {
   const [messages, setMessages] = useState<Msg[]>([]);
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [isListening, setIsListening] = useState(false);
   const scrollRef = useRef<HTMLDivElement>(null);
+  const recognitionRef = useRef<any>(null);
+
+  const supportsVoice = typeof window !== "undefined" && ("SpeechRecognition" in window || "webkitSpeechRecognition" in window);
+
+  const toggleListening = useCallback(() => {
+    if (isListening) {
+      recognitionRef.current?.stop();
+      setIsListening(false);
+      return;
+    }
+
+    const SR = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
+    if (!SR) return;
+
+    const recognition = new SR();
+    recognition.lang = "en-US";
+    recognition.interimResults = true;
+    recognition.continuous = false;
+    recognitionRef.current = recognition;
+
+    recognition.onresult = (event: SpeechRecognitionEvent) => {
+      const transcript = Array.from(event.results)
+        .map((r) => r[0].transcript)
+        .join("");
+      setInput(transcript);
+    };
+
+    recognition.onend = () => setIsListening(false);
+    recognition.onerror = () => setIsListening(false);
+
+    recognition.start();
+    setIsListening(true);
+  }, [isListening]);
 
   useEffect(() => {
     scrollRef.current?.scrollTo({ top: scrollRef.current.scrollHeight, behavior: "smooth" });
@@ -233,7 +267,19 @@ export function AIChatWidget() {
                 placeholder="Ask me anything about wellbeing..."
                 className="flex-1 text-sm bg-transparent outline-none placeholder:text-muted-foreground"
                 disabled={isLoading}
-              />
+               />
+              {supportsVoice && (
+                <Button
+                  size="icon"
+                  variant="ghost"
+                  onClick={toggleListening}
+                  disabled={isLoading}
+                  className={isListening ? "text-destructive animate-pulse" : ""}
+                  aria-label={isListening ? "Stop listening" : "Voice input"}
+                >
+                  {isListening ? <MicOff className="h-4 w-4" /> : <Mic className="h-4 w-4" />}
+                </Button>
+              )}
               <Button size="icon" variant="ghost" onClick={sendMessage} disabled={isLoading || !input.trim()}>
                 <Send className="h-4 w-4" />
               </Button>
