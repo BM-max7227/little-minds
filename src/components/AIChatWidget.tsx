@@ -328,36 +328,79 @@ export function AIChatWidget() {
 
           {/* Input */}
           <div className="border-t">
-            <div className="px-3 py-2 flex gap-2">
-              <input
-                value={input}
-                onChange={(e) => setInput(e.target.value)}
-                onKeyDown={(e) => e.key === "Enter" && !e.shiftKey && sendMessage()}
-                placeholder="Ask me anything about wellbeing..."
-                className="flex-1 text-sm bg-transparent outline-none placeholder:text-muted-foreground"
-                disabled={isLoading}
-               />
-              {supportsVoice && (
-                <button
-                  onClick={toggleListening}
+            {isListening ? (
+              /* Recording UI */
+              <div className="px-3 py-2 space-y-2">
+                {/* Waveform bar */}
+                <div className="flex items-center gap-2 bg-muted rounded-xl px-3 py-2">
+                  <div className="flex items-center gap-[2px] flex-1 h-8 justify-center">
+                    {audioLevels.map((level, i) => (
+                      <div
+                        key={i}
+                        className="w-1 rounded-full bg-primary transition-all duration-75"
+                        style={{ height: `${Math.max(4, level * 28)}px` }}
+                      />
+                    ))}
+                    {audioLevels.length === 0 &&
+                      Array.from({ length: 24 }).map((_, i) => (
+                        <div key={i} className="w-1 h-1 rounded-full bg-primary/40" />
+                      ))
+                    }
+                  </div>
+                </div>
+                {/* Transcript preview */}
+                {voiceTranscript && (
+                  <p className="text-xs text-muted-foreground px-1 truncate italic">
+                    "{voiceTranscript}"
+                  </p>
+                )}
+                {/* Actions */}
+                <div className="flex items-center justify-between">
+                  <button
+                    onClick={discardVoice}
+                    className="text-xs text-muted-foreground hover:text-foreground transition flex items-center gap-1"
+                  >
+                    <X className="h-3 w-3" /> Discard
+                  </button>
+                  <div className="flex items-center gap-2">
+                    <button
+                      onClick={discardVoice}
+                      className="h-8 w-8 rounded-full border flex items-center justify-center hover:bg-muted transition"
+                      aria-label="Cancel recording"
+                    >
+                      <X className="h-4 w-4" />
+                    </button>
+                    <button
+                      onClick={confirmVoice}
+                      className="h-8 w-8 rounded-full bg-primary text-primary-foreground flex items-center justify-center hover:bg-primary/90 transition"
+                      aria-label="Use recording"
+                    >
+                      <Check className="h-4 w-4" />
+                    </button>
+                  </div>
+                </div>
+              </div>
+            ) : (
+              /* Normal input */
+              <div className="px-3 py-2 flex gap-2">
+                <input
+                  value={input}
+                  onChange={(e) => setInput(e.target.value)}
+                  onKeyDown={(e) => e.key === "Enter" && !e.shiftKey && sendMessage()}
+                  placeholder="Ask me anything about wellbeing..."
+                  className="flex-1 text-sm bg-transparent outline-none placeholder:text-muted-foreground"
                   disabled={isLoading}
-                  aria-label={isListening ? "Stop listening" : "Voice input"}
-                  className={`relative h-10 w-10 flex items-center justify-center rounded-md transition-colors ${
-                    isListening
-                      ? "text-destructive"
-                      : "text-muted-foreground hover:bg-accent hover:text-accent-foreground"
-                  }`}
-                >
-                  {isListening && (
-                    <span className="absolute inset-1 rounded-full bg-destructive/20 animate-ping" />
-                  )}
-                  <Mic className={`h-4 w-4 relative z-10 ${isListening ? "animate-pulse" : ""}`} />
-                </button>
-              )}
-              <Button size="icon" variant="ghost" onClick={sendMessage} disabled={isLoading || !input.trim()}>
-                <Send className="h-4 w-4" />
-              </Button>
-            </div>
+                />
+                {supportsVoice && (
+                  <Button size="icon" variant="ghost" onClick={startListening} disabled={isLoading} aria-label="Voice input">
+                    <Mic className="h-4 w-4" />
+                  </Button>
+                )}
+                <Button size="icon" variant="ghost" onClick={sendMessage} disabled={isLoading || !input.trim()}>
+                  <Send className="h-4 w-4" />
+                </Button>
+              </div>
+            )}
             <p className={`text-muted-foreground text-center pb-2 px-3 ${fullscreen ? 'text-sm' : 'text-[10px]'}`}>
               Little Minds Helper can make mistakes. Always check important information with a trusted adult or professional.
             </p>
