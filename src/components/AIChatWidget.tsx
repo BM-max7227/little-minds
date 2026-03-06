@@ -269,16 +269,21 @@ export function AIChatWidget() {
                 disabled={isLoading}
                />
               {supportsVoice && (
-                <Button
-                  size="icon"
-                  variant="ghost"
+                <button
                   onClick={toggleListening}
                   disabled={isLoading}
-                  className={isListening ? "text-destructive animate-pulse" : ""}
                   aria-label={isListening ? "Stop listening" : "Voice input"}
+                  className={`relative h-10 w-10 flex items-center justify-center rounded-md transition-colors ${
+                    isListening
+                      ? "text-destructive"
+                      : "text-muted-foreground hover:bg-accent hover:text-accent-foreground"
+                  }`}
                 >
-                  {isListening ? <MicOff className="h-4 w-4" /> : <Mic className="h-4 w-4" />}
-                </Button>
+                  {isListening && (
+                    <span className="absolute inset-1 rounded-full bg-destructive/20 animate-ping" />
+                  )}
+                  <Mic className={`h-4 w-4 relative z-10 ${isListening ? "animate-pulse" : ""}`} />
+                </button>
               )}
               <Button size="icon" variant="ghost" onClick={sendMessage} disabled={isLoading || !input.trim()}>
                 <Send className="h-4 w-4" />
