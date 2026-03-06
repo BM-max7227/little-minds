@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect, useCallback } from "react";
 import { Button } from "@/components/ui/button";
-import { MessageCircle, X, Send, Bot, User, ShieldCheck, Maximize2, Minimize2, Mic } from "lucide-react";
+import { MessageCircle, X, Send, Bot, User, ShieldCheck, Maximize2, Minimize2, Mic, Check } from "lucide-react";
 import ReactMarkdown from "react-markdown";
 
 type Msg = { role: "user" | "assistant"; content: string };
@@ -14,40 +14,109 @@ export function AIChatWidget() {
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [isListening, setIsListening] = useState(false);
+  const [voiceTranscript, setVoiceTranscript] = useState("");
+  const [audioLevels, setAudioLevels] = useState<number[]>([]);
   const scrollRef = useRef<HTMLDivElement>(null);
   const recognitionRef = useRef<any>(null);
+  const audioContextRef = useRef<AudioContext | null>(null);
+  const analyserRef = useRef<AnalyserNode | null>(null);
+  const animFrameRef = useRef<number>(0);
+  const streamRef = useRef<MediaStream | null>(null);
 
   const supportsVoice = typeof window !== "undefined" && ("SpeechRecognition" in window || "webkitSpeechRecognition" in window);
 
-  const toggleListening = useCallback(() => {
-    if (isListening) {
-      recognitionRef.current?.stop();
-      setIsListening(false);
-      return;
-    }
+  const stopListening = useCallback(() => {
+    recognitionRef.current?.stop();
+    recognitionRef.current = null;
+    cancelAnimationFrame(animFrameRef.current);
+    streamRef.current?.getTracks().forEach(t => t.stop());
+    audioContextRef.current?.close();
+    audioContextRef.current = null;
+    setIsListening(false);
+  }, []);
 
+  const startListening = useCallback(async () => {
     const SR = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
     if (!SR) return;
+
+    // Start audio visualizer
+    try {
+      const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+      streamRef.current = stream;
+      const ctx = new AudioContext();
+      audioContextRef.current = ctx;
+      const source = ctx.createMediaStreamSource(stream);
+      const analyser = ctx.createAnalyser();
+      analyser.fftSize = 64;
+      source.connect(analyser);
+      analyserRef.current = analyser;
+
+      const updateLevels = () => {
+        if (!analyserRef.current) return;
+        const data = new Uint8Array(analyserRef.current.frequencyBinCount);
+        analyserRef.current.getByteFrequencyData(data);
+        // Sample 24 bars from the frequency data
+        const bars = Array.from({ length: 24 }, (_, i) => {
+          const idx = Math.floor((i / 24) * data.length);
+          return data[idx] / 255;
+        });
+        setAudioLevels(bars);
+        animFrameRef.current = requestAnimationFrame(updateLevels);
+      };
+      updateLevels();
+    } catch { /* mic denied, still allow speech recognition */ }
 
     const recognition = new SR();
     recognition.lang = "en-US";
     recognition.interimResults = true;
-    recognition.continuous = false;
+    recognition.continuous = true;
     recognitionRef.current = recognition;
 
+    setVoiceTranscript("");
+
     recognition.onresult = (event: SpeechRecognitionEvent) => {
-      const transcript = Array.from(event.results)
-        .map((r) => r[0].transcript)
-        .join("");
-      setInput(transcript);
+      let interim = "";
+      let final = "";
+      for (let i = 0; i < event.results.length; i++) {
+        const r = event.results[i];
+        if (r.isFinal) {
+          final += r[0].transcript;
+        } else {
+          interim += r[0].transcript;
+        }
+      }
+      setVoiceTranscript(final + interim);
     };
 
-    recognition.onend = () => setIsListening(false);
-    recognition.onerror = () => setIsListening(false);
+    recognition.onend = () => {
+      // If still listening, restart (browser can stop after silence)
+      if (recognitionRef.current) {
+        try { recognitionRef.current.start(); } catch { setIsListening(false); }
+      }
+    };
+    recognition.onerror = (e: any) => {
+      if (e.error !== "no-speech") stopListening();
+    };
 
     recognition.start();
     setIsListening(true);
-  }, [isListening]);
+  }, [stopListening]);
+
+  const confirmVoice = useCallback(() => {
+    const text = voiceTranscript.trim();
+    stopListening();
+    setAudioLevels([]);
+    if (text) {
+      setInput(text);
+      setVoiceTranscript("");
+    }
+  }, [voiceTranscript, stopListening]);
+
+  const discardVoice = useCallback(() => {
+    stopListening();
+    setVoiceTranscript("");
+    setAudioLevels([]);
+  }, [stopListening]);
 
   useEffect(() => {
     scrollRef.current?.scrollTo({ top: scrollRef.current.scrollHeight, behavior: "smooth" });
@@ -259,36 +328,79 @@ export function AIChatWidget() {
 
           {/* Input */}
           <div className="border-t">
-            <div className="px-3 py-2 flex gap-2">
-              <input
-                value={input}
-                onChange={(e) => setInput(e.target.value)}
-                onKeyDown={(e) => e.key === "Enter" && !e.shiftKey && sendMessage()}
-                placeholder="Ask me anything about wellbeing..."
-                className="flex-1 text-sm bg-transparent outline-none placeholder:text-muted-foreground"
-                disabled={isLoading}
-               />
-              {supportsVoice && (
-                <button
-                  onClick={toggleListening}
+            {isListening ? (
+              /* Recording UI */
+              <div className="px-3 py-2 space-y-2">
+                {/* Waveform bar */}
+                <div className="flex items-center gap-2 bg-muted rounded-xl px-3 py-2">
+                  <div className="flex items-center gap-[2px] flex-1 h-8 justify-center">
+                    {audioLevels.map((level, i) => (
+                      <div
+                        key={i}
+                        className="w-1 rounded-full bg-primary transition-all duration-75"
+                        style={{ height: `${Math.max(4, level * 28)}px` }}
+                      />
+                    ))}
+                    {audioLevels.length === 0 &&
+                      Array.from({ length: 24 }).map((_, i) => (
+                        <div key={i} className="w-1 h-1 rounded-full bg-primary/40" />
+                      ))
+                    }
+                  </div>
+                </div>
+                {/* Transcript preview */}
+                {voiceTranscript && (
+                  <p className="text-xs text-muted-foreground px-1 truncate italic">
+                    "{voiceTranscript}"
+                  </p>
+                )}
+                {/* Actions */}
+                <div className="flex items-center justify-between">
+                  <button
+                    onClick={discardVoice}
+                    className="text-xs text-muted-foreground hover:text-foreground transition flex items-center gap-1"
+                  >
+                    <X className="h-3 w-3" /> Discard
+                  </button>
+                  <div className="flex items-center gap-2">
+                    <button
+                      onClick={discardVoice}
+                      className="h-8 w-8 rounded-full border flex items-center justify-center hover:bg-muted transition"
+                      aria-label="Cancel recording"
+                    >
+                      <X className="h-4 w-4" />
+                    </button>
+                    <button
+                      onClick={confirmVoice}
+                      className="h-8 w-8 rounded-full bg-primary text-primary-foreground flex items-center justify-center hover:bg-primary/90 transition"
+                      aria-label="Use recording"
+                    >
+                      <Check className="h-4 w-4" />
+                    </button>
+                  </div>
+                </div>
+              </div>
+            ) : (
+              /* Normal input */
+              <div className="px-3 py-2 flex gap-2">
+                <input
+                  value={input}
+                  onChange={(e) => setInput(e.target.value)}
+                  onKeyDown={(e) => e.key === "Enter" && !e.shiftKey && sendMessage()}
+                  placeholder="Ask me anything about wellbeing..."
+                  className="flex-1 text-sm bg-transparent outline-none placeholder:text-muted-foreground"
                   disabled={isLoading}
-                  aria-label={isListening ? "Stop listening" : "Voice input"}
-                  className={`relative h-10 w-10 flex items-center justify-center rounded-md transition-colors ${
-                    isListening
-                      ? "text-destructive"
-                      : "text-muted-foreground hover:bg-accent hover:text-accent-foreground"
-                  }`}
-                >
-                  {isListening && (
-                    <span className="absolute inset-1 rounded-full bg-destructive/20 animate-ping" />
-                  )}
-                  <Mic className={`h-4 w-4 relative z-10 ${isListening ? "animate-pulse" : ""}`} />
-                </button>
-              )}
-              <Button size="icon" variant="ghost" onClick={sendMessage} disabled={isLoading || !input.trim()}>
-                <Send className="h-4 w-4" />
-              </Button>
-            </div>
+                />
+                {supportsVoice && (
+                  <Button size="icon" variant="ghost" onClick={startListening} disabled={isLoading} aria-label="Voice input">
+                    <Mic className="h-4 w-4" />
+                  </Button>
+                )}
+                <Button size="icon" variant="ghost" onClick={sendMessage} disabled={isLoading || !input.trim()}>
+                  <Send className="h-4 w-4" />
+                </Button>
+              </div>
+            )}
             <p className={`text-muted-foreground text-center pb-2 px-3 ${fullscreen ? 'text-sm' : 'text-[10px]'}`}>
               Little Minds Helper can make mistakes. Always check important information with a trusted adult or professional.
             </p>
