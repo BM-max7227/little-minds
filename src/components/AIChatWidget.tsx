@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect, useCallback } from "react";
 import { Button } from "@/components/ui/button";
-import { MessageCircle, X, Send, Bot, User, ShieldCheck, Maximize2, Minimize2, Mic, MicOff } from "lucide-react";
+import { MessageCircle, X, Send, Bot, User, ShieldCheck, Maximize2, Minimize2, Mic } from "lucide-react";
 import ReactMarkdown from "react-markdown";
 
 type Msg = { role: "user" | "assistant"; content: string };
