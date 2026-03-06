@@ -14,40 +14,109 @@ export function AIChatWidget() {
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [isListening, setIsListening] = useState(false);
+  const [voiceTranscript, setVoiceTranscript] = useState("");
+  const [audioLevels, setAudioLevels] = useState<number[]>([]);
   const scrollRef = useRef<HTMLDivElement>(null);
   const recognitionRef = useRef<any>(null);
+  const audioContextRef = useRef<AudioContext | null>(null);
+  const analyserRef = useRef<AnalyserNode | null>(null);
+  const animFrameRef = useRef<number>(0);
+  const streamRef = useRef<MediaStream | null>(null);
 
   const supportsVoice = typeof window !== "undefined" && ("SpeechRecognition" in window || "webkitSpeechRecognition" in window);
 
-  const toggleListening = useCallback(() => {
-    if (isListening) {
-      recognitionRef.current?.stop();
-      setIsListening(false);
-      return;
-    }
+  const stopListening = useCallback(() => {
+    recognitionRef.current?.stop();
+    recognitionRef.current = null;
+    cancelAnimationFrame(animFrameRef.current);
+    streamRef.current?.getTracks().forEach(t => t.stop());
+    audioContextRef.current?.close();
+    audioContextRef.current = null;
+    setIsListening(false);
+  }, []);
 
+  const startListening = useCallback(async () => {
     const SR = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
     if (!SR) return;
+
+    // Start audio visualizer
+    try {
+      const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+      streamRef.current = stream;
+      const ctx = new AudioContext();
+      audioContextRef.current = ctx;
+      const source = ctx.createMediaStreamSource(stream);
+      const analyser = ctx.createAnalyser();
+      analyser.fftSize = 64;
+      source.connect(analyser);
+      analyserRef.current = analyser;
+
+      const updateLevels = () => {
+        if (!analyserRef.current) return;
+        const data = new Uint8Array(analyserRef.current.frequencyBinCount);
+        analyserRef.current.getByteFrequencyData(data);
+        // Sample 24 bars from the frequency data
+        const bars = Array.from({ length: 24 }, (_, i) => {
+          const idx = Math.floor((i / 24) * data.length);
+          return data[idx] / 255;
+        });
+        setAudioLevels(bars);
+        animFrameRef.current = requestAnimationFrame(updateLevels);
+      };
+      updateLevels();
+    } catch { /* mic denied, still allow speech recognition */ }
 
     const recognition = new SR();
     recognition.lang = "en-US";
     recognition.interimResults = true;
-    recognition.continuous = false;
+    recognition.continuous = true;
     recognitionRef.current = recognition;
 
+    setVoiceTranscript("");
+
     recognition.onresult = (event: SpeechRecognitionEvent) => {
-      const transcript = Array.from(event.results)
-        .map((r) => r[0].transcript)
-        .join("");
-      setInput(transcript);
+      let interim = "";
+      let final = "";
+      for (let i = 0; i < event.results.length; i++) {
+        const r = event.results[i];
+        if (r.isFinal) {
+          final += r[0].transcript;
+        } else {
+          interim += r[0].transcript;
+        }
+      }
+      setVoiceTranscript(final + interim);
     };
 
-    recognition.onend = () => setIsListening(false);
-    recognition.onerror = () => setIsListening(false);
+    recognition.onend = () => {
+      // If still listening, restart (browser can stop after silence)
+      if (recognitionRef.current) {
+        try { recognitionRef.current.start(); } catch { setIsListening(false); }
+      }
+    };
+    recognition.onerror = (e: any) => {
+      if (e.error !== "no-speech") stopListening();
+    };
 
     recognition.start();
     setIsListening(true);
-  }, [isListening]);
+  }, [stopListening]);
+
+  const confirmVoice = useCallback(() => {
+    const text = voiceTranscript.trim();
+    stopListening();
+    setAudioLevels([]);
+    if (text) {
+      setInput(text);
+      setVoiceTranscript("");
+    }
+  }, [voiceTranscript, stopListening]);
+
+  const discardVoice = useCallback(() => {
+    stopListening();
+    setVoiceTranscript("");
+    setAudioLevels([]);
+  }, [stopListening]);
 
   useEffect(() => {
     scrollRef.current?.scrollTo({ top: scrollRef.current.scrollHeight, behavior: "smooth" });
