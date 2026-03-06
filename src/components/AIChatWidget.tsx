@@ -29,7 +29,7 @@ export function AIChatWidget() {
     const SR = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
     if (!SR) return;
 
-    const recognition = new SpeechRecognition();
+    const recognition = new SR();
     recognition.lang = "en-US";
     recognition.interimResults = true;
     recognition.continuous = false;
