@@ -70,7 +70,7 @@ export function FeedbackButtons({ userMessage, assistantMessage }: FeedbackButto
   return (
     <div className="mt-1">
       {!showForm && (
-        <div className="flex items-center gap-1">
+        <div className="flex items-center gap-0">
           <button
             onClick={handleThumbsUp}
             className="p-1 rounded hover:bg-muted transition"
