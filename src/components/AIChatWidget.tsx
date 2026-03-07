@@ -414,7 +414,7 @@ export function AIChatWidget() {
                 </Button>
               </div>
             )}
-            <p className={`text-muted-foreground text-center pb-2 px-3 ${fullscreen ? 'text-sm' : 'text-[10px]'}`}>
+            <p className={`text-muted-foreground text-center pb-2 px-3 ${fullscreen ? 'text-xs' : 'text-[10px]'}`}>
               Little Minds Helper can make mistakes. Always check important information with a trusted adult or professional.
             </p>
           </div>
