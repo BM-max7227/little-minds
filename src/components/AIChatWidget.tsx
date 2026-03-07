@@ -285,35 +285,47 @@ export function AIChatWidget() {
               </div>
             )}
 
-            {messages.map((msg, i) => (
-              <div key={i} className={`flex gap-2 ${msg.role === "user" ? "justify-end" : "justify-start"}`}>
-                {msg.role === "assistant" && (
-                  <div className="flex-shrink-0 h-7 w-7 rounded-full bg-primary/10 flex items-center justify-center mt-1">
-                    <Bot className="h-4 w-4 text-primary" />
-                  </div>
-                )}
-                <div
-                  className={`max-w-[80%] rounded-2xl px-3 py-2 text-sm ${
-                    msg.role === "user"
-                      ? "bg-primary text-primary-foreground rounded-br-sm"
-                      : "bg-muted rounded-bl-sm"
-                  }`}
-                >
-                  {msg.role === "assistant" ? (
-                    <div className="prose prose-sm dark:prose-invert max-w-none [&>p]:m-0 [&>ul]:my-1">
-                      <ReactMarkdown>{msg.content}</ReactMarkdown>
+            {messages.map((msg, i) => {
+              // Find the user message that preceded this assistant message
+              const prevUserMsg = msg.role === "assistant" && i > 0 ? messages[i - 1]?.content || "" : "";
+              const isLastAssistant = msg.role === "assistant" && (i === messages.length - 1 || messages[i + 1]?.role !== "assistant");
+              const showFeedback = msg.role === "assistant" && isLastAssistant && !isLoading;
+
+              return (
+                <div key={i} className={`flex gap-2 ${msg.role === "user" ? "justify-end" : "justify-start"}`}>
+                  {msg.role === "assistant" && (
+                    <div className="flex-shrink-0 h-7 w-7 rounded-full bg-primary/10 flex items-center justify-center mt-1">
+                      <Bot className="h-4 w-4 text-primary" />
                     </div>
-                  ) : (
-                    msg.content
+                  )}
+                  <div className="flex flex-col max-w-[80%]">
+                    <div
+                      className={`rounded-2xl px-3 py-2 text-sm ${
+                        msg.role === "user"
+                          ? "bg-primary text-primary-foreground rounded-br-sm"
+                          : "bg-muted rounded-bl-sm"
+                      }`}
+                    >
+                      {msg.role === "assistant" ? (
+                        <div className="prose prose-sm dark:prose-invert max-w-none [&>p]:m-0 [&>ul]:my-1">
+                          <ReactMarkdown>{msg.content}</ReactMarkdown>
+                        </div>
+                      ) : (
+                        msg.content
+                      )}
+                    </div>
+                    {showFeedback && (
+                      <FeedbackButtons userMessage={prevUserMsg} assistantMessage={msg.content} />
+                    )}
+                  </div>
+                  {msg.role === "user" && (
+                    <div className="flex-shrink-0 h-7 w-7 rounded-full bg-primary flex items-center justify-center mt-1">
+                      <User className="h-4 w-4 text-primary-foreground" />
+                    </div>
                   )}
                 </div>
-                {msg.role === "user" && (
-                  <div className="flex-shrink-0 h-7 w-7 rounded-full bg-primary flex items-center justify-center mt-1">
-                    <User className="h-4 w-4 text-primary-foreground" />
-                  </div>
-                )}
-              </div>
-            ))}
+              );
+            })}
 
             {isLoading && messages[messages.length - 1]?.role !== "assistant" && (
               <div className="flex gap-2">
