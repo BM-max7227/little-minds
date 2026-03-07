@@ -157,14 +157,18 @@ export function AIChatWidget() {
       let textBuffer = "";
       let streamDone = false;
 
+      // Use a ref-like variable to batch updates more efficiently
       const upsert = (chunk: string) => {
         assistantSoFar += chunk;
+        const snapshot = assistantSoFar;
         setMessages((prev) => {
           const last = prev[prev.length - 1];
           if (last?.role === "assistant") {
-            return prev.map((m, i) => (i === prev.length - 1 ? { ...m, content: assistantSoFar } : m));
+            const updated = [...prev];
+            updated[updated.length - 1] = { ...last, content: snapshot };
+            return updated;
           }
-          return [...prev, { role: "assistant", content: assistantSoFar }];
+          return [...prev, { role: "assistant", content: snapshot }];
         });
       };
 
