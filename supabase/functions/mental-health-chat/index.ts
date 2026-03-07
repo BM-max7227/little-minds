@@ -95,35 +95,55 @@ WEBSITE CONTENT YOU CAN REFERENCE (only when relevant to the user's question):
 
 Remember: You are a helpful guide, not a replacement for professional help.`;
 
-async function getRecentNegativeFeedback(): Promise<string> {
+async function getFeedbackContext(): Promise<string> {
   try {
     const supabaseUrl = Deno.env.get("SUPABASE_URL");
     const supabaseKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY");
     if (!supabaseUrl || !supabaseKey) return "";
 
     const supabase = createClient(supabaseUrl, supabaseKey);
-    const { data, error } = await supabase
-      .from("chat_feedback")
-      .select("message_content, assistant_response, category, details")
-      .eq("feedback_type", "negative")
-      .order("created_at", { ascending: false })
-      .limit(15);
+    
+    // Fetch both positive and negative feedback in parallel
+    const [negResult, posResult] = await Promise.all([
+      supabase
+        .from("chat_feedback")
+        .select("message_content, assistant_response, category, details")
+        .eq("feedback_type", "negative")
+        .order("created_at", { ascending: false })
+        .limit(15),
+      supabase
+        .from("chat_feedback")
+        .select("message_content, assistant_response")
+        .eq("feedback_type", "positive")
+        .order("created_at", { ascending: false })
+        .limit(10),
+    ]);
 
-    if (error || !data || data.length === 0) return "";
+    let context = "";
 
-    const feedbackLines = data.map((f, i) => {
-      let line = `${i + 1}. User asked: "${f.message_content.slice(0, 150)}"`;
-      line += `\n   Your response was marked as bad.`;
-      if (f.category) line += ` Reason: ${f.category}.`;
-      if (f.details) line += ` Details: "${f.details.slice(0, 200)}"`;
-      return line;
-    }).join("\n");
+    if (posResult.data && posResult.data.length > 0) {
+      const posLines = posResult.data.map((f, i) => {
+        return `${i + 1}. User asked: "${f.message_content.slice(0, 150)}" → Your response was rated GOOD. Keep this style and approach.`;
+      }).join("\n");
+      context += `\n\nPOSITIVE FEEDBACK — WHAT USERS LIKED:
+These responses were marked as helpful. Continue using similar style, tone, and depth:
+${posLines}`;
+    }
 
-    return `\n\nIMPORTANT — LEARNING FROM PAST FEEDBACK:
-Users have flagged the following responses as unhelpful. Learn from these mistakes and avoid repeating them:
-${feedbackLines}
+    if (negResult.data && negResult.data.length > 0) {
+      const negLines = negResult.data.map((f, i) => {
+        let line = `${i + 1}. User asked: "${f.message_content.slice(0, 150)}"`;
+        line += `\n   Your response was marked as bad.`;
+        if (f.category) line += ` Reason: ${f.category}.`;
+        if (f.details) line += ` Details: "${f.details.slice(0, 200)}"`;
+        return line;
+      }).join("\n");
+      context += `\n\nNEGATIVE FEEDBACK — AVOID THESE MISTAKES:
+Users flagged these responses as unhelpful. Adjust your approach for similar questions:
+${negLines}`;
+    }
 
-Use this feedback to improve your responses. If a similar question comes up, adjust your approach based on what users didn't like.`;
+    return context;
   } catch (e) {
     console.error("Error fetching feedback:", e);
     return "";
