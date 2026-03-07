@@ -1,4 +1,5 @@
 import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
+import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -6,7 +7,7 @@ const corsHeaders = {
     "authorization, x-client-info, apikey, content-type, x-supabase-client-platform, x-supabase-client-platform-version, x-supabase-client-runtime, x-supabase-client-runtime-version",
 };
 
-const SYSTEM_PROMPT = `You are "Little Minds Helper", a kind, supportive assistant on the Little Minds website — a children's mental health resource for kids, parents, and caregivers. The website is called "Little Minds", NOT "Little Minds Matter".
+const BASE_SYSTEM_PROMPT = `You are "Little Minds Helper", a kind, supportive assistant on the Little Minds website — a children's mental health resource for kids, parents, and caregivers. The website is called "Little Minds", NOT "Little Minds Matter".
 
 STRICT RULES:
 1. You ONLY discuss topics related to children's mental health, wellbeing, emotions, coping strategies, parenting support, and the content available on this website.
@@ -94,6 +95,41 @@ WEBSITE CONTENT YOU CAN REFERENCE (only when relevant to the user's question):
 
 Remember: You are a helpful guide, not a replacement for professional help.`;
 
+async function getRecentNegativeFeedback(): Promise<string> {
+  try {
+    const supabaseUrl = Deno.env.get("SUPABASE_URL");
+    const supabaseKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY");
+    if (!supabaseUrl || !supabaseKey) return "";
+
+    const supabase = createClient(supabaseUrl, supabaseKey);
+    const { data, error } = await supabase
+      .from("chat_feedback")
+      .select("message_content, assistant_response, category, details")
+      .eq("feedback_type", "negative")
+      .order("created_at", { ascending: false })
+      .limit(15);
+
+    if (error || !data || data.length === 0) return "";
+
+    const feedbackLines = data.map((f, i) => {
+      let line = `${i + 1}. User asked: "${f.message_content.slice(0, 150)}"`;
+      line += `\n   Your response was marked as bad.`;
+      if (f.category) line += ` Reason: ${f.category}.`;
+      if (f.details) line += ` Details: "${f.details.slice(0, 200)}"`;
+      return line;
+    }).join("\n");
+
+    return `\n\nIMPORTANT — LEARNING FROM PAST FEEDBACK:
+Users have flagged the following responses as unhelpful. Learn from these mistakes and avoid repeating them:
+${feedbackLines}
+
+Use this feedback to improve your responses. If a similar question comes up, adjust your approach based on what users didn't like.`;
+  } catch (e) {
+    console.error("Error fetching feedback:", e);
+    return "";
+  }
+}
+
 serve(async (req) => {
   if (req.method === "OPTIONS") {
     return new Response(null, { headers: corsHeaders });
@@ -103,6 +139,9 @@ serve(async (req) => {
     const { messages } = await req.json();
     const LOVABLE_API_KEY = Deno.env.get("LOVABLE_API_KEY");
     if (!LOVABLE_API_KEY) throw new Error("LOVABLE_API_KEY is not configured");
+
+    const feedbackContext = await getRecentNegativeFeedback();
+    const systemPrompt = BASE_SYSTEM_PROMPT + feedbackContext;
 
     const response = await fetch(
       "https://ai.gateway.lovable.dev/v1/chat/completions",
@@ -115,7 +154,7 @@ serve(async (req) => {
         body: JSON.stringify({
           model: "google/gemini-3-flash-preview",
           messages: [
-            { role: "system", content: SYSTEM_PROMPT },
+            { role: "system", content: systemPrompt },
             ...messages,
           ],
           stream: true,

@@ -14,7 +14,36 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      chat_feedback: {
+        Row: {
+          assistant_response: string
+          category: string | null
+          created_at: string
+          details: string | null
+          feedback_type: string
+          id: string
+          message_content: string
+        }
+        Insert: {
+          assistant_response: string
+          category?: string | null
+          created_at?: string
+          details?: string | null
+          feedback_type: string
+          id?: string
+          message_content: string
+        }
+        Update: {
+          assistant_response?: string
+          category?: string | null
+          created_at?: string
+          details?: string | null
+          feedback_type?: string
+          id?: string
+          message_content?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
