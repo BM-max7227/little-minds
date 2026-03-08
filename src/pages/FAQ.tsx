@@ -1,4 +1,5 @@
 import { Header } from "@/components/Header";
+import { SiteFooter } from "@/components/SiteFooter";
 import { Button } from "@/components/ui/button";
 import { Link, useLocation } from "react-router-dom";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
@@ -34,6 +35,7 @@ export default function FAQ() {
           </div>
         </div>
       </main>
+      <SiteFooter />
     </div>
   );
 }

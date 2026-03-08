@@ -1,5 +1,6 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Header } from "@/components/Header";
+import { SiteFooter } from "@/components/SiteFooter";
 import { Heart, Sparkles, BookOpen } from "lucide-react";
 import { Link } from "react-router-dom";
 
@@ -71,16 +72,7 @@ export default function Home() {
         </div>
       </main>
 
-      <footer className="border-t py-6 text-center text-sm text-muted-foreground">
-        <div className="container">
-          <p className="mb-2">
-            This site is for information only and is not a substitute for medical advice.
-          </p>
-          <p>
-            If you are in danger or thinking about harming yourself, get help now.
-          </p>
-        </div>
-      </footer>
+      <SiteFooter />
     </div>
   );
 }

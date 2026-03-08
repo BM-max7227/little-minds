@@ -23,7 +23,8 @@ import FAQ from "./pages/FAQ";
 import AboutUs from "./pages/AboutUs";
 import Donate from "./pages/Donate";
 import Contact from "./pages/Contact";
-
+import Disclaimer from "./pages/Disclaimer";
+import Terms from "./pages/Terms";
 const queryClient = new QueryClient();
 
 function ScrollToTop() {
@@ -58,6 +59,8 @@ const App = () => (
           <Route path="/about" element={<AboutUs />} />
           <Route path="/donate" element={<Donate />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/disclaimer" element={<Disclaimer />} />
+          <Route path="/terms" element={<Terms />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
         <AIChatWidget />

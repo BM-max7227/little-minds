@@ -178,7 +178,8 @@ export default function KidTopicDetail() {
             </Button>
           </div>
 
-          <div className="text-center text-sm text-muted-foreground pt-8 border-t">
+          <div className="text-center text-sm text-muted-foreground pt-8 border-t space-y-2">
+            <p>This content is for information only and is not a substitute for professional advice. If you are in crisis, please contact your local emergency services or call/text <strong>988</strong>.</p>
             <p>Made with care by Bode Munk</p>
             <p>This is a non profit project to help kids, parents, and people learn about mental health and ways to help</p>
           </div>

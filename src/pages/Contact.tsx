@@ -5,6 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Header } from "@/components/Header";
+import { SiteFooter } from "@/components/SiteFooter";
 import { Link } from "react-router-dom";
 import { Mail, Loader2, CheckCircle, Send } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
@@ -194,11 +195,7 @@ export default function Contact() {
         </section>
       </main>
 
-      <footer className="border-t py-4 text-center">
-        <Button variant="link" asChild>
-          <Link to="/">← Back to Home</Link>
-        </Button>
-      </footer>
+      <SiteFooter />
     </div>
   );
 }

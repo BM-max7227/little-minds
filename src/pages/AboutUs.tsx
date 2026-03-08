@@ -1,10 +1,12 @@
 import { Header } from "@/components/Header";
-import { Button } from "@/components/ui/button";
+import { SiteFooter } from "@/components/SiteFooter";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Link } from "react-router-dom";
-import { Heart, Mail } from "lucide-react";
+import { Mail } from "lucide-react";
+
 export default function AboutUs() {
-  return <div className="min-h-screen flex flex-col">
+  return (
+    <div className="min-h-screen flex flex-col">
       <Header />
       
       <main className="flex-1 py-12">
@@ -41,21 +43,10 @@ export default function AboutUs() {
               </div>
             </div>
           </div>
-
-          
         </div>
       </main>
 
-      <footer className="border-t py-8 text-center">
-        <p className="text-sm text-muted-foreground mb-4">Made with care by Bode Munk </p>
-        <div className="flex justify-center gap-4">
-          <Button variant="link" asChild>
-            <Link to="/">Home</Link>
-          </Button>
-          <Button variant="link" asChild>
-            <Link to="/faq">FAQ</Link>
-          </Button>
-        </div>
-      </footer>
-    </div>;
+      <SiteFooter />
+    </div>
+  );
 }

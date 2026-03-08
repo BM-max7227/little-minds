@@ -1,4 +1,5 @@
 import { Header } from "@/components/Header";
+import { SiteFooter } from "@/components/SiteFooter";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -96,11 +97,7 @@ export default function KidHome() {
         </div>
       </main>
 
-      <footer className="border-t py-4 text-center">
-        <Button variant="link" asChild>
-          <Link to="/">← Back to Home</Link>
-        </Button>
-      </footer>
+      <SiteFooter />
     </div>
   );
 }

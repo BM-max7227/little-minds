@@ -1,4 +1,5 @@
 import { Header } from "@/components/Header";
+import { SiteFooter } from "@/components/SiteFooter";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Link } from "react-router-dom";
@@ -273,5 +274,6 @@ export default function Tools() {
           </div>
         </div>
       </main>
+      <SiteFooter />
     </div>;
 }
