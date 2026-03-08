@@ -157,10 +157,17 @@ export function AIChatWidget() {
       let textBuffer = "";
       let streamDone = false;
 
-      // Use a ref-like variable to batch updates more efficiently
-      const upsert = (chunk: string) => {
-        assistantSoFar += chunk;
+      let queuedText = "";
+      let frameScheduled = false;
+
+      const flushAssistant = () => {
+        frameScheduled = false;
+        if (!queuedText) return;
+
+        assistantSoFar += queuedText;
+        queuedText = "";
         const snapshot = assistantSoFar;
+
         setMessages((prev) => {
           const last = prev[prev.length - 1];
           if (last?.role === "assistant") {
@@ -170,6 +177,14 @@ export function AIChatWidget() {
           }
           return [...prev, { role: "assistant", content: snapshot }];
         });
+      };
+
+      const upsert = (chunk: string) => {
+        queuedText += chunk;
+        if (!frameScheduled) {
+          frameScheduled = true;
+          requestAnimationFrame(flushAssistant);
+        }
       };
 
       while (!streamDone) {
