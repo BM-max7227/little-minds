@@ -161,15 +161,8 @@ export function AIChatWidget() {
       let textBuffer = "";
       let streamDone = false;
 
-      let queuedText = "";
-      let flushScheduled = false;
-
-      const flushAssistant = () => {
-        flushScheduled = false;
-        if (!queuedText) return;
-
-        assistantSoFar += queuedText;
-        queuedText = "";
+      const upsert = (chunk: string) => {
+        assistantSoFar += chunk;
         const snapshot = assistantSoFar;
 
         setMessages((prev) => {
@@ -181,14 +174,6 @@ export function AIChatWidget() {
           }
           return [...prev, { role: "assistant", content: snapshot }];
         });
-      };
-
-      const upsert = (chunk: string) => {
-        queuedText += chunk;
-        if (!flushScheduled) {
-          flushScheduled = true;
-          queueMicrotask(flushAssistant);
-        }
       };
 
       while (!streamDone) {
