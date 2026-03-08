@@ -295,7 +295,6 @@ export function AIChatWidget() {
             {messages.map((msg, i) => {
               // Find the user message that preceded this assistant message
               const prevUserMsg = msg.role === "assistant" && i > 0 ? messages[i - 1]?.content || "" : "";
-              const isStreamingAssistant = msg.role === "assistant" && isLoading && i === messages.length - 1;
               const showFeedback = msg.role === "assistant";
 
               return (
