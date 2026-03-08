@@ -66,9 +66,10 @@ export async function generateBadgeCard(badgeLabel: string, totalCompleted: numb
   ctx.arc(500, 80, 30, 0, Math.PI * 2);
   ctx.fill();
 
-  // Badge icon (large)
+  // Badge icon (large) — draw twice for stronger opacity
   ctx.font = "72px serif";
   ctx.textAlign = "center";
+  ctx.fillText(badge.icon, W / 2, 130);
   ctx.fillText(badge.icon, W / 2, 130);
 
   // Badge name
