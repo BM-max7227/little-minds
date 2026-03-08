@@ -13,6 +13,7 @@ import QuickGuide from "./pages/parent/QuickGuide";
 import ConversationStarters from "./pages/parent/ConversationStarters";
 import FindSupport from "./pages/parent/FindSupport";
 import Tools from "./pages/parent/Tools";
+import Dashboard from "./pages/parent/Dashboard";
 import KidHome from "./pages/kid/KidHome";
 import KidTopicDetail from "./pages/kid/KidTopicDetail";
 import TryThis from "./pages/kid/TryThis";
