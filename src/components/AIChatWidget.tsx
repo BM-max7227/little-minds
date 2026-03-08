@@ -177,7 +177,7 @@ export function AIChatWidget() {
       };
 
       const processEventBlock = (eventBlock: string) => {
-        const normalized = eventBlock.replaceAll("\r", "");
+        const normalized = eventBlock.replace(/\r/g, "");
         const dataLines = normalized
           .split("\n")
           .filter((line) => line.startsWith("data:"))
