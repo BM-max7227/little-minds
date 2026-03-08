@@ -94,6 +94,10 @@ export default function KidHome() {
               </Link>
             ))}
           </div>
+
+          <div className="mt-12">
+            <SuggestIdeasBanner message="Don't see what you're looking for? Let us know and we'll try to add it!" />
+          </div>
         </div>
       </main>
 
