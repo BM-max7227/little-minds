@@ -141,6 +141,43 @@ export function AIChatWidget() {
 
     let assistantSoFar = "";
 
+    const upsert = (chunk: string) => {
+      assistantSoFar += chunk;
+      const snapshot = assistantSoFar;
+
+      setMessages((prev) => {
+        const last = prev[prev.length - 1];
+        if (last?.role === "assistant") {
+          const updated = [...prev];
+          updated[updated.length - 1] = { ...last, content: snapshot };
+          return updated;
+        }
+        return [...prev, { role: "assistant", content: snapshot }];
+      });
+    };
+
+    const stopTypingTimer = () => {
+      if (typingTimerRef.current !== null) {
+        clearInterval(typingTimerRef.current);
+        typingTimerRef.current = null;
+      }
+    };
+
+    const startTypingTimer = () => {
+      if (typingTimerRef.current !== null) return;
+      typingTimerRef.current = window.setInterval(() => {
+        if (!typingBufferRef.current) {
+          stopTypingTimer();
+          return;
+        }
+
+        const step = Math.min(3, typingBufferRef.current.length);
+        const nextChunk = typingBufferRef.current.slice(0, step);
+        typingBufferRef.current = typingBufferRef.current.slice(step);
+        upsert(nextChunk);
+      }, 16);
+    };
+
     try {
       const resp = await fetch(CHAT_URL, {
         method: "POST",
@@ -158,24 +195,10 @@ export function AIChatWidget() {
         return;
       }
 
-      const upsert = (chunk: string) => {
-        assistantSoFar += chunk;
-        const snapshot = assistantSoFar;
-
-        setMessages((prev) => {
-          const last = prev[prev.length - 1];
-          if (last?.role === "assistant") {
-            const updated = [...prev];
-            updated[updated.length - 1] = { ...last, content: snapshot };
-            return updated;
-          }
-          return [...prev, { role: "assistant", content: snapshot }];
-        });
-      };
-
       const reader = resp.body.getReader();
       const decoder = new TextDecoder();
       let sseBuffer = "";
+      let streamDone = false;
 
       // Process each data: line immediately — no waiting for empty-line boundaries
       const processLine = (line: string): boolean => {
@@ -183,15 +206,21 @@ export function AIChatWidget() {
         const payload = line.slice(5).trimStart();
         if (payload === "[DONE]") return true;
         if (!payload) return false;
+
         try {
           const parsed = JSON.parse(payload);
           const content = parsed.choices?.[0]?.delta?.content as string | undefined;
-          if (content) upsert(content);
-        } catch { /* skip malformed */ }
+          if (content) {
+            typingBufferRef.current += content;
+            startTypingTimer();
+          }
+        } catch {
+          // skip malformed chunks
+        }
+
         return false;
       };
 
-      let streamDone = false;
       while (!streamDone) {
         const { done, value } = await reader.read();
         if (done) break;
@@ -216,6 +245,12 @@ export function AIChatWidget() {
       console.error(e);
       setMessages((prev) => [...prev, { role: "assistant", content: "Sorry, I couldn't connect. Please try again later." }]);
     } finally {
+      // Flush any remaining characters instantly so nothing appears to "jump" at the end
+      stopTypingTimer();
+      if (typingBufferRef.current) {
+        upsert(typingBufferRef.current);
+        typingBufferRef.current = "";
+      }
       setIsLoading(false);
     }
   }, [input, isLoading, messages]);
