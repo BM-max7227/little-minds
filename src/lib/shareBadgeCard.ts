@@ -1,3 +1,5 @@
+import logoSrc from "@/assets/logo.png";
+
 const BADGES = [
   { threshold: 1, label: "First Step", icon: "⭐", color: "#f59e0b" },
   { threshold: 5, label: "Getting Going", icon: "🌟", color: "#8b5cf6" },
@@ -9,6 +11,16 @@ const BADGES = [
 
 export function getEarnedBadges(totalCompleted: number) {
   return BADGES.filter((b) => totalCompleted >= b.threshold);
+}
+
+function loadImage(src: string): Promise<HTMLImageElement | null> {
+  return new Promise((resolve) => {
+    const img = new Image();
+    img.crossOrigin = "anonymous";
+    img.onload = () => resolve(img);
+    img.onerror = () => resolve(null);
+    img.src = src;
+  });
 }
 
 export async function generateBadgeCard(badgeLabel: string, totalCompleted: number): Promise<Blob | null> {
@@ -23,18 +35,7 @@ export async function generateBadgeCard(badgeLabel: string, totalCompleted: numb
   const ctx = canvas.getContext("2d");
   if (!ctx) return null;
 
-  // Load logo
-  const logo = new Image();
-  logo.crossOrigin = "anonymous";
-  const logoLoaded = new Promise<boolean>((resolve) => {
-    logo.onload = () => resolve(true);
-    logo.onerror = () => resolve(false);
-    // Dynamic import to get the resolved asset URL
-    import("@/assets/logo.png").then((mod) => {
-      logo.src = mod.default;
-    }).catch(() => resolve(false));
-  });
-  const hasLogo = await logoLoaded;
+  const logo = await loadImage(logoSrc);
 
   // Background gradient
   const grad = ctx.createLinearGradient(0, 0, W, H);
@@ -89,7 +90,7 @@ export async function generateBadgeCard(badgeLabel: string, totalCompleted: numb
   ctx.fillText("activities completed", W / 2, 305);
 
   // Logo at the bottom
-  if (hasLogo) {
+  if (logo) {
     const logoH = 50;
     const logoW = (logo.naturalWidth / logo.naturalHeight) * logoH;
     ctx.drawImage(logo, (W - logoW) / 2, H - logoH - 20, logoW, logoH);
@@ -109,11 +110,15 @@ export async function downloadBadgeCard(badgeLabel: string, totalCompleted: numb
   if (!blob) return;
 
   const url = URL.createObjectURL(blob);
+  // Use window.open as fallback for sandboxed iframes where <a download> is blocked
   const a = document.createElement("a");
   a.href = url;
   a.download = `little-minds-${badgeLabel.toLowerCase().replace(/\s+/g, "-")}-badge.png`;
+  a.target = "_blank";
+  a.rel = "noopener";
   document.body.appendChild(a);
   a.click();
   document.body.removeChild(a);
-  URL.revokeObjectURL(url);
+  // Small delay before revoking to ensure download starts
+  setTimeout(() => URL.revokeObjectURL(url), 1000);
 }
