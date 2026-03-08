@@ -338,6 +338,10 @@ export function AIChatWidget() {
             {messages.map((msg, i) => {
               const prevUserMsg = msg.role === "assistant" && i > 0 ? messages[i - 1]?.content || "" : "";
               const showFeedback = msg.role === "assistant";
+              const isStreamingAssistantMessage =
+                msg.role === "assistant" &&
+                isLoading &&
+                i === messages.length - 1;
 
               return (
                 <div key={i} className={`flex gap-2 ${msg.role === "user" ? "justify-end" : "justify-start"}`}>
@@ -355,7 +359,13 @@ export function AIChatWidget() {
                       }`}
                     >
                       {msg.role === "assistant" ? (
-                        <div className="whitespace-pre-wrap">{msg.content}</div>
+                        isStreamingAssistantMessage ? (
+                          <div className="whitespace-pre-wrap">{msg.content}</div>
+                        ) : (
+                          <div className="prose prose-sm max-w-none [&>p]:m-0 [&>ul]:my-1 [&>ol]:my-1">
+                            <ReactMarkdown>{msg.content}</ReactMarkdown>
+                          </div>
+                        )
                       ) : (
                         msg.content
                       )}
