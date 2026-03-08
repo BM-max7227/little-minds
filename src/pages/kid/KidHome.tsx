@@ -3,7 +3,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { getWordOfTheWeek, getDidYouKnow } from "@/data/kidEngagement";
-import { BookOpen, Lightbulb, Sparkles, CheckCircle2, Heart, Trophy } from "lucide-react";
+import { BookOpen, Lightbulb, ChevronDown, Sparkles } from "lucide-react";
 
 const topicCards = [
   { id: "anxiety", title: "Anxiety", icon: "🌊" },
