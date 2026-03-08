@@ -13,6 +13,7 @@ import QuickGuide from "./pages/parent/QuickGuide";
 import ConversationStarters from "./pages/parent/ConversationStarters";
 import FindSupport from "./pages/parent/FindSupport";
 import Tools from "./pages/parent/Tools";
+import Dashboard from "./pages/parent/Dashboard";
 import KidHome from "./pages/kid/KidHome";
 import KidTopicDetail from "./pages/kid/KidTopicDetail";
 import TryThis from "./pages/kid/TryThis";
@@ -47,6 +48,7 @@ const App = () => (
           <Route path="/parent/conversation-starters" element={<ConversationStarters />} />
           <Route path="/parent/find-support" element={<FindSupport />} />
           <Route path="/parent/tools" element={<Tools />} />
+          <Route path="/parent/dashboard" element={<Dashboard />} />
           <Route path="/kid" element={<KidHome />} />
           <Route path="/kid/:topicId" element={<KidTopicDetail />} />
           <Route path="/kid/try-this" element={<TryThis />} />
