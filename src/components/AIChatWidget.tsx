@@ -23,6 +23,8 @@ export function AIChatWidget() {
   const analyserRef = useRef<AnalyserNode | null>(null);
   const animFrameRef = useRef<number>(0);
   const streamRef = useRef<MediaStream | null>(null);
+  const typingBufferRef = useRef("");
+  const typingTimerRef = useRef<number | null>(null);
 
   const supportsVoice = typeof window !== "undefined" && ("SpeechRecognition" in window || "webkitSpeechRecognition" in window);
 
