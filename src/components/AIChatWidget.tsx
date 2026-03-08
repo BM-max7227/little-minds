@@ -120,8 +120,12 @@ export function AIChatWidget() {
   }, [stopListening]);
 
   useEffect(() => {
-    scrollRef.current?.scrollTo({ top: scrollRef.current.scrollHeight, behavior: "smooth" });
-  }, [messages]);
+    if (!scrollRef.current) return;
+    scrollRef.current.scrollTo({
+      top: scrollRef.current.scrollHeight,
+      behavior: isLoading ? "auto" : "smooth",
+    });
+  }, [messages, isLoading]);
 
   const sendMessage = useCallback(async () => {
     const text = input.trim();
@@ -158,10 +162,10 @@ export function AIChatWidget() {
       let streamDone = false;
 
       let queuedText = "";
-      let frameScheduled = false;
+      let flushScheduled = false;
 
       const flushAssistant = () => {
-        frameScheduled = false;
+        flushScheduled = false;
         if (!queuedText) return;
 
         assistantSoFar += queuedText;
@@ -181,9 +185,9 @@ export function AIChatWidget() {
 
       const upsert = (chunk: string) => {
         queuedText += chunk;
-        if (!frameScheduled) {
-          frameScheduled = true;
-          requestAnimationFrame(flushAssistant);
+        if (!flushScheduled) {
+          flushScheduled = true;
+          queueMicrotask(flushAssistant);
         }
       };
 

@@ -65,17 +65,17 @@ export function FeedbackButtons({ userMessage, assistantMessage }: FeedbackButto
   return (
     <div className="mt-1">
       {!showForm && (
-        <div className="flex items-center gap-0">
+        <div className="flex items-center gap-0.5">
           <button
             onClick={handleThumbsUp}
-            className="p-0.5 rounded hover:bg-muted transition"
+            className="p-0 rounded hover:bg-muted transition"
             aria-label="Good response"
           >
             <ThumbsUp className="h-3.5 w-3.5 text-muted-foreground hover:text-foreground" />
           </button>
           <button
             onClick={handleThumbsDown}
-            className="p-0.5 rounded hover:bg-muted transition"
+            className="p-0 rounded hover:bg-muted transition"
             aria-label="Bad response"
           >
             <ThumbsDown className="h-3.5 w-3.5 text-muted-foreground hover:text-foreground" />
