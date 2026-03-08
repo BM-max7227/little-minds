@@ -1,13 +1,22 @@
+import { useState } from "react";
 import { Header } from "@/components/Header";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Link } from "react-router-dom";
 import { professionalSupportTypes, choosingTherapist, insuranceAndCost } from "@/data/parentContent";
 import { ExternalLink } from "lucide-react";
+import { CountryPicker } from "@/components/CountryPicker";
+import { HelplineDisplay } from "@/components/HelplineDisplay";
+import { getHelplinesForCountry, getSavedCountry } from "@/data/crisisHelplines";
+
 export default function FindSupport() {
-  return <div className="min-h-screen flex flex-col">
+  const [countryCode, setCountryCode] = useState<string>(getSavedCountry() || "");
+  const countryData = countryCode ? getHelplinesForCountry(countryCode) : null;
+
+  return (
+    <div className="min-h-screen flex flex-col">
       <Header audience="parent" />
-      
+
       <main className="flex-1 py-12">
         <div className="container px-4 max-w-4xl mx-auto">
           <div className="mb-12">
@@ -20,7 +29,8 @@ export default function FindSupport() {
           <section className="mb-12">
             <h2 className="text-2xl font-bold mb-6">Types of Professional Help</h2>
             <div className="grid md:grid-cols-2 gap-6">
-              {professionalSupportTypes.map(type => <Card key={type.title}>
+              {professionalSupportTypes.map((type) => (
+                <Card key={type.title}>
                   <CardHeader>
                     <CardTitle>{type.title}</CardTitle>
                     <CardDescription>{type.description}</CardDescription>
@@ -30,7 +40,8 @@ export default function FindSupport() {
                       <span className="font-semibold">When to use:</span> {type.when}
                     </p>
                   </CardContent>
-                </Card>)}
+                </Card>
+              ))}
             </div>
           </section>
 
@@ -43,21 +54,25 @@ export default function FindSupport() {
                 <div>
                   <h3 className="font-semibold mb-3">Check Credentials and Training</h3>
                   <ul className="space-y-2 text-muted-foreground">
-                    {choosingTherapist.credentials.map((item, index) => <li key={index}>• {item}</li>)}
+                    {choosingTherapist.credentials.map((item, index) => (
+                      <li key={index}>• {item}</li>
+                    ))}
                   </ul>
                 </div>
-
                 <div>
                   <h3 className="font-semibold mb-3">Consider Fit and Comfort</h3>
                   <ul className="space-y-2 text-muted-foreground">
-                    {choosingTherapist.fitAndComfort.map((item, index) => <li key={index}>• {item}</li>)}
+                    {choosingTherapist.fitAndComfort.map((item, index) => (
+                      <li key={index}>• {item}</li>
+                    ))}
                   </ul>
                 </div>
-
                 <div>
                   <h3 className="font-semibold mb-3">Questions for the First Meeting</h3>
                   <ul className="space-y-2 text-muted-foreground">
-                    {choosingTherapist.firstMeetingQuestions.map((item, index) => <li key={index}>• {item}</li>)}
+                    {choosingTherapist.firstMeetingQuestions.map((item, index) => (
+                      <li key={index}>• {item}</li>
+                    ))}
                   </ul>
                 </div>
               </CardContent>
@@ -71,7 +86,9 @@ export default function FindSupport() {
               </CardHeader>
               <CardContent>
                 <ul className="space-y-2 text-muted-foreground">
-                  {insuranceAndCost.tips.map((tip, index) => <li key={index}>• {tip}</li>)}
+                  {insuranceAndCost.tips.map((tip, index) => (
+                    <li key={index}>• {tip}</li>
+                  ))}
                 </ul>
               </CardContent>
             </Card>
@@ -80,25 +97,31 @@ export default function FindSupport() {
           <section className="mb-12">
             <Card>
               <CardHeader>
-                <CardTitle>External Resources</CardTitle>
+                <CardTitle>Find Help in Your Area</CardTitle>
                 <CardDescription>
-                  Find therapists and mental health services in your area
+                  Select your country to find therapists, mental health services, and helplines near you
                 </CardDescription>
               </CardHeader>
-              <CardContent className="space-y-3">
-                <Button variant="outline" className="w-full justify-between" asChild>
-                  <a href="https://www.counselling-directory.org.uk/city/london" target="_blank" rel="noopener noreferrer">
-                    Counselling Directory - London
-                    <ExternalLink className="h-4 w-4" />
-                  </a>
-                </Button>
-                <Button variant="outline" className="w-full justify-between" asChild>
-                  <a href="https://www.nhs.uk/mental-health/children-and-young-adults/mental-health-support/" target="_blank" rel="noopener noreferrer">
-                    NHS Mental Health Support for Children & Young Adults
-                    <ExternalLink className="h-4 w-4" />
-                  </a>
-                </Button>
-                
+              <CardContent className="space-y-4">
+                <CountryPicker selectedCode={countryCode || null} onSelect={setCountryCode} />
+
+                {countryData && (
+                  <HelplineDisplay data={countryData} showDirectories />
+                )}
+
+                {!countryData && (
+                  <p className="text-sm text-muted-foreground">
+                    Select a country above to see local resources. You can also visit{" "}
+                    <a href="https://findahelpline.com" target="_blank" rel="noopener noreferrer" className="text-primary underline">
+                      findahelpline.com
+                    </a>{" "}
+                    for worldwide support.
+                  </p>
+                )}
+
+                <p className="text-xs text-muted-foreground pt-2">
+                  This information is provided for guidance only. Always verify details directly with the service provider. Little Minds is not affiliated with these organisations.
+                </p>
               </CardContent>
             </Card>
           </section>
@@ -110,5 +133,6 @@ export default function FindSupport() {
           </div>
         </div>
       </main>
-    </div>;
+    </div>
+  );
 }

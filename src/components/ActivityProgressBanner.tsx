@@ -1,4 +1,6 @@
-import { Star, Flame, Trophy } from "lucide-react";
+import { Star, Flame, Trophy, Download } from "lucide-react";
+import { downloadBadgeCard } from "@/lib/shareBadgeCard";
+import { useToast } from "@/hooks/use-toast";
 
 interface ActivityProgressBannerProps {
   totalCompleted: number;
@@ -25,6 +27,15 @@ export function ActivityProgressBanner({
   const progressPercent = Math.min(100, Math.round((totalCompleted / totalActivities) * 100));
   const earnedBadges = BADGES.filter((b) => totalCompleted >= b.threshold);
   const nextBadge = BADGES.find((b) => totalCompleted < b.threshold);
+  const { toast } = useToast();
+
+  const handleDownloadBadge = async (badgeLabel: string) => {
+    await downloadBadgeCard(badgeLabel, totalCompleted);
+    toast({
+      title: "Badge card downloaded! 🎉",
+      description: "Share it with your friends and family!",
+    });
+  };
 
   return (
     <div className="rounded-2xl border bg-card p-5 mb-8 space-y-4">
@@ -78,15 +89,17 @@ export function ActivityProgressBanner({
       {/* Badges */}
       {earnedBadges.length > 0 && (
         <div>
-          <p className="text-xs font-medium text-muted-foreground mb-2">Badges earned</p>
+          <p className="text-xs font-medium text-muted-foreground mb-2">Badges earned (tap to download card)</p>
           <div className="flex flex-wrap gap-2">
             {earnedBadges.map((badge) => (
-              <span
+              <button
                 key={badge.label}
-                className="inline-flex items-center gap-1 rounded-full bg-primary/10 px-3 py-1 text-xs font-medium"
+                onClick={() => handleDownloadBadge(badge.label)}
+                className="inline-flex items-center gap-1 rounded-full bg-primary/10 px-3 py-1 text-xs font-medium hover:bg-primary/20 transition group"
               >
                 {badge.icon} {badge.label}
-              </span>
+                <Download className="h-3 w-3 opacity-0 group-hover:opacity-100 transition-opacity text-primary" />
+              </button>
             ))}
           </div>
         </div>
