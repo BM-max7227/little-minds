@@ -50,19 +50,14 @@ export function FeedbackButtons({ userMessage, assistantMessage }: FeedbackButto
     setSubmitted(true);
   };
 
-  if (submitted) {
+  if (submitted || feedback === "positive") {
     return (
-      <div className="flex items-center gap-1 mt-1">
-        <ThumbsDown className="h-3.5 w-3.5 text-muted-foreground fill-muted-foreground" />
-        <span className="text-[10px] text-muted-foreground">Thanks for your feedback</span>
-      </div>
-    );
-  }
-
-  if (feedback === "positive") {
-    return (
-      <div className="flex items-center gap-1 mt-1">
-        <ThumbsUp className="h-3.5 w-3.5 text-muted-foreground fill-muted-foreground" />
+      <div className="flex items-center mt-1">
+        {submitted ? (
+          <ThumbsDown className="h-3.5 w-3.5 text-muted-foreground fill-muted-foreground" />
+        ) : (
+          <ThumbsUp className="h-3.5 w-3.5 text-muted-foreground fill-muted-foreground" />
+        )}
       </div>
     );
   }
@@ -73,14 +68,14 @@ export function FeedbackButtons({ userMessage, assistantMessage }: FeedbackButto
         <div className="flex items-center gap-0">
           <button
             onClick={handleThumbsUp}
-            className="p-1 rounded hover:bg-muted transition"
+            className="p-0.5 rounded hover:bg-muted transition"
             aria-label="Good response"
           >
             <ThumbsUp className="h-3.5 w-3.5 text-muted-foreground hover:text-foreground" />
           </button>
           <button
             onClick={handleThumbsDown}
-            className="p-1 rounded hover:bg-muted transition"
+            className="p-0.5 rounded hover:bg-muted transition"
             aria-label="Bad response"
           >
             <ThumbsDown className="h-3.5 w-3.5 text-muted-foreground hover:text-foreground" />

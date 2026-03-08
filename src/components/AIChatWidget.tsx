@@ -157,10 +157,17 @@ export function AIChatWidget() {
       let textBuffer = "";
       let streamDone = false;
 
-      // Use a ref-like variable to batch updates more efficiently
-      const upsert = (chunk: string) => {
-        assistantSoFar += chunk;
+      let queuedText = "";
+      let frameScheduled = false;
+
+      const flushAssistant = () => {
+        frameScheduled = false;
+        if (!queuedText) return;
+
+        assistantSoFar += queuedText;
+        queuedText = "";
         const snapshot = assistantSoFar;
+
         setMessages((prev) => {
           const last = prev[prev.length - 1];
           if (last?.role === "assistant") {
@@ -170,6 +177,14 @@ export function AIChatWidget() {
           }
           return [...prev, { role: "assistant", content: snapshot }];
         });
+      };
+
+      const upsert = (chunk: string) => {
+        queuedText += chunk;
+        if (!frameScheduled) {
+          frameScheduled = true;
+          requestAnimationFrame(flushAssistant);
+        }
       };
 
       while (!streamDone) {
@@ -212,6 +227,9 @@ export function AIChatWidget() {
             if (content) upsert(content);
           } catch { /* ignore */ }
         }
+      }
+      if (queuedText) {
+        flushAssistant();
       }
     } catch (e) {
       console.error(e);
@@ -292,8 +310,8 @@ export function AIChatWidget() {
             {messages.map((msg, i) => {
               // Find the user message that preceded this assistant message
               const prevUserMsg = msg.role === "assistant" && i > 0 ? messages[i - 1]?.content || "" : "";
-              const isLastAssistant = msg.role === "assistant" && (i === messages.length - 1 || messages[i + 1]?.role !== "assistant");
-              const showFeedback = msg.role === "assistant" && isLastAssistant && !isLoading;
+              const isStreamingAssistant = msg.role === "assistant" && isLoading && i === messages.length - 1;
+              const showFeedback = msg.role === "assistant";
 
               return (
                 <div key={i} className={`flex gap-2 ${msg.role === "user" ? "justify-end" : "justify-start"}`}>
@@ -311,9 +329,13 @@ export function AIChatWidget() {
                       }`}
                     >
                       {msg.role === "assistant" ? (
-                        <div className="prose prose-sm dark:prose-invert max-w-none [&>p]:m-0 [&>ul]:my-1">
-                          <ReactMarkdown>{msg.content}</ReactMarkdown>
-                        </div>
+                        isStreamingAssistant ? (
+                          <p className="whitespace-pre-wrap break-words m-0">{msg.content}</p>
+                        ) : (
+                          <div className="prose prose-sm dark:prose-invert max-w-none [&>p]:m-0 [&>ul]:my-1">
+                            <ReactMarkdown>{msg.content}</ReactMarkdown>
+                          </div>
+                        )
                       ) : (
                         msg.content
                       )}
