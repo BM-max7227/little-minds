@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect, useCallback } from "react";
 import { Button } from "@/components/ui/button";
 import { MessageCircle, X, Send, Bot, User, ShieldCheck, Maximize2, Minimize2, Mic, Check } from "lucide-react";
-
+import ReactMarkdown from "react-markdown";
 import { FeedbackButtons } from "@/components/chat/FeedbackButtons";
 
 type Msg = { role: "user" | "assistant"; content: string };
@@ -140,6 +140,7 @@ export function AIChatWidget() {
     setIsLoading(true);
 
     let assistantSoFar = "";
+    typingBufferRef.current = "";
 
     const upsert = (chunk: string) => {
       assistantSoFar += chunk;
@@ -171,11 +172,19 @@ export function AIChatWidget() {
           return;
         }
 
-        const step = Math.min(3, typingBufferRef.current.length);
+        const step = Math.min(2, typingBufferRef.current.length);
         const nextChunk = typingBufferRef.current.slice(0, step);
         typingBufferRef.current = typingBufferRef.current.slice(step);
         upsert(nextChunk);
       }, 16);
+    };
+
+    const waitForTypingDrain = async () => {
+      let safety = 0;
+      while (typingBufferRef.current.length > 0 && safety < 3000) {
+        await new Promise((resolve) => setTimeout(resolve, 16));
+        safety += 1;
+      }
     };
 
     try {
@@ -197,12 +206,14 @@ export function AIChatWidget() {
 
       const reader = resp.body.getReader();
       const decoder = new TextDecoder();
-      let sseBuffer = "";
+      let textBuffer = "";
       let streamDone = false;
 
-      // Process each data: line immediately — no waiting for empty-line boundaries
       const processLine = (line: string): boolean => {
+        if (line.endsWith("\r")) line = line.slice(0, -1);
+        if (!line || line.startsWith(":")) return false;
         if (!line.startsWith("data:")) return false;
+
         const payload = line.slice(5).trimStart();
         if (payload === "[DONE]") return true;
         if (!payload) return false;
@@ -215,7 +226,8 @@ export function AIChatWidget() {
             startTypingTimer();
           }
         } catch {
-          // skip malformed chunks
+          // put back partial JSON and wait for next chunk
+          textBuffer = `${line}\n${textBuffer}`;
         }
 
         return false;
@@ -225,32 +237,32 @@ export function AIChatWidget() {
         const { done, value } = await reader.read();
         if (done) break;
 
-        sseBuffer += decoder.decode(value, { stream: true });
-        const lines = sseBuffer.split(/\r?\n/);
-        sseBuffer = lines.pop() ?? "";
+        textBuffer += decoder.decode(value, { stream: true });
 
-        for (const line of lines) {
-          if (processLine(line)) {
+        let newlineIndex = textBuffer.indexOf("\n");
+        while (newlineIndex !== -1) {
+          const rawLine = textBuffer.slice(0, newlineIndex);
+          textBuffer = textBuffer.slice(newlineIndex + 1);
+
+          if (processLine(rawLine)) {
             streamDone = true;
             break;
           }
+
+          newlineIndex = textBuffer.indexOf("\n");
         }
       }
 
-      // Handle any remaining data in the buffer
-      if (!streamDone && sseBuffer.trim()) {
-        processLine(sseBuffer.trim());
+      if (!streamDone && textBuffer.trim()) {
+        processLine(textBuffer.trim());
       }
     } catch (e) {
       console.error(e);
       setMessages((prev) => [...prev, { role: "assistant", content: "Sorry, I couldn't connect. Please try again later." }]);
     } finally {
-      // Flush any remaining characters instantly so nothing appears to "jump" at the end
+      startTypingTimer();
+      await waitForTypingDrain();
       stopTypingTimer();
-      if (typingBufferRef.current) {
-        upsert(typingBufferRef.current);
-        typingBufferRef.current = "";
-      }
       setIsLoading(false);
     }
   }, [input, isLoading, messages]);
@@ -326,6 +338,10 @@ export function AIChatWidget() {
             {messages.map((msg, i) => {
               const prevUserMsg = msg.role === "assistant" && i > 0 ? messages[i - 1]?.content || "" : "";
               const showFeedback = msg.role === "assistant";
+              const isStreamingAssistantMessage =
+                msg.role === "assistant" &&
+                isLoading &&
+                i === messages.length - 1;
 
               return (
                 <div key={i} className={`flex gap-2 ${msg.role === "user" ? "justify-end" : "justify-start"}`}>
@@ -343,7 +359,13 @@ export function AIChatWidget() {
                       }`}
                     >
                       {msg.role === "assistant" ? (
-                        <div className="whitespace-pre-wrap">{msg.content}</div>
+                        isStreamingAssistantMessage ? (
+                          <div className="whitespace-pre-wrap">{msg.content}</div>
+                        ) : (
+                          <div className="prose prose-sm max-w-none [&>p]:m-0 [&>ul]:my-1 [&>ol]:my-1">
+                            <ReactMarkdown>{msg.content}</ReactMarkdown>
+                          </div>
+                        )
                       ) : (
                         msg.content
                       )}
