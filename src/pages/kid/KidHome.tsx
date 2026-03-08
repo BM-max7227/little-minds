@@ -37,7 +37,8 @@ export default function KidHome() {
             <div className="flex flex-wrap justify-center gap-3">
               <Button
                 size="lg"
-                className="text-lg px-8 py-6 rounded-full shadow-md"
+                variant="outline"
+                className="text-lg px-8 py-6 rounded-full"
                 onClick={() => document.getElementById("topic-grid")?.scrollIntoView({ behavior: "smooth" })}
               >
                 <ChevronDown className="h-5 w-5 mr-2" />
