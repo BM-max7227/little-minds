@@ -31,9 +31,15 @@ export default function KidHome() {
         <div className="container px-4 max-w-6xl mx-auto">
           <div className="text-center mb-12">
             <h1 className="text-4xl md:text-5xl font-bold mb-4">You Are Not Alone</h1>
-            <p className="text-xl text-muted-foreground">
+            <p className="text-xl text-muted-foreground mb-6">
               Pick what you're dealing with. We'll show ideas, short videos, and tools you can try today.
             </p>
+            <Button size="lg" asChild className="text-lg px-8 py-6 rounded-full shadow-md">
+              <Link to="/kid/try-this">
+                <Sparkles className="h-5 w-5 mr-2" />
+                Explore Activities
+              </Link>
+            </Button>
           </div>
 
           {/* Word of the Week + Did You Know row */}
