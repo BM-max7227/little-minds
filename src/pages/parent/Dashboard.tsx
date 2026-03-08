@@ -71,8 +71,8 @@ export default function Dashboard() {
               <p className="text-lg text-muted-foreground">
                 Fresh insights and resources to support your child's wellbeing
               </p>
-              <p className="text-sm text-muted-foreground/60 mt-1 flex items-center gap-1.5">
-                <span className="inline-block h-1.5 w-1.5 rounded-full bg-primary/50" />
+              <p className="text-sm text-muted-foreground mt-1 flex items-center gap-1.5">
+                <span className="inline-block h-1.5 w-1.5 rounded-full bg-primary" />
                 New content every Monday
               </p>
             </div>
