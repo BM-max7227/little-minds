@@ -217,9 +217,6 @@ export function AIChatWidget() {
           } catch { /* ignore */ }
         }
       }
-      if (queuedText) {
-        flushAssistant();
-      }
     } catch (e) {
       console.error(e);
       setMessages((prev) => [...prev, { role: "assistant", content: "Sorry, I couldn't connect. Please try again later." }]);
