@@ -12,7 +12,7 @@ export default function Disclaimer() {
 
           <h2>General Information Only</h2>
           <p>
-            The material presented on Little Minds (littleminds.com) is provided for general
+            The material presented on the Little Minds website is provided for general
             informational and educational purposes only. It is not an attempt to practice medicine,
             psychology, or any other form of professional healthcare, and does not constitute
             medical advice, diagnosis, or treatment.
