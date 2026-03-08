@@ -424,29 +424,21 @@ export function AIChatWidget() {
                   </p>
                 )}
                 {/* Actions */}
-                <div className="flex items-center justify-between">
+                <div className="flex items-center justify-end gap-2">
                   <button
                     onClick={discardVoice}
-                    className="text-xs text-muted-foreground hover:text-foreground transition flex items-center gap-1"
+                    className="h-8 w-8 rounded-full border flex items-center justify-center hover:bg-muted transition"
+                    aria-label="Cancel recording"
                   >
-                    <X className="h-3 w-3" /> Discard
+                    <X className="h-4 w-4" />
                   </button>
-                  <div className="flex items-center gap-2">
-                    <button
-                      onClick={discardVoice}
-                      className="h-8 w-8 rounded-full border flex items-center justify-center hover:bg-muted transition"
-                      aria-label="Cancel recording"
-                    >
-                      <X className="h-4 w-4" />
-                    </button>
-                    <button
-                      onClick={confirmVoice}
-                      className="h-8 w-8 rounded-full bg-primary text-primary-foreground flex items-center justify-center hover:bg-primary/90 transition"
-                      aria-label="Use recording"
-                    >
-                      <Check className="h-4 w-4" />
-                    </button>
-                  </div>
+                  <button
+                    onClick={confirmVoice}
+                    className="h-8 w-8 rounded-full bg-primary text-primary-foreground flex items-center justify-center hover:bg-primary/90 transition"
+                    aria-label="Use recording"
+                  >
+                    <Check className="h-4 w-4" />
+                  </button>
                 </div>
               </div>
             ) : (
