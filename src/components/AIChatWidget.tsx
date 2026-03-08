@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect, useCallback } from "react";
 import { Button } from "@/components/ui/button";
 import { MessageCircle, X, Send, Bot, User, ShieldCheck, Maximize2, Minimize2, Mic, Check } from "lucide-react";
-import ReactMarkdown from "react-markdown";
+
 import { FeedbackButtons } from "@/components/chat/FeedbackButtons";
 
 type Msg = { role: "user" | "assistant"; content: string };
@@ -23,6 +23,8 @@ export function AIChatWidget() {
   const analyserRef = useRef<AnalyserNode | null>(null);
   const animFrameRef = useRef<number>(0);
   const streamRef = useRef<MediaStream | null>(null);
+  const typingBufferRef = useRef("");
+  const typingTimerRef = useRef<number | null>(null);
 
   const supportsVoice = typeof window !== "undefined" && ("SpeechRecognition" in window || "webkitSpeechRecognition" in window);
 
@@ -139,6 +141,43 @@ export function AIChatWidget() {
 
     let assistantSoFar = "";
 
+    const upsert = (chunk: string) => {
+      assistantSoFar += chunk;
+      const snapshot = assistantSoFar;
+
+      setMessages((prev) => {
+        const last = prev[prev.length - 1];
+        if (last?.role === "assistant") {
+          const updated = [...prev];
+          updated[updated.length - 1] = { ...last, content: snapshot };
+          return updated;
+        }
+        return [...prev, { role: "assistant", content: snapshot }];
+      });
+    };
+
+    const stopTypingTimer = () => {
+      if (typingTimerRef.current !== null) {
+        clearInterval(typingTimerRef.current);
+        typingTimerRef.current = null;
+      }
+    };
+
+    const startTypingTimer = () => {
+      if (typingTimerRef.current !== null) return;
+      typingTimerRef.current = window.setInterval(() => {
+        if (!typingBufferRef.current) {
+          stopTypingTimer();
+          return;
+        }
+
+        const step = Math.min(3, typingBufferRef.current.length);
+        const nextChunk = typingBufferRef.current.slice(0, step);
+        typingBufferRef.current = typingBufferRef.current.slice(step);
+        upsert(nextChunk);
+      }, 16);
+    };
+
     try {
       const resp = await fetch(CHAT_URL, {
         method: "POST",
@@ -156,24 +195,10 @@ export function AIChatWidget() {
         return;
       }
 
-      const upsert = (chunk: string) => {
-        assistantSoFar += chunk;
-        const snapshot = assistantSoFar;
-
-        setMessages((prev) => {
-          const last = prev[prev.length - 1];
-          if (last?.role === "assistant") {
-            const updated = [...prev];
-            updated[updated.length - 1] = { ...last, content: snapshot };
-            return updated;
-          }
-          return [...prev, { role: "assistant", content: snapshot }];
-        });
-      };
-
       const reader = resp.body.getReader();
       const decoder = new TextDecoder();
       let sseBuffer = "";
+      let streamDone = false;
 
       // Process each data: line immediately — no waiting for empty-line boundaries
       const processLine = (line: string): boolean => {
@@ -181,15 +206,21 @@ export function AIChatWidget() {
         const payload = line.slice(5).trimStart();
         if (payload === "[DONE]") return true;
         if (!payload) return false;
+
         try {
           const parsed = JSON.parse(payload);
           const content = parsed.choices?.[0]?.delta?.content as string | undefined;
-          if (content) upsert(content);
-        } catch { /* skip malformed */ }
+          if (content) {
+            typingBufferRef.current += content;
+            startTypingTimer();
+          }
+        } catch {
+          // skip malformed chunks
+        }
+
         return false;
       };
 
-      let streamDone = false;
       while (!streamDone) {
         const { done, value } = await reader.read();
         if (done) break;
@@ -214,6 +245,12 @@ export function AIChatWidget() {
       console.error(e);
       setMessages((prev) => [...prev, { role: "assistant", content: "Sorry, I couldn't connect. Please try again later." }]);
     } finally {
+      // Flush any remaining characters instantly so nothing appears to "jump" at the end
+      stopTypingTimer();
+      if (typingBufferRef.current) {
+        upsert(typingBufferRef.current);
+        typingBufferRef.current = "";
+      }
       setIsLoading(false);
     }
   }, [input, isLoading, messages]);
@@ -289,10 +326,6 @@ export function AIChatWidget() {
             {messages.map((msg, i) => {
               const prevUserMsg = msg.role === "assistant" && i > 0 ? messages[i - 1]?.content || "" : "";
               const showFeedback = msg.role === "assistant";
-              const isStreamingAssistantMessage =
-                msg.role === "assistant" &&
-                isLoading &&
-                i === messages.length - 1;
 
               return (
                 <div key={i} className={`flex gap-2 ${msg.role === "user" ? "justify-end" : "justify-start"}`}>
@@ -310,13 +343,7 @@ export function AIChatWidget() {
                       }`}
                     >
                       {msg.role === "assistant" ? (
-                        isStreamingAssistantMessage ? (
-                          <div className="whitespace-pre-wrap">{msg.content}</div>
-                        ) : (
-                          <div className="prose prose-sm dark:prose-invert max-w-none [&>p]:m-0 [&>ul]:my-1">
-                            <ReactMarkdown>{msg.content}</ReactMarkdown>
-                          </div>
-                        )
+                        <div className="whitespace-pre-wrap">{msg.content}</div>
                       ) : (
                         msg.content
                       )}
