@@ -3,6 +3,7 @@ import { SiteFooter } from "@/components/SiteFooter";
 import { Header } from "@/components/Header";
 import { Card, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { learnTopics } from "@/data/learnTopics";
+import { SuggestIdeasBanner } from "@/components/SuggestIdeasBanner";
 export default function LearnHome() {
   return <div className="min-h-screen bg-background">
       <Header audience="learn" />

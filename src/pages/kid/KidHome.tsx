@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { getWordOfTheWeek, getDidYouKnow } from "@/data/kidEngagement";
 import { BookOpen, Lightbulb, ChevronDown, Sparkles } from "lucide-react";
+import { SuggestIdeasBanner } from "@/components/SuggestIdeasBanner";
 
 const topicCards = [
   { id: "anxiety", title: "Anxiety", icon: "🌊" },

@@ -138,9 +138,10 @@ export default function ParentHome() {
         <section className="bg-muted/30 py-16">
           <div className="container px-4 max-w-3xl mx-auto text-center">
             <h2 className="text-3xl font-bold mb-4">Remember</h2>
-            <p className="text-lg text-muted-foreground">
+            <p className="text-lg text-muted-foreground mb-8">
               You don't need to have all the answers. Showing up, listening, and seeking support when needed are already powerful steps.
             </p>
+            <SuggestIdeasBanner message="Have a suggestion for a resource or topic we should add? We'd love to hear from you!" />
           </div>
         </section>
       </main>
