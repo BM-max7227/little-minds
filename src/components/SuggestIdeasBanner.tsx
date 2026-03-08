@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { MessageCircle } from "lucide-react";
+import { Mail } from "lucide-react";
 
 interface SuggestIdeasBannerProps {
   message?: string;
