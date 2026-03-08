@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { AlertCircle, ExternalLink, Heart, Menu } from "lucide-react";
+import { AlertCircle, Heart, Menu } from "lucide-react";
+import { HelpNowContent } from "@/components/HelpNowContent";
 import { Link } from "react-router-dom";
 import { AccessibilityControls } from "@/components/AccessibilityControls";
 import { GlobalSearch } from "@/components/GlobalSearch";
@@ -103,43 +104,8 @@ export function Header({ audience }: HeaderProps) {
                 <span className="hidden sm:inline">Help Now</span>
               </Button>
             </SheetTrigger>
-            <SheetContent className="w-full sm:max-w-md">
-              <div className="space-y-6 pt-6">
-                <div className="space-y-3">
-                  <div className="flex items-start space-x-3 p-4 border border-destructive rounded-lg bg-destructive/5">
-                    <AlertCircle className="h-5 w-5 text-destructive flex-shrink-0 mt-0.5" />
-                    <div className="text-sm">
-                      <p className="font-semibold text-destructive mb-1">
-                        If you are in immediate danger
-                      </p>
-                      <p>Call your local emergency number immediately</p>
-                    </div>
-                  </div>
-
-                  <div className="p-4 border rounded-lg">
-                    <p className="font-semibold mb-2">Need help now?</p>
-                    <p className="text-sm text-muted-foreground mb-3">
-                      Talk to a trusted adult or contact a crisis line
-                    </p>
-                  </div>
-                </div>
-
-                <div className="space-y-3">
-                  <h3 className="font-semibold">NHS Mental Health Services</h3>
-                  <div className="space-y-2">
-                    <Button variant="outline" className="w-full justify-start" asChild>
-                      <a
-                        href="https://www.nhs.uk/nhs-services/mental-health-services/"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        <ExternalLink className="mr-2 h-4 w-4" />
-                        NHS Mental Health Services
-                      </a>
-                    </Button>
-                  </div>
-                </div>
-              </div>
+            <SheetContent className="w-full sm:max-w-md overflow-y-auto">
+              <HelpNowContent />
             </SheetContent>
           </Sheet>
 
