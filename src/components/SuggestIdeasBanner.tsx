@@ -9,7 +9,7 @@ interface SuggestIdeasBannerProps {
 export function SuggestIdeasBanner({ message = "Have an idea for something we should add? We'd love to hear from you!" }: SuggestIdeasBannerProps) {
   return (
     <div className="bg-primary/5 border border-primary/15 rounded-2xl p-6 sm:p-8 text-center max-w-2xl mx-auto">
-      <MessageCircle className="h-8 w-8 text-primary mx-auto mb-3" />
+      <Mail className="h-8 w-8 text-primary mx-auto mb-3" />
       <p className="text-base sm:text-lg text-foreground mb-4">
         {message}
       </p>
