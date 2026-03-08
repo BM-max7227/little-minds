@@ -75,7 +75,7 @@ export function FeedbackButtons({ userMessage, assistantMessage }: FeedbackButto
           </button>
           <button
             onClick={handleThumbsDown}
-            className="-ml-0.5 p-0 rounded hover:bg-muted transition"
+            className="-ml-1 p-0 rounded hover:bg-muted transition"
             aria-label="Bad response"
           >
             <ThumbsDown className="h-3.5 w-3.5 text-muted-foreground hover:text-foreground" />
