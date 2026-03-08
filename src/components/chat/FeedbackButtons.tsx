@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { ThumbsUp, ThumbsDown, X } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 
@@ -14,14 +14,37 @@ const CATEGORIES = [
 interface FeedbackButtonsProps {
   userMessage: string;
   assistantMessage: string;
+  messageId: string;
 }
 
-export function FeedbackButtons({ userMessage, assistantMessage }: FeedbackButtonsProps) {
-  const [feedback, setFeedback] = useState<"positive" | "negative" | null>(null);
+type SavedFeedback = "positive" | "negative" | null;
+
+export function FeedbackButtons({ userMessage, assistantMessage, messageId }: FeedbackButtonsProps) {
+  const [feedback, setFeedback] = useState<SavedFeedback>(null);
   const [showForm, setShowForm] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [details, setDetails] = useState("");
   const [submitted, setSubmitted] = useState(false);
+
+  const storageKey = useMemo(() => `chat-feedback-${messageId}`, [messageId]);
+
+  useEffect(() => {
+    const saved = sessionStorage.getItem(storageKey);
+    if (!saved) return;
+
+    if (saved === "positive") {
+      setFeedback("positive");
+      setSubmitted(false);
+      setShowForm(false);
+      return;
+    }
+
+    if (saved === "negative") {
+      setFeedback("negative");
+      setSubmitted(true);
+      setShowForm(false);
+    }
+  }, [storageKey]);
 
   const submitFeedback = async (type: "positive" | "negative", category?: string, detailText?: string) => {
     await supabase.from("chat_feedback").insert({
@@ -36,6 +59,7 @@ export function FeedbackButtons({ userMessage, assistantMessage }: FeedbackButto
   const handleThumbsUp = async () => {
     setFeedback("positive");
     setShowForm(false);
+    sessionStorage.setItem(storageKey, "positive");
     await submitFeedback("positive");
   };
 
@@ -48,6 +72,7 @@ export function FeedbackButtons({ userMessage, assistantMessage }: FeedbackButto
     await submitFeedback("negative", selectedCategory || undefined, details || undefined);
     setShowForm(false);
     setSubmitted(true);
+    sessionStorage.setItem(storageKey, "negative");
   };
 
   if (submitted || feedback === "positive") {
@@ -65,17 +90,17 @@ export function FeedbackButtons({ userMessage, assistantMessage }: FeedbackButto
   return (
     <div className="mt-1">
       {!showForm && (
-        <div className="flex items-center gap-0">
+        <div className="flex items-center -space-x-3">
           <button
             onClick={handleThumbsUp}
-            className="p-0 rounded hover:bg-muted transition"
+            className="p-0 m-0 leading-none rounded hover:bg-muted transition"
             aria-label="Good response"
           >
             <ThumbsUp className="h-3.5 w-3.5 text-muted-foreground hover:text-foreground" />
           </button>
           <button
             onClick={handleThumbsDown}
-            className="-ml-1 p-0 rounded hover:bg-muted transition"
+            className="p-0 m-0 leading-none rounded hover:bg-muted transition"
             aria-label="Bad response"
           >
             <ThumbsDown className="h-3.5 w-3.5 text-muted-foreground hover:text-foreground" />
@@ -88,7 +113,10 @@ export function FeedbackButtons({ userMessage, assistantMessage }: FeedbackButto
           <div className="flex items-center justify-between">
             <p className="text-xs font-medium text-foreground">Share feedback</p>
             <button
-              onClick={() => { setShowForm(false); setFeedback(null); }}
+              onClick={() => {
+                setShowForm(false);
+                setFeedback(null);
+              }}
               className="p-0.5 rounded hover:bg-background transition"
             >
               <X className="h-3.5 w-3.5 text-muted-foreground" />
@@ -132,3 +160,4 @@ export function FeedbackButtons({ userMessage, assistantMessage }: FeedbackButto
     </div>
   );
 }
+
