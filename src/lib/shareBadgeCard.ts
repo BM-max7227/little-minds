@@ -29,11 +29,13 @@ export async function generateBadgeCard(badgeLabel: string, totalCompleted: numb
 
   const W = 600;
   const H = 400;
+  const scale = 3; // 3x resolution for crisp output
   const canvas = document.createElement("canvas");
-  canvas.width = W;
-  canvas.height = H;
+  canvas.width = W * scale;
+  canvas.height = H * scale;
   const ctx = canvas.getContext("2d");
   if (!ctx) return null;
+  ctx.scale(scale, scale);
 
   const logo = await loadImage(logoSrc);
 
@@ -66,9 +68,11 @@ export async function generateBadgeCard(badgeLabel: string, totalCompleted: numb
   ctx.arc(500, 80, 30, 0, Math.PI * 2);
   ctx.fill();
 
-  // Badge icon (large) — draw twice for stronger opacity
+  // Badge icon (large) — draw multiple times for full opacity/boldness
   ctx.font = "72px serif";
   ctx.textAlign = "center";
+  ctx.fillText(badge.icon, W / 2, 130);
+  ctx.fillText(badge.icon, W / 2, 130);
   ctx.fillText(badge.icon, W / 2, 130);
   ctx.fillText(badge.icon, W / 2, 130);
 
