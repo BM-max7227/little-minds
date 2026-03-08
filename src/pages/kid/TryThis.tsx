@@ -1,12 +1,15 @@
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import { Header } from "@/components/Header";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { topics, QuickAction, Skill } from "@/data/kidTopics";
-import { Clock, Search, CheckCircle2, Circle } from "lucide-react";
+import { Clock, Search, CheckCircle2, Circle, Heart } from "lucide-react";
 import { useActivityProgress } from "@/hooks/useActivityProgress";
+import { useFavorites } from "@/hooks/useFavorites";
 import { ActivityProgressBanner } from "@/components/ActivityProgressBanner";
+import { triggerCelebration } from "@/lib/celebration";
+import { useToast } from "@/hooks/use-toast";
 
 type ActionItem = (QuickAction | Skill) & {
   topicId: string;
@@ -18,7 +21,10 @@ export default function TryThis() {
   const [timeFilter, setTimeFilter] = useState<number | null>(null);
   const [feelingFilter, setFeelingFilter] = useState<string | null>(null);
   const [searchQuery, setSearchQuery] = useState("");
+  const [showFavoritesOnly, setShowFavoritesOnly] = useState(false);
   const { isCompleted, toggleComplete, totalCompleted, streak, todayCompletions } = useActivityProgress();
+  const { isFavorite, toggleFavorite, favoriteCount } = useFavorites();
+  const { toast } = useToast();
 
   const allActions: ActionItem[] = [];
   Object.entries(topics).forEach(([topicId, topic]) => {
@@ -30,9 +36,13 @@ export default function TryThis() {
     });
   });
 
+  const getActivityId = (action: ActionItem) =>
+    `${action.topicId}-${action.type}-${action.title}`.replace(/\s+/g, "-").toLowerCase();
+
   const filteredActions = allActions.filter((action) => {
     if (timeFilter !== null && action.time !== timeFilter) return false;
     if (feelingFilter && action.topicId !== feelingFilter) return false;
+    if (showFavoritesOnly && !isFavorite(getActivityId(action))) return false;
     if (searchQuery) {
       const query = searchQuery.toLowerCase();
       if (
@@ -56,8 +66,13 @@ export default function TryThis() {
     { label: "Stressed", value: "stress" },
   ];
 
-  const getActivityId = (action: ActionItem) =>
-    `${action.topicId}-${action.type}-${action.title}`.replace(/\s+/g, "-").toLowerCase();
+  const handleComplete = useCallback((activityId: string, wasCompleted: boolean) => {
+    toggleComplete(activityId);
+    if (!wasCompleted) {
+      const message = triggerCelebration();
+      toast({ title: message, duration: 3000 });
+    }
+  }, [toggleComplete, toast]);
 
   return (
     <div className="min-h-screen bg-background">
@@ -131,6 +146,20 @@ export default function TryThis() {
               ))}
             </div>
           </div>
+
+          <div className="space-y-2">
+            <p className="text-sm font-medium">My Toolkit:</p>
+            <div className="flex gap-2">
+              <Button
+                variant={showFavoritesOnly ? "default" : "outline"}
+                size="sm"
+                onClick={() => setShowFavoritesOnly(!showFavoritesOnly)}
+              >
+                <Heart className={`h-3.5 w-3.5 mr-1 ${showFavoritesOnly ? "fill-current" : ""}`} />
+                Favorites{favoriteCount > 0 ? ` (${favoriteCount})` : ""}
+              </Button>
+            </div>
+          </div>
         </div>
 
         {/* Activity Cards */}
@@ -138,6 +167,7 @@ export default function TryThis() {
           {filteredActions.map((action) => {
             const activityId = getActivityId(action);
             const completed = isCompleted(activityId);
+            const favorited = isFavorite(activityId);
 
             return (
               <Card key={activityId} className={`transition-all ${completed ? "border-primary/40 bg-primary/5" : ""}`}>
@@ -147,9 +177,22 @@ export default function TryThis() {
                       {completed && <span className="text-lg">⭐</span>}
                       {action.title}
                     </CardTitle>
-                    <div className="flex items-center gap-1 text-muted-foreground">
-                      <Clock className="w-4 h-4" />
-                      <span className="text-xs">{action.time}m</span>
+                    <div className="flex items-center gap-2">
+                      <button
+                        onClick={() => toggleFavorite(activityId)}
+                        className="p-1 rounded-full hover:bg-muted transition"
+                        aria-label={favorited ? "Remove from favorites" : "Add to favorites"}
+                      >
+                        <Heart
+                          className={`h-4 w-4 transition-colors ${
+                            favorited ? "fill-destructive text-destructive" : "text-muted-foreground"
+                          }`}
+                        />
+                      </button>
+                      <div className="flex items-center gap-1 text-muted-foreground">
+                        <Clock className="w-4 h-4" />
+                        <span className="text-xs">{action.time}m</span>
+                      </div>
                     </div>
                   </div>
                   <CardDescription className="text-xs">
@@ -171,7 +214,7 @@ export default function TryThis() {
                     variant={completed ? "outline" : "default"}
                     size="sm"
                     className="w-full mt-2"
-                    onClick={() => toggleComplete(activityId)}
+                    onClick={() => handleComplete(activityId, completed)}
                   >
                     {completed ? (
                       <>
@@ -191,7 +234,11 @@ export default function TryThis() {
 
         {filteredActions.length === 0 && (
           <div className="text-center py-12">
-            <p className="text-muted-foreground">No activities match your filters. Try different options.</p>
+            <p className="text-muted-foreground">
+              {showFavoritesOnly
+                ? "No favorites yet! Tap the heart on activities you love."
+                : "No activities match your filters. Try different options."}
+            </p>
           </div>
         )}
       </main>
