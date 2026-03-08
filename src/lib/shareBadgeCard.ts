@@ -66,9 +66,10 @@ export async function generateBadgeCard(badgeLabel: string, totalCompleted: numb
   ctx.arc(500, 80, 30, 0, Math.PI * 2);
   ctx.fill();
 
-  // Badge icon (large)
+  // Badge icon (large) — draw twice for stronger opacity
   ctx.font = "72px serif";
   ctx.textAlign = "center";
+  ctx.fillText(badge.icon, W / 2, 130);
   ctx.fillText(badge.icon, W / 2, 130);
 
   // Badge name
@@ -93,7 +94,7 @@ export async function generateBadgeCard(badgeLabel: string, totalCompleted: numb
   if (logo) {
     const logoH = 120;
     const logoW = (logo.naturalWidth / logo.naturalHeight) * logoH;
-    ctx.drawImage(logo, (W - logoW) / 2, H - logoH - 10, logoW, logoH);
+    ctx.drawImage(logo, (W - logoW) / 2, H - logoH + 15, logoW, logoH);
   } else {
     ctx.fillStyle = "#94a3b8";
     ctx.font = "bold 14px system-ui, -apple-system, sans-serif";
