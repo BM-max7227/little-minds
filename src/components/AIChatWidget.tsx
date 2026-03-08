@@ -174,29 +174,22 @@ export function AIChatWidget() {
       const reader = resp.body.getReader();
       const decoder = new TextDecoder();
       let sseBuffer = "";
-      let pendingDataLines: string[] = [];
-      let streamDone = false;
 
-      const flushEvent = () => {
-        if (pendingDataLines.length === 0) return false;
-
-        const payload = pendingDataLines.join("");
-        pendingDataLines = [];
-
-        if (!payload) return false;
+      // Process each data: line immediately — no waiting for empty-line boundaries
+      const processLine = (line: string): boolean => {
+        if (!line.startsWith("data:")) return false;
+        const payload = line.slice(5).trimStart();
         if (payload === "[DONE]") return true;
-
+        if (!payload) return false;
         try {
           const parsed = JSON.parse(payload);
           const content = parsed.choices?.[0]?.delta?.content as string | undefined;
           if (content) upsert(content);
-        } catch {
-          // ignore malformed non-JSON data chunks
-        }
-
+        } catch { /* skip malformed */ }
         return false;
       };
 
+      let streamDone = false;
       while (!streamDone) {
         const { done, value } = await reader.read();
         if (done) break;
@@ -206,28 +199,16 @@ export function AIChatWidget() {
         sseBuffer = lines.pop() ?? "";
 
         for (const line of lines) {
-          if (line === "") {
-            if (flushEvent()) {
-              streamDone = true;
-              break;
-            }
-            continue;
-          }
-
-          if (line.startsWith("data:")) {
-            pendingDataLines.push(line.slice(5).trimStart());
+          if (processLine(line)) {
+            streamDone = true;
+            break;
           }
         }
       }
 
-      if (!streamDone) {
-        const trailingLines = sseBuffer.split(/\r?\n/);
-        for (const line of trailingLines) {
-          if (line.startsWith("data:")) {
-            pendingDataLines.push(line.slice(5).trimStart());
-          }
-        }
-        flushEvent();
+      // Handle any remaining data in the buffer
+      if (!streamDone && sseBuffer.trim()) {
+        processLine(sseBuffer.trim());
       }
     } catch (e) {
       console.error(e);
