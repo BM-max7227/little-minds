@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { AlertCircle, ExternalLink, Heart, Menu } from "lucide-react";
+import { AlertCircle, Heart, Menu } from "lucide-react";
+import { HelpNowContent } from "@/components/HelpNowContent";
 import { Link } from "react-router-dom";
 import { AccessibilityControls } from "@/components/AccessibilityControls";
 import { GlobalSearch } from "@/components/GlobalSearch";
