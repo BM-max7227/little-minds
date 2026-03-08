@@ -27,8 +27,8 @@ export async function generateBadgeCard(badgeLabel: string, totalCompleted: numb
   const badge = BADGES.find((b) => b.label === badgeLabel);
   if (!badge) return null;
 
-  const W = 600;
-  const H = 400;
+  const W = 1200;
+  const H = 800;
   const canvas = document.createElement("canvas");
   canvas.width = W;
   canvas.height = H;
