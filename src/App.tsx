@@ -23,7 +23,8 @@ import FAQ from "./pages/FAQ";
 import AboutUs from "./pages/AboutUs";
 import Donate from "./pages/Donate";
 import Contact from "./pages/Contact";
-
+import Disclaimer from "./pages/Disclaimer";
+import Terms from "./pages/Terms";
 const queryClient = new QueryClient();
 
 function ScrollToTop() {
