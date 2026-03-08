@@ -194,11 +194,7 @@ export default function Contact() {
         </section>
       </main>
 
-      <footer className="border-t py-4 text-center">
-        <Button variant="link" asChild>
-          <Link to="/">← Back to Home</Link>
-        </Button>
-      </footer>
+      <SiteFooter />
     </div>
   );
 }

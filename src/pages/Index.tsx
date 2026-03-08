@@ -234,12 +234,7 @@ const Index = () => {
       </section>
 
       {/* Footer */}
-      <footer className="py-8 bg-muted/50 border-t">
-        <div className="container mx-auto px-4 text-center text-muted-foreground">
-          <p>This website provides general information and is not a substitute for professional medical advice.</p>
-          <p className="mt-2">Always consult with a qualified healthcare provider for diagnosis and treatment.</p>
-        </div>
-      </footer>
+      <SiteFooter />
     </div>
   );
 };
