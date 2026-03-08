@@ -44,60 +44,60 @@ export async function generateBadgeCard(badgeLabel: string, totalCompleted: numb
   grad.addColorStop(1, "#fff7ed");
   ctx.fillStyle = grad;
   ctx.beginPath();
-  ctx.roundRect(0, 0, W, H, 48);
+  ctx.roundRect(0, 0, W, H, 24);
   ctx.fill();
 
   // Border
   ctx.strokeStyle = "#e2e8f0";
-  ctx.lineWidth = 3;
+  ctx.lineWidth = 2;
   ctx.beginPath();
-  ctx.roundRect(0, 0, W, H, 48);
+  ctx.roundRect(0, 0, W, H, 24);
   ctx.stroke();
 
   // Decorative circles
   ctx.fillStyle = `${badge.color}15`;
   ctx.beginPath();
-  ctx.arc(160, 160, 120, 0, Math.PI * 2);
+  ctx.arc(80, 80, 60, 0, Math.PI * 2);
   ctx.fill();
   ctx.beginPath();
-  ctx.arc(1040, 640, 100, 0, Math.PI * 2);
+  ctx.arc(520, 320, 50, 0, Math.PI * 2);
   ctx.fill();
   ctx.beginPath();
-  ctx.arc(1000, 160, 60, 0, Math.PI * 2);
+  ctx.arc(500, 80, 30, 0, Math.PI * 2);
   ctx.fill();
 
   // Badge icon (large)
-  ctx.font = "144px serif";
+  ctx.font = "72px serif";
   ctx.textAlign = "center";
-  ctx.fillText(badge.icon, W / 2, 240);
+  ctx.fillText(badge.icon, W / 2, 130);
 
   // Badge name
   ctx.fillStyle = "#1e293b";
-  ctx.font = "bold 64px system-ui, -apple-system, sans-serif";
-  ctx.fillText(badge.label, W / 2, 340);
+  ctx.font = "bold 32px system-ui, -apple-system, sans-serif";
+  ctx.fillText(badge.label, W / 2, 190);
 
   // Achievement text
   ctx.fillStyle = "#64748b";
-  ctx.font = "36px system-ui, -apple-system, sans-serif";
-  ctx.fillText("Achievement Unlocked!", W / 2, 410);
+  ctx.font = "18px system-ui, -apple-system, sans-serif";
+  ctx.fillText("Achievement Unlocked!", W / 2, 230);
 
   // Stats
   ctx.fillStyle = badge.color;
-  ctx.font = "bold 96px system-ui, -apple-system, sans-serif";
-  ctx.fillText(`${totalCompleted}`, W / 2, 540);
+  ctx.font = "bold 48px system-ui, -apple-system, sans-serif";
+  ctx.fillText(`${totalCompleted}`, W / 2, 295);
   ctx.fillStyle = "#64748b";
-  ctx.font = "32px system-ui, -apple-system, sans-serif";
-  ctx.fillText("activities completed", W / 2, 590);
+  ctx.font = "16px system-ui, -apple-system, sans-serif";
+  ctx.fillText("activities completed", W / 2, 320);
 
-  // Logo at the bottom
+  // Logo at the bottom — nice and large
   if (logo) {
-    const logoH = 100;
+    const logoH = 120;
     const logoW = (logo.naturalWidth / logo.naturalHeight) * logoH;
-    ctx.drawImage(logo, (W - logoW) / 2, H - logoH - 40, logoW, logoH);
+    ctx.drawImage(logo, (W - logoW) / 2, H - logoH - 10, logoW, logoH);
   } else {
     ctx.fillStyle = "#94a3b8";
-    ctx.font = "bold 28px system-ui, -apple-system, sans-serif";
-    ctx.fillText("Little Minds", W / 2, H - 50);
+    ctx.font = "bold 14px system-ui, -apple-system, sans-serif";
+    ctx.fillText("Little Minds", W / 2, H - 30);
   }
 
   return new Promise((resolve) => {
