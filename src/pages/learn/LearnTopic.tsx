@@ -186,6 +186,7 @@ export default function LearnTopic() {
           </section>
         </article>
       </main>
+      <SiteFooter />
     </div>
   );
 }

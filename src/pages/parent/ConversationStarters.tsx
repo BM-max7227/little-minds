@@ -86,6 +86,7 @@ export default function ConversationStarters() {
           </div>
         </div>
       </main>
+      <SiteFooter />
     </div>
   );
 }

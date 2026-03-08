@@ -25,5 +25,6 @@ export default function LearnHome() {
             </Link>)}
         </div>
       </main>
+      <SiteFooter />
     </div>;
 }

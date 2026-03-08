@@ -203,6 +203,7 @@ export default function QuickGuide() {
           </div>
         </div>
       </main>
+      <SiteFooter />
     </div>
   );
 }

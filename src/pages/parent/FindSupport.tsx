@@ -134,6 +134,7 @@ export default function FindSupport() {
           </div>
         </div>
       </main>
+      <SiteFooter />
     </div>
   );
 }

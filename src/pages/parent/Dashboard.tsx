@@ -188,11 +188,7 @@ export default function Dashboard() {
         </div>
       </main>
 
-      <footer className="border-t py-4 text-center">
-        <Button variant="link" asChild>
-          <Link to="/parent">← Back to Parent Home</Link>
-        </Button>
-      </footer>
+      <SiteFooter />
     </div>
   );
 }

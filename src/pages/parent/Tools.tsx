@@ -274,5 +274,6 @@ export default function Tools() {
           </div>
         </div>
       </main>
+      <SiteFooter />
     </div>;
 }
