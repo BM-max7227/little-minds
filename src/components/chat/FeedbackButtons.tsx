@@ -93,14 +93,14 @@ export function FeedbackButtons({ userMessage, assistantMessage, messageId }: Fe
         <div className="flex items-center -space-x-3">
           <button
             onClick={handleThumbsUp}
-            className="p-0 m-0 leading-none rounded hover:bg-muted transition"
+            className="inline-flex h-4 w-4 items-center justify-center p-0 m-0 leading-none rounded-sm transition focus-visible:outline-none"
             aria-label="Good response"
           >
             <ThumbsUp className="h-3.5 w-3.5 text-muted-foreground hover:text-foreground" />
           </button>
           <button
             onClick={handleThumbsDown}
-            className="p-0 m-0 leading-none rounded hover:bg-muted transition"
+            className="inline-flex h-4 w-4 items-center justify-center p-0 m-0 leading-none rounded-sm transition focus-visible:outline-none"
             aria-label="Bad response"
           >
             <ThumbsDown className="h-3.5 w-3.5 text-muted-foreground hover:text-foreground" />

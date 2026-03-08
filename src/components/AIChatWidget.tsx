@@ -156,11 +156,6 @@ export function AIChatWidget() {
         return;
       }
 
-      const reader = resp.body.getReader();
-      const decoder = new TextDecoder();
-      let sseBuffer = "";
-      let streamDone = false;
-
       const upsert = (chunk: string) => {
         assistantSoFar += chunk;
         const snapshot = assistantSoFar;
@@ -176,16 +171,18 @@ export function AIChatWidget() {
         });
       };
 
-      const processEventBlock = (eventBlock: string) => {
-        const normalized = eventBlock.replace(/\r/g, "");
-        const dataLines = normalized
-          .split("\n")
-          .filter((line) => line.startsWith("data:"))
-          .map((line) => line.slice(5).trimStart());
+      const reader = resp.body.getReader();
+      const decoder = new TextDecoder();
+      let sseBuffer = "";
+      let pendingDataLines: string[] = [];
+      let streamDone = false;
 
-        if (dataLines.length === 0) return false;
+      const flushEvent = () => {
+        if (pendingDataLines.length === 0) return false;
 
-        const payload = dataLines.join("");
+        const payload = pendingDataLines.join("");
+        pendingDataLines = [];
+
         if (!payload) return false;
         if (payload === "[DONE]") return true;
 
@@ -194,7 +191,7 @@ export function AIChatWidget() {
           const content = parsed.choices?.[0]?.delta?.content as string | undefined;
           if (content) upsert(content);
         } catch {
-          // wait for the next chunk if this event block is not yet complete
+          // ignore malformed non-JSON data chunks
         }
 
         return false;
@@ -205,21 +202,32 @@ export function AIChatWidget() {
         if (done) break;
 
         sseBuffer += decoder.decode(value, { stream: true });
+        const lines = sseBuffer.split(/\r?\n/);
+        sseBuffer = lines.pop() ?? "";
 
-        let boundaryIndex: number;
-        while ((boundaryIndex = sseBuffer.indexOf("\n\n")) !== -1) {
-          const eventBlock = sseBuffer.slice(0, boundaryIndex);
-          sseBuffer = sseBuffer.slice(boundaryIndex + 2);
-          if (!eventBlock.trim()) continue;
-          if (processEventBlock(eventBlock)) {
-            streamDone = true;
-            break;
+        for (const line of lines) {
+          if (line === "") {
+            if (flushEvent()) {
+              streamDone = true;
+              break;
+            }
+            continue;
+          }
+
+          if (line.startsWith("data:")) {
+            pendingDataLines.push(line.slice(5).trimStart());
           }
         }
       }
 
-      if (sseBuffer.trim()) {
-        processEventBlock(sseBuffer);
+      if (!streamDone) {
+        const trailingLines = sseBuffer.split(/\r?\n/);
+        for (const line of trailingLines) {
+          if (line.startsWith("data:")) {
+            pendingDataLines.push(line.slice(5).trimStart());
+          }
+        }
+        flushEvent();
       }
     } catch (e) {
       console.error(e);
