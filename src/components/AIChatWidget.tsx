@@ -120,8 +120,12 @@ export function AIChatWidget() {
   }, [stopListening]);
 
   useEffect(() => {
-    scrollRef.current?.scrollTo({ top: scrollRef.current.scrollHeight, behavior: "smooth" });
-  }, [messages]);
+    if (!scrollRef.current) return;
+    scrollRef.current.scrollTo({
+      top: scrollRef.current.scrollHeight,
+      behavior: isLoading ? "auto" : "smooth",
+    });
+  }, [messages, isLoading]);
 
   const sendMessage = useCallback(async () => {
     const text = input.trim();
@@ -157,15 +161,8 @@ export function AIChatWidget() {
       let textBuffer = "";
       let streamDone = false;
 
-      let queuedText = "";
-      let frameScheduled = false;
-
-      const flushAssistant = () => {
-        frameScheduled = false;
-        if (!queuedText) return;
-
-        assistantSoFar += queuedText;
-        queuedText = "";
+      const upsert = (chunk: string) => {
+        assistantSoFar += chunk;
         const snapshot = assistantSoFar;
 
         setMessages((prev) => {
@@ -177,14 +174,6 @@ export function AIChatWidget() {
           }
           return [...prev, { role: "assistant", content: snapshot }];
         });
-      };
-
-      const upsert = (chunk: string) => {
-        queuedText += chunk;
-        if (!frameScheduled) {
-          frameScheduled = true;
-          requestAnimationFrame(flushAssistant);
-        }
       };
 
       while (!streamDone) {
@@ -227,9 +216,6 @@ export function AIChatWidget() {
             if (content) upsert(content);
           } catch { /* ignore */ }
         }
-      }
-      if (queuedText) {
-        flushAssistant();
       }
     } catch (e) {
       console.error(e);
@@ -310,7 +296,6 @@ export function AIChatWidget() {
             {messages.map((msg, i) => {
               // Find the user message that preceded this assistant message
               const prevUserMsg = msg.role === "assistant" && i > 0 ? messages[i - 1]?.content || "" : "";
-              const isStreamingAssistant = msg.role === "assistant" && isLoading && i === messages.length - 1;
               const showFeedback = msg.role === "assistant";
 
               return (
@@ -329,13 +314,9 @@ export function AIChatWidget() {
                       }`}
                     >
                       {msg.role === "assistant" ? (
-                        isStreamingAssistant ? (
-                          <p className="whitespace-pre-wrap break-words m-0">{msg.content}</p>
-                        ) : (
-                          <div className="prose prose-sm dark:prose-invert max-w-none [&>p]:m-0 [&>ul]:my-1">
-                            <ReactMarkdown>{msg.content}</ReactMarkdown>
-                          </div>
-                        )
+                        <div className="prose prose-sm dark:prose-invert max-w-none [&>p]:m-0 [&>ul]:my-1">
+                          <ReactMarkdown>{msg.content}</ReactMarkdown>
+                        </div>
                       ) : (
                         msg.content
                       )}
