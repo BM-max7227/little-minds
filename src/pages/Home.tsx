@@ -1,5 +1,6 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Header } from "@/components/Header";
+import { SiteFooter } from "@/components/SiteFooter";
 import { Heart, Sparkles, BookOpen } from "lucide-react";
 import { Link } from "react-router-dom";
 

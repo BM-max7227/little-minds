@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/button";
+import { SiteFooter } from "@/components/SiteFooter";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import heroImage from "@/assets/hero-kids-mental-health.jpg";
 import { Heart } from "lucide-react";

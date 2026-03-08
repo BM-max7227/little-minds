@@ -5,6 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Header } from "@/components/Header";
+import { SiteFooter } from "@/components/SiteFooter";
 import { Link } from "react-router-dom";
 import { Heart, Users, BookOpen, Loader2, CheckCircle } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
