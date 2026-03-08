@@ -292,8 +292,8 @@ export function AIChatWidget() {
             {messages.map((msg, i) => {
               // Find the user message that preceded this assistant message
               const prevUserMsg = msg.role === "assistant" && i > 0 ? messages[i - 1]?.content || "" : "";
-              const isLastAssistant = msg.role === "assistant" && (i === messages.length - 1 || messages[i + 1]?.role !== "assistant");
-              const showFeedback = msg.role === "assistant" && isLastAssistant && !isLoading;
+              const isStreamingAssistant = msg.role === "assistant" && isLoading && i === messages.length - 1;
+              const showFeedback = msg.role === "assistant";
 
               return (
                 <div key={i} className={`flex gap-2 ${msg.role === "user" ? "justify-end" : "justify-start"}`}>
