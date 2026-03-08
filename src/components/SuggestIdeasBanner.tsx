@@ -15,7 +15,7 @@ export function SuggestIdeasBanner({ message = "Have an idea for something we sh
       </p>
       <Button asChild variant="outline" className="rounded-full border-primary text-primary hover:bg-primary hover:text-primary-foreground">
         <Link to="/contact">
-          <MessageCircle className="h-4 w-4 mr-2" />
+          <Mail className="h-4 w-4 mr-2" />
           Contact Us
         </Link>
       </Button>
