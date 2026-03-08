@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect, useCallback } from "react";
 import { Button } from "@/components/ui/button";
 import { MessageCircle, X, Send, Bot, User, ShieldCheck, Maximize2, Minimize2, Mic, Check } from "lucide-react";
-
+import ReactMarkdown from "react-markdown";
 import { FeedbackButtons } from "@/components/chat/FeedbackButtons";
 
 type Msg = { role: "user" | "assistant"; content: string };
