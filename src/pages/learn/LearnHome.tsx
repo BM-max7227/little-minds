@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { SiteFooter } from "@/components/SiteFooter";
 import { Header } from "@/components/Header";
 import { Card, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { learnTopics } from "@/data/learnTopics";
