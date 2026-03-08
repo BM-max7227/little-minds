@@ -73,7 +73,33 @@ export default function KidHome() {
             </Card>
           </div>
 
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+          {/* Try This Highlight Section */}
+          <div className="mb-10 rounded-2xl border-2 border-primary/20 bg-gradient-to-br from-primary/5 via-background to-accent/5 p-6 md:p-8">
+            <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
+              <div className="space-y-3">
+                <h2 className="text-2xl md:text-3xl font-bold flex items-center gap-2">
+                  <Sparkles className="h-6 w-6 text-primary" />
+                  Your Activity Toolkit
+                </h2>
+                <p className="text-muted-foreground max-w-lg">
+                  Quick actions, skills, and exercises you can try right now. Track your progress, earn badges, and build healthy habits.
+                </p>
+                <div className="flex flex-wrap gap-4 text-sm text-muted-foreground">
+                  <span className="flex items-center gap-1.5"><CheckCircle2 className="h-4 w-4 text-primary" /> Track progress</span>
+                  <span className="flex items-center gap-1.5"><Trophy className="h-4 w-4 text-primary" /> Earn badges</span>
+                  <span className="flex items-center gap-1.5"><Heart className="h-4 w-4 text-primary" /> Save favorites</span>
+                </div>
+              </div>
+              <Button size="lg" asChild className="text-base px-6 py-5 rounded-xl shadow-sm shrink-0">
+                <Link to="/kid/try-this">
+                  <Sparkles className="h-5 w-5 mr-2" />
+                  Open Toolkit
+                </Link>
+              </Button>
+            </div>
+          </div>
+
+
             {topicCards.map((topic) => (
               <Link key={topic.id} to={`/kid/${topic.id}`} className="block group">
                 <Card className="h-full transition-all hover:shadow-lg hover:border-primary cursor-pointer">
