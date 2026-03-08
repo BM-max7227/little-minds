@@ -10,8 +10,11 @@ interface HelplineDisplayProps {
 export function HelplineDisplay({ data, showDirectories = false }: HelplineDisplayProps) {
   return (
     <div className="space-y-3">
-      <div className="flex items-center gap-2 text-xs text-muted-foreground">
-        <span>Emergency number: <strong className="text-foreground">{data.emergency}</strong></span>
+      <div className="p-4 rounded-lg bg-destructive/10 border border-destructive/20 text-center space-y-1">
+        <p className="text-xs font-medium text-destructive uppercase tracking-wide">Emergency Number</p>
+        <a href={`tel:${data.emergency.replace(/\s/g, "")}`} className="block text-3xl font-bold text-destructive hover:underline">
+          {data.emergency}
+        </a>
       </div>
 
       <div className="space-y-2">

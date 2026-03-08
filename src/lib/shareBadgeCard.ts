@@ -23,6 +23,19 @@ export async function generateBadgeCard(badgeLabel: string, totalCompleted: numb
   const ctx = canvas.getContext("2d");
   if (!ctx) return null;
 
+  // Load logo
+  const logo = new Image();
+  logo.crossOrigin = "anonymous";
+  const logoLoaded = new Promise<boolean>((resolve) => {
+    logo.onload = () => resolve(true);
+    logo.onerror = () => resolve(false);
+    // Dynamic import to get the resolved asset URL
+    import("@/assets/logo.png").then((mod) => {
+      logo.src = mod.default;
+    }).catch(() => resolve(false));
+  });
+  const hasLogo = await logoLoaded;
+
   // Background gradient
   const grad = ctx.createLinearGradient(0, 0, W, H);
   grad.addColorStop(0, "#f0f9ff");
@@ -55,30 +68,36 @@ export async function generateBadgeCard(badgeLabel: string, totalCompleted: numb
   // Badge icon (large)
   ctx.font = "72px serif";
   ctx.textAlign = "center";
-  ctx.fillText(badge.icon, W / 2, 130);
+  ctx.fillText(badge.icon, W / 2, 120);
 
   // Badge name
   ctx.fillStyle = "#1e293b";
   ctx.font = "bold 32px system-ui, -apple-system, sans-serif";
-  ctx.fillText(badge.label, W / 2, 190);
+  ctx.fillText(badge.label, W / 2, 175);
 
   // Achievement text
   ctx.fillStyle = "#64748b";
   ctx.font = "18px system-ui, -apple-system, sans-serif";
-  ctx.fillText("Achievement Unlocked!", W / 2, 230);
+  ctx.fillText("Achievement Unlocked!", W / 2, 215);
 
   // Stats
   ctx.fillStyle = badge.color;
   ctx.font = "bold 48px system-ui, -apple-system, sans-serif";
-  ctx.fillText(`${totalCompleted}`, W / 2, 295);
+  ctx.fillText(`${totalCompleted}`, W / 2, 280);
   ctx.fillStyle = "#64748b";
   ctx.font = "16px system-ui, -apple-system, sans-serif";
-  ctx.fillText("activities completed", W / 2, 320);
+  ctx.fillText("activities completed", W / 2, 305);
 
-  // Branding
-  ctx.fillStyle = "#94a3b8";
-  ctx.font = "14px system-ui, -apple-system, sans-serif";
-  ctx.fillText("littleminds.app", W / 2, 370);
+  // Logo at the bottom
+  if (hasLogo) {
+    const logoH = 50;
+    const logoW = (logo.naturalWidth / logo.naturalHeight) * logoH;
+    ctx.drawImage(logo, (W - logoW) / 2, H - logoH - 20, logoW, logoH);
+  } else {
+    ctx.fillStyle = "#94a3b8";
+    ctx.font = "bold 14px system-ui, -apple-system, sans-serif";
+    ctx.fillText("Little Minds", W / 2, H - 30);
+  }
 
   return new Promise((resolve) => {
     canvas.toBlob((blob) => resolve(blob), "image/png");
