@@ -59,6 +59,8 @@ const App = () => (
           <Route path="/about" element={<AboutUs />} />
           <Route path="/donate" element={<Donate />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/disclaimer" element={<Disclaimer />} />
+          <Route path="/terms" element={<Terms />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
         <AIChatWidget />
