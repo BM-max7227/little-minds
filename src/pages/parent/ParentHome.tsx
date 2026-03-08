@@ -26,6 +26,24 @@ export default function ParentHome() {
           </div>
         </section>
 
+        {/* Dashboard CTA */}
+        <section className="py-8 bg-primary/5 border-b">
+          <div className="container px-4">
+            <div className="max-w-3xl mx-auto">
+              <Link to="/parent/dashboard" className="group flex items-center gap-4 rounded-xl border border-primary/20 bg-card p-5 hover:shadow-lg hover:border-primary/40 transition-all">
+                <div className="h-12 w-12 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0">
+                  <LayoutDashboard className="h-6 w-6 text-primary" />
+                </div>
+                <div className="flex-1">
+                  <p className="font-semibold text-base">Your Weekly Dashboard</p>
+                  <p className="text-sm text-muted-foreground">Fresh tips, conversation starters, and topics — updated every week</p>
+                </div>
+                <ArrowRight className="h-5 w-5 text-primary group-hover:translate-x-1 transition-transform flex-shrink-0" />
+              </Link>
+            </div>
+          </div>
+        </section>
+
         {/* Quick Access Guides Section */}
         <section id="toolkit" className="py-16">
           <div className="container px-4">
