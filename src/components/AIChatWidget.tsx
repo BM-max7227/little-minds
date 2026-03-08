@@ -156,6 +156,21 @@ export function AIChatWidget() {
         return;
       }
 
+      const upsert = (chunk: string) => {
+        assistantSoFar += chunk;
+        const snapshot = assistantSoFar;
+
+        setMessages((prev) => {
+          const last = prev[prev.length - 1];
+          if (last?.role === "assistant") {
+            const updated = [...prev];
+            updated[updated.length - 1] = { ...last, content: snapshot };
+            return updated;
+          }
+          return [...prev, { role: "assistant", content: snapshot }];
+        });
+      };
+
       const reader = resp.body.getReader();
       const decoder = new TextDecoder();
       let sseBuffer = "";
