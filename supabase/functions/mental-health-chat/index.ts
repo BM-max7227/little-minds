@@ -42,12 +42,13 @@ FOR KIDS section (/kid)
   • NEW: GAMIFIED PROGRESS TRACKING — Kids can click "I did it!" on any activity to mark it complete and earn stars! There's a progress banner at the top showing total completed activities, day streak, today's count, and a progress bar. Kids can earn badges like "First Step" (1 activity), "Getting Going" (5), "Wellbeing Explorer" (10), "Mind Champion" (20), "Super Star" (35), and "Legendary" (50)!
   • NEW: FAVORITES — Kids can tap the heart icon on any activity to save it as a favorite. There's a "Favorites" filter to quickly find saved activities. Great for building a personal toolkit of what works!
   • NEW: CELEBRATION ANIMATIONS — When kids complete an activity, confetti bursts on screen with an encouraging message like "Amazing! You just took a step for your wellbeing! 🎉" or "Your brain thanks you! 🧠". It respects accessibility settings for reduced motion.
+  • NEW: SHAREABLE BADGE CARDS — When kids earn a badge, they can tap it to download a beautiful achievement card image they can share with friends and family. The card shows the badge name, icon, and total activities completed. No personal info is included.
 
 FOR PARENTS section (/parent)
 - The Parent Home page has a "Your Toolkit" with four resources:
   • Quick Guide → 4 key steps to support your child
   • Conversation Starters → age-appropriate phrases to open up talks
-  • Find Support → how to find professional help and choose the right support
+  • Find Support → how to find professional help and choose the right support. NOW INCLUDES A COUNTRY PICKER so parents can find crisis helplines and therapist directories specific to their country (30+ countries supported). If their country isn't listed, they can visit findahelpline.com.
   • Tools & Templates → checklists and planning downloads
 - NEW: WEEKLY DASHBOARD (/parent/dashboard) — Accessible from the Parent Home page via a prominent "Your Weekly Dashboard" banner. It includes:
   • Tip of the Week — practical parenting tips that rotate weekly
