@@ -3,7 +3,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { TrendingUp, MessageCircle, Lightbulb, Calendar, ArrowRight, BookOpen } from "lucide-react";
-import { challengeData } from "@/data/challengeData";
+import { learnTopics } from "@/data/learnTopics";
 import { conversationStarters } from "@/data/parentContent";
 
 // Rotate content by week of the year
@@ -25,6 +25,21 @@ const weeklyTips = [
   { title: "Reassure safety", tip: "Remind your child: 'You can always tell me anything. I'm on your team, no matter what.'", icon: "🛡️" },
 ];
 
+// Topic icons for display
+const topicIcons: Record<string, string> = {
+  anxiety: "😰",
+  sleep: "🌙",
+  stress: "📚",
+  sad: "🌧️",
+  conflict: "💬",
+  socialmedia: "📱",
+  anger: "🔥",
+  bodyimage: "💪",
+  bullying: "🛡️",
+  grief: "💔",
+  other: "❓",
+};
+
 export default function Dashboard() {
   const week = getWeekOfYear();
 
@@ -35,11 +50,12 @@ export default function Dashboard() {
   const starters = conversationStarters[starterGroup];
   const starterOfWeek = starters[week % starters.length];
 
-  // "Trending" topics — rotate through challenge topics
+  // Trending topics from learnTopics (valid IDs)
+  const topicKeys = Object.keys(learnTopics);
   const trendingTopics = [
-    challengeData[(week) % challengeData.length],
-    challengeData[(week + 2) % challengeData.length],
-    challengeData[(week + 4) % challengeData.length],
+    learnTopics[topicKeys[week % topicKeys.length]],
+    learnTopics[topicKeys[(week + 3) % topicKeys.length]],
+    learnTopics[topicKeys[(week + 6) % topicKeys.length]],
   ];
 
   return (
@@ -120,9 +136,7 @@ export default function Dashboard() {
                 {trendingTopics.map((topic) => (
                   <Card key={topic.id} className="hover:shadow-md transition-shadow">
                     <CardHeader className="pb-2">
-                      <div className={`${topic.color} mb-2`}>
-                        {topic.icon}
-                      </div>
+                      <span className="text-3xl mb-2">{topicIcons[topic.id] || "📖"}</span>
                       <CardTitle className="text-base">{topic.title}</CardTitle>
                     </CardHeader>
                     <CardContent>
