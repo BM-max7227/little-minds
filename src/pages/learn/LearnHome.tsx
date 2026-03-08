@@ -3,6 +3,7 @@ import { SiteFooter } from "@/components/SiteFooter";
 import { Header } from "@/components/Header";
 import { Card, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { learnTopics } from "@/data/learnTopics";
+import { SuggestIdeasBanner } from "@/components/SuggestIdeasBanner";
 export default function LearnHome() {
   return <div className="min-h-screen bg-background">
       <Header audience="learn" />
@@ -23,6 +24,10 @@ export default function LearnHome() {
                 </CardHeader>
               </Card>
             </Link>)}
+        </div>
+
+        <div className="mt-12">
+          <SuggestIdeasBanner message="Want us to cover a topic we haven't included? Reach out and let us know!" />
         </div>
       </main>
       <SiteFooter />

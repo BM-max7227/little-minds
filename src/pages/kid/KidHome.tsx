@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { getWordOfTheWeek, getDidYouKnow } from "@/data/kidEngagement";
 import { BookOpen, Lightbulb, ChevronDown, Sparkles } from "lucide-react";
+import { SuggestIdeasBanner } from "@/components/SuggestIdeasBanner";
 
 const topicCards = [
   { id: "anxiety", title: "Anxiety", icon: "🌊" },
@@ -93,6 +94,10 @@ export default function KidHome() {
                 </Card>
               </Link>
             ))}
+          </div>
+
+          <div className="mt-12">
+            <SuggestIdeasBanner message="Don't see what you're looking for? Let us know and we'll try to add it!" />
           </div>
         </div>
       </main>
