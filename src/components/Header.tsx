@@ -19,6 +19,7 @@ export function Header({ audience }: HeaderProps) {
       case "parent":
         return [
           { label: "Home", path: "/parent" },
+          { label: "Dashboard", path: "/parent/dashboard" },
           { label: "Guides", path: "/parent/quick-guide" },
           { label: "Find Support", path: "/parent/find-support" },
           { label: "Tools", path: "/parent/tools" },

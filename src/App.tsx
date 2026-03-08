@@ -48,6 +48,7 @@ const App = () => (
           <Route path="/parent/conversation-starters" element={<ConversationStarters />} />
           <Route path="/parent/find-support" element={<FindSupport />} />
           <Route path="/parent/tools" element={<Tools />} />
+          <Route path="/parent/dashboard" element={<Dashboard />} />
           <Route path="/kid" element={<KidHome />} />
           <Route path="/kid/:topicId" element={<KidTopicDetail />} />
           <Route path="/kid/try-this" element={<TryThis />} />
