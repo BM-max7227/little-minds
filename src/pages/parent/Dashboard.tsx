@@ -67,11 +67,7 @@ export default function Dashboard() {
         <section className="bg-muted/30 py-12">
           <div className="container px-4">
             <div className="max-w-3xl mx-auto">
-              <div className="flex items-center gap-2 mb-2">
-                <Calendar className="h-5 w-5 text-primary" />
-                <span className="text-sm font-medium text-muted-foreground">Week {week} Dashboard</span>
-              </div>
-              <h1 className="text-3xl md:text-4xl font-bold mb-2">Your Weekly Overview</h1>
+              <h1 className="text-3xl md:text-4xl font-bold mb-2">This Week's Overview</h1>
               <p className="text-lg text-muted-foreground">
                 Fresh insights and resources to support your child's wellbeing
               </p>
