@@ -24,6 +24,10 @@ export default function LearnHome() {
               </Card>
             </Link>)}
         </div>
+
+        <div className="mt-12">
+          <SuggestIdeasBanner message="Want us to cover a topic we haven't included? Reach out and let us know!" />
+        </div>
       </main>
       <SiteFooter />
     </div>;
