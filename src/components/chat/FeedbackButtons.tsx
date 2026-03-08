@@ -90,7 +90,7 @@ export function FeedbackButtons({ userMessage, assistantMessage, messageId }: Fe
   return (
     <div className="mt-1">
       {!showForm && (
-        <div className="flex items-center -space-x-2">
+        <div className="flex items-center -space-x-3">
           <button
             onClick={handleThumbsUp}
             className="p-0 m-0 leading-none rounded hover:bg-muted transition"
@@ -113,7 +113,10 @@ export function FeedbackButtons({ userMessage, assistantMessage, messageId }: Fe
           <div className="flex items-center justify-between">
             <p className="text-xs font-medium text-foreground">Share feedback</p>
             <button
-              onClick={() => { setShowForm(false); setFeedback(null); }}
+              onClick={() => {
+                setShowForm(false);
+                setFeedback(null);
+              }}
               className="p-0.5 rounded hover:bg-background transition"
             >
               <X className="h-3.5 w-3.5 text-muted-foreground" />

@@ -158,7 +158,7 @@ export function AIChatWidget() {
 
       const reader = resp.body.getReader();
       const decoder = new TextDecoder();
-      let textBuffer = "";
+      let sseBuffer = "";
       let streamDone = false;
 
       const upsert = (chunk: string) => {
@@ -176,46 +176,50 @@ export function AIChatWidget() {
         });
       };
 
+      const processEventBlock = (eventBlock: string) => {
+        const normalized = eventBlock.replaceAll("\r", "");
+        const dataLines = normalized
+          .split("\n")
+          .filter((line) => line.startsWith("data:"))
+          .map((line) => line.slice(5).trimStart());
+
+        if (dataLines.length === 0) return false;
+
+        const payload = dataLines.join("");
+        if (!payload) return false;
+        if (payload === "[DONE]") return true;
+
+        try {
+          const parsed = JSON.parse(payload);
+          const content = parsed.choices?.[0]?.delta?.content as string | undefined;
+          if (content) upsert(content);
+        } catch {
+          // wait for the next chunk if this event block is not yet complete
+        }
+
+        return false;
+      };
+
       while (!streamDone) {
         const { done, value } = await reader.read();
         if (done) break;
-        textBuffer += decoder.decode(value, { stream: true });
 
-        let newlineIndex: number;
-        while ((newlineIndex = textBuffer.indexOf("\n")) !== -1) {
-          let line = textBuffer.slice(0, newlineIndex);
-          textBuffer = textBuffer.slice(newlineIndex + 1);
-          if (line.endsWith("\r")) line = line.slice(0, -1);
-          if (line.startsWith(":") || line.trim() === "") continue;
-          if (!line.startsWith("data: ")) continue;
-          const jsonStr = line.slice(6).trim();
-          if (jsonStr === "[DONE]") { streamDone = true; break; }
-          try {
-            const parsed = JSON.parse(jsonStr);
-            const content = parsed.choices?.[0]?.delta?.content as string | undefined;
-            if (content) upsert(content);
-          } catch {
-            textBuffer = line + "\n" + textBuffer;
+        sseBuffer += decoder.decode(value, { stream: true });
+
+        let boundaryIndex: number;
+        while ((boundaryIndex = sseBuffer.indexOf("\n\n")) !== -1) {
+          const eventBlock = sseBuffer.slice(0, boundaryIndex);
+          sseBuffer = sseBuffer.slice(boundaryIndex + 2);
+          if (!eventBlock.trim()) continue;
+          if (processEventBlock(eventBlock)) {
+            streamDone = true;
             break;
           }
         }
       }
 
-      // Final flush
-      if (textBuffer.trim()) {
-        for (let raw of textBuffer.split("\n")) {
-          if (!raw) continue;
-          if (raw.endsWith("\r")) raw = raw.slice(0, -1);
-          if (raw.startsWith(":") || raw.trim() === "") continue;
-          if (!raw.startsWith("data: ")) continue;
-          const jsonStr = raw.slice(6).trim();
-          if (jsonStr === "[DONE]") continue;
-          try {
-            const parsed = JSON.parse(jsonStr);
-            const content = parsed.choices?.[0]?.delta?.content as string | undefined;
-            if (content) upsert(content);
-          } catch { /* ignore */ }
-        }
+      if (sseBuffer.trim()) {
+        processEventBlock(sseBuffer);
       }
     } catch (e) {
       console.error(e);
