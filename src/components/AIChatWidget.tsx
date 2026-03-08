@@ -347,13 +347,7 @@ export function AIChatWidget() {
                       }`}
                     >
                       {msg.role === "assistant" ? (
-                        isStreamingAssistantMessage ? (
-                          <div className="whitespace-pre-wrap">{msg.content}</div>
-                        ) : (
-                          <div className="prose prose-sm dark:prose-invert max-w-none [&>p]:m-0 [&>ul]:my-1">
-                            <ReactMarkdown>{msg.content}</ReactMarkdown>
-                          </div>
-                        )
+                        <div className="whitespace-pre-wrap">{msg.content}</div>
                       ) : (
                         msg.content
                       )}
