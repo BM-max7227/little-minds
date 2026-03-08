@@ -98,8 +98,7 @@ export default function KidHome() {
               </Button>
             </div>
           </div>
-
-
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
             {topicCards.map((topic) => (
               <Link key={topic.id} to={`/kid/${topic.id}`} className="block group">
                 <Card className="h-full transition-all hover:shadow-lg hover:border-primary cursor-pointer">
