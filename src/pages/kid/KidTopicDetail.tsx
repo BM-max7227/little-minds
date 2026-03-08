@@ -59,10 +59,10 @@ export default function KidTopicDetail() {
 
         <Tabs defaultValue="quick" className="w-full">
           <TabsList className="grid w-full grid-cols-4">
-            <TabsTrigger value="quick">Try This Today</TabsTrigger>
-            <TabsTrigger value="skills">Learn a Skill</TabsTrigger>
-            <TabsTrigger value="videos">Watch</TabsTrigger>
-            <TabsTrigger value="journal">Journal</TabsTrigger>
+            <TabsTrigger value="quick" className="text-xs sm:text-sm">Try This Today</TabsTrigger>
+            <TabsTrigger value="skills" className="text-xs sm:text-sm">Learn a Skill</TabsTrigger>
+            <TabsTrigger value="videos" className="text-xs sm:text-sm">Watch</TabsTrigger>
+            <TabsTrigger value="journal" className="text-xs sm:text-sm">Journal</TabsTrigger>
           </TabsList>
 
           <TabsContent value="quick" className="space-y-4 mt-6">
