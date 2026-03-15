@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { MessageCircle, X, Send, Bot, User, ShieldCheck, Maximize2, Minimize2, Mic, Check } from "lucide-react";
 import ReactMarkdown from "react-markdown";
 import { FeedbackButtons } from "@/components/chat/FeedbackButtons";
+import { supabase } from "@/integrations/supabase/client";
 
 type Msg = { role: "user" | "assistant"; content: string };
 
