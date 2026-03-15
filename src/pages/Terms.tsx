@@ -14,6 +14,11 @@ export default function Terms() {
             By accessing and using the Little Minds website, you accept and agree to be bound by
             these Terms of Use. If you do not agree, please do not use this website.
           </p>
+          <p>
+            If you are under the age of 18, you must review these Terms with a parent or guardian.
+            By using this website, you represent that your parent or guardian has reviewed and agreed
+            to these Terms on your behalf.
+          </p>
 
           <h2>Use of This Website</h2>
           <p>
