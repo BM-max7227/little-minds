@@ -62,8 +62,10 @@ export default function PrivacyPolicy() {
 
           <h2>AI Chat Assistant ("Little Minds Helper")</h2>
           <p>
-            The Little Minds Helper chat feature is powered by automated AI technology. When you use
-            the chat:
+            The Little Minds Helper chat feature is powered by automated AI technology. Before your
+            first message, a notice is displayed reminding you that the assistant is an AI (not a
+            real person or doctor), that chats are not saved, and that you should not share personal
+            secrets. When you use the chat:
           </p>
           <ul>
             <li>Your messages are sent to a backend function that processes the request and returns a response</li>
