@@ -17,6 +17,8 @@ import Dashboard from "./pages/parent/Dashboard";
 import KidHome from "./pages/kid/KidHome";
 import KidTopicDetail from "./pages/kid/KidTopicDetail";
 import TryThis from "./pages/kid/TryThis";
+import Breathe from "./pages/kid/Breathe";
+import Together from "./pages/Together";
 import LearnHome from "./pages/learn/LearnHome";
 import LearnTopic from "./pages/learn/LearnTopic";
 import FAQ from "./pages/FAQ";
@@ -53,6 +55,8 @@ const App = () => (
           <Route path="/kid" element={<KidHome />} />
           <Route path="/kid/:topicId" element={<KidTopicDetail />} />
           <Route path="/kid/try-this" element={<TryThis />} />
+          <Route path="/kid/breathe" element={<Breathe />} />
+          <Route path="/together" element={<Together />} />
           <Route path="/learn" element={<LearnHome />} />
           <Route path="/learn/:topicId" element={<LearnTopic />} />
           <Route path="/faq" element={<FAQ />} />

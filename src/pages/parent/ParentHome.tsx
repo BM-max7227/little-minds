@@ -3,7 +3,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Header } from "@/components/Header";
 import { SiteFooter } from "@/components/SiteFooter";
 import { Link } from "react-router-dom";
-import { BookOpen, Users, Wrench, MessageCircle, Eye, FileText, ArrowRight, LayoutDashboard } from "lucide-react";
+import { BookOpen, Users, Wrench, MessageCircle, Eye, FileText, ArrowRight, LayoutDashboard, Heart } from "lucide-react";
 import { SuggestIdeasBanner } from "@/components/SuggestIdeasBanner";
 
 export default function ParentHome() {
@@ -127,6 +127,25 @@ export default function ParentHome() {
                     <CardContent className="pt-0">
                       <span className="text-sm font-medium text-primary inline-flex items-center gap-1 group-hover:gap-2 transition-all">
                         View tools <ArrowRight className="h-3.5 w-3.5" />
+                      </span>
+                    </CardContent>
+                  </Card>
+                </Link>
+
+                <Link to="/together" className="group">
+                  <Card className="h-full transition-all duration-200 hover:shadow-lg hover:border-primary/40 group-hover:-translate-y-1">
+                    <CardHeader className="pb-3">
+                      <div className="h-12 w-12 rounded-xl bg-primary/10 flex items-center justify-center mb-3">
+                        <Heart className="h-6 w-6 text-primary" />
+                      </div>
+                      <CardTitle className="text-lg">Talk Together</CardTitle>
+                      <CardDescription>
+                        Conversation cards to share with your child
+                      </CardDescription>
+                    </CardHeader>
+                    <CardContent className="pt-0">
+                      <span className="text-sm font-medium text-primary inline-flex items-center gap-1 group-hover:gap-2 transition-all">
+                        Start talking <ArrowRight className="h-3.5 w-3.5" />
                       </span>
                     </CardContent>
                   </Card>

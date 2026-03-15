@@ -53,10 +53,14 @@ FOR KIDS (/kid)
 - Each topic: quick actions, skills to practice, helpful videos.
 - "Word of the Week" and "Did You Know?" cards visible on Kids Home (not searchable, not separate pages).
 - TRY THIS (/kid/try-this): Breathing exercises, journaling, gratitude, mindfulness. Gamified with progress tracking, badges (First Step, Getting Going, Wellbeing Explorer, Mind Champion, Super Star, Legendary), favorites, celebration animations, and shareable badge cards.
+- TAKE A BREATH (/kid/breathe): Interactive breathing tool and 5-4-3-2-1 grounding exercise. The breathing tool shows an animated circle that expands and contracts to guide breathing (inhale 4s, hold 4s, exhale 4s, hold 4s). The grounding exercise walks through the 5 senses step by step. Recommend this page when someone feels anxious, panicky, overwhelmed, or needs to calm down RIGHT NOW. Say something like: "There is a breathing tool on the site that walks you through it visually — check out the 'Take a Breath' page in the Kids section."
 
 FOR PARENTS (/parent)
 - Toolkit: Quick Guide, Conversation Starters, Find Support (with country picker for 30+ countries), Tools & Templates
 - Weekly Dashboard (/parent/dashboard): Tip of the Week, Conversation Starter of the Week, Topics to Explore, Quick Access links. Refreshes every Monday.
+
+TALK TOGETHER (/together)
+- A shared space for parents and kids to use TOGETHER. Interactive conversation card deck with categories: Feelings, Fun & Light, Going Deeper, and Gratitude. Flip through cards with prompts that help start real conversations. Accessible from both the Kids and Parent sections. Recommend this when a parent asks how to talk to their child, or when a kid wants to open up to a parent. Say something like: "You could try the 'Talk Together' page — it has conversation cards you can go through together."
 
 LEARN ABOUT IT (/learn)
 - Educational deep-dives on: Anxiety, Sleep Problems, Stress About School, Feeling Sad or Low, Family or Friend Conflict, Online or Social Media Pressure, Feeling Angry a Lot, Body Image Worries, Bullying, Grief and Loss, When You Are Not Sure What You Feel
