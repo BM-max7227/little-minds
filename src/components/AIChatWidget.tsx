@@ -188,6 +188,28 @@ export function AIChatWidget() {
       }
     };
 
+    const parseSseText = (raw: string) => {
+      let fullText = "";
+      for (const rawLine of raw.split("\n")) {
+        const line = rawLine.trim();
+        if (!line.startsWith("data:")) continue;
+        const payload = line.slice(5).trimStart();
+        if (!payload || payload === "[DONE]") continue;
+
+        try {
+          const parsed = JSON.parse(payload);
+          const delta = parsed.choices?.[0]?.delta?.content as string | undefined;
+          if (delta) fullText += delta;
+
+          const messageContent = parsed.choices?.[0]?.message?.content as string | undefined;
+          if (!fullText && messageContent) fullText = messageContent;
+        } catch {
+          // Ignore malformed chunks in fallback parsing
+        }
+      }
+      return fullText;
+    };
+
     const MAX_RETRIES = 3;
     let resp: Response | null = null;
 
@@ -198,22 +220,42 @@ export function AIChatWidget() {
           headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY}`,
+            apikey: import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY,
           },
           body: JSON.stringify({ messages: allMessages }),
         });
-        break; // success, exit retry loop
+        break;
       } catch (networkErr) {
         console.warn(`Chat fetch attempt ${attempt + 1}/${MAX_RETRIES} failed:`, networkErr);
         if (attempt < MAX_RETRIES - 1) {
-          await new Promise((r) => setTimeout(r, 1000 * (attempt + 1))); // backoff: 1s, 2s
+          await new Promise((r) => setTimeout(r, 1000 * (attempt + 1)));
         }
       }
     }
 
     try {
       if (!resp) {
-        setMessages((prev) => [...prev, { role: "assistant", content: "I'm having trouble connecting right now. Please check your internet connection and try again in a moment." }]);
-        setIsLoading(false);
+        const { data, error } = await supabase.functions.invoke("mental-health-chat", {
+          body: { messages: allMessages },
+        });
+
+        if (error) {
+          throw error;
+        }
+
+        const fallbackContent = typeof data === "string"
+          ? parseSseText(data)
+          : (typeof data === "object" && data !== null && "error" in data && typeof (data as { error?: unknown }).error === "string"
+              ? ""
+              : "");
+
+        if (fallbackContent) {
+          typingBufferRef.current += fallbackContent;
+          startTypingTimer();
+          return;
+        }
+
+        setMessages((prev) => [...prev, { role: "assistant", content: "Something went wrong. Please try again." }]);
         return;
       }
 
