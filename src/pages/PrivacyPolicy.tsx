@@ -20,10 +20,9 @@ export default function PrivacyPolicy() {
           <p>Little Minds does <strong>not</strong>:</p>
           <ul>
             <li>Require user accounts, sign-ups, or logins</li>
-            <li>Collect names, email addresses, or personal details through the site (except voluntarily through the contact form — see below)</li>
+            <li>Collect personal information from anyone of any age through general use of the site</li>
             <li>Use analytics tracking, advertising cookies, or third-party trackers</li>
             <li>Sell, share, or trade any user data with third parties</li>
-            <li>Knowingly collect personal information from children under the age of 13</li>
           </ul>
 
           <h2>Information Stored Locally on Your Device</h2>
