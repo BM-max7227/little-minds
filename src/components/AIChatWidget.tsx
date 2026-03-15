@@ -187,15 +187,34 @@ export function AIChatWidget() {
       }
     };
 
+    const MAX_RETRIES = 3;
+    let resp: Response | null = null;
+
+    for (let attempt = 0; attempt < MAX_RETRIES; attempt++) {
+      try {
+        resp = await fetch(CHAT_URL, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY}`,
+          },
+          body: JSON.stringify({ messages: allMessages }),
+        });
+        break; // success, exit retry loop
+      } catch (networkErr) {
+        console.warn(`Chat fetch attempt ${attempt + 1}/${MAX_RETRIES} failed:`, networkErr);
+        if (attempt < MAX_RETRIES - 1) {
+          await new Promise((r) => setTimeout(r, 1000 * (attempt + 1))); // backoff: 1s, 2s
+        }
+      }
+    }
+
     try {
-      const resp = await fetch(CHAT_URL, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY}`,
-        },
-        body: JSON.stringify({ messages: allMessages }),
-      });
+      if (!resp) {
+        setMessages((prev) => [...prev, { role: "assistant", content: "I'm having trouble connecting right now. Please check your internet connection and try again in a moment." }]);
+        setIsLoading(false);
+        return;
+      }
 
       if (!resp.ok || !resp.body) {
         const err = await resp.json().catch(() => ({ error: "Something went wrong" }));
@@ -257,8 +276,8 @@ export function AIChatWidget() {
         processLine(textBuffer.trim());
       }
     } catch (e) {
-      console.error(e);
-      setMessages((prev) => [...prev, { role: "assistant", content: "Sorry, I couldn't connect. Please try again later." }]);
+      console.error("Chat stream error:", e);
+      setMessages((prev) => [...prev, { role: "assistant", content: "Something went wrong while receiving the response. Please try again." }]);
     } finally {
       startTypingTimer();
       await waitForTypingDrain();
