@@ -80,9 +80,17 @@ export default function Terms() {
           <p>
             Little Minds respects your privacy. This website does not require user accounts or
             collect personal information beyond what is voluntarily submitted through the contact
-            form. Some features (such as activity progress and favorites) use your browser's local
-            storage and are not transmitted to any server. No personal data from children is
-            knowingly collected.
+            and donation forms. Some features (such as activity progress and favorites) use your
+            browser's local storage and are not transmitted to any server. No personal data from
+            children is knowingly collected.
+          </p>
+
+          <h2>Data and Storage</h2>
+          <p>
+            Because your journals, progress, and favorites are stored only on your local device,
+            Little Minds cannot recover, move, or back up this data. You are solely responsible for
+            maintaining your device and browser settings. We are not responsible for any loss of data
+            caused by clearing your browser cache, device damage, or any other reason.
           </p>
 
           <h2>Donations</h2>
