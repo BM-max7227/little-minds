@@ -55,6 +55,8 @@ const App = () => (
           <Route path="/kid" element={<KidHome />} />
           <Route path="/kid/:topicId" element={<KidTopicDetail />} />
           <Route path="/kid/try-this" element={<TryThis />} />
+          <Route path="/kid/breathe" element={<Breathe />} />
+          <Route path="/together" element={<Together />} />
           <Route path="/learn" element={<LearnHome />} />
           <Route path="/learn/:topicId" element={<LearnTopic />} />
           <Route path="/faq" element={<FAQ />} />

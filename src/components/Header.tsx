@@ -24,6 +24,7 @@ export function Header({ audience }: HeaderProps) {
           { label: "Guides", path: "/parent/quick-guide" },
           { label: "Find Support", path: "/parent/find-support" },
           { label: "Tools", path: "/parent/tools" },
+          { label: "Talk Together", path: "/together" },
           { label: "About Us", path: "/about" },
           { label: "Contact", path: "/contact" },
           { label: "FAQ", path: "/faq" },
