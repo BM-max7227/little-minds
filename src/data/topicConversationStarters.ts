@@ -1,14 +1,14 @@
-// Maps kid topic IDs to a relevant conversation starter for the "Talk About It" prompt
+// Kid-friendly conversation starters — written as things a KID would say to a parent/trusted adult
 export const topicConversationStarters: Record<string, string> = {
-  anxiety: "I've noticed you seem a bit worried lately. What's been on your mind?",
-  stress: "School can feel like a lot sometimes. What's been the hardest part for you this week?",
-  sad: "I've been thinking about how you've been feeling. Want to talk about it? No pressure.",
-  sleep: "How have you been sleeping? Sometimes our minds get busy at night — is that happening to you?",
-  conflict: "I know things have been a bit tough between you and your friend. Want to talk it through?",
-  socialmedia: "How does being online make you feel? I'm curious, not checking up — I just want to understand.",
-  anger: "I've noticed you've been feeling frustrated a lot. What's going on? I'm here to listen.",
-  bodyimage: "You are amazing just as you are. Is there anything about how you feel about yourself you want to talk about?",
-  bullying: "Is everything okay at school? You can tell me anything — I'll listen and we'll figure it out together.",
-  grief: "I know you've been going through a lot. It's okay to feel however you feel. Want to talk about it?",
-  other: "Sometimes feelings are hard to figure out. Want to sit together and try to work through it?",
+  anxiety: "I've been feeling really worried a lot and I don't know how to make it stop. Can we talk about it?",
+  stress: "School has been really stressful lately and I feel like I can't keep up. Can you help me figure it out?",
+  sad: "I've been feeling really sad and I'm not sure why. I just wanted to tell you.",
+  sleep: "I've been having a hard time falling asleep. My brain won't stop thinking at night.",
+  conflict: "I had a fight with my friend and I don't know what to do. Can I talk to you about it?",
+  socialmedia: "Sometimes stuff I see online makes me feel bad about myself. Can we talk about it?",
+  anger: "I've been getting angry a lot and I don't like how it feels. Can you help me?",
+  bodyimage: "I've been feeling weird about how I look. I know it's silly but it bothers me.",
+  bullying: "Something's been happening at school that's making me upset. I need to tell you about it.",
+  grief: "I've been really missing them and I feel sad a lot. Is it okay if we talk?",
+  other: "I've been feeling kind of off lately and I can't really explain it. Can we just talk?",
 };

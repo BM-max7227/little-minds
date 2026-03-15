@@ -72,27 +72,6 @@ export default function LearnTopic() {
             )}
           </div>
 
-          {/* What Your Kid Is Reading cross-link */}
-          {hasKidVersion && topicId && (
-            <Card className="mb-8 border-primary/20 bg-primary/5">
-              <CardContent className="py-4">
-                <div className="flex items-center gap-3">
-                  <div className="h-9 w-9 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
-                    <Eye className="h-4 w-4 text-primary" />
-                  </div>
-                  <div className="flex-1">
-                    <p className="text-sm font-medium">What your child sees on this topic</p>
-                    <p className="text-xs text-muted-foreground">
-                      The Kids section has an age-appropriate version with quick actions, skills, and videos.
-                    </p>
-                  </div>
-                  <Button variant="outline" size="sm" asChild>
-                    <Link to={`/kid/${topicId}`}>View kid version</Link>
-                  </Button>
-                </div>
-              </CardContent>
-            </Card>
-          )}
 
           <section className="mb-8">
             <h2 className="text-2xl font-semibold mb-4">What It Is</h2>
