@@ -22,6 +22,7 @@ export function AIChatWidget() {
   const [voiceTranscript, setVoiceTranscript] = useState("");
   const [audioLevels, setAudioLevels] = useState<number[]>([]);
   const scrollRef = useRef<HTMLDivElement>(null);
+  const userHasScrolledUpRef = useRef(false);
   const recognitionRef = useRef<any>(null);
   const audioContextRef = useRef<AudioContext | null>(null);
   const analyserRef = useRef<AnalyserNode | null>(null);
