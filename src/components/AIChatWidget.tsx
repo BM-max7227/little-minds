@@ -155,6 +155,7 @@ export function AIChatWidget() {
     const allMessages = [...messages, userMsg];
     setMessages(allMessages);
     setInput("");
+    userHasScrolledUpRef.current = false; // Reset so we scroll to new message
     setIsLoading(true);
 
     let assistantSoFar = "";
