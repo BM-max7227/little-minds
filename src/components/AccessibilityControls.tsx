@@ -3,12 +3,15 @@ import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";
-import { Settings } from "lucide-react";
+import { Settings, Trash2 } from "lucide-react";
+import { useToast } from "@/hooks/use-toast";
 
 export const AccessibilityControls = () => {
   const [highContrast, setHighContrast] = useState(false);
   const [reduceMotion, setReduceMotion] = useState(false);
   const [readAloud, setReadAloud] = useState(false);
+  const [confirmClear, setConfirmClear] = useState(false);
+  const { toast } = useToast();
 
   useEffect(() => {
     const saved = localStorage.getItem("accessibility-prefs");
@@ -95,6 +98,55 @@ export const AccessibilityControls = () => {
               checked={readAloud}
               onCheckedChange={handleReadAloud}
             />
+          </div>
+
+          <div className="border-t pt-6 mt-6 space-y-3">
+            <Label className="flex flex-col gap-1">
+              <span className="font-medium">Clear My Data</span>
+              <span className="text-sm text-muted-foreground">
+                Remove all locally stored data including journals, progress, favorites, and preferences
+              </span>
+            </Label>
+            {!confirmClear ? (
+              <Button
+                variant="destructive"
+                size="sm"
+                onClick={() => setConfirmClear(true)}
+                className="gap-2"
+              >
+                <Trash2 className="h-4 w-4" />
+                Clear All Data
+              </Button>
+            ) : (
+              <div className="flex gap-2">
+                <Button
+                  variant="destructive"
+                  size="sm"
+                  onClick={() => {
+                    localStorage.clear();
+                    sessionStorage.clear();
+                    setHighContrast(false);
+                    setReduceMotion(false);
+                    setReadAloud(false);
+                    setConfirmClear(false);
+                    document.documentElement.classList.remove("high-contrast", "reduce-motion");
+                    toast({
+                      title: "Data Cleared",
+                      description: "All locally stored data has been removed.",
+                    });
+                  }}
+                >
+                  Yes, clear everything
+                </Button>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={() => setConfirmClear(false)}
+                >
+                  Cancel
+                </Button>
+              </div>
+            )}
           </div>
         </div>
       </SheetContent>
