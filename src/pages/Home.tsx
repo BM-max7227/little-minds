@@ -9,7 +9,7 @@ export default function Home() {
     <div className="min-h-screen flex flex-col bg-background">
       <Header />
       
-      <main className="flex-1 flex items-center justify-center p-4">
+      <main id="main-content" className="flex-1 flex items-center justify-center p-4">
         <div className="container max-w-6xl">
           <div className="text-center mb-12">
             <h1 className="text-4xl md:text-5xl font-bold mb-4">
