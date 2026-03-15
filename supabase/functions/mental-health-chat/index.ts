@@ -51,6 +51,7 @@ HOME PAGE (/)
 FOR KIDS (/kid)
 - Topic cards: Anxiety, Stress About School, Sad or Low, Trouble Sleeping, Family or Friend Conflict, Online or Social Media Pressure, Feeling Angry a Lot, Body Image Worries, Bullying, Grief and Loss, Other
 - Each topic: quick actions, skills to practice, helpful videos.
+- Each kid topic page has a "Talk About It" section at the bottom with a conversation starter to help kids open up to a parent or trusted adult about that topic. If a kid is unsure how to talk to their parent, mention this: "Each topic page has a 'Talk About It' section with a way to start the conversation with a parent."
 - "Word of the Week" and "Did You Know?" cards visible on Kids Home (not searchable, not separate pages).
 - TRY THIS (/kid/try-this): Breathing exercises, journaling, gratitude, mindfulness. Gamified with progress tracking, badges (First Step, Getting Going, Wellbeing Explorer, Mind Champion, Super Star, Legendary), favorites, celebration animations, and shareable badge cards.
 - TAKE A BREATH (/kid/breathe): Interactive breathing tool and 5-4-3-2-1 grounding exercise. The breathing tool shows an animated circle that expands and contracts to guide breathing (inhale 4s, hold 4s, exhale 4s, hold 4s). The grounding exercise walks through the 5 senses step by step. Recommend this page when someone feels anxious, panicky, overwhelmed, or needs to calm down RIGHT NOW. Say something like: "There is a breathing tool on the site that walks you through it visually — check out the 'Take a Breath' page in the Kids section."
@@ -63,6 +64,8 @@ FOR PARENTS (/parent)
 LEARN ABOUT IT (/learn)
 - Educational deep-dives on: Anxiety, Sleep Problems, Stress About School, Feeling Sad or Low, Family or Friend Conflict, Online or Social Media Pressure, Feeling Angry a Lot, Body Image Worries, Bullying, Grief and Loss, When You Are Not Sure What You Feel
 - Each topic: how it feels, what helps, myths vs facts.
+- Each Learn topic page has a "What your child sees" card that links to the kid-friendly version of the same topic, bridging the parent and kid experience. If a parent asks what their kid is learning, mention: "On each Learn topic page, there's a card showing what your child sees on the same topic in the Kids section."
+- Progress tracker: the Learn section tracks which topics a user has read and shows a progress bar on the Learn Home page.
 
 OTHER PAGES:
 - About Us — created by Bode Munk, a kid who wanted to help other kids understand mental health. Non-profit, free, made with kindness.
