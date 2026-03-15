@@ -3,7 +3,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Header } from "@/components/Header";
 import { SiteFooter } from "@/components/SiteFooter";
 import { Link } from "react-router-dom";
-import { BookOpen, Users, Wrench, MessageCircle, Eye, FileText, ArrowRight, LayoutDashboard } from "lucide-react";
+import { BookOpen, Users, Wrench, MessageCircle, Eye, FileText, ArrowRight, LayoutDashboard, Heart } from "lucide-react";
 import { SuggestIdeasBanner } from "@/components/SuggestIdeasBanner";
 
 export default function ParentHome() {
