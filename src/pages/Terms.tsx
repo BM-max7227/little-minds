@@ -95,9 +95,10 @@ export default function Terms() {
 
           <h2>Donations</h2>
           <p>
-            Any donations made through this website are voluntary and support the continued
-            operation of this non profit project. Donation inquiries are handled through our contact
-            form. Little Minds is not a registered charity and donations may not be tax deductible.
+            Little Minds provides a donation inquiry form that allows you to express interest in
+            supporting this project. No financial transactions take place on this website. If you
+            submit a donation inquiry, we will contact you by email to discuss next steps. Little
+            Minds is not a registered charity and donations may not be tax deductible.
           </p>
 
           <h2>Limitation of Liability</h2>
