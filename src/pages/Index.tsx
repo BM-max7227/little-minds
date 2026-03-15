@@ -205,13 +205,7 @@ const Index = () => {
                 <CardTitle className="text-2xl">Crisis Resources</CardTitle>
               </CardHeader>
               <CardContent className="space-y-3 text-left">
-                <p className="text-muted-foreground">Immediate help is available 24/7:</p>
-                <ul className="space-y-2 text-muted-foreground">
-                  <li>• National Crisis Hotline: 988</li>
-                  <li>• Crisis Text Line: Text HOME to 741741</li>
-                  <li>• Emergency: 911</li>
-                  <li>• Child Help: 1-800-422-4453</li>
-                </ul>
+                <p className="text-muted-foreground">Immediate help is available 24/7. Please contact your local emergency services or use the Help Now button above to find crisis resources for your country.</p>
               </CardContent>
             </Card>
           </div>
