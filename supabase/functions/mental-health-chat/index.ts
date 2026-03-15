@@ -59,8 +59,6 @@ FOR PARENTS (/parent)
 - Toolkit: Quick Guide, Conversation Starters, Find Support (with country picker for 30+ countries), Tools & Templates
 - Weekly Dashboard (/parent/dashboard): Tip of the Week, Conversation Starter of the Week, Topics to Explore, Quick Access links. Refreshes every Monday.
 
-TALK TOGETHER (/together)
-- A shared space for parents and kids to use TOGETHER. Interactive conversation card deck with categories: Feelings, Fun & Light, Going Deeper, and Gratitude. Flip through cards with prompts that help start real conversations. Accessible from both the Kids and Parent sections. Recommend this when a parent asks how to talk to their child, or when a kid wants to open up to a parent. Say something like: "You could try the 'Talk Together' page — it has conversation cards you can go through together."
 
 LEARN ABOUT IT (/learn)
 - Educational deep-dives on: Anxiety, Sleep Problems, Stress About School, Feeling Sad or Low, Family or Friend Conflict, Online or Social Media Pressure, Feeling Angry a Lot, Body Image Worries, Bullying, Grief and Loss, When You Are Not Sure What You Feel

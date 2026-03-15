@@ -4,7 +4,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { getWordOfTheWeek, getDidYouKnow } from "@/data/kidEngagement";
-import { BookOpen, Lightbulb, ChevronDown, Sparkles, Wind, Users } from "lucide-react";
+import { BookOpen, Lightbulb, ChevronDown, Sparkles, Wind } from "lucide-react";
 import { SuggestIdeasBanner } from "@/components/SuggestIdeasBanner";
 
 const topicCards = [
@@ -56,12 +56,6 @@ export default function KidHome() {
                 <Link to="/kid/breathe">
                   <Wind className="h-5 w-5 mr-2" />
                   Take a Breath
-                </Link>
-              </Button>
-              <Button size="lg" variant="outline" asChild className="text-lg px-8 py-6 rounded-full">
-                <Link to="/together">
-                  <Users className="h-5 w-5 mr-2" />
-                  Talk Together
                 </Link>
               </Button>
             </div>
