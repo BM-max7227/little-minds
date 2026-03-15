@@ -58,12 +58,6 @@ export default function KidHome() {
                   Take a Breath
                 </Link>
               </Button>
-              <Button size="lg" variant="outline" asChild className="text-lg px-8 py-6 rounded-full">
-                <Link to="/together">
-                  <Users className="h-5 w-5 mr-2" />
-                  Talk Together
-                </Link>
-              </Button>
             </div>
           </div>
 
