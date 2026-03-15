@@ -11,7 +11,7 @@ function getProgress(): string[] {
   }
 }
 
-export function useLearnProgress() {
+export function useLearnProgress(totalTopics: number) {
   const [completed, setCompleted] = useState<string[]>(getProgress);
 
   const markRead = useCallback((topicId: string) => {
@@ -36,5 +36,5 @@ export function useLearnProgress() {
     [completed]
   );
 
-  return { completed, markRead, unmark, isRead, total: Object.keys(import("@/data/learnTopics")).length };
+  return { completed, markRead, unmark, isRead, total: totalTopics };
 }
