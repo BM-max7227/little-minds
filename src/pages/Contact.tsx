@@ -201,6 +201,10 @@ export default function Contact() {
                           </>
                         )}
                       </Button>
+                      <p className="text-xs text-center text-muted-foreground">
+                        By submitting, you agree to our{" "}
+                        <Link to="/privacy" className="underline hover:text-foreground transition-colors">Privacy Policy</Link>.
+                      </p>
                     </form>
                   )}
                 </CardContent>
