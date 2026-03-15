@@ -213,6 +213,7 @@ export default function LearnTopic() {
                 </Card>
               ))}
             </div>
+          <div ref={bottomRef} />
           </section>
         </article>
       </main>
