@@ -5,11 +5,9 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { learnTopics } from "@/data/learnTopics";
-import { topics as kidTopics } from "@/data/kidTopics";
 import { useLearnProgress } from "@/hooks/useLearnProgress";
-import { ArrowLeft, AlertCircle, CheckCircle, BookOpen, Eye } from "lucide-react";
-import { useEffect } from "react";
-import { Link } from "react-router-dom";
+import { ArrowLeft, AlertCircle, CheckCircle } from "lucide-react";
+import { useEffect, useRef } from "react";
 
 const topicKeys = Object.keys(learnTopics);
 
@@ -18,13 +16,22 @@ export default function LearnTopic() {
   const navigate = useNavigate();
   const topic = topicId ? learnTopics[topicId] : null;
   const { markRead, isRead } = useLearnProgress(topicKeys.length);
-  const hasKidVersion = topicId ? !!kidTopics[topicId] : false;
+  const bottomRef = useRef<HTMLDivElement>(null);
 
-  // Mark as read when the user visits the page
+  // Mark as read when user scrolls to the bottom of the page
   useEffect(() => {
-    if (topicId && topic) {
-      markRead(topicId);
-    }
+    if (!topicId || !topic || !bottomRef.current) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          markRead(topicId);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.5 }
+    );
+    observer.observe(bottomRef.current);
+    return () => observer.disconnect();
   }, [topicId, topic, markRead]);
 
   if (!topic) {
@@ -65,27 +72,6 @@ export default function LearnTopic() {
             )}
           </div>
 
-          {/* What Your Kid Is Reading cross-link */}
-          {hasKidVersion && topicId && (
-            <Card className="mb-8 border-primary/20 bg-primary/5">
-              <CardContent className="py-4">
-                <div className="flex items-center gap-3">
-                  <div className="h-9 w-9 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
-                    <Eye className="h-4 w-4 text-primary" />
-                  </div>
-                  <div className="flex-1">
-                    <p className="text-sm font-medium">What your child sees on this topic</p>
-                    <p className="text-xs text-muted-foreground">
-                      The Kids section has an age-appropriate version with quick actions, skills, and videos.
-                    </p>
-                  </div>
-                  <Button variant="outline" size="sm" asChild>
-                    <Link to={`/kid/${topicId}`}>View kid version</Link>
-                  </Button>
-                </div>
-              </CardContent>
-            </Card>
-          )}
 
           <section className="mb-8">
             <h2 className="text-2xl font-semibold mb-4">What It Is</h2>
@@ -227,6 +213,7 @@ export default function LearnTopic() {
                 </Card>
               ))}
             </div>
+          <div ref={bottomRef} />
           </section>
         </article>
       </main>

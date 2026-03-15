@@ -165,12 +165,12 @@ export default function KidTopicDetail() {
                   </div>
                   <div>
                     <p className="font-semibold mb-1">Want to talk to a parent or trusted adult about this?</p>
-                    <p className="text-sm text-muted-foreground mb-3">Here's a way they could start the conversation:</p>
+                    <p className="text-sm text-muted-foreground mb-3">Here's something you could say to start the conversation:</p>
                     <blockquote className="border-l-2 border-primary/40 pl-3 italic text-sm">
                       "{topicConversationStarters[topicId]}"
                     </blockquote>
                     <p className="text-xs text-muted-foreground mt-3">
-                      You could show them this page, or just tell them how you feel 💛
+                      It's brave to speak up — you could say this out loud, or show them this page 💛
                     </p>
                   </div>
                 </div>
