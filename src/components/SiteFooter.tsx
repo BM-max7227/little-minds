@@ -10,7 +10,7 @@ export function SiteFooter() {
             It is <strong>not a substitute</strong> for professional medical advice, diagnosis, or treatment.
           </p>
           <p>
-            If you or someone you know is in crisis or danger, please contact your local emergency services or call/text <strong>988</strong> (Suicide & Crisis Lifeline).
+            If you or someone you know is in crisis or danger, please contact your local emergency services immediately.
           </p>
           <div className="flex flex-wrap justify-center gap-4 pt-2 text-xs">
             <Link to="/" className="hover:text-foreground transition-colors">Home</Link>
