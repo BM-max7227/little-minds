@@ -19,6 +19,7 @@ export function SiteFooter() {
             <Link to="/faq" className="hover:text-foreground transition-colors">FAQ</Link>
             <Link to="/disclaimer" className="hover:text-foreground transition-colors">Disclaimer</Link>
             <Link to="/terms" className="hover:text-foreground transition-colors">Terms of Use</Link>
+            <Link to="/privacy" className="hover:text-foreground transition-colors">Privacy Policy</Link>
           </div>
           <p className="text-xs pt-1">
             Made with care by Bode Munk. This is a non profit project to help kids, parents, and people learn about mental health and ways to help.
