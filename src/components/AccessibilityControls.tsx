@@ -3,7 +3,8 @@ import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";
-import { Settings } from "lucide-react";
+import { Settings, Trash2 } from "lucide-react";
+import { useToast } from "@/hooks/use-toast";
 
 export const AccessibilityControls = () => {
   const [highContrast, setHighContrast] = useState(false);
