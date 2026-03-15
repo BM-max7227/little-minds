@@ -276,8 +276,8 @@ export function AIChatWidget() {
         processLine(textBuffer.trim());
       }
     } catch (e) {
-      console.error(e);
-      setMessages((prev) => [...prev, { role: "assistant", content: "Sorry, I couldn't connect. Please try again later." }]);
+      console.error("Chat stream error:", e);
+      setMessages((prev) => [...prev, { role: "assistant", content: "Something went wrong while receiving the response. Please try again." }]);
     } finally {
       startTypingTimer();
       await waitForTypingDrain();
