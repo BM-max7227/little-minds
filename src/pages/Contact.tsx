@@ -84,8 +84,11 @@ export default function Contact() {
               <h1 className="text-4xl md:text-5xl font-bold mb-6">
                 Contact Us
               </h1>
-              <p className="text-xl text-muted-foreground mb-8">
+              <p className="text-xl text-muted-foreground mb-4">
                 Have a question, idea, or just want to say hello? We would love to hear from you!
+              </p>
+              <p className="text-sm text-muted-foreground">
+                Little Minds is operated by Bode Munk. You can reach us using the form below.
               </p>
             </div>
           </div>
