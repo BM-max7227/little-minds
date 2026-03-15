@@ -206,8 +206,6 @@ const Index = () => {
               </CardHeader>
               <CardContent className="space-y-3 text-left">
                 <p className="text-muted-foreground">Immediate help is available 24/7. Please contact your local emergency services or use the Help Now button above to find crisis resources for your country.</p>
-                  <li>• Child Help: 1-800-422-4453</li>
-                </ul>
               </CardContent>
             </Card>
           </div>
