@@ -5,11 +5,9 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { learnTopics } from "@/data/learnTopics";
-import { topics as kidTopics } from "@/data/kidTopics";
 import { useLearnProgress } from "@/hooks/useLearnProgress";
-import { ArrowLeft, AlertCircle, CheckCircle, BookOpen, Eye } from "lucide-react";
-import { useEffect } from "react";
-import { Link } from "react-router-dom";
+import { ArrowLeft, AlertCircle, CheckCircle } from "lucide-react";
+import { useEffect, useRef } from "react";
 
 const topicKeys = Object.keys(learnTopics);
 
