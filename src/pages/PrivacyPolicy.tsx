@@ -33,7 +33,7 @@ export default function PrivacyPolicy() {
           </p>
           <ul>
             <li><strong>Audience preference</strong> — whether you chose the parent, kid, or learn section</li>
-            <li><strong>Theme preference</strong> — light or dark mode</li>
+            <li><strong>Activity progress</strong> — which activities or challenges you've completed</li>
             <li><strong>Activity progress</strong> — which activities or challenges you've completed</li>
             <li><strong>Learning progress</strong> — which topics you've read</li>
             <li><strong>Favorites</strong> — any content you've marked as a favorite</li>
