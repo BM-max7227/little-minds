@@ -193,7 +193,19 @@ export default function Donate() {
                         />
                       </div>
 
-                      <Button type="submit" className="w-full" size="lg" disabled={isSubmitting}>
+                      <div className="flex items-start space-x-2">
+                        <Checkbox
+                          id="ageConfirm"
+                          checked={ageConfirmed}
+                          onCheckedChange={(checked) => setAgeConfirmed(checked === true)}
+                          required
+                        />
+                        <Label htmlFor="ageConfirm" className="text-sm leading-snug cursor-pointer">
+                          I confirm that I am 13 years of age or older, or I am a parent/guardian submitting on behalf of a child. *
+                        </Label>
+                      </div>
+
+                      <Button type="submit" className="w-full" size="lg" disabled={isSubmitting || !ageConfirmed}>
                         {isSubmitting ? (
                           <>
                             <Loader2 className="mr-2 h-4 w-4 animate-spin" />

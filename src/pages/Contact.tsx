@@ -117,6 +117,7 @@ export default function Contact() {
                         onClick={() => {
                           setIsSubmitted(false);
                           setFormData({ name: "", email: "", subject: "", message: "" });
+                          setAgeConfirmed(false);
                         }}
                       >
                         Send Another Message
