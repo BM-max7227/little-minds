@@ -22,6 +22,7 @@ export function AIChatWidget() {
   const [voiceTranscript, setVoiceTranscript] = useState("");
   const [audioLevels, setAudioLevels] = useState<number[]>([]);
   const scrollRef = useRef<HTMLDivElement>(null);
+  const userHasScrolledUpRef = useRef(false);
   const recognitionRef = useRef<any>(null);
   const audioContextRef = useRef<AudioContext | null>(null);
   const analyserRef = useRef<AnalyserNode | null>(null);
@@ -125,8 +126,21 @@ export function AIChatWidget() {
     setAudioLevels([]);
   }, [stopListening]);
 
+  // Track if user has scrolled up
   useEffect(() => {
-    if (!scrollRef.current) return;
+    const el = scrollRef.current;
+    if (!el) return;
+    const handleScroll = () => {
+      const distanceFromBottom = el.scrollHeight - el.scrollTop - el.clientHeight;
+      userHasScrolledUpRef.current = distanceFromBottom > 80;
+    };
+    el.addEventListener("scroll", handleScroll);
+    return () => el.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  // Only auto-scroll if user hasn't scrolled up
+  useEffect(() => {
+    if (!scrollRef.current || userHasScrolledUpRef.current) return;
     scrollRef.current.scrollTo({
       top: scrollRef.current.scrollHeight,
       behavior: isLoading ? "auto" : "smooth",
@@ -141,6 +155,7 @@ export function AIChatWidget() {
     const allMessages = [...messages, userMsg];
     setMessages(allMessages);
     setInput("");
+    userHasScrolledUpRef.current = false; // Reset so we scroll to new message
     setIsLoading(true);
 
     let assistantSoFar = "";
