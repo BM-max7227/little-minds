@@ -216,24 +216,28 @@ export function AIChatWidget() {
     const MAX_RETRIES = 3;
     let resp: Response | null = null;
 
-    for (let attempt = 0; attempt < MAX_RETRIES; attempt++) {
-      try {
-        resp = await fetch(CHAT_URL, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY}`,
-            apikey: import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY,
-          },
-          body: JSON.stringify({ messages: allMessages }),
-        });
-        break;
-      } catch (networkErr) {
-        console.warn(`Chat fetch attempt ${attempt + 1}/${MAX_RETRIES} failed:`, networkErr);
-        if (attempt < MAX_RETRIES - 1) {
-          await new Promise((r) => setTimeout(r, 1000 * (attempt + 1)));
+    for (const chatUrl of CHAT_URLS) {
+      for (let attempt = 0; attempt < MAX_RETRIES; attempt++) {
+        try {
+          resp = await fetch(chatUrl, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY}`,
+              apikey: import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY,
+            },
+            body: JSON.stringify({ messages: allMessages }),
+          });
+          break;
+        } catch (networkErr) {
+          console.warn(`Chat fetch attempt ${attempt + 1}/${MAX_RETRIES} failed for ${chatUrl}:`, networkErr);
+          if (attempt < MAX_RETRIES - 1) {
+            await new Promise((r) => setTimeout(r, 1000 * (attempt + 1)));
+          }
         }
       }
+
+      if (resp) break;
     }
 
     try {
@@ -242,15 +246,14 @@ export function AIChatWidget() {
           body: { messages: allMessages },
         });
 
-        if (error) {
-          throw error;
-        }
+        if (error) throw error;
 
-        const fallbackContent = typeof data === "string"
-          ? parseSseText(data)
-          : (typeof data === "object" && data !== null && "error" in data && typeof (data as { error?: unknown }).error === "string"
-              ? ""
-              : "");
+        let fallbackContent = "";
+        if (typeof data === "string") {
+          fallbackContent = parseSseText(data);
+        } else if (typeof data === "object" && data !== null && "content" in data && typeof (data as { content?: unknown }).content === "string") {
+          fallbackContent = (data as { content: string }).content;
+        }
 
         if (fallbackContent) {
           typingBufferRef.current += fallbackContent;
