@@ -261,7 +261,7 @@ export function AIChatWidget() {
           return;
         }
 
-        setMessages((prev) => [...prev, { role: "assistant", content: "Something went wrong. Please try again." }]);
+        setMessages((prev) => [...prev, { role: "assistant", content: "I couldn't connect right now, but please try again in a moment." }]);
         return;
       }
 
