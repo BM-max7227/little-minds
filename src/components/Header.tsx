@@ -33,6 +33,8 @@ export function Header({ audience }: HeaderProps) {
           { label: "Home", path: "/kid" },
           { label: "Pick a Topic", path: "/kid" },
           { label: "Try This", path: "/kid/try-this" },
+          { label: "Breathe", path: "/kid/breathe" },
+          { label: "Talk Together", path: "/together" },
           { label: "About Us", path: "/about" },
           { label: "Contact", path: "/contact" },
           { label: "FAQ", path: "/faq" },
