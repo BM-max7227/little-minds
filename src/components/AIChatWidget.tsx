@@ -330,8 +330,26 @@ export function AIChatWidget() {
         return false;
       };
 
+      const STREAM_CHUNK_TIMEOUT_MS = 15000;
+
+      const readWithTimeout = async () => {
+        return Promise.race([
+          reader.read(),
+          new Promise<never>((_, reject) =>
+            setTimeout(() => reject(new Error("Stream chunk timeout")), STREAM_CHUNK_TIMEOUT_MS)
+          ),
+        ]);
+      };
+
       while (!streamDone) {
-        const { done, value } = await reader.read();
+        let readResult: ReadableStreamReadResult<Uint8Array>;
+        try {
+          readResult = await readWithTimeout();
+        } catch {
+          console.warn("Stream read timed out, ending stream gracefully");
+          break;
+        }
+        const { done, value } = readResult;
         if (done) break;
 
         textBuffer += decoder.decode(value, { stream: true });
