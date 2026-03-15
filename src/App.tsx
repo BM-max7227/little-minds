@@ -27,6 +27,7 @@ import Donate from "./pages/Donate";
 import Contact from "./pages/Contact";
 import Disclaimer from "./pages/Disclaimer";
 import Terms from "./pages/Terms";
+import PrivacyPolicy from "./pages/PrivacyPolicy";
 const queryClient = new QueryClient();
 
 function ScrollToTop() {
