@@ -20,10 +20,9 @@ export default function PrivacyPolicy() {
           <p>Little Minds does <strong>not</strong>:</p>
           <ul>
             <li>Require user accounts, sign-ups, or logins</li>
-            <li>Collect names, email addresses, or personal details through the site (except voluntarily through the contact form — see below)</li>
+            <li>Collect personal information from anyone of any age through general use of the site</li>
             <li>Use analytics tracking, advertising cookies, or third-party trackers</li>
             <li>Sell, share, or trade any user data with third parties</li>
-            <li>Knowingly collect personal information from children under the age of 13</li>
           </ul>
 
           <h2>Information Stored Locally on Your Device</h2>
@@ -34,7 +33,7 @@ export default function PrivacyPolicy() {
           </p>
           <ul>
             <li><strong>Audience preference</strong> — whether you chose the parent, kid, or learn section</li>
-            <li><strong>Theme preference</strong> — light or dark mode</li>
+            <li><strong>Activity progress</strong> — which activities or challenges you've completed</li>
             <li><strong>Activity progress</strong> — which activities or challenges you've completed</li>
             <li><strong>Learning progress</strong> — which topics you've read</li>
             <li><strong>Favorites</strong> — any content you've marked as a favorite</li>
@@ -45,12 +44,13 @@ export default function PrivacyPolicy() {
             data. No one — including us — can access this information.
           </p>
 
-          <h2>Contact Form</h2>
+          <h2>Contact and Donation Forms</h2>
           <p>
-            If you voluntarily submit a message through our contact form, the information you provide
-            (such as your name and email address) is sent via a secure backend function for the sole
-            purpose of responding to your inquiry. We do not store this information in a database or
-            use it for any other purpose.
+            If you voluntarily submit a message through our contact form or a donation inquiry
+            through our donate page, the information you provide (such as your name, email address,
+            and message) is sent via a secure backend function for the sole purpose of responding to
+            your inquiry. We do not store this information in a database or use it for any other
+            purpose.
           </p>
 
           <h2>AI Chat Assistant ("Little Minds Helper")</h2>
@@ -79,7 +79,7 @@ export default function PrivacyPolicy() {
             Privacy Protection Act (COPPA) by:
           </p>
           <ul>
-            <li>Not collecting personal information from children under 13 (or any age)</li>
+            <li>Not collecting personal information from anyone of any age</li>
             <li>Not requiring accounts, registration, or sign-ups</li>
             <li>Storing all child-facing features (journal, progress, favorites) locally on the device only</li>
             <li>Not using tracking, advertising, or data collection tools</li>
