@@ -7,7 +7,10 @@ import { supabase } from "@/integrations/supabase/client";
 
 type Msg = { role: "user" | "assistant"; content: string };
 
-const CHAT_URL = `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/mental-health-chat`;
+const CHAT_URLS = [
+  `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/mental-health-chat`,
+  "/functions/v1/mental-health-chat",
+];
 
 export function AIChatWidget() {
   const [open, setOpen] = useState(false);
