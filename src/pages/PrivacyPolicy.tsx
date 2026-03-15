@@ -86,7 +86,17 @@ export default function PrivacyPolicy() {
           </ul>
           <p>
             Parents and guardians are encouraged to supervise their children's use of the internet,
-            including this website.
+            including this website. If you are a parent or guardian and have questions about how this
+            website handles privacy, please contact us through our{" "}
+            <a href="/contact">contact page</a>.
+          </p>
+
+          <h2>Hosting and Third-Party Services</h2>
+          <p>
+            This website uses third-party hosting and backend services to operate (such as serving
+            web pages and processing form submissions). These services do not collect personally
+            identifiable information (PII) from any users, including children. No analytics,
+            advertising, or tracking services are used.
           </p>
 
           <h2>Cookies</h2>
