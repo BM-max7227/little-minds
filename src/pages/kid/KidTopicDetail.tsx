@@ -155,6 +155,29 @@ export default function KidTopicDetail() {
         </Tabs>
 
         <div className="mt-12 space-y-6">
+          {/* Talk About It prompt */}
+          {topicId && topicConversationStarters[topicId] && (
+            <Card className="border-primary/20 bg-primary/5">
+              <CardContent className="pt-6">
+                <div className="flex items-start gap-3">
+                  <div className="h-10 w-10 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
+                    <MessageCircle className="h-5 w-5 text-primary" />
+                  </div>
+                  <div>
+                    <p className="font-semibold mb-1">Want to talk to a parent or trusted adult about this?</p>
+                    <p className="text-sm text-muted-foreground mb-3">Here's a way they could start the conversation:</p>
+                    <blockquote className="border-l-2 border-primary/40 pl-3 italic text-sm">
+                      "{topicConversationStarters[topicId]}"
+                    </blockquote>
+                    <p className="text-xs text-muted-foreground mt-3">
+                      You could show them this page, or just tell them how you feel 💛
+                    </p>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          )}
+
           <Card className="bg-primary/5 border-primary/20">
             <CardContent className="pt-6">
               <p className="text-center text-lg font-medium italic">
