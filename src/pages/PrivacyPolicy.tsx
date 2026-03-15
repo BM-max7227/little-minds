@@ -44,12 +44,13 @@ export default function PrivacyPolicy() {
             data. No one — including us — can access this information.
           </p>
 
-          <h2>Contact Form</h2>
+          <h2>Contact and Donation Forms</h2>
           <p>
-            If you voluntarily submit a message through our contact form, the information you provide
-            (such as your name and email address) is sent via a secure backend function for the sole
-            purpose of responding to your inquiry. We do not store this information in a database or
-            use it for any other purpose.
+            If you voluntarily submit a message through our contact form or a donation inquiry
+            through our donate page, the information you provide (such as your name, email address,
+            and message) is sent via a secure backend function for the sole purpose of responding to
+            your inquiry. We do not store this information in a database or use it for any other
+            purpose.
           </p>
 
           <h2>AI Chat Assistant ("Little Minds Helper")</h2>
