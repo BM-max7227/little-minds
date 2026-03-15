@@ -214,23 +214,52 @@ export function AIChatWidget() {
     };
 
     const MAX_RETRIES = 3;
+    const REQUEST_TIMEOUT_MS = 30000;
     let resp: Response | null = null;
+
+    const fetchWithTimeout = async (url: string, options: RequestInit, timeoutMs: number): Promise<Response> => {
+      const controller = new AbortController();
+      const timer = setTimeout(() => controller.abort(), timeoutMs);
+      try {
+        const res = await fetch(url, { ...options, signal: controller.signal });
+        return res;
+      } finally {
+        clearTimeout(timer);
+      }
+    };
 
     for (const chatUrl of CHAT_URLS) {
       for (let attempt = 0; attempt < MAX_RETRIES; attempt++) {
         try {
-          resp = await fetch(chatUrl, {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-              Authorization: `Bearer ${import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY}`,
-              apikey: import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY,
+          resp = await fetchWithTimeout(
+            chatUrl,
+            {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY}`,
+                apikey: import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY,
+              },
+              body: JSON.stringify({ messages: allMessages }),
             },
-            body: JSON.stringify({ messages: allMessages }),
-          });
+            REQUEST_TIMEOUT_MS,
+          );
+
+          // If we got a server error (500/502/503), retry instead of accepting
+          if (resp.status >= 500 && attempt < MAX_RETRIES - 1) {
+            console.warn(`Chat server error ${resp.status} on attempt ${attempt + 1}, retrying...`);
+            resp = null;
+            await new Promise((r) => setTimeout(r, 1000 * (attempt + 1)));
+            continue;
+          }
+
           break;
-        } catch (networkErr) {
-          console.warn(`Chat fetch attempt ${attempt + 1}/${MAX_RETRIES} failed for ${chatUrl}:`, networkErr);
+        } catch (networkErr: any) {
+          const isTimeout = networkErr?.name === "AbortError";
+          console.warn(
+            `Chat fetch attempt ${attempt + 1}/${MAX_RETRIES} failed for ${chatUrl}:`,
+            isTimeout ? "Request timed out" : networkErr,
+          );
           if (attempt < MAX_RETRIES - 1) {
             await new Promise((r) => setTimeout(r, 1000 * (attempt + 1)));
           }
@@ -301,8 +330,26 @@ export function AIChatWidget() {
         return false;
       };
 
+      const STREAM_CHUNK_TIMEOUT_MS = 15000;
+
+      const readWithTimeout = async () => {
+        return Promise.race([
+          reader.read(),
+          new Promise<never>((_, reject) =>
+            setTimeout(() => reject(new Error("Stream chunk timeout")), STREAM_CHUNK_TIMEOUT_MS)
+          ),
+        ]);
+      };
+
       while (!streamDone) {
-        const { done, value } = await reader.read();
+        let readResult: ReadableStreamReadResult<Uint8Array>;
+        try {
+          readResult = await readWithTimeout();
+        } catch {
+          console.warn("Stream read timed out, ending stream gracefully");
+          break;
+        }
+        const { done, value } = readResult;
         if (done) break;
 
         textBuffer += decoder.decode(value, { stream: true });
