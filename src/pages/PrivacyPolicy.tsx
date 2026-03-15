@@ -41,8 +41,9 @@ export default function PrivacyPolicy() {
             <li><strong>Private Journal</strong> — journal entries in the kids section are stored locally only and are completely private</li>
           </ul>
           <p>
-            You can clear this data at any time by clearing your browser's local storage or site
-            data. No one — including us — can access this information.
+            You can clear this data at any time by using the <strong>"Clear My Data"</strong> button
+            in the Accessibility Settings panel (the gear icon), or by clearing your browser's local
+            storage or site data manually. No one — including us — can access this information.
           </p>
 
           <h2>Contact and Donation Forms</h2>
@@ -61,8 +62,10 @@ export default function PrivacyPolicy() {
 
           <h2>AI Chat Assistant ("Little Minds Helper")</h2>
           <p>
-            The Little Minds Helper chat feature is powered by automated AI technology. When you use
-            the chat:
+            The Little Minds Helper chat feature is powered by automated AI technology. Before your
+            first message, a notice is displayed reminding you that the assistant is an AI (not a
+            real person or doctor), that chats are not saved, and that you should not share personal
+            secrets. When you use the chat:
           </p>
           <ul>
             <li>Your messages are sent to a backend function that processes the request and returns a response</li>
