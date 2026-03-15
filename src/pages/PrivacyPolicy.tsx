@@ -53,6 +53,11 @@ export default function PrivacyPolicy() {
             your inquiry. We do not store this information in a database or use it for any other
             purpose.
           </p>
+          <p>
+            Both forms require users to confirm that they are 13 years of age or older, or that they
+            are a parent or guardian submitting on behalf of a child. This safeguard ensures that
+            children are not directly providing personal information through these forms.
+          </p>
 
           <h2>AI Chat Assistant ("Little Minds Helper")</h2>
           <p>
