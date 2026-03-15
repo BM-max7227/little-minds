@@ -44,6 +44,8 @@ const Index = () => {
                 src={heroImage} 
                 alt="Children in supportive environment" 
                 className="rounded-3xl shadow-2xl w-full"
+                loading="lazy"
+                decoding="async"
               />
             </div>
           </div>
