@@ -10,6 +10,8 @@ export const AccessibilityControls = () => {
   const [highContrast, setHighContrast] = useState(false);
   const [reduceMotion, setReduceMotion] = useState(false);
   const [readAloud, setReadAloud] = useState(false);
+  const [confirmClear, setConfirmClear] = useState(false);
+  const { toast } = useToast();
 
   useEffect(() => {
     const saved = localStorage.getItem("accessibility-prefs");
