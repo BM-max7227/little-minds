@@ -17,6 +17,8 @@ import Dashboard from "./pages/parent/Dashboard";
 import KidHome from "./pages/kid/KidHome";
 import KidTopicDetail from "./pages/kid/KidTopicDetail";
 import TryThis from "./pages/kid/TryThis";
+import Breathe from "./pages/kid/Breathe";
+import Together from "./pages/Together";
 import LearnHome from "./pages/learn/LearnHome";
 import LearnTopic from "./pages/learn/LearnTopic";
 import FAQ from "./pages/FAQ";
