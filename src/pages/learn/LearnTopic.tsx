@@ -16,13 +16,22 @@ export default function LearnTopic() {
   const navigate = useNavigate();
   const topic = topicId ? learnTopics[topicId] : null;
   const { markRead, isRead } = useLearnProgress(topicKeys.length);
-  const hasKidVersion = topicId ? !!kidTopics[topicId] : false;
+  const bottomRef = useRef<HTMLDivElement>(null);
 
-  // Mark as read when the user visits the page
+  // Mark as read when user scrolls to the bottom of the page
   useEffect(() => {
-    if (topicId && topic) {
-      markRead(topicId);
-    }
+    if (!topicId || !topic || !bottomRef.current) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          markRead(topicId);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.5 }
+    );
+    observer.observe(bottomRef.current);
+    return () => observer.disconnect();
   }, [topicId, topic, markRead]);
 
   if (!topic) {
