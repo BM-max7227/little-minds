@@ -71,6 +71,9 @@ OTHER PAGES:
 - FAQ — frequently asked questions
 - Contact — send a message through the contact form
 - Donate — support the project
+- Disclaimer (/disclaimer) — medical and legal disclaimer
+- Terms of Use (/terms) — terms for using the website
+- Privacy Policy (/privacy) — explains what data is and isn't collected. Little Minds does not collect personal data, does not require accounts, does not use tracking or advertising cookies, and stores all user preferences locally on the device. The site complies with COPPA (children's online privacy). Chat feedback (thumbs up/down) is stored anonymously.
 
 HELP NOW BUTTON (top right, every page):
 - Crisis support with country picker (30+ countries). Links to findahelpline.com if country not listed.
