@@ -38,9 +38,8 @@ export default function Disclaimer() {
           <h2>Emergency Situations</h2>
           <p>
             If you believe you or someone else is experiencing a medical or mental health emergency,
-            please call your local emergency services immediately (e.g., 911 in the United States)
-            or contact the 988 Suicide & Crisis Lifeline by calling or texting 988. Do not rely on
-            this website for emergency assistance.
+            please call your local emergency services immediately. Do not rely on this website for
+            emergency assistance.
           </p>
 
           <h2>AI Chat Assistant ("Little Minds Helper")</h2>
@@ -67,6 +66,15 @@ export default function Disclaimer() {
             control, endorse, or guarantee the accuracy of content on third party websites. You
             access external links at your own risk and should review their own terms and privacy
             policies.
+          </p>
+
+          <h2>Data Retention</h2>
+          <p>
+            Because Little Minds stores all information (such as journals, progress, favorites, and
+            preferences) locally on your device using your browser's storage, we cannot recover or
+            back up your data. If you clear your browser data, use a different browser, or lose your
+            device, your saved information will be permanently deleted. Little Minds is not
+            responsible for any data loss.
           </p>
 
           <h2>No Guarantees</h2>
