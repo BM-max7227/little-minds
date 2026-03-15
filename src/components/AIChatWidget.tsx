@@ -3,10 +3,14 @@ import { Button } from "@/components/ui/button";
 import { MessageCircle, X, Send, Bot, User, ShieldCheck, Maximize2, Minimize2, Mic, Check } from "lucide-react";
 import ReactMarkdown from "react-markdown";
 import { FeedbackButtons } from "@/components/chat/FeedbackButtons";
+import { supabase } from "@/integrations/supabase/client";
 
 type Msg = { role: "user" | "assistant"; content: string };
 
-const CHAT_URL = `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/mental-health-chat`;
+const CHAT_URLS = [
+  `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/mental-health-chat`,
+  "/functions/v1/mental-health-chat",
+];
 
 export function AIChatWidget() {
   const [open, setOpen] = useState(false);
@@ -187,32 +191,77 @@ export function AIChatWidget() {
       }
     };
 
+    const parseSseText = (raw: string) => {
+      let fullText = "";
+      for (const rawLine of raw.split("\n")) {
+        const line = rawLine.trim();
+        if (!line.startsWith("data:")) continue;
+        const payload = line.slice(5).trimStart();
+        if (!payload || payload === "[DONE]") continue;
+
+        try {
+          const parsed = JSON.parse(payload);
+          const delta = parsed.choices?.[0]?.delta?.content as string | undefined;
+          if (delta) fullText += delta;
+
+          const messageContent = parsed.choices?.[0]?.message?.content as string | undefined;
+          if (!fullText && messageContent) fullText = messageContent;
+        } catch {
+          // Ignore malformed chunks in fallback parsing
+        }
+      }
+      return fullText;
+    };
+
     const MAX_RETRIES = 3;
     let resp: Response | null = null;
 
-    for (let attempt = 0; attempt < MAX_RETRIES; attempt++) {
-      try {
-        resp = await fetch(CHAT_URL, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY}`,
-          },
-          body: JSON.stringify({ messages: allMessages }),
-        });
-        break; // success, exit retry loop
-      } catch (networkErr) {
-        console.warn(`Chat fetch attempt ${attempt + 1}/${MAX_RETRIES} failed:`, networkErr);
-        if (attempt < MAX_RETRIES - 1) {
-          await new Promise((r) => setTimeout(r, 1000 * (attempt + 1))); // backoff: 1s, 2s
+    for (const chatUrl of CHAT_URLS) {
+      for (let attempt = 0; attempt < MAX_RETRIES; attempt++) {
+        try {
+          resp = await fetch(chatUrl, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY}`,
+              apikey: import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY,
+            },
+            body: JSON.stringify({ messages: allMessages }),
+          });
+          break;
+        } catch (networkErr) {
+          console.warn(`Chat fetch attempt ${attempt + 1}/${MAX_RETRIES} failed for ${chatUrl}:`, networkErr);
+          if (attempt < MAX_RETRIES - 1) {
+            await new Promise((r) => setTimeout(r, 1000 * (attempt + 1)));
+          }
         }
       }
+
+      if (resp) break;
     }
 
     try {
       if (!resp) {
-        setMessages((prev) => [...prev, { role: "assistant", content: "I'm having trouble connecting right now. Please check your internet connection and try again in a moment." }]);
-        setIsLoading(false);
+        const { data, error } = await supabase.functions.invoke("mental-health-chat", {
+          body: { messages: allMessages },
+        });
+
+        if (error) throw error;
+
+        let fallbackContent = "";
+        if (typeof data === "string") {
+          fallbackContent = parseSseText(data);
+        } else if (typeof data === "object" && data !== null && "content" in data && typeof (data as { content?: unknown }).content === "string") {
+          fallbackContent = (data as { content: string }).content;
+        }
+
+        if (fallbackContent) {
+          typingBufferRef.current += fallbackContent;
+          startTypingTimer();
+          return;
+        }
+
+        setMessages((prev) => [...prev, { role: "assistant", content: "I couldn't connect right now, but please try again in a moment." }]);
         return;
       }
 
