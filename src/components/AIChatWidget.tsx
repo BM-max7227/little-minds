@@ -126,8 +126,21 @@ export function AIChatWidget() {
     setAudioLevels([]);
   }, [stopListening]);
 
+  // Track if user has scrolled up
   useEffect(() => {
-    if (!scrollRef.current) return;
+    const el = scrollRef.current;
+    if (!el) return;
+    const handleScroll = () => {
+      const distanceFromBottom = el.scrollHeight - el.scrollTop - el.clientHeight;
+      userHasScrolledUpRef.current = distanceFromBottom > 80;
+    };
+    el.addEventListener("scroll", handleScroll);
+    return () => el.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  // Only auto-scroll if user hasn't scrolled up
+  useEffect(() => {
+    if (!scrollRef.current || userHasScrolledUpRef.current) return;
     scrollRef.current.scrollTo({
       top: scrollRef.current.scrollHeight,
       behavior: isLoading ? "auto" : "smooth",
