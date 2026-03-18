@@ -102,7 +102,7 @@ export default function Donate() {
               </p>
               <p className="text-sm font-bold text-muted-foreground inline-flex items-center gap-1.5 bg-muted/50 rounded-full px-4 py-1.5">
                 <Heart className="h-3.5 w-3.5 text-primary" />
-                Little Minds is a nonprofit organisation
+                No profit is made from this website — it is a free personal project
               </p>
             </div>
           </div>

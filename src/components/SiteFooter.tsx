@@ -22,7 +22,7 @@ export function SiteFooter() {
             <Link to="/privacy" className="hover:text-foreground transition-colors">Privacy Policy</Link>
           </div>
           <p className="text-xs pt-1">
-            Made with care by Bode Munk. This is a personal project to help kids, parents, and people learn about mental health and ways to help.
+            Made with care by Bode Munk. This is a free personal project — no profit is made from this website.
           </p>
         </div>
       </div>
