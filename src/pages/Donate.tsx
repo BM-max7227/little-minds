@@ -15,6 +15,7 @@ import { useToast } from "@/hooks/use-toast";
 export default function Donate() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [ageConfirmed, setAgeConfirmed] = useState(false);
   const [honeypot, setHoneypot] = useState("");
   const [formData, setFormData] = useState({
     donorName: "",
