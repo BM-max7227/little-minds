@@ -29,6 +29,9 @@ export default function Donate() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    // Honeypot check — bots fill hidden fields, real users don't
+    if (honeypot) return;
     
     if (!formData.donorName.trim() || !formData.donorEmail.trim() || !formData.amount.trim()) {
       toast({ title: "Missing Information", description: "Please fill in your name, email, and donation amount.", variant: "destructive" });
