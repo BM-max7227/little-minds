@@ -69,7 +69,7 @@ export function Header({ audience }: HeaderProps) {
         </Link>
 
         {/* Desktop nav */}
-        {audience && (
+        {navLinks.length > 0 && (
           <nav className="hidden lg:flex items-center space-x-6">
             {navLinks.map((link) => (
               <Link
