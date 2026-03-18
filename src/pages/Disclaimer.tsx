@@ -58,8 +58,9 @@ export default function Disclaimer() {
             Some sections of this website are designed for children and young people. While we strive
             to provide age-appropriate, helpful information, parents and guardians should supervise
             their children's use of this website and any actions taken based on its content. The
-            donation inquiry form requires users to be 18 or older. This website does not collect
-            personal information from children.
+            contact form requires users to confirm they are 13 or older. The donation inquiry form
+            requires users to be 18 or older. This website does not collect personal information
+            from children.
           </p>
 
           <h2>Third Party Links and Resources</h2>
