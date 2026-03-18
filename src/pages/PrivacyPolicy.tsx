@@ -89,7 +89,7 @@ export default function PrivacyPolicy() {
             Privacy Protection Act (COPPA) by:
           </p>
           <ul>
-            <li>Not collecting personal information from anyone of any age</li>
+            <li>Not knowingly collecting personal information from children under 13</li>
             <li>Not requiring accounts, registration, or sign-ups</li>
             <li>Storing all child-facing features (journal, progress, favorites) locally on the device only</li>
             <li>Not using tracking, advertising, or data collection tools</li>
