@@ -31,7 +31,6 @@ export function Header({ audience }: HeaderProps) {
       case "kid":
         return [
           { label: "Home", path: "/kid" },
-          { label: "Pick a Topic", path: "/kid" },
           { label: "Try This", path: "/kid/try-this" },
           { label: "Breathe", path: "/kid/breathe" },
           { label: "About Us", path: "/about" },
@@ -47,7 +46,9 @@ export function Header({ audience }: HeaderProps) {
           { label: "FAQ", path: "/faq" },
         ];
       default:
-        return [];
+        return [
+          { label: "Home", path: "/" },
+        ];
     }
   };
 
