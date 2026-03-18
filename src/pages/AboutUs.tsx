@@ -28,7 +28,7 @@ export default function AboutUs() {
             </p>
 
             <p>
-              This is a non-profit project, made only to share knowledge, tools, and hope. Everything here is free to use and designed with kindness first.
+              This is a personal project — not a registered charity, nonprofit organization, or government entity. It was made only to share knowledge, tools, and hope. Everything here is free to use and designed with kindness first.
             </p>
 
             <p>Our mission is to make learning about mental health easy and safe. Whether you are a parent, a kid, or someone who wants to help, you are part of the change just by being here.</p>

@@ -95,11 +95,12 @@ export default function Disclaimer() {
             indirect, incidental, consequential, or punitive damages.
           </p>
 
-          <h2>Non Profit Nature</h2>
+          <h2>Nature of This Project</h2>
           <p>
-            Little Minds is a non profit project created to help children, parents, and individuals
-            learn about mental health and wellbeing. It is not a healthcare organization or
-            registered charity.
+            Little Minds is a personal project created to help children, parents, and individuals
+            learn about mental health and wellbeing. It is not a registered charity, nonprofit
+            organization, healthcare organization, or government entity. It has no formal
+            registrations of any kind.
           </p>
 
           <p className="text-xs text-muted-foreground mt-8">
