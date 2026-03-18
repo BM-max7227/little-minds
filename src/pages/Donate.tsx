@@ -9,7 +9,6 @@ import { SiteFooter } from "@/components/SiteFooter";
 import { Link } from "react-router-dom";
 import { Heart, Users, BookOpen, Loader2, CheckCircle } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
-import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
 
 export default function Donate() {
