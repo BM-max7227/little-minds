@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
+import { Checkbox } from "@/components/ui/checkbox";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -15,6 +16,7 @@ export default function Contact() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [honeypot, setHoneypot] = useState("");
+  const [ageConfirmed, setAgeConfirmed] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -193,7 +195,18 @@ export default function Contact() {
                         />
                       </div>
 
-                      <Button type="submit" className="w-full" size="lg" disabled={isSubmitting}>
+                      <div className="flex items-start space-x-2">
+                        <Checkbox
+                          id="age-confirm"
+                          checked={ageConfirmed}
+                          onCheckedChange={(checked) => setAgeConfirmed(checked === true)}
+                        />
+                        <Label htmlFor="age-confirm" className="text-sm leading-snug cursor-pointer">
+                          I am 13 or older, or I have a parent's permission to send this message *
+                        </Label>
+                      </div>
+
+                      <Button type="submit" className="w-full" size="lg" disabled={isSubmitting || !ageConfirmed}>
                         {isSubmitting ? (
                           <>
                             <Loader2 className="mr-2 h-4 w-4 animate-spin" />
