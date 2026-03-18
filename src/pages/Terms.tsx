@@ -83,7 +83,7 @@ export default function Terms() {
             and donation inquiry forms. The contact form requires users to confirm they are 13 or
             older. The donation inquiry form requires users to be 18 or older. Some features (such
             as activity progress and favorites) use your browser's local storage and are not
-            transmitted to any server. No personal data from children is knowingly collected.
+            transmitted to any server. No personal data from children under 13 is knowingly collected.
           </p>
 
           <h2>Data and Storage</h2>
