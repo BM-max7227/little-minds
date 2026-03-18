@@ -88,9 +88,9 @@ function BreathingExercise() {
     : phase === "hold-in" ? 1.0 : 0.6;
 
   return (
-    <div className="flex flex-col items-center gap-8">
+    <div className="flex flex-col items-center gap-4">
       {/* Breathing Circle */}
-      <div className="relative w-64 h-64 sm:w-80 sm:h-80 flex items-center justify-center">
+      <div className="relative w-48 h-48 sm:w-64 sm:h-64 flex items-center justify-center">
         {/* Outer glow */}
         <div
           className="absolute rounded-full bg-primary/10 transition-transform duration-100 ease-linear"
@@ -102,16 +102,19 @@ function BreathingExercise() {
         />
         {/* Main circle */}
         <div
-          className="absolute rounded-full bg-primary/20 border-4 border-primary/40 transition-transform duration-100 ease-linear flex items-center justify-center"
+          className="absolute rounded-full bg-primary/20 border-4 border-primary/40 transition-transform duration-100 ease-linear flex items-center justify-center cursor-pointer"
           style={{
             width: "80%",
             height: "80%",
             transform: `scale(${circleScale})`,
           }}
+          onClick={!isRunning ? handleStartStop : undefined}
+          role={!isRunning ? "button" : undefined}
+          tabIndex={!isRunning ? 0 : undefined}
         >
           <div className="text-center">
             <p className="text-2xl sm:text-3xl font-bold text-primary">
-              {isRunning ? PHASE_LABEL[phase] : "Ready"}
+              {isRunning ? PHASE_LABEL[phase] : "Tap to Start"}
             </p>
             {isRunning && (
               <p className="text-sm text-muted-foreground mt-1">
@@ -122,19 +125,19 @@ function BreathingExercise() {
         </div>
       </div>
 
-      {/* Controls */}
-      <div className="flex items-center gap-4">
-        <Button onClick={handleStartStop} size="lg" className="rounded-full px-8">
-          {isRunning ? <Pause className="h-5 w-5 mr-2" /> : <Play className="h-5 w-5 mr-2" />}
-          {isRunning ? "Pause" : "Start"}
-        </Button>
-        {cycleCount > 0 && (
-          <Button onClick={handleReset} variant="outline" size="lg" className="rounded-full">
+      {/* Controls - only show pause/reset when running */}
+      {isRunning && (
+        <div className="flex items-center gap-3">
+          <Button onClick={handleStartStop} size="sm" variant="outline" className="rounded-full px-6">
+            <Pause className="h-4 w-4 mr-2" />
+            Pause
+          </Button>
+          <Button onClick={handleReset} variant="ghost" size="sm" className="rounded-full">
             <RotateCcw className="h-4 w-4 mr-2" />
             Reset
           </Button>
-        )}
-      </div>
+        </div>
+      )}
 
       {/* Cycle counter */}
       {cycleCount > 0 && (
@@ -144,11 +147,11 @@ function BreathingExercise() {
       )}
 
       <Card className="max-w-md w-full">
-        <CardContent className="pt-6">
+        <CardContent className="pt-4 pb-4">
           <p className="text-sm text-muted-foreground leading-relaxed">
             <strong>How it works:</strong> Follow the circle as it grows and shrinks. 
             Breathe in as it expands, hold, then breathe out as it gets smaller. 
-            Try to do at least 4 cycles. This helps calm your nervous system and bring you back to the present moment.
+            Try to do at least 4 cycles.
           </p>
         </CardContent>
       </Card>
