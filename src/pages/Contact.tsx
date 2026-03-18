@@ -204,7 +204,7 @@ export default function Contact() {
                           required
                         />
                         <Label htmlFor="ageConfirm" className="text-sm leading-snug cursor-pointer">
-                          I confirm that I am 13 years of age or older, or I am a parent/guardian submitting on behalf of a child. *
+                          I confirm that I am 18 years of age or older. *
                         </Label>
                       </div>
 

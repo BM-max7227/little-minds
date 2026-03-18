@@ -8,14 +8,12 @@ import { Header } from "@/components/Header";
 import { SiteFooter } from "@/components/SiteFooter";
 import { Link } from "react-router-dom";
 import { Heart, Users, BookOpen, Loader2, CheckCircle } from "lucide-react";
-import { Checkbox } from "@/components/ui/checkbox";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
 
 export default function Donate() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
-  const [ageConfirmed, setAgeConfirmed] = useState(false);
   const [honeypot, setHoneypot] = useState("");
   const [formData, setFormData] = useState({
     donorName: "",
@@ -134,7 +132,6 @@ export default function Donate() {
                         onClick={() => {
                           setIsSubmitted(false);
                           setFormData({ donorName: "", donorEmail: "", amount: "", message: "" });
-                          setAgeConfirmed(false);
                         }}
                       >
                         Make Another Donation
@@ -214,19 +211,7 @@ export default function Donate() {
                         />
                       </div>
 
-                      <div className="flex items-start space-x-2">
-                        <Checkbox
-                          id="ageConfirm"
-                          checked={ageConfirmed}
-                          onCheckedChange={(checked) => setAgeConfirmed(checked === true)}
-                          required
-                        />
-                        <Label htmlFor="ageConfirm" className="text-sm leading-snug cursor-pointer">
-                          I confirm that I am 13 years of age or older, or I am a parent/guardian submitting on behalf of a child. *
-                        </Label>
-                      </div>
-
-                      <Button type="submit" className="w-full" size="lg" disabled={isSubmitting || !ageConfirmed}>
+                      <Button type="submit" className="w-full" size="lg" disabled={isSubmitting}>
                         {isSubmitting ? (
                           <>
                             <Loader2 className="mr-2 h-4 w-4 animate-spin" />
