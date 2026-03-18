@@ -64,68 +64,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Path cards below the fold */}
-      <main id="paths" className="py-16 scroll-mt-8">
-        <div className="container max-w-6xl px-4">
-          <div className="text-center mb-10">
-            <h2 className="text-3xl md:text-4xl font-bold mb-3">Choose Your Path</h2>
-            <p className="text-lg text-muted-foreground">
-              Pick the one that fits you best
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-3 gap-6 md:gap-8">
-            <Link to="/parent" className="block group">
-              <Card className="h-full transition-all hover:shadow-lg hover:border-primary cursor-pointer">
-                <CardHeader className="space-y-4">
-                  <div className="h-16 w-16 rounded-full bg-primary/10 flex items-center justify-center mx-auto group-hover:bg-primary/20 transition-colors">
-                    <Heart className="h-8 w-8 text-primary" />
-                  </div>
-                  <CardTitle className="text-2xl text-center">I am a parent</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <CardDescription className="text-center text-base">
-                    Get steps to support your child and find professional help
-                  </CardDescription>
-                </CardContent>
-              </Card>
-            </Link>
-
-            <Link to="/kid" className="block group">
-              <Card className="h-full transition-all hover:shadow-lg hover:border-primary cursor-pointer">
-                <CardHeader className="space-y-4">
-                  <div className="h-16 w-16 rounded-full bg-secondary/20 flex items-center justify-center mx-auto group-hover:bg-secondary/30 transition-colors">
-                    <Sparkles className="h-8 w-8 text-secondary-foreground" />
-                  </div>
-                  <CardTitle className="text-2xl text-center">I am a kid or teen</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <CardDescription className="text-center text-base">
-                    Pick what you're dealing with and get ideas, videos, and tools
-                  </CardDescription>
-                </CardContent>
-              </Card>
-            </Link>
-
-            <Link to="/learn" className="block group">
-              <Card className="h-full transition-all hover:shadow-lg hover:border-primary cursor-pointer">
-                <CardHeader className="space-y-4">
-                  <div className="h-16 w-16 rounded-full bg-accent/20 flex items-center justify-center mx-auto group-hover:bg-accent/30 transition-colors">
-                    <BookOpen className="h-8 w-8 text-accent-foreground" />
-                  </div>
-                  <CardTitle className="text-2xl text-center">I want to learn more</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <CardDescription className="text-center text-base">
-                    Understand the topics and how they can look different for kids
-                  </CardDescription>
-                </CardContent>
-              </Card>
-            </Link>
-          </div>
-        </div>
-      </main>
-
       <SiteFooter />
     </div>
   );
