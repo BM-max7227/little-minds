@@ -82,7 +82,7 @@ export default function Donate() {
 
   return (
     <div className="min-h-screen flex flex-col">
-      <Header />
+      <Header audience="learn" />
 
       <main className="flex-1">
         <section className="bg-gradient-to-b from-primary/10 to-background py-20">

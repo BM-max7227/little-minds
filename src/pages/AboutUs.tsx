@@ -7,7 +7,7 @@ import { Mail } from "lucide-react";
 export default function AboutUs() {
   return (
     <div className="min-h-screen flex flex-col">
-      <Header />
+      <Header audience="learn" />
       
       <main className="flex-1 py-12">
         <div className="container px-4 max-w-4xl mx-auto">
