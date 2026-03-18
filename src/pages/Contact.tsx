@@ -202,7 +202,7 @@ export default function Contact() {
                           onCheckedChange={(checked) => setAgeConfirmed(checked === true)}
                         />
                         <Label htmlFor="age-confirm" className="text-sm leading-snug cursor-pointer">
-                          I am 13 or older, or I have a parent's permission to send this message *
+                          I am 13 or older *
                         </Label>
                       </div>
 
