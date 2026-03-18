@@ -16,6 +16,7 @@ export default function Donate() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [ageConfirmed, setAgeConfirmed] = useState(false);
+  const [honeypot, setHoneypot] = useState("");
   const [formData, setFormData] = useState({
     donorName: "",
     donorEmail: "",
@@ -28,6 +29,9 @@ export default function Donate() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    // Honeypot check — bots fill hidden fields, real users don't
+    if (honeypot) return;
     
     if (!formData.donorName.trim() || !formData.donorEmail.trim() || !formData.amount.trim()) {
       toast({ title: "Missing Information", description: "Please fill in your name, email, and donation amount.", variant: "destructive" });
@@ -138,6 +142,19 @@ export default function Donate() {
                     </div>
                   ) : (
                     <form onSubmit={handleSubmit} className="space-y-4">
+                      {/* Honeypot field — hidden from real users, bots will fill it */}
+                      <div className="absolute opacity-0 top-0 left-0 h-0 w-0 -z-10" aria-hidden="true">
+                        <label htmlFor="company">Company</label>
+                        <input
+                          type="text"
+                          id="company"
+                          name="company"
+                          value={honeypot}
+                          onChange={(e) => setHoneypot(e.target.value)}
+                          tabIndex={-1}
+                          autoComplete="off"
+                        />
+                      </div>
                       <div className="space-y-2">
                         <Label htmlFor="donorName">Your Name *</Label>
                         <Input

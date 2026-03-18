@@ -16,6 +16,7 @@ export default function Contact() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [ageConfirmed, setAgeConfirmed] = useState(false);
+  const [honeypot, setHoneypot] = useState("");
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -28,6 +29,9 @@ export default function Contact() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    // Honeypot check — bots fill hidden fields, real users don't
+    if (honeypot) return;
     
     if (!formData.name.trim() || !formData.email.trim() || !formData.message.trim()) {
       toast({ title: "Missing Information", description: "Please fill in your name, email, and message.", variant: "destructive" });
@@ -128,6 +132,19 @@ export default function Contact() {
                     </div>
                   ) : (
                     <form onSubmit={handleSubmit} className="space-y-4">
+                      {/* Honeypot field — hidden from real users, bots will fill it */}
+                      <div className="absolute opacity-0 top-0 left-0 h-0 w-0 -z-10" aria-hidden="true">
+                        <label htmlFor="website">Website</label>
+                        <input
+                          type="text"
+                          id="website"
+                          name="website"
+                          value={honeypot}
+                          onChange={(e) => setHoneypot(e.target.value)}
+                          tabIndex={-1}
+                          autoComplete="off"
+                        />
+                      </div>
                       <div className="space-y-2">
                         <Label htmlFor="name">Your Name *</Label>
                         <Input
