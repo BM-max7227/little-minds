@@ -104,9 +104,8 @@ const handler = async (req: Request): Promise<Response> => {
     );
   } catch (error: unknown) {
     console.error("Error sending contact message email:", error);
-    const errorMessage = error instanceof Error ? error.message : "Unknown error occurred";
     return new Response(
-      JSON.stringify({ error: errorMessage }),
+      JSON.stringify({ error: "Something went wrong. Please try again later." }),
       { status: 500, headers: { "Content-Type": "application/json", ...corsHeaders } }
     );
   }
