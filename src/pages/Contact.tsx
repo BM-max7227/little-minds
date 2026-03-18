@@ -16,6 +16,7 @@ export default function Contact() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [honeypot, setHoneypot] = useState("");
+  const [ageConfirmed, setAgeConfirmed] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
