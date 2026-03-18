@@ -98,8 +98,8 @@ export default function Terms() {
             Little Minds provides a donation inquiry form that allows you to express interest in
             supporting this project. No financial transactions take place on this website. If you
             submit a donation inquiry, we will contact you by email to discuss next steps. Little
-            Minds is a personal project — not a registered charity, nonprofit organization, or
-            government entity — and donations are not tax deductible.
+            Minds is a free personal project — not a registered charity or government entity — and
+            donations are not tax deductible.
           </p>
 
           <h2>Limitation of Liability</h2>
