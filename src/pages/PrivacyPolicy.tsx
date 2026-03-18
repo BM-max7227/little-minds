@@ -55,10 +55,10 @@ export default function PrivacyPolicy() {
             purpose.
           </p>
           <p>
-            The contact form requires users to confirm that they are 18 years of age or older. The
-            donation inquiry form does not collect age information, as no financial transactions
-            take place on this website. These safeguards help ensure that children are not directly
-            providing personal information through these forms.
+            The donation inquiry form requires users to confirm that they are 18 years of age or
+            older. The contact form does not require age confirmation, so that anyone — including
+            young people — can reach out with questions or feedback. These safeguards help ensure
+            that financial inquiries are handled by adults while keeping communication open for all.
           </p>
 
           <h2>AI Chat Assistant ("Little Minds Helper")</h2>
