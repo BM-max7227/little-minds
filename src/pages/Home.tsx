@@ -23,18 +23,43 @@ export default function Home() {
 
         {/* Hero content */}
         <div className="relative z-10 text-center px-4 max-w-3xl mx-auto">
-          <h1 className="text-4xl md:text-6xl font-bold text-white mb-4 drop-shadow-lg">
+          <h1 className="text-4xl md:text-6xl font-bold text-white mb-3 drop-shadow-lg">
             Welcome to Little Minds
           </h1>
-          <p className="text-lg md:text-2xl text-white/90 mb-8 drop-shadow-md leading-relaxed">
+          <p className="text-lg md:text-xl text-white/90 mb-8 drop-shadow-md leading-relaxed">
             A safe place for kids, parents, and anyone who wants to learn about mental health
           </p>
+
+          {/* Quick path buttons on the hero */}
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-3 mb-6">
+            <Link
+              to="/parent"
+              className="inline-flex items-center gap-2 px-6 py-3 rounded-full border-2 border-white/60 text-white text-base font-medium backdrop-blur-sm bg-white/10 hover:bg-white/25 transition-all w-full sm:w-auto justify-center"
+            >
+              <Heart className="h-5 w-5" />
+              I'm a Parent
+            </Link>
+            <Link
+              to="/kid"
+              className="inline-flex items-center gap-2 px-6 py-3 rounded-full border-2 border-white/60 text-white text-base font-medium backdrop-blur-sm bg-white/10 hover:bg-white/25 transition-all w-full sm:w-auto justify-center"
+            >
+              <Sparkles className="h-5 w-5" />
+              I'm a Kid or Teen
+            </Link>
+            <Link
+              to="/learn"
+              className="inline-flex items-center gap-2 px-6 py-3 rounded-full border-2 border-white/60 text-white text-base font-medium backdrop-blur-sm bg-white/10 hover:bg-white/25 transition-all w-full sm:w-auto justify-center"
+            >
+              <BookOpen className="h-5 w-5" />
+              I Want to Learn
+            </Link>
+          </div>
+
           <button
             onClick={() => document.getElementById("paths")?.scrollIntoView({ behavior: "smooth" })}
-            className="inline-flex items-center gap-2 px-8 py-3 rounded-full border-2 border-white/70 text-white text-lg font-medium backdrop-blur-sm bg-white/10 hover:bg-white/20 transition-all"
+            className="text-white/70 hover:text-white transition-colors"
           >
-            Get Started
-            <ChevronDown className="h-5 w-5 animate-bounce" />
+            <ChevronDown className="h-6 w-6 animate-bounce mx-auto" />
           </button>
         </div>
       </section>
