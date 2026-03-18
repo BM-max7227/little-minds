@@ -46,7 +46,9 @@ export function Header({ audience }: HeaderProps) {
           { label: "FAQ", path: "/faq" },
         ];
       default:
-        return [];
+        return [
+          { label: "Home", path: "/" },
+        ];
     }
   };
 
