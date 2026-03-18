@@ -254,25 +254,25 @@ export default function Breathe() {
     <div className="min-h-screen flex flex-col">
       <Header audience="kid" />
 
-      <main className="flex-1 py-12">
+      <main className="flex-1 py-6">
         <div className="container px-4 max-w-4xl mx-auto">
-          <div className="mb-4">
-            <Button variant="ghost" size="sm" asChild className="mb-4">
+          <div className="mb-2">
+            <Button variant="ghost" size="sm" asChild className="mb-2">
               <Link to="/kid">
                 <ArrowLeft className="h-4 w-4 mr-2" /> Back to Kids Home
               </Link>
             </Button>
           </div>
 
-          <div className="text-center mb-10">
-            <h1 className="text-4xl md:text-5xl font-bold mb-4">Take a Breath</h1>
-            <p className="text-xl text-muted-foreground">
+          <div className="text-center mb-6">
+            <h1 className="text-3xl md:text-4xl font-bold mb-2">Take a Breath</h1>
+            <p className="text-lg text-muted-foreground">
               When everything feels like too much, these simple exercises can help you feel calmer right now.
             </p>
           </div>
 
           {/* Tool selector */}
-          <div className="flex justify-center gap-3 mb-12">
+          <div className="flex justify-center gap-3 mb-6">
             <Button
               variant={activeTool === "breathing" ? "default" : "outline"}
               size="lg"
