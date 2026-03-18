@@ -91,7 +91,7 @@ export default function Disclaimer() {
           <p>
             Little Minds, its creator, contributors, and affiliates shall not be liable for any
             loss, injury, claim, liability, or damage of any kind resulting from your use of this
-            website or any information provided herein, including but not limited to any direct,
+            website or any information provided on it, including but not limited to any direct,
             indirect, incidental, consequential, or punitive damages.
           </p>
 
