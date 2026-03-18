@@ -69,7 +69,7 @@ export function Header({ audience }: HeaderProps) {
         </Link>
 
         {/* Desktop nav */}
-        {audience && (
+        {navLinks.length > 0 && (
           <nav className="hidden lg:flex items-center space-x-6">
             {navLinks.map((link) => (
               <Link
@@ -119,7 +119,7 @@ export function Header({ audience }: HeaderProps) {
           </Sheet>
 
           {/* Mobile hamburger menu for nav links */}
-          {audience && (
+          {navLinks.length > 0 && (
             <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
               <SheetTrigger asChild>
                 <Button variant="ghost" size="sm" className="lg:hidden h-9 w-9 p-0">

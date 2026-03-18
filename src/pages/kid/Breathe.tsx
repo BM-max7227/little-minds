@@ -88,9 +88,9 @@ function BreathingExercise() {
     : phase === "hold-in" ? 1.0 : 0.6;
 
   return (
-    <div className="flex flex-col items-center gap-8">
+    <div className="flex flex-col items-center gap-4">
       {/* Breathing Circle */}
-      <div className="relative w-64 h-64 sm:w-80 sm:h-80 flex items-center justify-center">
+      <div className="relative w-48 h-48 sm:w-64 sm:h-64 flex items-center justify-center">
         {/* Outer glow */}
         <div
           className="absolute rounded-full bg-primary/10 transition-transform duration-100 ease-linear"
@@ -102,16 +102,19 @@ function BreathingExercise() {
         />
         {/* Main circle */}
         <div
-          className="absolute rounded-full bg-primary/20 border-4 border-primary/40 transition-transform duration-100 ease-linear flex items-center justify-center"
+          className="absolute rounded-full bg-primary/20 border-4 border-primary/40 transition-transform duration-100 ease-linear flex items-center justify-center cursor-pointer"
           style={{
             width: "80%",
             height: "80%",
             transform: `scale(${circleScale})`,
           }}
+          onClick={!isRunning ? handleStartStop : undefined}
+          role={!isRunning ? "button" : undefined}
+          tabIndex={!isRunning ? 0 : undefined}
         >
           <div className="text-center">
             <p className="text-2xl sm:text-3xl font-bold text-primary">
-              {isRunning ? PHASE_LABEL[phase] : "Ready"}
+              {isRunning ? PHASE_LABEL[phase] : "Tap to Start"}
             </p>
             {isRunning && (
               <p className="text-sm text-muted-foreground mt-1">
@@ -122,19 +125,19 @@ function BreathingExercise() {
         </div>
       </div>
 
-      {/* Controls */}
-      <div className="flex items-center gap-4">
-        <Button onClick={handleStartStop} size="lg" className="rounded-full px-8">
-          {isRunning ? <Pause className="h-5 w-5 mr-2" /> : <Play className="h-5 w-5 mr-2" />}
-          {isRunning ? "Pause" : "Start"}
-        </Button>
-        {cycleCount > 0 && (
-          <Button onClick={handleReset} variant="outline" size="lg" className="rounded-full">
+      {/* Controls - only show pause/reset when running */}
+      {isRunning && (
+        <div className="flex items-center gap-3">
+          <Button onClick={handleStartStop} size="sm" variant="outline" className="rounded-full px-6">
+            <Pause className="h-4 w-4 mr-2" />
+            Pause
+          </Button>
+          <Button onClick={handleReset} variant="ghost" size="sm" className="rounded-full">
             <RotateCcw className="h-4 w-4 mr-2" />
             Reset
           </Button>
-        )}
-      </div>
+        </div>
+      )}
 
       {/* Cycle counter */}
       {cycleCount > 0 && (
@@ -144,11 +147,11 @@ function BreathingExercise() {
       )}
 
       <Card className="max-w-md w-full">
-        <CardContent className="pt-6">
+        <CardContent className="pt-4 pb-4">
           <p className="text-sm text-muted-foreground leading-relaxed">
             <strong>How it works:</strong> Follow the circle as it grows and shrinks. 
             Breathe in as it expands, hold, then breathe out as it gets smaller. 
-            Try to do at least 4 cycles. This helps calm your nervous system and bring you back to the present moment.
+            Try to do at least 4 cycles.
           </p>
         </CardContent>
       </Card>
@@ -251,25 +254,25 @@ export default function Breathe() {
     <div className="min-h-screen flex flex-col">
       <Header audience="kid" />
 
-      <main className="flex-1 py-12">
+      <main className="flex-1 py-6">
         <div className="container px-4 max-w-4xl mx-auto">
-          <div className="mb-4">
-            <Button variant="ghost" size="sm" asChild className="mb-4">
+          <div className="mb-2">
+            <Button variant="ghost" size="sm" asChild className="mb-2">
               <Link to="/kid">
                 <ArrowLeft className="h-4 w-4 mr-2" /> Back to Kids Home
               </Link>
             </Button>
           </div>
 
-          <div className="text-center mb-10">
-            <h1 className="text-4xl md:text-5xl font-bold mb-4">Take a Breath</h1>
-            <p className="text-xl text-muted-foreground">
+          <div className="text-center mb-6">
+            <h1 className="text-3xl md:text-4xl font-bold mb-2">Take a Breath</h1>
+            <p className="text-lg text-muted-foreground">
               When everything feels like too much, these simple exercises can help you feel calmer right now.
             </p>
           </div>
 
           {/* Tool selector */}
-          <div className="flex justify-center gap-3 mb-12">
+          <div className="flex justify-center gap-3 mb-6">
             <Button
               variant={activeTool === "breathing" ? "default" : "outline"}
               size="lg"
@@ -292,7 +295,7 @@ export default function Breathe() {
 
           {activeTool === "breathing" ? <BreathingExercise /> : <GroundingExercise />}
 
-          <div className="text-center mt-12 text-sm text-muted-foreground">
+          <div className="text-center mt-6 text-sm text-muted-foreground">
             <p>These tools are not a replacement for professional support. If you are struggling, please talk to a trusted adult or tap the <strong>Help Now</strong> button.</p>
           </div>
         </div>
