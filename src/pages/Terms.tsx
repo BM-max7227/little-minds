@@ -80,9 +80,10 @@ export default function Terms() {
           <p>
             Little Minds respects your privacy. This website does not require user accounts or
             collect personal information beyond what is voluntarily submitted through the contact
-            form (which requires users to be 18 or older) and donation inquiry form. Some features
-            (such as activity progress and favorites) use your browser's local storage and are not
-            transmitted to any server. No personal data from children is knowingly collected.
+            and donation inquiry forms. The donation inquiry form requires users to be 18 or older.
+            Some features (such as activity progress and favorites) use your browser's local storage
+            and are not transmitted to any server. No personal data from children is knowingly
+            collected.
           </p>
 
           <h2>Data and Storage</h2>

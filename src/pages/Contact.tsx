@@ -194,19 +194,7 @@ export default function Contact() {
                         />
                       </div>
 
-                      <div className="flex items-start space-x-2">
-                        <Checkbox
-                          id="ageConfirm"
-                          checked={ageConfirmed}
-                          onCheckedChange={(checked) => setAgeConfirmed(checked === true)}
-                          required
-                        />
-                        <Label htmlFor="ageConfirm" className="text-sm leading-snug cursor-pointer">
-                          I confirm that I am 18 years of age or older. *
-                        </Label>
-                      </div>
-
-                      <Button type="submit" className="w-full" size="lg" disabled={isSubmitting || !ageConfirmed}>
+                      <Button type="submit" className="w-full" size="lg" disabled={isSubmitting}>
                         {isSubmitting ? (
                           <>
                             <Loader2 className="mr-2 h-4 w-4 animate-spin" />
