@@ -132,6 +132,19 @@ export default function Contact() {
                     </div>
                   ) : (
                     <form onSubmit={handleSubmit} className="space-y-4">
+                      {/* Honeypot field — hidden from real users, bots will fill it */}
+                      <div className="absolute opacity-0 top-0 left-0 h-0 w-0 -z-10" aria-hidden="true">
+                        <label htmlFor="website">Website</label>
+                        <input
+                          type="text"
+                          id="website"
+                          name="website"
+                          value={honeypot}
+                          onChange={(e) => setHoneypot(e.target.value)}
+                          tabIndex={-1}
+                          autoComplete="off"
+                        />
+                      </div>
                       <div className="space-y-2">
                         <Label htmlFor="name">Your Name *</Label>
                         <Input
