@@ -134,6 +134,7 @@ export default function Donate() {
                         onClick={() => {
                           setIsSubmitted(false);
                           setFormData({ donorName: "", donorEmail: "", amount: "", message: "" });
+                          setAgeConfirmed(false);
                         }}
                       >
                         Make Another Donation
