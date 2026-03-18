@@ -55,12 +55,6 @@ export default function Home() {
             </Link>
           </div>
 
-          <button
-            onClick={() => document.getElementById("paths")?.scrollIntoView({ behavior: "smooth" })}
-            className="text-white/70 hover:text-white transition-colors"
-          >
-            <ChevronDown className="h-6 w-6 animate-bounce mx-auto" />
-          </button>
         </div>
       </section>
 
