@@ -29,6 +29,9 @@ export default function Contact() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    // Honeypot check — bots fill hidden fields, real users don't
+    if (honeypot) return;
     
     if (!formData.name.trim() || !formData.email.trim() || !formData.message.trim()) {
       toast({ title: "Missing Information", description: "Please fill in your name, email, and message.", variant: "destructive" });
