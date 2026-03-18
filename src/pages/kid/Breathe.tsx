@@ -295,7 +295,7 @@ export default function Breathe() {
 
           {activeTool === "breathing" ? <BreathingExercise /> : <GroundingExercise />}
 
-          <div className="text-center mt-12 text-sm text-muted-foreground">
+          <div className="text-center mt-6 text-sm text-muted-foreground">
             <p>These tools are not a replacement for professional support. If you are struggling, please talk to a trusted adult or tap the <strong>Help Now</strong> button.</p>
           </div>
         </div>
