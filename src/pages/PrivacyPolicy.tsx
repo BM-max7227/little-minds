@@ -17,10 +17,16 @@ export default function PrivacyPolicy() {
           </p>
 
           <h2>Information We Do Not Collect</h2>
+          <p>
+            Little Minds does not collect personal information from anyone of any age through
+            general use of this website. No user accounts, sign-ups, or logins are required. The
+            only personal information we receive is what you <strong>voluntarily choose to
+            submit</strong> through our contact form or donation inquiry form.
+          </p>
           <p>Little Minds does <strong>not</strong>:</p>
           <ul>
             <li>Require user accounts, sign-ups, or logins</li>
-            <li>Collect personal information from anyone of any age through general use of the site</li>
+            <li>Automatically collect personal information from any visitor</li>
             <li>Use analytics tracking, advertising cookies, or third-party trackers</li>
             <li>Sell, share, or trade any user data with third parties</li>
           </ul>
