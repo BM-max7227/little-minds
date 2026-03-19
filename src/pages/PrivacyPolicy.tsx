@@ -91,11 +91,20 @@ export default function PrivacyPolicy() {
 
           <h2>Children's Privacy (COPPA Compliance)</h2>
           <p>
-            Little Minds is designed to be safe for children. We comply with the Children's Online
-            Privacy Protection Act (COPPA) by:
+            Little Minds is designed to be safe for children. As stated above, this website does not
+            automatically collect personal information from any visitor of any age. The only personal
+            information we receive is what users voluntarily submit through our contact or donation
+            inquiry forms.
           </p>
+          <p>
+            To comply with the Children's Online Privacy Protection Act (COPPA), which protects
+            children under the age of 13, our contact form requires users to confirm that they are
+            13 years of age or older before submitting. The donation inquiry form requires users to
+            be 18 or older. These age requirements ensure that we do not knowingly collect personal
+            information from children under 13.
+          </p>
+          <p>We further protect children's privacy by:</p>
           <ul>
-            <li>Not knowingly collecting personal information from children under 13</li>
             <li>Not requiring accounts, registration, or sign-ups</li>
             <li>Storing all child-facing features (journal, progress, favorites) locally on the device only</li>
             <li>Not using tracking, advertising, or data collection tools</li>

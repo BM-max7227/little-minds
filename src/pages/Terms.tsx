@@ -78,12 +78,18 @@ export default function Terms() {
 
           <h2>Privacy</h2>
           <p>
-            Little Minds respects your privacy. This website does not require user accounts or
-            collect personal information beyond what is voluntarily submitted through the contact
-            and donation inquiry forms. The contact form requires users to confirm they are 13 or
-            older. The donation inquiry form requires users to be 18 or older. Some features (such
-            as activity progress and favorites) use your browser's local storage and are not
-            transmitted to any server. No personal data from children under 13 is knowingly collected.
+            Little Minds respects your privacy. This website does not automatically collect personal
+            information from any visitor of any age. The only personal information we receive is
+            what you voluntarily choose to submit through our contact form or donation inquiry form.
+            Some features (such as activity progress and favorites) use your browser's local storage
+            and are not transmitted to any server.
+          </p>
+          <p>
+            To comply with the Children's Online Privacy Protection Act (COPPA), which protects
+            children under the age of 13, our contact form requires users to confirm they are 13 or
+            older before submitting. The donation inquiry form requires users to be 18 or older.
+            These age requirements ensure that we do not knowingly collect personal information from
+            children under 13.
           </p>
 
           <h2>Data and Storage</h2>
