@@ -57,10 +57,15 @@ export default function Disclaimer() {
           <p>
             Some sections of this website are designed for children and young people. While we strive
             to provide age-appropriate, helpful information, parents and guardians should supervise
-            their children's use of this website and any actions taken based on its content. The
-            contact form requires users to confirm they are 13 or older. The donation inquiry form
-            requires users to be 18 or older. This website does not knowingly collect personal
-            information from children under 13.
+            their children's use of this website and any actions taken based on its content.
+          </p>
+          <p>
+            This website does not automatically collect personal information from any visitor of any
+            age. The only personal information we receive is what users voluntarily choose to submit
+            through our contact or donation inquiry forms. To comply with the Children's Online
+            Privacy Protection Act (COPPA), which protects children under the age of 13, the contact
+            form requires users to confirm they are 13 or older before submitting. The donation
+            inquiry form requires users to be 18 or older.
           </p>
 
           <h2>Third Party Links and Resources</h2>
