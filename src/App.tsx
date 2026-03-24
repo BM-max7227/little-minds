@@ -21,7 +21,7 @@ const Dashboard = lazy(() => import("./pages/parent/Dashboard"));
 const KidTopicDetail = lazy(() => import("./pages/kid/KidTopicDetail"));
 const TryThis = lazy(() => import("./pages/kid/TryThis"));
 const Breathe = lazy(() => import("./pages/kid/Breathe"));
-const LearnHome = lazy(() => import("./pages/learn/LearnHome"));
+
 const LearnTopic = lazy(() => import("./pages/learn/LearnTopic"));
 const FAQ = lazy(() => import("./pages/FAQ"));
 const AboutUs = lazy(() => import("./pages/AboutUs"));
