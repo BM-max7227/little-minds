@@ -6,21 +6,22 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import { useEffect, lazy, Suspense } from "react";
 import Home from "./pages/Home";
+import ParentHome from "./pages/parent/ParentHome";
+import KidHome from "./pages/kid/KidHome";
+import LearnHome from "./pages/learn/LearnHome";
 
 // Lazy load all secondary pages
 const NotFound = lazy(() => import("./pages/NotFound"));
 const Index = lazy(() => import("./pages/Index"));
-const ParentHome = lazy(() => import("./pages/parent/ParentHome"));
 const QuickGuide = lazy(() => import("./pages/parent/QuickGuide"));
 const ConversationStarters = lazy(() => import("./pages/parent/ConversationStarters"));
 const FindSupport = lazy(() => import("./pages/parent/FindSupport"));
 const Tools = lazy(() => import("./pages/parent/Tools"));
 const Dashboard = lazy(() => import("./pages/parent/Dashboard"));
-const KidHome = lazy(() => import("./pages/kid/KidHome"));
 const KidTopicDetail = lazy(() => import("./pages/kid/KidTopicDetail"));
 const TryThis = lazy(() => import("./pages/kid/TryThis"));
 const Breathe = lazy(() => import("./pages/kid/Breathe"));
-const LearnHome = lazy(() => import("./pages/learn/LearnHome"));
+
 const LearnTopic = lazy(() => import("./pages/learn/LearnTopic"));
 const FAQ = lazy(() => import("./pages/FAQ"));
 const AboutUs = lazy(() => import("./pages/AboutUs"));
