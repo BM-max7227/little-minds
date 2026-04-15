@@ -36,6 +36,19 @@ export default function LearnHome() {
           </p>
         </div>
 
+        {/* Completion Celebration */}
+        {allComplete && (
+          <div className="mb-8 max-w-md p-4 rounded-lg border border-primary/30 bg-primary/5 animate-fade-in">
+            <div className="flex items-center gap-3">
+              <Trophy className="h-6 w-6 text-primary flex-shrink-0" />
+              <div>
+                <p className="font-semibold text-foreground">Congratulations! 🎉</p>
+                <p className="text-sm text-muted-foreground">You've explored all {topicKeys.length} topics. You're building a great understanding of children's mental health!</p>
+              </div>
+            </div>
+          </div>
+        )}
+
         {/* Progress Tracker */}
         <div className="mb-8 max-w-md">
           <div className="flex items-center gap-2 mb-2">
