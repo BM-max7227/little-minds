@@ -6,13 +6,24 @@ import { Progress } from "@/components/ui/progress";
 import { learnTopics } from "@/data/learnTopics";
 import { SuggestIdeasBanner } from "@/components/SuggestIdeasBanner";
 import { useLearnProgress } from "@/hooks/useLearnProgress";
-import { CheckCircle, BookOpen } from "lucide-react";
+import { CheckCircle, BookOpen, Trophy } from "lucide-react";
+import { useEffect, useRef } from "react";
+import { triggerCelebration } from "@/lib/celebration";
 
 const topicKeys = Object.keys(learnTopics);
 
 export default function LearnHome() {
   const { completed, isRead } = useLearnProgress(topicKeys.length);
   const progressPercent = topicKeys.length > 0 ? Math.round((completed.length / topicKeys.length) * 100) : 0;
+  const allComplete = completed.length === topicKeys.length && topicKeys.length > 0;
+  const celebratedRef = useRef(false);
+
+  useEffect(() => {
+    if (allComplete && !celebratedRef.current) {
+      celebratedRef.current = true;
+      triggerCelebration();
+    }
+  }, [allComplete]);
 
   return (
     <div className="min-h-screen bg-background">
@@ -24,6 +35,19 @@ export default function LearnHome() {
             Learn how mental health challenges look in kids and teens, with clear differences between adult and youth.
           </p>
         </div>
+
+        {/* Completion Celebration */}
+        {allComplete && (
+          <div className="mb-8 max-w-md p-4 rounded-lg border border-primary/30 bg-primary/5 animate-fade-in">
+            <div className="flex items-center gap-3">
+              <Trophy className="h-6 w-6 text-primary flex-shrink-0" />
+              <div>
+                <p className="font-semibold text-foreground">Congratulations! 🎉</p>
+                <p className="text-sm text-muted-foreground">You've explored all {topicKeys.length} topics. You're building a great understanding of children's mental health!</p>
+              </div>
+            </div>
+          </div>
+        )}
 
         {/* Progress Tracker */}
         <div className="mb-8 max-w-md">
