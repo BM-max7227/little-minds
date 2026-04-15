@@ -6,13 +6,24 @@ import { Progress } from "@/components/ui/progress";
 import { learnTopics } from "@/data/learnTopics";
 import { SuggestIdeasBanner } from "@/components/SuggestIdeasBanner";
 import { useLearnProgress } from "@/hooks/useLearnProgress";
-import { CheckCircle, BookOpen } from "lucide-react";
+import { CheckCircle, BookOpen, Trophy } from "lucide-react";
+import { useEffect, useRef } from "react";
+import { triggerCelebration } from "@/lib/celebration";
 
 const topicKeys = Object.keys(learnTopics);
 
 export default function LearnHome() {
   const { completed, isRead } = useLearnProgress(topicKeys.length);
   const progressPercent = topicKeys.length > 0 ? Math.round((completed.length / topicKeys.length) * 100) : 0;
+  const allComplete = completed.length === topicKeys.length && topicKeys.length > 0;
+  const celebratedRef = useRef(false);
+
+  useEffect(() => {
+    if (allComplete && !celebratedRef.current) {
+      celebratedRef.current = true;
+      triggerCelebration();
+    }
+  }, [allComplete]);
 
   return (
     <div className="min-h-screen bg-background">
