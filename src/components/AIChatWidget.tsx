@@ -440,7 +440,7 @@ export function AIChatWidget() {
           <div className="flex items-center gap-2 bg-accent/50 px-4 py-2 border-b">
             <ShieldCheck className="h-4 w-4 text-primary flex-shrink-0" />
             <p className="text-xs text-foreground/70">
-              Safe & trusted — trained only on children's mental health & wellbeing topics
+              Safe & trusted — designed to only discuss children's mental health & wellbeing topics
             </p>
           </div>
 
