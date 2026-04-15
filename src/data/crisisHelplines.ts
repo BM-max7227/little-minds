@@ -352,6 +352,666 @@ export const crisisHelplines: CountryHelplines[] = [
     ],
     directories: [],
   },
+  {
+    country: "Argentina",
+    code: "AR",
+    emergency: "911",
+    helplines: [
+      { name: "Centro de Asistencia al Suicida", phone: "135", url: "https://www.casbuenosaires.com.ar", description: "24/7 suicide prevention" },
+      { name: "Línea 102 (Children)", phone: "102", description: "Helpline for children and teens" },
+    ],
+    directories: [],
+  },
+  {
+    country: "Chile",
+    code: "CL",
+    emergency: "131",
+    helplines: [
+      { name: "Fono Infancia", phone: "800 200 818", url: "https://www.fonoinfancia.cl", description: "Support for children and families" },
+      { name: "Salud Responde", phone: "600 360 7777", description: "Health and mental health support" },
+    ],
+    directories: [],
+  },
+  {
+    country: "Colombia",
+    code: "CO",
+    emergency: "123",
+    helplines: [
+      { name: "Línea 106 (Children)", phone: "106", description: "Helpline for children and teens" },
+      { name: "Línea 141 ICBF", phone: "141", description: "Child welfare support" },
+    ],
+    directories: [],
+  },
+  {
+    country: "Peru",
+    code: "PE",
+    emergency: "105",
+    helplines: [
+      { name: "Línea 100", phone: "100", description: "Family violence and child abuse helpline" },
+      { name: "Infosalud", phone: "113", description: "Mental health support" },
+    ],
+    directories: [],
+  },
+  {
+    country: "Ecuador",
+    code: "EC",
+    emergency: "911",
+    helplines: [
+      { name: "Línea 100 (DINAPEN)", phone: "100", description: "Child protection helpline" },
+    ],
+    directories: [],
+  },
+  {
+    country: "Venezuela",
+    code: "VE",
+    emergency: "911",
+    helplines: [
+      { name: "CECODAP", phone: "0212-951-5798", url: "https://cecodap.org", description: "Children's rights and wellbeing" },
+    ],
+    directories: [],
+  },
+  {
+    country: "Costa Rica",
+    code: "CR",
+    emergency: "911",
+    helplines: [
+      { name: "Línea 1147 (Children)", phone: "1147", description: "Helpline for children and teens" },
+      { name: "Aquí Estoy", phone: "2272-3774", description: "Emotional crisis support" },
+    ],
+    directories: [],
+  },
+  {
+    country: "Uruguay",
+    code: "UY",
+    emergency: "911",
+    helplines: [
+      { name: "Línea Azul (Children)", phone: "0800 5050", description: "Child abuse and support helpline" },
+      { name: "Último Recurso", phone: "0800 0767", url: "https://www.ultimorecurso.com.uy", description: "Crisis support" },
+    ],
+    directories: [],
+  },
+  {
+    country: "Paraguay",
+    code: "PY",
+    emergency: "911",
+    helplines: [
+      { name: "Fono Ayuda (Children)", phone: "147", description: "Helpline for children and families" },
+    ],
+    directories: [],
+  },
+  {
+    country: "Bolivia",
+    code: "BO",
+    emergency: "110",
+    helplines: [
+      { name: "Línea 156 (Children)", phone: "156", description: "Child protection helpline" },
+    ],
+    directories: [],
+  },
+  {
+    country: "Guatemala",
+    code: "GT",
+    emergency: "110",
+    helplines: [
+      { name: "Línea 1546 PGN", phone: "1546", description: "Child protection helpline" },
+    ],
+    directories: [],
+  },
+  {
+    country: "Panama",
+    code: "PA",
+    emergency: "911",
+    helplines: [
+      { name: "Línea 147 (Children)", phone: "147", description: "Child and family support" },
+    ],
+    directories: [],
+  },
+  {
+    country: "Dominican Republic",
+    code: "DO",
+    emergency: "911",
+    helplines: [
+      { name: "Línea Vida", phone: "1-809-200-0711", description: "Emotional crisis support" },
+      { name: "CONANI Línea de Protección", phone: "809-227-7700", description: "Child protection" },
+    ],
+    directories: [],
+  },
+  {
+    country: "Austria",
+    code: "AT",
+    emergency: "112",
+    helplines: [
+      { name: "Rat auf Draht (Children)", phone: "147", url: "https://www.rataufdraht.at", description: "Helpline for children and teens" },
+      { name: "Telefonseelsorge", phone: "142", description: "24/7 crisis support" },
+    ],
+    directories: [],
+  },
+  {
+    country: "Switzerland",
+    code: "CH",
+    emergency: "112",
+    helplines: [
+      { name: "Pro Juventute (Children)", phone: "147", url: "https://www.projuventute.ch", description: "Helpline for children and teens" },
+      { name: "Die Dargebotene Hand", phone: "143", url: "https://www.143.ch", description: "24/7 crisis support" },
+    ],
+    directories: [],
+  },
+  {
+    country: "Belgium",
+    code: "BE",
+    emergency: "112",
+    helplines: [
+      { name: "Awel (Children)", phone: "102", url: "https://www.awel.be", description: "Helpline for children and teens" },
+      { name: "Centre de Prévention du Suicide", phone: "0800 32 123", url: "https://www.preventionsuicide.be", description: "Crisis support (French)" },
+      { name: "Zelfmoordlijn", phone: "1813", url: "https://www.zelfmoord1813.be", description: "Crisis support (Dutch)" },
+    ],
+    directories: [],
+  },
+  {
+    country: "Czech Republic",
+    code: "CZ",
+    emergency: "112",
+    helplines: [
+      { name: "Linka bezpečí (Children)", phone: "116 111", url: "https://www.linkabezpeci.cz", description: "Safety line for children" },
+      { name: "Linka duševní tísně", phone: "116 123", description: "Mental distress helpline" },
+    ],
+    directories: [],
+  },
+  {
+    country: "Slovakia",
+    code: "SK",
+    emergency: "112",
+    helplines: [
+      { name: "Linka detskej istoty (Children)", phone: "116 111", url: "https://www.ldi.sk", description: "Child safety line" },
+      { name: "Linka dôvery", phone: "116 123", description: "Crisis helpline" },
+    ],
+    directories: [],
+  },
+  {
+    country: "Hungary",
+    code: "HU",
+    emergency: "112",
+    helplines: [
+      { name: "Kék Vonal (Children)", phone: "116 111", url: "https://www.kek-vonal.hu", description: "Helpline for children" },
+      { name: "Lelki Elsősegély", phone: "116 123", description: "Emotional first aid" },
+    ],
+    directories: [],
+  },
+  {
+    country: "Romania",
+    code: "RO",
+    emergency: "112",
+    helplines: [
+      { name: "Telefonul Copilului (Children)", phone: "116 111", url: "https://www.telefonulcopilului.ro", description: "Child helpline" },
+      { name: "Telefonul Sufletului", phone: "116 123", description: "Emotional support" },
+    ],
+    directories: [],
+  },
+  {
+    country: "Bulgaria",
+    code: "BG",
+    emergency: "112",
+    helplines: [
+      { name: "National Child Helpline", phone: "116 111", description: "Helpline for children" },
+      { name: "Crisis Line", phone: "116 123", description: "Emotional crisis support" },
+    ],
+    directories: [],
+  },
+  {
+    country: "Croatia",
+    code: "HR",
+    emergency: "112",
+    helplines: [
+      { name: "Hrabri Telefon (Children)", phone: "116 111", url: "https://www.hrabritelefon.hr", description: "Helpline for children" },
+    ],
+    directories: [],
+  },
+  {
+    country: "Serbia",
+    code: "RS",
+    emergency: "112",
+    helplines: [
+      { name: "Nadel (Children)", phone: "116 111", description: "Helpline for children" },
+      { name: "Centar Srce", phone: "0800 300 303", url: "https://www.centarsrce.org", description: "Emotional support" },
+    ],
+    directories: [],
+  },
+  {
+    country: "Slovenia",
+    code: "SI",
+    emergency: "112",
+    helplines: [
+      { name: "TOM Telefon (Children)", phone: "116 111", url: "https://www.e-tom.si", description: "Helpline for children and teens" },
+      { name: "Zaupni telefon", phone: "116 123", description: "Crisis support" },
+    ],
+    directories: [],
+  },
+  {
+    country: "Greece",
+    code: "GR",
+    emergency: "112",
+    helplines: [
+      { name: "Smile of the Child", phone: "1056", url: "https://www.hamogelo.gr", description: "24/7 helpline for children" },
+      { name: "National Helpline", phone: "116 123", description: "Emotional crisis support" },
+    ],
+    directories: [],
+  },
+  {
+    country: "Turkey",
+    code: "TR",
+    emergency: "112",
+    helplines: [
+      { name: "ALO 183 (Children)", phone: "183", description: "Social support and child helpline" },
+      { name: "Yaşam Hattı", phone: "182", description: "Crisis support" },
+    ],
+    directories: [],
+  },
+  {
+    country: "Israel",
+    code: "IL",
+    emergency: "100",
+    helplines: [
+      { name: "ERAN", phone: "1201", url: "https://www.eran.org.il", description: "Emotional first aid" },
+      { name: "Natal", phone: "1-800-363-363", url: "https://www.natal.org.il", description: "Trauma and crisis support" },
+    ],
+    directories: [],
+  },
+  {
+    country: "Egypt",
+    code: "EG",
+    emergency: "122",
+    helplines: [
+      { name: "Child Helpline Egypt", phone: "16000", description: "National child helpline" },
+    ],
+    directories: [],
+  },
+  {
+    country: "Morocco",
+    code: "MA",
+    emergency: "15",
+    helplines: [
+      { name: "DGSN Child Protection", phone: "19", description: "Child protection services" },
+    ],
+    directories: [],
+  },
+  {
+    country: "Tunisia",
+    code: "TN",
+    emergency: "197",
+    helplines: [
+      { name: "Child Protection Helpline", phone: "1809", description: "Child welfare support" },
+    ],
+    directories: [],
+  },
+  {
+    country: "Ghana",
+    code: "GH",
+    emergency: "999",
+    helplines: [
+      { name: "Childline Ghana", phone: "0800 800 800", description: "Free helpline for children" },
+    ],
+    directories: [],
+  },
+  {
+    country: "Uganda",
+    code: "UG",
+    emergency: "999",
+    helplines: [
+      { name: "Childline Uganda", phone: "116", url: "https://www.uchl.org", description: "Free helpline for children" },
+    ],
+    directories: [],
+  },
+  {
+    country: "Tanzania",
+    code: "TZ",
+    emergency: "114",
+    helplines: [
+      { name: "Childline Tanzania", phone: "116", description: "Free helpline for children" },
+    ],
+    directories: [],
+  },
+  {
+    country: "Ethiopia",
+    code: "ET",
+    emergency: "911",
+    helplines: [
+      { name: "Child Helpline Ethiopia", phone: "116", description: "Free helpline for children" },
+    ],
+    directories: [],
+  },
+  {
+    country: "Rwanda",
+    code: "RW",
+    emergency: "112",
+    helplines: [
+      { name: "Isange One Stop Centre", phone: "3512", description: "Support for children and families" },
+    ],
+    directories: [],
+  },
+  {
+    country: "Zambia",
+    code: "ZM",
+    emergency: "999",
+    helplines: [
+      { name: "Childline Zambia", phone: "116", description: "Free helpline for children" },
+      { name: "Lifeline Zambia", phone: "0977 770 510", description: "Crisis support" },
+    ],
+    directories: [],
+  },
+  {
+    country: "Zimbabwe",
+    code: "ZW",
+    emergency: "999",
+    helplines: [
+      { name: "Childline Zimbabwe", phone: "116", url: "https://www.childline.org.zw", description: "Free helpline for children" },
+    ],
+    directories: [],
+  },
+  {
+    country: "Mozambique",
+    code: "MZ",
+    emergency: "119",
+    helplines: [
+      { name: "Linha da Criança", phone: "116", description: "Child helpline" },
+    ],
+    directories: [],
+  },
+  {
+    country: "Bangladesh",
+    code: "BD",
+    emergency: "999",
+    helplines: [
+      { name: "Child Helpline 1098", phone: "1098", description: "National child helpline" },
+      { name: "Kaan Pete Roi", phone: "+1-888-568-1112", url: "https://www.kaanpeteroi.com", description: "Bengali emotional support" },
+    ],
+    directories: [],
+  },
+  {
+    country: "Sri Lanka",
+    code: "LK",
+    emergency: "119",
+    helplines: [
+      { name: "Childline Sri Lanka", phone: "1929", description: "Child protection helpline" },
+      { name: "Sumithrayo", phone: "011 268 2535", url: "https://www.sumithrayo.org", description: "Emotional support" },
+    ],
+    directories: [],
+  },
+  {
+    country: "Nepal",
+    code: "NP",
+    emergency: "100",
+    helplines: [
+      { name: "Child Helpline Nepal", phone: "1098", description: "National child helpline" },
+    ],
+    directories: [],
+  },
+  {
+    country: "Thailand",
+    code: "TH",
+    emergency: "191",
+    helplines: [
+      { name: "Childline Thailand", phone: "1387", description: "Child protection helpline" },
+      { name: "Samaritans Thailand", phone: "02-713-6793", url: "https://www.samaritansofthailand.org", description: "24/7 emotional support" },
+    ],
+    directories: [],
+  },
+  {
+    country: "Vietnam",
+    code: "VN",
+    emergency: "113",
+    helplines: [
+      { name: "Child Helpline Vietnam", phone: "111", description: "National child helpline" },
+    ],
+    directories: [],
+  },
+  {
+    country: "Indonesia",
+    code: "ID",
+    emergency: "112",
+    helplines: [
+      { name: "Telepon Pelayanan Sosial Anak (TePSA)", phone: "129", description: "Child welfare helpline" },
+      { name: "Into The Light", url: "https://www.intothelightid.org", description: "Suicide prevention resources" },
+    ],
+    directories: [],
+  },
+  {
+    country: "Taiwan",
+    code: "TW",
+    emergency: "110",
+    helplines: [
+      { name: "Child Protection Hotline", phone: "113", description: "Child and family support" },
+      { name: "Lifeline Taiwan", phone: "1925", description: "24/7 crisis support" },
+    ],
+    directories: [],
+  },
+  {
+    country: "Hong Kong",
+    code: "HK",
+    emergency: "999",
+    helplines: [
+      { name: "Samaritans Hong Kong", phone: "2389 2222", url: "https://www.samaritans.org.hk", description: "24/7 emotional support" },
+      { name: "Suicide Prevention Services", phone: "2382 0000", url: "https://www.sps.org.hk", description: "Crisis support" },
+    ],
+    directories: [],
+  },
+  {
+    country: "China",
+    code: "CN",
+    emergency: "110",
+    helplines: [
+      { name: "Beijing Psychological Crisis Hotline", phone: "010-8295-1332", description: "Mental health crisis support" },
+      { name: "National Mental Health Hotline", phone: "400-161-9995", description: "Mental health support" },
+    ],
+    directories: [],
+  },
+  {
+    country: "Saudi Arabia",
+    code: "SA",
+    emergency: "911",
+    helplines: [
+      { name: "Child Helpline (NCCA)", phone: "116111", description: "National child helpline" },
+      { name: "920033360 Mental Health", phone: "920033360", description: "Mental health support" },
+    ],
+    directories: [],
+  },
+  {
+    country: "Qatar",
+    code: "QA",
+    emergency: "999",
+    helplines: [
+      { name: "Qatar Child Protection", phone: "919", description: "Child protection hotline" },
+    ],
+    directories: [],
+  },
+  {
+    country: "Kuwait",
+    code: "KW",
+    emergency: "112",
+    helplines: [
+      { name: "Social Emergency Line", phone: "147", description: "Social and family support" },
+    ],
+    directories: [],
+  },
+  {
+    country: "Bahrain",
+    code: "BH",
+    emergency: "999",
+    helplines: [
+      { name: "Child Protection Centre", phone: "998", description: "Child protection services" },
+    ],
+    directories: [],
+  },
+  {
+    country: "Jordan",
+    code: "JO",
+    emergency: "911",
+    helplines: [
+      { name: "Family Protection Hotline", phone: "110", description: "Family and child protection" },
+    ],
+    directories: [],
+  },
+  {
+    country: "Lebanon",
+    code: "LB",
+    emergency: "112",
+    helplines: [
+      { name: "Embrace Lifeline", phone: "1564", url: "https://www.embracelebanon.org", description: "Mental health and crisis support" },
+      { name: "Himaya (Children)", phone: "1714", url: "https://www.himaya.org", description: "Child protection" },
+    ],
+    directories: [],
+  },
+  {
+    country: "Iceland",
+    code: "IS",
+    emergency: "112",
+    helplines: [
+      { name: "Barnaverndarstofa (Children)", phone: "112", description: "Child protection services" },
+      { name: "Rauði Krossinn", phone: "1717", url: "https://www.raudikrossinn.is", description: "Emotional support line" },
+    ],
+    directories: [],
+  },
+  {
+    country: "Lithuania",
+    code: "LT",
+    emergency: "112",
+    helplines: [
+      { name: "Vaiko linija (Children)", phone: "116 111", url: "https://www.vaikulinija.lt", description: "Child helpline" },
+      { name: "Jaunimo linija", phone: "8 800 28888", url: "https://www.jaunimolinija.lt", description: "Youth helpline" },
+    ],
+    directories: [],
+  },
+  {
+    country: "Latvia",
+    code: "LV",
+    emergency: "112",
+    helplines: [
+      { name: "Uzticības tālrunis (Children)", phone: "116 111", description: "Child helpline" },
+      { name: "Krīzes tālrunis", phone: "116 123", description: "Crisis support" },
+    ],
+    directories: [],
+  },
+  {
+    country: "Estonia",
+    code: "EE",
+    emergency: "112",
+    helplines: [
+      { name: "Lasteabi (Children)", phone: "116 111", url: "https://www.lasteabi.ee", description: "Child helpline" },
+      { name: "Eluliin", phone: "116 123", description: "Crisis support" },
+    ],
+    directories: [],
+  },
+  {
+    country: "Luxembourg",
+    code: "LU",
+    emergency: "112",
+    helplines: [
+      { name: "Kanner-Jugendtelefon", phone: "116 111", url: "https://www.kjt.lu", description: "Helpline for children and teens" },
+      { name: "SOS Détresse", phone: "45 45 45", url: "https://www.454545.lu", description: "Crisis support" },
+    ],
+    directories: [],
+  },
+  {
+    country: "Malta",
+    code: "MT",
+    emergency: "112",
+    helplines: [
+      { name: "Supportline 179", phone: "179", url: "https://www.supportline179.gov.mt", description: "Mental health and emotional support" },
+      { name: "Kellimni.com", url: "https://www.kellimni.com", description: "Online chat support for young people" },
+    ],
+    directories: [],
+  },
+  {
+    country: "Cyprus",
+    code: "CY",
+    emergency: "112",
+    helplines: [
+      { name: "Children's Helpline", phone: "116 111", description: "Child helpline" },
+      { name: "Crisis Line", phone: "1410", description: "Emotional crisis support" },
+    ],
+    directories: [],
+  },
+  {
+    country: "Jamaica",
+    code: "JM",
+    emergency: "119",
+    helplines: [
+      { name: "Office of the Children's Registry", phone: "888-PROTECT (776-8328)", description: "Child protection hotline" },
+    ],
+    directories: [],
+  },
+  {
+    country: "Trinidad and Tobago",
+    code: "TT",
+    emergency: "999",
+    helplines: [
+      { name: "Childline Trinidad", phone: "800-4321", description: "Free helpline for children" },
+      { name: "Lifeline Trinidad", phone: "800-5588", description: "Crisis support" },
+    ],
+    directories: [],
+  },
+  {
+    country: "Fiji",
+    code: "FJ",
+    emergency: "911",
+    helplines: [
+      { name: "Child Helpline Fiji", phone: "1325", description: "Free helpline for children" },
+    ],
+    directories: [],
+  },
+  {
+    country: "Papua New Guinea",
+    code: "PG",
+    emergency: "000",
+    helplines: [
+      { name: "Childline PNG", phone: "1-Tok-Pisin 71508000", description: "Child welfare support" },
+    ],
+    directories: [],
+  },
+  {
+    country: "Cambodia",
+    code: "KH",
+    emergency: "119",
+    helplines: [
+      { name: "Child Helpline Cambodia", phone: "1280", description: "Child protection helpline" },
+    ],
+    directories: [],
+  },
+  {
+    country: "Myanmar",
+    code: "MM",
+    emergency: "199",
+    helplines: [
+      { name: "Child Helpline Myanmar", phone: "1295", description: "Child welfare support" },
+    ],
+    directories: [],
+  },
+  {
+    country: "Mongolia",
+    code: "MN",
+    emergency: "102",
+    helplines: [
+      { name: "Child Helpline Mongolia", phone: "108", description: "National child helpline" },
+    ],
+    directories: [],
+  },
+  {
+    country: "Afghanistan",
+    code: "AF",
+    emergency: "119",
+    helplines: [
+      { name: "Afghanistan Child Helpline", phone: "142", description: "Child protection services" },
+    ],
+    directories: [],
+  },
+  {
+    country: "Iraq",
+    code: "IQ",
+    emergency: "104",
+    helplines: [
+      { name: "Child Protection Helpline", phone: "116", description: "Child welfare support" },
+    ],
+    directories: [],
+  },
 ];
 
 const COUNTRY_STORAGE_KEY = "little-minds-country";
