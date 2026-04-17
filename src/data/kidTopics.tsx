@@ -676,7 +676,7 @@ export const topics: Record<string, Topic> = {
     id: "other",
     title: "Other",
     subtitle: "Sometimes what you feel does not fit in one topic. That is okay. Every feeling matters.",
-    icon: "🌈",
+    icon: "✨",
     quickActions: [
       {
         title: "Name Your Feeling",
