@@ -18,7 +18,7 @@ const topicCards = [
   { id: "bodyimage", title: "Body Image Worries", icon: "💪" },
   { id: "bullying", title: "Bullying", icon: "🛡️" },
   { id: "grief", title: "Grief and Loss", icon: "🕊️" },
-  { id: "other", title: "Other", icon: "🌈" },
+  { id: "other", title: "Other", icon: "✨" },
 ];
 
 export default function KidHome() {
