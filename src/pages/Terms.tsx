@@ -117,6 +117,18 @@ export default function Terms() {
             to direct, indirect, incidental, consequential, or punitive damages.
           </p>
 
+          <h2>Image Credits</h2>
+          <p>
+            The hero photograph displayed on the Little Minds homepage — showing two children
+            sitting in a meadow reading a book together — is a stock photograph licensed via{" "}
+            <a href="https://www.pexels.com" target="_blank" rel="noopener noreferrer">Pexels</a>{" "}
+            under the free Pexels License, which permits commercial and non-commercial use without
+            attribution. The children pictured are not affiliated with Little Minds and do not
+            personally endorse this website or its content. Any other stock imagery used elsewhere
+            on the site is similarly licensed for free commercial use from Pexels or comparable
+            royalty-free sources.
+          </p>
+
           <h2>Changes to These Terms</h2>
           <p>
             We reserve the right to update these Terms of Use at any time. Continued use of the
