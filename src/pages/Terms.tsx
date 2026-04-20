@@ -124,8 +124,7 @@ export default function Terms() {
             <a href="https://www.pexels.com" target="_blank" rel="noopener noreferrer">Pexels</a>{" "}
             under the free Pexels License, which permits commercial and non-commercial use without
             attribution. The children pictured are not affiliated with Little Minds and do not
-            personally endorse this website or its content. All other imagery on the site
-            (such as the Little Minds logo) is original artwork created for this project.
+            personally endorse this website or its content.
           </p>
 
           <h2>Changes to These Terms</h2>
