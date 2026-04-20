@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Header } from "@/components/Header";
 import { SiteFooter } from "@/components/SiteFooter";
@@ -5,20 +6,27 @@ import { Heart, Sparkles, BookOpen, ChevronDown } from "lucide-react";
 import { Link } from "react-router-dom";
 import heroImage from "@/assets/hero-home.webp";
 
-// Tiny inlined placeholder (LQIP) — paints instantly so users never see gray
-const HERO_LQIP =
-  "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEASABIAAD/2wBDABQODxIPDRQSEBIXFRQYHjIhHhwcHj0sLiQySUBMS0dARkVQWnNiUFVtVkVGZIhlbXd7gYKBTmCNl4x9lnN+gXz/2wBDARUXFx4aHjshITt8U0ZTfHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHz/wAARCAAVACADASIAAhEBAxEB/8QAGAAAAgMAAAAAAAAAAAAAAAAAAAUCAwT/xAAlEAACAgIBAwMFAAAAAAAAAAABAgMRAAQSBSExFCLBQVFhcaH/xAAXAQADAQAAAAAAAAAAAAAAAAAAAQMC/8QAGREAAwEBAQAAAAAAAAAAAAAAAAERAjEh/9oADAMBAAIRAxEAPwBvGya2q0nE+0X4vJwdQU6ks86tGkRosV+BeJIep+pEMMzGMM1Flqr+n9y+HafU1uEZXhIvM0bK3Y+Mz12hzLUG2j1CDeDhDTKRasCOx8ecydSn1RrsWmQA2BR73i0SpJUkcipIrBlJbke34xXtrJ72Z+R5Gh47ffBuOCzmor138WoP7GMHCsDyUUx7gdrwwyW+lSKwxxliq0VB8HMe0xN4YYsesD//2Q==";
-
 export default function Home() {
+  // Preload the hero as early as possible — same technique used by Apple, Stripe, Linear
+  useEffect(() => {
+    const link = document.createElement("link");
+    link.rel = "preload";
+    link.as = "image";
+    link.href = heroImage;
+    // @ts-expect-error - fetchPriority is valid on HTMLLinkElement
+    link.fetchPriority = "high";
+    document.head.appendChild(link);
+    return () => {
+      document.head.removeChild(link);
+    };
+  }, []);
+
   return (
     <div className="min-h-screen flex flex-col bg-background">
       <Header />
 
-      {/* Full-screen hero — LQIP shows instantly, full image fades in over it */}
-      <section
-        className="relative min-h-[calc(100vh-4rem)] flex items-center justify-center overflow-hidden bg-cover bg-center"
-        style={{ backgroundImage: `url(${HERO_LQIP})` }}
-      >
+      {/* Full-screen hero — dark base color matches the overlay so there's no flash */}
+      <section className="relative min-h-[calc(100vh-4rem)] flex items-center justify-center overflow-hidden bg-[#1a1f2e]">
         {/* Full-quality background image — eager + high priority */}
         <img
           src={heroImage}
