@@ -14,15 +14,18 @@ export default function Home() {
     <div className="min-h-screen flex flex-col bg-background">
       <Header />
 
-      {/* Full-screen hero */}
-      <section className="relative min-h-[calc(100vh-4rem)] flex items-center justify-center overflow-hidden bg-[hsl(var(--muted))]">
-        {/* Background image — eager + high priority so it appears with the page */}
+      {/* Full-screen hero — LQIP shows instantly, full image fades in over it */}
+      <section
+        className="relative min-h-[calc(100vh-4rem)] flex items-center justify-center overflow-hidden bg-cover bg-center"
+        style={{ backgroundImage: `url(${HERO_LQIP})` }}
+      >
+        {/* Full-quality background image — eager + high priority */}
         <img
           src={heroImage}
           alt="Two children sitting in a meadow reading a book together"
           className="absolute inset-0 w-full h-full object-cover"
           loading="eager"
-          decoding="sync"
+          decoding="async"
           // @ts-expect-error - fetchpriority is a valid HTML attribute
           fetchpriority="high"
         />
