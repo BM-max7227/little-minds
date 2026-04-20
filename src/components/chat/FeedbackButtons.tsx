@@ -46,17 +46,82 @@ export function FeedbackButtons({ userMessage, assistantMessage, messageId }: Fe
     }
   }, [storageKey]);
 
+  // --- Hardening: rate-limit + prompt-injection filter ---
+  const RATE_LIMIT_KEY = "chat-feedback-submissions";
+  const MAX_PER_HOUR = 10;
+
+  const isRateLimited = (): boolean => {
+    try {
+      const raw = sessionStorage.getItem(RATE_LIMIT_KEY);
+      const timestamps: number[] = raw ? JSON.parse(raw) : [];
+      const oneHourAgo = Date.now() - 60 * 60 * 1000;
+      const recent = timestamps.filter((t) => t > oneHourAgo);
+      return recent.length >= MAX_PER_HOUR;
+    } catch {
+      return false;
+    }
+  };
+
+  const recordSubmission = () => {
+    try {
+      const raw = sessionStorage.getItem(RATE_LIMIT_KEY);
+      const timestamps: number[] = raw ? JSON.parse(raw) : [];
+      const oneHourAgo = Date.now() - 60 * 60 * 1000;
+      const recent = timestamps.filter((t) => t > oneHourAgo);
+      recent.push(Date.now());
+      sessionStorage.setItem(RATE_LIMIT_KEY, JSON.stringify(recent));
+    } catch {
+      /* ignore */
+    }
+  };
+
+  // Common prompt-injection / jailbreak phrases. Case-insensitive substring match.
+  const INJECTION_PATTERNS: RegExp[] = [
+    /ignore\s+(all\s+)?(previous|prior|above)\s+(instructions|rules|prompts)/i,
+    /disregard\s+(all\s+)?(previous|prior|above)/i,
+    /forget\s+(everything|all\s+previous)/i,
+    /you\s+are\s+now\s+a/i,
+    /act\s+as\s+(a|an)\s+/i,
+    /pretend\s+(you\s+are|to\s+be)/i,
+    /system\s*[:=]/i,
+    /<\s*\/?\s*system\s*>/i,
+    /jailbreak/i,
+    /developer\s+mode/i,
+    /\bDAN\b/,
+    /reveal\s+(your|the)\s+(system|prompt|instructions)/i,
+    /override\s+(your|the)\s+(rules|instructions)/i,
+  ];
+
+  const containsInjection = (text: string): boolean => {
+    if (!text) return false;
+    return INJECTION_PATTERNS.some((re) => re.test(text));
+  };
+
+  const sanitizeDetails = (text: string | undefined): string | undefined => {
+    if (!text) return text;
+    // Strip any angle brackets to prevent fake tag injection in the system prompt later.
+    return text.replace(/[<>]/g, "");
+  };
+  // -------------------------------------------------------
+
   const submitFeedback = async (type: "positive" | "negative", category?: string, detailText?: string) => {
     await supabase.from("chat_feedback").insert({
       message_content: userMessage,
       assistant_response: assistantMessage,
       feedback_type: type,
       category: category || null,
-      details: detailText || null,
+      details: sanitizeDetails(detailText) || null,
     });
+    recordSubmission();
   };
 
   const handleThumbsUp = async () => {
+    if (isRateLimited()) {
+      setFeedback("positive");
+      setSubmitted(true);
+      sessionStorage.setItem(storageKey, "positive");
+      return;
+    }
     setFeedback("positive");
     setShowForm(false);
     sessionStorage.setItem(storageKey, "positive");
@@ -69,7 +134,15 @@ export function FeedbackButtons({ userMessage, assistantMessage, messageId }: Fe
   };
 
   const handleSubmitNegative = async () => {
-    await submitFeedback("negative", selectedCategory || undefined, details || undefined);
+    if (isRateLimited()) {
+      setShowForm(false);
+      setSubmitted(true);
+      sessionStorage.setItem(storageKey, "negative");
+      return;
+    }
+    // Block prompt-injection attempts silently — record the rating but drop the malicious details.
+    const safeDetails = containsInjection(details) ? undefined : details || undefined;
+    await submitFeedback("negative", selectedCategory || undefined, safeDetails);
     setShowForm(false);
     setSubmitted(true);
     sessionStorage.setItem(storageKey, "negative");
