@@ -1,38 +1,22 @@
-import { useEffect } from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Header } from "@/components/Header";
 import { SiteFooter } from "@/components/SiteFooter";
 import { Heart, Sparkles, BookOpen, ChevronDown } from "lucide-react";
 import { Link } from "react-router-dom";
-import heroImage from "@/assets/hero-home.webp";
+import heroImage from "@/assets/hero-home-1280.webp";
 
 export default function Home() {
-  // Preload the hero as early as possible — same technique used by Apple, Stripe, Linear
-  useEffect(() => {
-    const link = document.createElement("link");
-    link.rel = "preload";
-    link.as = "image";
-    link.href = heroImage;
-    (link as HTMLLinkElement & { fetchPriority?: string }).fetchPriority = "high";
-    document.head.appendChild(link);
-    return () => {
-      document.head.removeChild(link);
-    };
-  }, []);
-
   return (
     <div className="min-h-screen flex flex-col bg-background">
       <Header />
 
-      {/* Full-screen hero — dark base color matches the overlay so there's no flash */}
-      <section className="relative min-h-[calc(100vh-4rem)] flex items-center justify-center overflow-hidden bg-[#1a1f2e]">
-        {/* Full-quality background image — eager + high priority */}
+      <section className="relative min-h-[calc(100vh-4rem)] flex items-center justify-center overflow-hidden bg-muted">
         <img
           src={heroImage}
           alt="Two children sitting in a meadow reading a book together"
           className="absolute inset-0 w-full h-full object-cover"
           loading="eager"
-          decoding="async"
+          decoding="sync"
           // @ts-expect-error - fetchpriority is a valid HTML attribute
           fetchpriority="high"
         />
