@@ -13,8 +13,7 @@ export default function Home() {
     link.rel = "preload";
     link.as = "image";
     link.href = heroImage;
-    // @ts-expect-error - fetchPriority is valid on HTMLLinkElement
-    link.fetchPriority = "high";
+    (link as HTMLLinkElement & { fetchPriority?: string }).fetchPriority = "high";
     document.head.appendChild(link);
     return () => {
       document.head.removeChild(link);
