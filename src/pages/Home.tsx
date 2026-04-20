@@ -11,12 +11,16 @@ export default function Home() {
       <Header />
 
       {/* Full-screen hero */}
-      <section className="relative min-h-[calc(100vh-4rem)] flex items-center justify-center overflow-hidden">
-        {/* Background image */}
+      <section className="relative min-h-[calc(100vh-4rem)] flex items-center justify-center overflow-hidden bg-[hsl(var(--muted))]">
+        {/* Background image — eager + high priority so it appears with the page */}
         <img
           src={heroImage}
           alt="Two children sitting in a meadow reading a book together"
           className="absolute inset-0 w-full h-full object-cover"
+          loading="eager"
+          decoding="sync"
+          // @ts-expect-error - fetchpriority is a valid HTML attribute
+          fetchpriority="high"
         />
         {/* Branded overlay */}
         <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/40 to-black/60" />
