@@ -140,14 +140,16 @@ export function AIChatWidget() {
     return () => el.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Only auto-scroll if user hasn't scrolled up
+  // After sending, scroll the user's latest message to the top of the chat viewport.
+  // While the assistant streams, do NOT auto-scroll to bottom — let the user read from the top.
   useEffect(() => {
-    if (!scrollRef.current || userHasScrolledUpRef.current) return;
-    scrollRef.current.scrollTo({
-      top: scrollRef.current.scrollHeight,
-      behavior: isLoading ? "auto" : "smooth",
-    });
-  }, [messages, isLoading]);
+    if (lastUserIndexRef.current < 0) return;
+    const userEl = lastUserMsgRef.current;
+    const scrollEl = scrollRef.current;
+    if (!userEl || !scrollEl) return;
+    const offset = userEl.offsetTop - scrollEl.offsetTop;
+    scrollEl.scrollTo({ top: offset - 8, behavior: "smooth" });
+  }, [lastUserIndexRef.current, messages.length === 0 ? 0 : 1]);
 
   const sendMessage = useCallback(async () => {
     const text = input.trim();
