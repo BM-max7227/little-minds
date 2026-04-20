@@ -535,6 +535,9 @@ export function AIChatWidget() {
                 </div>
               </div>
             )}
+
+            {/* Spacer so the latest user message can scroll to the top of the viewport */}
+            {lastUserIndex >= 0 && <div aria-hidden className="h-[60vh]" />}
           </div>
 
           {/* Input */}
