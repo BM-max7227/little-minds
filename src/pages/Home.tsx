@@ -3,7 +3,11 @@ import { Header } from "@/components/Header";
 import { SiteFooter } from "@/components/SiteFooter";
 import { Heart, Sparkles, BookOpen, ChevronDown } from "lucide-react";
 import { Link } from "react-router-dom";
-import heroImage from "@/assets/hero-home.jpg";
+import heroImage from "@/assets/hero-home.webp";
+
+// Tiny inlined placeholder (LQIP) — paints instantly so users never see gray
+const HERO_LQIP =
+  "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEASABIAAD/2wBDABQODxIPDRQSEBIXFRQYHjIhHhwcHj0sLiQySUBMS0dARkVQWnNiUFVtVkVGZIhlbXd7gYKBTmCNl4x9lnN+gXz/2wBDARUXFx4aHjshITt8U0ZTfHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHz/wAARCAAVACADASIAAhEBAxEB/8QAGAAAAgMAAAAAAAAAAAAAAAAAAAUCAwT/xAAlEAACAgIBAwMFAAAAAAAAAAABAgMRAAQSBSExFCLBQVFhcaH/xAAXAQADAQAAAAAAAAAAAAAAAAAAAQMC/8QAGREAAwEBAQAAAAAAAAAAAAAAAAERAjEh/9oADAMBAAIRAxEAPwBvGya2q0nE+0X4vJwdQU6ks86tGkRosV+BeJIep+pEMMzGMM1Flqr+n9y+HafU1uEZXhIvM0bK3Y+Mz12hzLUG2j1CDeDhDTKRasCOx8ecydSn1RrsWmQA2BR73i0SpJUkcipIrBlJbke34xXtrJ72Z+R5Gh47ffBuOCzmor138WoP7GMHCsDyUUx7gdrwwyW+lSKwxxliq0VB8HMe0xN4YYsesD//2Q==";
 
 export default function Home() {
   return (
