@@ -482,7 +482,11 @@ export function AIChatWidget() {
                 i === messages.length - 1;
 
               return (
-                <div key={i} className={`flex gap-2 ${msg.role === "user" ? "justify-end" : "justify-start"}`}>
+                <div
+                  key={i}
+                  ref={i === lastUserIndex ? lastUserMsgRef : undefined}
+                  className={`flex gap-2 ${msg.role === "user" ? "justify-end" : "justify-start"}`}
+                >
                   {msg.role === "assistant" && (
                     <div className="flex-shrink-0 h-7 w-7 rounded-full bg-primary/10 flex items-center justify-center mt-1">
                       <Bot className="h-4 w-4 text-primary" />
