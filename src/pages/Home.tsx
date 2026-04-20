@@ -15,7 +15,7 @@ export default function Home() {
         {/* Background image */}
         <img
           src={heroImage}
-          alt="Two children standing side by side, smiling"
+          alt="Two children sitting in a meadow reading a book together"
           className="absolute inset-0 w-full h-full object-cover"
         />
         {/* Branded overlay */}
