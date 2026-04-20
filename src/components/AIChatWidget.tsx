@@ -22,7 +22,9 @@ export function AIChatWidget() {
   const [voiceTranscript, setVoiceTranscript] = useState("");
   const [audioLevels, setAudioLevels] = useState<number[]>([]);
   const scrollRef = useRef<HTMLDivElement>(null);
+  const lastUserMsgRef = useRef<HTMLDivElement>(null);
   const userHasScrolledUpRef = useRef(false);
+  const [lastUserIndex, setLastUserIndex] = useState<number>(-1);
   const recognitionRef = useRef<any>(null);
   const audioContextRef = useRef<AudioContext | null>(null);
   const analyserRef = useRef<AnalyserNode | null>(null);
@@ -138,14 +140,16 @@ export function AIChatWidget() {
     return () => el.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Only auto-scroll if user hasn't scrolled up
+  // After sending, scroll the user's latest message to the top of the chat viewport.
+  // While the assistant streams, do NOT auto-scroll to bottom — let the user read from the top.
   useEffect(() => {
-    if (!scrollRef.current || userHasScrolledUpRef.current) return;
-    scrollRef.current.scrollTo({
-      top: scrollRef.current.scrollHeight,
-      behavior: isLoading ? "auto" : "smooth",
-    });
-  }, [messages, isLoading]);
+    if (lastUserIndex < 0) return;
+    const userEl = lastUserMsgRef.current;
+    const scrollEl = scrollRef.current;
+    if (!userEl || !scrollEl) return;
+    const offset = userEl.offsetTop - scrollEl.offsetTop;
+    scrollEl.scrollTo({ top: offset - 8, behavior: "smooth" });
+  }, [lastUserIndex]);
 
   const sendMessage = useCallback(async () => {
     const text = input.trim();
@@ -155,7 +159,8 @@ export function AIChatWidget() {
     const allMessages = [...messages, userMsg];
     setMessages(allMessages);
     setInput("");
-    userHasScrolledUpRef.current = false; // Reset so we scroll to new message
+    userHasScrolledUpRef.current = false;
+    setLastUserIndex(allMessages.length - 1);
     setIsLoading(true);
 
     let assistantSoFar = "";
@@ -477,7 +482,11 @@ export function AIChatWidget() {
                 i === messages.length - 1;
 
               return (
-                <div key={i} className={`flex gap-2 ${msg.role === "user" ? "justify-end" : "justify-start"}`}>
+                <div
+                  key={i}
+                  ref={i === lastUserIndex ? lastUserMsgRef : undefined}
+                  className={`flex gap-2 ${msg.role === "user" ? "justify-end" : "justify-start"}`}
+                >
                   {msg.role === "assistant" && (
                     <div className="flex-shrink-0 h-7 w-7 rounded-full bg-primary/10 flex items-center justify-center mt-1">
                       <Bot className="h-4 w-4 text-primary" />
@@ -526,6 +535,9 @@ export function AIChatWidget() {
                 </div>
               </div>
             )}
+
+            {/* Spacer so the latest user message can scroll to the top of the viewport */}
+            {lastUserIndex >= 0 && <div aria-hidden className="h-[60vh]" />}
           </div>
 
           {/* Input */}
