@@ -15,7 +15,7 @@ export default function Home() {
         {/* Background image */}
         <img
           src={heroImage}
-          alt="Children playing outdoors in golden sunlight"
+          alt="A child running joyfully through a sunlit blossoming orchard"
           className="absolute inset-0 w-full h-full object-cover"
         />
         {/* Branded overlay */}
