@@ -102,8 +102,8 @@ export default function PrivacyPolicy() {
           <p>
             If you choose to submit feedback on a chat response (thumbs up/down), a record is saved
             that includes the feedback type and the relevant message content. This feedback is
-            anonymous — it is not linked to any user identity — and is used solely to improve the
-            quality of the chat assistant.
+            anonymous — it is not linked to any user identity and does not include any identifying
+            information about you — and is used solely to improve the quality of the chat assistant.
           </p>
 
           <h2>Children's Privacy (COPPA Compliance)</h2>
