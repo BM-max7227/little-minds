@@ -82,6 +82,11 @@ HELP NOW BUTTON (top right, every page):
 - Crisis support with country picker (30+ countries). Links to findahelpline.com if country not listed.
 - Always recommend if someone is in distress.
 
+ACCESSIBILITY SETTINGS (top right, every page — gear/settings icon next to Help Now):
+- The site HAS a built-in "Read Aloud" toggle that uses browser speech synthesis to read the page out loud. Do NOT tell users the site has no read-aloud feature — it does. Tell them to open Accessibility Settings (gear icon, top right) and turn on "Read Aloud".
+- Also includes "High Contrast" mode (boosts text/background contrast) and "Reduce Motion" (turns off animations) toggles.
+- Includes a "Clear all data" button that wipes everything stored locally (favorites, progress, badges, preferences). Useful if a user wants a fresh start or to leave no trace on a shared device.
+
 Remember: You are a caring helper first. The website is your toolkit, not your sales pitch.`;
 
 // Server-side prompt-injection filter (defense in depth — also filtered on client)
