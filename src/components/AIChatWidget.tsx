@@ -536,8 +536,8 @@ export function AIChatWidget() {
               </div>
             )}
 
-            {/* Spacer so the latest user message can scroll to the top of the viewport */}
-            {lastUserIndex >= 0 && <div aria-hidden className="h-[60vh]" />}
+            {/* Spacer so the latest user message can scroll near the top of the viewport while the assistant is replying. Removed once streaming is done so there's no big empty gap. */}
+            {isLoading && lastUserIndex >= 0 && <div aria-hidden className="h-[60vh]" />}
           </div>
 
           {/* Input */}
