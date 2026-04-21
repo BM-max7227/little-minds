@@ -136,8 +136,9 @@ export default function KidTopicDetail() {
                     {topic.journalPrompts.map((prompt, index) => <li key={index}>{prompt}</li>)}
                   </ul>
                 </div>
-                <div className="rounded-md bg-muted/60 px-3 py-2 text-xs text-muted-foreground">
-                  🔒 Please don't type passwords, your address, phone number, or other private information here.
+                <div className="rounded-md border border-amber-500/40 bg-amber-500/10 px-3 py-2.5 text-sm text-foreground flex items-start gap-2">
+                  <span aria-hidden="true">🔒</span>
+                  <span><strong>Please don't type</strong> passwords, your address, phone number, or other private information here.</span>
                 </div>
                 <Textarea placeholder="Start writing here..." value={journalEntry} onChange={e => saveJournal(e.target.value)} className="min-h-[200px]" aria-label="Journal entry" />
                 <div className="flex justify-between items-center">
