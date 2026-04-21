@@ -150,33 +150,33 @@ export function FeedbackButtons({ userMessage, assistantMessage, messageId }: Fe
 
   if (submitted || feedback === "positive") {
     return (
-      <div className="flex items-center mt-1">
+      <div className="flex items-center mt-1.5">
         {submitted ? (
-          <ThumbsDown className="h-3.5 w-3.5 text-muted-foreground fill-muted-foreground" />
+          <ThumbsDown className="h-5 w-5 text-muted-foreground fill-muted-foreground" />
         ) : (
-          <ThumbsUp className="h-3.5 w-3.5 text-muted-foreground fill-muted-foreground" />
+          <ThumbsUp className="h-5 w-5 text-muted-foreground fill-muted-foreground" />
         )}
       </div>
     );
   }
 
   return (
-    <div className="mt-1">
+    <div className="mt-1.5">
       {!showForm && (
-        <div className="flex items-center -space-x-3">
+        <div className="flex items-center gap-2">
           <button
             onClick={handleThumbsUp}
-            className="inline-flex h-4 w-4 items-center justify-center p-0 m-0 leading-none rounded-sm transition focus-visible:outline-none"
+            className="inline-flex h-7 w-7 items-center justify-center rounded-md transition focus-visible:outline-none"
             aria-label="Good response"
           >
-            <ThumbsUp className="h-3.5 w-3.5 text-muted-foreground hover:text-foreground" />
+            <ThumbsUp className="h-5 w-5 text-muted-foreground hover:text-foreground" />
           </button>
           <button
             onClick={handleThumbsDown}
-            className="inline-flex h-4 w-4 items-center justify-center p-0 m-0 leading-none rounded-sm transition focus-visible:outline-none"
+            className="inline-flex h-7 w-7 items-center justify-center rounded-md transition focus-visible:outline-none"
             aria-label="Bad response"
           >
-            <ThumbsDown className="h-3.5 w-3.5 text-muted-foreground hover:text-foreground" />
+            <ThumbsDown className="h-5 w-5 text-muted-foreground hover:text-foreground" />
           </button>
         </div>
       )}
