@@ -3,7 +3,8 @@ import { Header } from "@/components/Header";
 import { SiteFooter } from "@/components/SiteFooter";
 import { Heart, Sparkles, BookOpen, ChevronDown } from "lucide-react";
 import { Link } from "react-router-dom";
-import heroImage from "@/assets/hero-home-1280.webp";
+import heroImage from "@/assets/hero-home-hq.webp";
+import heroImageSmall from "@/assets/hero-home-1280.webp";
 
 export default function Home() {
   return (
