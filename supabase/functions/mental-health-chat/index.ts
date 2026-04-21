@@ -117,6 +117,57 @@ function sanitize(text: string | null | undefined, max: number): string {
   return text.replace(/[<>]/g, "").slice(0, max);
 }
 
+// --- Kid-safe content filter ---
+// Blocks profanity, sexual, graphic violence, drug/alcohol promotion, and dangerous content
+// BEFORE it ever reaches the AI. Returns a friendly redirect instead.
+// Self-harm and suicide are NOT blocked here — those are real wellbeing topics the AI must
+// handle with care (acknowledge feelings + recommend Help Now). They're handled by the prompt.
+const UNSAFE_PATTERNS: { pattern: RegExp; reason: "profanity" | "sexual" | "violence" | "substances" | "weapons" }[] = [
+  { pattern: /\b(fuck|f\*+ck|fck|shit|sh\*+t|bitch|b\*+tch|asshole|a\*+hole|cunt|dick|pussy|cock|bastard|wanker|slut|whore|faggot|retard|n[i1]gg(a|er)|chink|spic|kike|tranny)\b/i, reason: "profanity" },
+  { pattern: /\b(sex|sexual|sexy|porn|pornography|nude|nudes|naked|boobs|tits|penis|vagina|orgasm|masturbat\w*|horny|kinky|fetish|hentai|nsfw|erotic|blowjob|handjob|bdsm|hookup|sext|onlyfans)\b/i, reason: "sexual" },
+  { pattern: /\b(kill\s+(him|her|them|people|someone)|murder\s+\w+|stab\s+(him|her|them|someone)|shoot\s+(up|him|her|them|someone)|behead|torture|massacre|school\s+shoot\w*|how\s+to\s+(kill|murder|hurt))\b/i, reason: "violence" },
+  { pattern: /\b(weed|marijuana|cannabis|cocaine|heroin|meth|crack|ecstasy|mdma|lsd|shrooms|fentanyl|vape|vaping|get\s+drunk|get\s+high|smoke\s+(weed|crack)|drug\s+dealer|how\s+to\s+(smoke|snort|inject))\b/i, reason: "substances" },
+  { pattern: /\b(how\s+to\s+(make|build)\s+(a\s+)?(bomb|gun|weapon|knife)|pipe\s+bomb|molotov|ammunition|silencer)\b/i, reason: "weapons" },
+];
+
+function checkContentSafety(text: string): { safe: true } | { safe: false; reason: string } {
+  if (!text) return { safe: true };
+  for (const { pattern, reason } of UNSAFE_PATTERNS) {
+    if (pattern.test(text)) return { safe: false, reason };
+  }
+  return { safe: true };
+}
+
+function safeRefusalMessage(reason: string): string {
+  const base = "I want to keep this a safe and friendly space for everyone, including kids, so I can't talk about that here. 💛";
+  const followUps: Record<string, string> = {
+    profanity: "Let's chat with kind words. Is there something on your mind I can help with — like feelings, school, friends, or sleep?",
+    sexual: "That's not something I can help with. If you have questions about your body or growing up, please talk to a trusted adult, parent, or your doctor. Is there a feeling or worry I can help you with instead?",
+    violence: "If you're having scary or angry thoughts about hurting someone, please tell a trusted adult right away. You can also tap the **Help Now** button at the top of the page for someone to talk to. I'm happy to help you work through big feelings if you'd like to share what's going on.",
+    substances: "That's not something I can help with. If you're worried about drugs or alcohol — for yourself or someone else — please talk to a trusted adult, or tap **Help Now** at the top of the page for support.",
+    weapons: "I can't help with that. If you're feeling unsafe, please tell a trusted adult or tap **Help Now** at the top of the page right away.",
+  };
+  return `${base}\n\n${followUps[reason] ?? "Is there something else I can help you with — maybe a feeling, a worry, or something at school or home?"}`;
+}
+
+// Build a fake SSE stream so the client's streaming parser handles refusals identically to AI replies.
+function buildRefusalSSE(content: string): ReadableStream<Uint8Array> {
+  const encoder = new TextEncoder();
+  const chunkSize = 6;
+  return new ReadableStream({
+    async start(controller) {
+      for (let i = 0; i < content.length; i += chunkSize) {
+        const piece = content.slice(i, i + chunkSize);
+        const payload = JSON.stringify({ choices: [{ delta: { content: piece } }] });
+        controller.enqueue(encoder.encode(`data: ${payload}\n\n`));
+        await new Promise((r) => setTimeout(r, 12));
+      }
+      controller.enqueue(encoder.encode("data: [DONE]\n\n"));
+      controller.close();
+    },
+  });
+}
+
 async function getFeedbackContext(): Promise<string> {
   try {
     const supabaseUrl = Deno.env.get("SUPABASE_URL");
@@ -198,6 +249,19 @@ serve(async (req) => {
     const { messages } = await req.json();
     const LOVABLE_API_KEY = Deno.env.get("LOVABLE_API_KEY");
     if (!LOVABLE_API_KEY) throw new Error("LOVABLE_API_KEY is not configured");
+
+    // Kid-safety pre-filter: scan the latest user message for inappropriate content.
+    // If it matches, return a friendly redirect as a streamed response — never call the AI.
+    const latestUser = Array.isArray(messages)
+      ? [...messages].reverse().find((m: { role?: string; content?: string }) => m?.role === "user")
+      : null;
+    const safetyCheck = checkContentSafety(latestUser?.content ?? "");
+    if (!safetyCheck.safe) {
+      const refusal = safeRefusalMessage(safetyCheck.reason);
+      return new Response(buildRefusalSSE(refusal), {
+        headers: { ...corsHeaders, "Content-Type": "text/event-stream" },
+      });
+    }
 
     const feedbackContext = await getFeedbackContext();
     const systemPrompt = BASE_SYSTEM_PROMPT + feedbackContext;
