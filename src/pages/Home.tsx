@@ -3,7 +3,8 @@ import { Header } from "@/components/Header";
 import { SiteFooter } from "@/components/SiteFooter";
 import { Heart, Sparkles, BookOpen, ChevronDown } from "lucide-react";
 import { Link } from "react-router-dom";
-import heroImage from "@/assets/hero-home-1280.webp";
+import heroImage from "@/assets/hero-home-hq.webp";
+import heroImageSmall from "@/assets/hero-home-1280.webp";
 
 export default function Home() {
   return (
@@ -13,6 +14,8 @@ export default function Home() {
       <section className="relative min-h-[calc(100vh-4rem)] flex items-center justify-center overflow-hidden bg-muted">
         <img
           src={heroImage}
+          srcSet={`${heroImageSmall} 1280w, ${heroImage} 1920w`}
+          sizes="100vw"
           alt="Two children sitting in a meadow reading a book together"
           className="absolute inset-0 w-full h-full object-cover"
           loading="eager"
