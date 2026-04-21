@@ -32,6 +32,8 @@ export function AIChatWidget() {
   const streamRef = useRef<MediaStream | null>(null);
   const typingBufferRef = useRef("");
   const typingTimerRef = useRef<number | null>(null);
+  // Unique per chat session so feedback storage keys don't collide with stale entries from prior sessions.
+  const sessionIdRef = useRef<string>(`${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 8)}`);
 
   const supportsVoice = typeof window !== "undefined" && ("SpeechRecognition" in window || "webkitSpeechRecognition" in window);
 
@@ -510,7 +512,7 @@ export function AIChatWidget() {
                     </div>
                     {showFeedback && (
                       <FeedbackButtons
-                        messageId={`assistant-${i}`}
+                        messageId={`${sessionIdRef.current}-${i}`}
                         userMessage={prevUserMsg}
                         assistantMessage={msg.content}
                       />
