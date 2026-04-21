@@ -14,6 +14,8 @@ export default function Home() {
       <section className="relative min-h-[calc(100vh-4rem)] flex items-center justify-center overflow-hidden bg-muted">
         <img
           src={heroImage}
+          srcSet={`${heroImageSmall} 1280w, ${heroImage} 1920w`}
+          sizes="100vw"
           alt="Two children sitting in a meadow reading a book together"
           className="absolute inset-0 w-full h-full object-cover"
           loading="eager"
