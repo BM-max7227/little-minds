@@ -136,7 +136,7 @@ export default function KidTopicDetail() {
                     {topic.journalPrompts.map((prompt, index) => <li key={index}>{prompt}</li>)}
                   </ul>
                 </div>
-                <div className="rounded-md border border-amber-500/40 bg-amber-500/10 px-3 py-2.5 text-sm text-foreground flex items-start gap-2">
+                <div className="rounded-md border border-primary/30 bg-primary/10 px-3 py-2.5 text-sm text-foreground flex items-start gap-2">
                   <span aria-hidden="true">🔒</span>
                   <span><strong>Please don't type</strong> passwords, your address, phone number, or other private information here.</span>
                 </div>
