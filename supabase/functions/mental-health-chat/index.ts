@@ -321,13 +321,36 @@ serve(async (req) => {
     const latestUser = Array.isArray(messages)
       ? [...messages].reverse().find((m: { role?: string; content?: string }) => m?.role === "user")
       : null;
-    const safetyCheck = checkContentSafety(latestUser?.content ?? "");
+    const latestUserContent = latestUser?.content ?? "";
+
+    const safetyCheck = checkContentSafety(latestUserContent);
     if (!safetyCheck.safe) {
       const refusal = safeRefusalMessage(safetyCheck.reason);
       return new Response(buildRefusalSSE(refusal), {
         headers: { ...corsHeaders, "Content-Type": "text/event-stream" },
       });
     }
+
+    // PII scrub: remove emails, phones, addresses, school names BEFORE sending to the AI.
+    // The AI then naturally addresses the safety concern in its reply.
+    const { scrubbed: scrubbedContent, found: piiFound } = detectAndScrubPII(latestUserContent);
+    const piiNotice = piiFound.length > 0
+      ? `\n\n[Safety note for assistant: the user shared ${piiFound.join(" and ")}. It has been removed for their safety. Gently remind them that they don't need to share personal info like real names, addresses, phone numbers, emails, or school names with you, and that this keeps them safe online. Then continue helping with their original question.]`
+      : "";
+
+    // Build the messages array sent to the AI with the scrubbed latest message.
+    const safeMessages = piiFound.length > 0 && Array.isArray(messages)
+      ? messages.map((m: { role?: string; content?: string }, idx: number, arr: any[]) => {
+          // Only replace the LAST user message (the one we scrubbed)
+          if (m === latestUser && idx === arr.lastIndexOf(latestUser)) {
+            return { ...m, content: scrubbedContent + piiNotice };
+          }
+          return m;
+        })
+      : messages;
+
+    // Crisis detection — flag self-harm / suicide language for force-prepended Help Now banner.
+    const isCrisis = isCrisisMessage(latestUserContent);
 
     const feedbackContext = await getFeedbackContext();
     const systemPrompt = BASE_SYSTEM_PROMPT + feedbackContext;
@@ -344,7 +367,7 @@ serve(async (req) => {
           model: "google/gemini-3-flash-preview",
           messages: [
             { role: "system", content: systemPrompt },
-            ...messages,
+            ...safeMessages,
           ],
           stream: true,
         }),
@@ -370,6 +393,36 @@ serve(async (req) => {
         JSON.stringify({ error: "Something went wrong. Please try again." }),
         { status: 500, headers: { ...corsHeaders, "Content-Type": "application/json" } }
       );
+    }
+
+    // If crisis: prepend the Help Now banner to the streamed response so it appears FIRST,
+    // then continue streaming the AI's reply afterwards.
+    if (isCrisis && response.body) {
+      const encoder = new TextEncoder();
+      const upstream = response.body;
+      const combined = new ReadableStream({
+        async start(controller) {
+          // Stream the crisis banner as SSE chunks first
+          const chunkSize = 8;
+          for (let i = 0; i < CRISIS_BANNER.length; i += chunkSize) {
+            const piece = CRISIS_BANNER.slice(i, i + chunkSize);
+            const payload = JSON.stringify({ choices: [{ delta: { content: piece } }] });
+            controller.enqueue(encoder.encode(`data: ${payload}\n\n`));
+            await new Promise((r) => setTimeout(r, 8));
+          }
+          // Then pipe the upstream AI response through unchanged
+          const reader = upstream.getReader();
+          while (true) {
+            const { done, value } = await reader.read();
+            if (done) break;
+            controller.enqueue(value);
+          }
+          controller.close();
+        },
+      });
+      return new Response(combined, {
+        headers: { ...corsHeaders, "Content-Type": "text/event-stream" },
+      });
     }
 
     return new Response(response.body, {
