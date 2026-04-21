@@ -512,7 +512,7 @@ export function AIChatWidget() {
                     </div>
                     {showFeedback && (
                       <FeedbackButtons
-                        messageId={`assistant-${i}`}
+                        messageId={`${sessionIdRef.current}-${i}`}
                         userMessage={prevUserMsg}
                         assistantMessage={msg.content}
                       />
