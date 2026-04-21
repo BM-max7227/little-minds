@@ -71,6 +71,12 @@ export default function Disclaimer() {
             their children's use of this website and any actions taken based on its content.
           </p>
           <p>
+            Children (and all users) should be reminded never to type passwords, financial details,
+            home addresses, phone numbers, school names, or other sensitive personal information into
+            any input field on this website — including the AI chat, the private journal, the contact
+            form, or the donation inquiry form. Little Minds will never ask for this information.
+          </p>
+          <p>
             This website does not automatically collect personal information from any visitor of any
             age. The only personal information we receive is what users voluntarily choose to submit
             through our contact or donation inquiry forms. To comply with the Children's Online

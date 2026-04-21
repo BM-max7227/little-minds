@@ -78,7 +78,7 @@ export default function PrivacyPolicy() {
             <li>Your messages are sent to a backend function that processes the request and returns a response</li>
             <li><strong>Conversations are not stored</strong> — when you close the chat or refresh the page, the conversation is gone</li>
             <li>We do not log, save, or review individual chat messages</li>
-            <li>Please do not share sensitive personal information through the chat</li>
+            <li>Please do not share sensitive personal information through the chat — including passwords, financial details, full names, addresses, phone numbers, or school names</li>
           </ul>
 
           <h3>Automated Safety Filters</h3>
