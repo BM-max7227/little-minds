@@ -213,7 +213,7 @@ export default function Donate() {
                           rows={3}
                         />
                         <p className="text-xs text-muted-foreground">
-                          Please don't include passwords, card numbers, or other sensitive financial information — we'll never ask for these.
+                          Please don't include passwords or other sensitive personal information.
                         </p>
                       </div>
 
