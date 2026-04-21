@@ -250,6 +250,19 @@ serve(async (req) => {
     const LOVABLE_API_KEY = Deno.env.get("LOVABLE_API_KEY");
     if (!LOVABLE_API_KEY) throw new Error("LOVABLE_API_KEY is not configured");
 
+    // Kid-safety pre-filter: scan the latest user message for inappropriate content.
+    // If it matches, return a friendly redirect as a streamed response — never call the AI.
+    const latestUser = Array.isArray(messages)
+      ? [...messages].reverse().find((m: { role?: string; content?: string }) => m?.role === "user")
+      : null;
+    const safetyCheck = checkContentSafety(latestUser?.content ?? "");
+    if (!safetyCheck.safe) {
+      const refusal = safeRefusalMessage(safetyCheck.reason);
+      return new Response(buildRefusalSSE(refusal), {
+        headers: { ...corsHeaders, "Content-Type": "text/event-stream" },
+      });
+    }
+
     const feedbackContext = await getFeedbackContext();
     const systemPrompt = BASE_SYSTEM_PROMPT + feedbackContext;
 
