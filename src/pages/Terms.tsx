@@ -16,7 +16,7 @@ export default function Terms() {
           </p>
           <p>
             If you are under the age of 18, you must review these Terms with a parent or guardian.
-            By using this website, you represent that your parent or guardian has reviewed and agreed
+            By using this website, you confirm that your parent or guardian has reviewed and agreed
             to these Terms on your behalf.
           </p>
 
@@ -25,7 +25,14 @@ export default function Terms() {
             This website is intended to provide general mental health information and educational
             resources. You may use the content for personal, non-commercial purposes only. You agree
             not to misuse the website or its content in any way that could damage, disable, or
-            impair its functionality.
+            impair its functionality. You use this website at your own risk.
+          </p>
+
+          <h2>Availability</h2>
+          <p>
+            We do not guarantee that the website will always be available, uninterrupted, secure,
+            or error-free. Little Minds may modify, suspend, or discontinue any part of the website
+            at any time without notice.
           </p>
 
           <h2>Accuracy of Information</h2>
@@ -77,14 +84,23 @@ export default function Terms() {
           <p>
             All content on this website, including text, graphics, logos, and design, is the
             property of Little Minds unless otherwise stated. You may not reproduce or distribute
-            this content without written permission, except for personal, non-commercial use.
+            this content without written permission, except for personal, non-commercial use. You
+            may not copy, reuse, or distribute content for commercial purposes without written
+            permission.
           </p>
 
           <h2>External Links</h2>
           <p>
             This website may contain links to third party websites. These links are provided for
             your convenience only. Little Minds has no control over the content of external sites
-            and is not responsible for their content or practices.
+            and is not responsible for their content, services, or any outcomes resulting from
+            their use.
+          </p>
+
+          <h2>Termination of Use</h2>
+          <p>
+            We reserve the right to restrict or block access to the website for any user who
+            violates these Terms or misuses the website or its features.
           </p>
 
           <h2>Privacy</h2>
