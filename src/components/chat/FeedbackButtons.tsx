@@ -152,9 +152,9 @@ export function FeedbackButtons({ userMessage, assistantMessage, messageId }: Fe
     return (
       <div className="flex items-center mt-1.5">
         {submitted ? (
-          <ThumbsDown className="h-5 w-5 text-muted-foreground fill-muted-foreground" />
+          <ThumbsDown className="h-4 w-4 text-muted-foreground fill-muted-foreground" />
         ) : (
-          <ThumbsUp className="h-5 w-5 text-muted-foreground fill-muted-foreground" />
+          <ThumbsUp className="h-4 w-4 text-muted-foreground fill-muted-foreground" />
         )}
       </div>
     );
@@ -163,20 +163,20 @@ export function FeedbackButtons({ userMessage, assistantMessage, messageId }: Fe
   return (
     <div className="mt-1.5">
       {!showForm && (
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-1.5">
           <button
             onClick={handleThumbsUp}
-            className="inline-flex h-7 w-7 items-center justify-center rounded-md transition focus-visible:outline-none"
+            className="inline-flex h-6 w-6 items-center justify-center rounded-md transition focus-visible:outline-none"
             aria-label="Good response"
           >
-            <ThumbsUp className="h-5 w-5 text-muted-foreground hover:text-foreground" />
+            <ThumbsUp className="h-4 w-4 text-muted-foreground hover:text-foreground" />
           </button>
           <button
             onClick={handleThumbsDown}
-            className="inline-flex h-7 w-7 items-center justify-center rounded-md transition focus-visible:outline-none"
+            className="inline-flex h-6 w-6 items-center justify-center rounded-md transition focus-visible:outline-none"
             aria-label="Bad response"
           >
-            <ThumbsDown className="h-5 w-5 text-muted-foreground hover:text-foreground" />
+            <ThumbsDown className="h-4 w-4 text-muted-foreground hover:text-foreground" />
           </button>
         </div>
       )}
