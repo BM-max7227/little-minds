@@ -1,6 +1,6 @@
 import { createRoot } from "react-dom/client";
 import App from "./App.tsx";
-import heroHomePreload from "./assets/hero-home-1280.webp";
+import heroHomePreload from "./assets/hero-home-hq.webp";
 import "./index.css";
 
 const heroPreload = document.createElement("link");
