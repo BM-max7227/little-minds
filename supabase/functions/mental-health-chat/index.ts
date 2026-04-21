@@ -168,6 +168,72 @@ function buildRefusalSSE(content: string): ReadableStream<Uint8Array> {
   });
 }
 
+// --- PII detection ---
+// Detect personal info kids should NOT share (full name, address, phone, email, school).
+// On detection, we PRE-PEND a gentle warning to the user's message before sending to the AI,
+// AND scrub the obvious matches so the AI never sees real PII. This protects kids from
+// oversharing and means the AI's reply naturally addresses the safety concern.
+const PII_PATTERNS: { pattern: RegExp; replacement: string; label: string }[] = [
+  // Email addresses
+  { pattern: /\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}\b/gi, replacement: "[email removed]", label: "an email address" },
+  // Phone numbers — international, US, with separators
+  { pattern: /(?:\+?\d{1,3}[\s.-]?)?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}\b/g, replacement: "[phone removed]", label: "a phone number" },
+  // Street addresses (number + street word)
+  { pattern: /\b\d{1,5}\s+[A-Za-z0-9.\-\s]{2,40}\s+(street|st|road|rd|avenue|ave|drive|dr|lane|ln|boulevard|blvd|court|ct|place|pl|way|terrace|ter|circle|cir)\b\.?/gi, replacement: "[address removed]", label: "a home address" },
+];
+
+// School / institution name heuristic — looks for "[Name] School/Academy/High/Elementary/Primary/College"
+const SCHOOL_PATTERN = /\b([A-Z][a-zA-Z]+(?:\s+[A-Z][a-zA-Z]+){0,3})\s+(elementary|primary|middle|high|secondary|academy|college|institute|school)\b/g;
+
+function detectAndScrubPII(text: string): { scrubbed: string; found: string[] } {
+  if (!text) return { scrubbed: text, found: [] };
+  let scrubbed = text;
+  const found: string[] = [];
+  for (const { pattern, replacement, label } of PII_PATTERNS) {
+    if (pattern.test(scrubbed)) {
+      found.push(label);
+      scrubbed = scrubbed.replace(pattern, replacement);
+    }
+  }
+  if (SCHOOL_PATTERN.test(scrubbed)) {
+    found.push("a school name");
+    scrubbed = scrubbed.replace(SCHOOL_PATTERN, "[school removed]");
+  }
+  return { scrubbed, found: Array.from(new Set(found)) };
+}
+
+// --- Crisis / self-harm escalation ---
+// Belt-and-suspenders: if the user message contains crisis language, ALWAYS prepend a Help Now
+// banner to the AI's reply, regardless of what the AI says. This guarantees the safety message
+// reaches the user even if the model under-responds.
+const CRISIS_PATTERNS: RegExp[] = [
+  /\b(kill\s+myself|kms|end\s+(my|it)\s+(life|all)|take\s+my\s+(own\s+)?life|suicid\w*)\b/i,
+  /\b(want\s+to\s+die|wanna\s+die|don'?t\s+want\s+to\s+(live|be\s+alive|be\s+here)|ready\s+to\s+die)\b/i,
+  /\b(hurt\s+myself|harm\s+myself|cut\s+myself|cutting\s+myself|self[\s-]?harm)\b/i,
+  /\b(no\s+reason\s+to\s+live|better\s+off\s+dead|wish\s+i\s+was\s+(dead|never\s+born))\b/i,
+  /\b(overdose|od\s+on)\b/i,
+];
+
+function isCrisisMessage(text: string): boolean {
+  if (!text) return false;
+  return CRISIS_PATTERNS.some((re) => re.test(text));
+}
+
+const CRISIS_BANNER = `💛 **I hear you, and I'm really glad you told me.** What you're feeling matters, and you don't have to go through this alone.
+
+**Please reach out right now** — tap the **Help Now** button at the top of the page for free, confidential support in your country. A few you can call or text any time:
+
+- 🇺🇸 US — call or text **988** (Suicide & Crisis Lifeline)
+- 🇬🇧 UK — call **116 123** (Samaritans, free)
+- 🇦🇺 Australia — call **13 11 14** (Lifeline)
+- 🌍 Anywhere else — visit [findahelpline.com](https://findahelpline.com)
+
+If you can, please also tell a trusted adult — a parent, teacher, school counselor, or family member — what you're feeling. They want to help.
+
+---
+
+`;
+
 async function getFeedbackContext(): Promise<string> {
   try {
     const supabaseUrl = Deno.env.get("SUPABASE_URL");
@@ -255,13 +321,36 @@ serve(async (req) => {
     const latestUser = Array.isArray(messages)
       ? [...messages].reverse().find((m: { role?: string; content?: string }) => m?.role === "user")
       : null;
-    const safetyCheck = checkContentSafety(latestUser?.content ?? "");
+    const latestUserContent = latestUser?.content ?? "";
+
+    const safetyCheck = checkContentSafety(latestUserContent);
     if (!safetyCheck.safe) {
       const refusal = safeRefusalMessage(safetyCheck.reason);
       return new Response(buildRefusalSSE(refusal), {
         headers: { ...corsHeaders, "Content-Type": "text/event-stream" },
       });
     }
+
+    // PII scrub: remove emails, phones, addresses, school names BEFORE sending to the AI.
+    // The AI then naturally addresses the safety concern in its reply.
+    const { scrubbed: scrubbedContent, found: piiFound } = detectAndScrubPII(latestUserContent);
+    const piiNotice = piiFound.length > 0
+      ? `\n\n[Safety note for assistant: the user shared ${piiFound.join(" and ")}. It has been removed for their safety. Gently remind them that they don't need to share personal info like real names, addresses, phone numbers, emails, or school names with you, and that this keeps them safe online. Then continue helping with their original question.]`
+      : "";
+
+    // Build the messages array sent to the AI with the scrubbed latest message.
+    const safeMessages = piiFound.length > 0 && Array.isArray(messages)
+      ? messages.map((m: { role?: string; content?: string }, idx: number, arr: any[]) => {
+          // Only replace the LAST user message (the one we scrubbed)
+          if (m === latestUser && idx === arr.lastIndexOf(latestUser)) {
+            return { ...m, content: scrubbedContent + piiNotice };
+          }
+          return m;
+        })
+      : messages;
+
+    // Crisis detection — flag self-harm / suicide language for force-prepended Help Now banner.
+    const isCrisis = isCrisisMessage(latestUserContent);
 
     const feedbackContext = await getFeedbackContext();
     const systemPrompt = BASE_SYSTEM_PROMPT + feedbackContext;
@@ -278,7 +367,7 @@ serve(async (req) => {
           model: "google/gemini-3-flash-preview",
           messages: [
             { role: "system", content: systemPrompt },
-            ...messages,
+            ...safeMessages,
           ],
           stream: true,
         }),
@@ -304,6 +393,36 @@ serve(async (req) => {
         JSON.stringify({ error: "Something went wrong. Please try again." }),
         { status: 500, headers: { ...corsHeaders, "Content-Type": "application/json" } }
       );
+    }
+
+    // If crisis: prepend the Help Now banner to the streamed response so it appears FIRST,
+    // then continue streaming the AI's reply afterwards.
+    if (isCrisis && response.body) {
+      const encoder = new TextEncoder();
+      const upstream = response.body;
+      const combined = new ReadableStream({
+        async start(controller) {
+          // Stream the crisis banner as SSE chunks first
+          const chunkSize = 8;
+          for (let i = 0; i < CRISIS_BANNER.length; i += chunkSize) {
+            const piece = CRISIS_BANNER.slice(i, i + chunkSize);
+            const payload = JSON.stringify({ choices: [{ delta: { content: piece } }] });
+            controller.enqueue(encoder.encode(`data: ${payload}\n\n`));
+            await new Promise((r) => setTimeout(r, 8));
+          }
+          // Then pipe the upstream AI response through unchanged
+          const reader = upstream.getReader();
+          while (true) {
+            const { done, value } = await reader.read();
+            if (done) break;
+            controller.enqueue(value);
+          }
+          controller.close();
+        },
+      });
+      return new Response(combined, {
+        headers: { ...corsHeaders, "Content-Type": "text/event-stream" },
+      });
     }
 
     return new Response(response.body, {
