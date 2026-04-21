@@ -193,6 +193,9 @@ export default function Contact() {
                           rows={5}
                           required
                         />
+                        <p className="text-xs text-muted-foreground">
+                          Please don't include passwords, financial details, or other sensitive personal information.
+                        </p>
                       </div>
 
                       <div className="flex items-start space-x-2">
