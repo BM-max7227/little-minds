@@ -43,6 +43,7 @@ export default function Terms() {
             <li>Reproduce, distribute, or modify the website content without permission</li>
             <li>Use automated tools to scrape or extract content from this website</li>
             <li>Submit false, misleading, or harmful information through any forms on this site</li>
+            <li>Enter passwords, financial information, government identifiers, or other sensitive credentials into any input field on this website (including the AI chat, journal, contact form, or donation form). Little Minds will never ask for this information.</li>
           </ul>
 
           <h2>AI Chat Assistant</h2>
