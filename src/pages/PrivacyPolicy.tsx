@@ -136,9 +136,9 @@ export default function PrivacyPolicy() {
           <h2>Hosting and Third-Party Services</h2>
           <p>
             This website uses third-party hosting and backend services to operate (such as serving
-            web pages and processing form submissions). These services do not collect personally
-            identifiable information (PII) from any users, including children. No analytics,
-            advertising, or tracking services are used.
+            web pages and processing form submissions). These services may process data as needed to
+            run the website, but they are not used by us to collect or track personally identifiable
+            information, and we do not use them for analytics, advertising, or tracking.
           </p>
 
           <h2>Cookies</h2>
@@ -159,15 +159,17 @@ export default function PrivacyPolicy() {
           <p>
             Because we collect minimal data, our security risk is inherently low. Communication
             between your browser and our backend functions is encrypted via HTTPS. Locally stored
-            data is protected by your device and browser's own security.
+            data is protected by your device and browser's own security. While we take reasonable
+            steps to protect information, no method of transmission or storage is completely secure,
+            and we cannot guarantee absolute security.
           </p>
 
           <h2>Your Rights</h2>
           <p>
             Since we do not collect or store personal data, there is generally no personal
-            information for us to delete, correct, or provide. If you submitted a contact form
-            inquiry and wish to have it addressed, please reach out through our{" "}
-            <a href="/contact">contact page</a>.
+            information for us to delete, correct, or provide. If you have questions about any
+            information you submitted through our forms, you may contact us through our{" "}
+            <a href="/contact">contact page</a> and we will do our best to assist.
           </p>
 
           <h2>Changes to This Policy</h2>
