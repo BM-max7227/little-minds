@@ -1,0 +1,24 @@
+{
+  "name": "Little Minds — Kids Mental Health & Wellbeing",
+  "short_name": "Little Minds",
+  "description": "Little Minds helps kids, parents, and everyone learn about mental health and wellbeing through fun activities, guides, and resources.",
+  "start_url": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#FBF8F3",
+  "theme_color": "#7BA8C4",
+  "icons": [
+    {
+      "src": "/favicon-source.png?v=15",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/favicon-source.png?v=15",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
