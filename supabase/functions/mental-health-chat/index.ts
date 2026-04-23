@@ -314,7 +314,7 @@ serve(async (req) => {
   }
 
   try {
-    const { messages } = await req.json();
+    const { messages, audience } = await req.json();
     const LOVABLE_API_KEY = Deno.env.get("LOVABLE_API_KEY");
     if (!LOVABLE_API_KEY) throw new Error("LOVABLE_API_KEY is not configured");
 
@@ -355,7 +355,21 @@ serve(async (req) => {
     const isCrisis = isCrisisMessage(latestUserContent);
 
     const feedbackContext = await getFeedbackContext();
-    const systemPrompt = BASE_SYSTEM_PROMPT + feedbackContext;
+
+    // Build a tone hint from the user's current section of the site so the
+    // assistant always knows whether it is talking to a child or an adult.
+    let audienceHint = "";
+    if (audience === "kid") {
+      audienceHint = `\n\nCURRENT AUDIENCE — KID/TEEN:\nThe user is currently in the Kids section of the site, so assume you are talking to a child or teenager unless they clearly say otherwise (e.g. "I'm their parent"). Use simple, warm, friendly language. Short sentences. Gentle encouragement. Avoid clinical jargon. Never suggest adult-only resources. Always remind them they can talk to a trusted adult, and mention the Help Now button for anything serious.`;
+    } else if (audience === "parent") {
+      audienceHint = `\n\nCURRENT AUDIENCE — PARENT/CAREGIVER:\nThe user is currently in the Parent section, so assume you are talking to an adult parent or caregiver unless they clearly say otherwise. Be practical, reassuring, and respectful of their role. You can use slightly more clinical language where helpful, but stay warm.`;
+    } else if (audience === "learn") {
+      audienceHint = `\n\nCURRENT AUDIENCE — LEARN SECTION:\nThe user is reading the educational "Learn More" section, likely an older teen, parent, or curious adult. Be informative and clear, but still warm. Avoid overly childish phrasing unless they identify as a kid.`;
+    } else {
+      audienceHint = `\n\nCURRENT AUDIENCE — UNKNOWN:\nYou don't know yet whether you're talking to a kid, teen, or adult. Default to gentle, age-neutral language that works for anyone aged ~8 and up. If their message clearly signals they are a child (e.g. "my mum", "at school", simple wording) or an adult (e.g. "my child", "my student"), adapt your tone accordingly.`;
+    }
+
+    const systemPrompt = BASE_SYSTEM_PROMPT + audienceHint + feedbackContext;
 
     const response = await fetch(
       "https://ai.gateway.lovable.dev/v1/chat/completions",
