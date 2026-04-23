@@ -53,17 +53,19 @@ const emotionalWords = [
   { word: "Helpless", definition: "Feeling like there's nothing you can do to change a hard situation.", example: "Like watching a friend go through something tough and not knowing how to help." },
 ];
 
-function getWeekOfYear() {
+function getDayOfYear() {
   const now = new Date();
-  const start = new Date(now.getFullYear(), 0, 1);
-  const diff = now.getTime() - start.getTime();
-  return Math.ceil(diff / (7 * 24 * 60 * 60 * 1000));
+  const start = new Date(now.getFullYear(), 0, 0);
+  return Math.floor((now.getTime() - start.getTime()) / (1000 * 60 * 60 * 24));
 }
 
-export function getWordOfTheWeek() {
-  const week = getWeekOfYear();
-  return emotionalWords[week % emotionalWords.length];
+export function getWordOfTheDay() {
+  const day = getDayOfYear();
+  return emotionalWords[day % emotionalWords.length];
 }
+
+// Backwards-compatible alias (now returns word of the day)
+export const getWordOfTheWeek = getWordOfTheDay;
 
 export function getDidYouKnow() {
   const facts = [
