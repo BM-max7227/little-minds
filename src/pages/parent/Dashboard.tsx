@@ -47,7 +47,7 @@ const topicIcons: Record<string, string> = {
 };
 
 export default function Dashboard() {
-  const week = getWeekOfYear();
+  const week = getWeekIndex();
 
   // Rotate weekly content
   const tipOfWeek = weeklyTips[week % weeklyTips.length];
