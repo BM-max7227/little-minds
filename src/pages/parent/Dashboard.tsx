@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import { TrendingUp, MessageCircle, Lightbulb, Calendar, ArrowRight, BookOpen } from "lucide-react";
 import { learnTopics } from "@/data/learnTopics";
 import { conversationStarters } from "@/data/parentContent";
+import { useDailyValue } from "@/hooks/useDailyValue";
 
 // Rotate content weekly, anchored to Monday.
 // Returns the number of whole weeks since a fixed Monday epoch,
@@ -47,7 +48,8 @@ const topicIcons: Record<string, string> = {
 };
 
 export default function Dashboard() {
-  const week = getWeekIndex();
+  // Re-evaluates whenever the local day changes (covers the Monday rollover too)
+  const week = useDailyValue(getWeekIndex);
 
   // Rotate weekly content
   const tipOfWeek = weeklyTips[week % weeklyTips.length];

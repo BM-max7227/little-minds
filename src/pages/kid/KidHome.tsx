@@ -4,6 +4,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { getWordOfTheDay, getDidYouKnow } from "@/data/kidEngagement";
+import { useDailyValue } from "@/hooks/useDailyValue";
 import { BookOpen, Lightbulb, ChevronDown, Sparkles, Wind } from "lucide-react";
 import { SuggestIdeasBanner } from "@/components/SuggestIdeasBanner";
 
@@ -22,8 +23,8 @@ const topicCards = [
 ];
 
 export default function KidHome() {
-  const wordOfDay = getWordOfTheDay();
-  const funFact = getDidYouKnow();
+  const wordOfDay = useDailyValue(getWordOfTheDay);
+  const funFact = useDailyValue(getDidYouKnow);
 
   return (
     <div className="min-h-screen flex flex-col">
