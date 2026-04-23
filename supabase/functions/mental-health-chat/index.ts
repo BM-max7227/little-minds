@@ -358,15 +358,21 @@ serve(async (req) => {
 
     // Build a tone hint from the user's current section of the site so the
     // assistant always knows whether it is talking to a child or an adult.
+    // CRITICAL: this is a SILENT tone signal. The assistant must NEVER tell the
+    // user it knows which section they are in or that it can "see" where they
+    // are on the site — that sounds like surveillance and breaks our privacy
+    // promise. Just use the right tone; never narrate it.
+    const SILENT_RULE = `\n\nIMPORTANT — SILENT CONTEXT RULE:\nThe information below about the user's current section of the site is for YOUR tone calibration only. NEVER mention it to the user. Do NOT say things like "I can see you're in the Kids section", "since you're exploring...", "I notice you're on the parent page", or anything that implies you can see where they are on the website. Just adopt the right tone naturally and answer their actual question. If they have not asked anything yet, give a short warm greeting appropriate to that audience — do not announce that you know who they are.`;
+
     let audienceHint = "";
     if (audience === "kid") {
-      audienceHint = `\n\nCURRENT AUDIENCE — KID/TEEN:\nThe user is currently in the Kids section of the site, so assume you are talking to a child or teenager unless they clearly say otherwise (e.g. "I'm their parent"). Use simple, warm, friendly language. Short sentences. Gentle encouragement. Avoid clinical jargon. Never suggest adult-only resources. Always remind them they can talk to a trusted adult, and mention the Help Now button for anything serious.`;
+      audienceHint = `${SILENT_RULE}\n\nCURRENT AUDIENCE (silent) — KID/TEEN:\nAssume you are talking to a child or teenager unless they clearly say otherwise (e.g. "I'm their parent"). Use simple, warm, friendly language. Short sentences. Gentle encouragement. Avoid clinical jargon. Never suggest adult-only resources. Always remind them they can talk to a trusted adult, and mention the Help Now button for anything serious.`;
     } else if (audience === "parent") {
-      audienceHint = `\n\nCURRENT AUDIENCE — PARENT/CAREGIVER:\nThe user is currently in the Parent section, so assume you are talking to an adult parent or caregiver unless they clearly say otherwise. Be practical, reassuring, and respectful of their role. You can use slightly more clinical language where helpful, but stay warm.`;
+      audienceHint = `${SILENT_RULE}\n\nCURRENT AUDIENCE (silent) — PARENT/CAREGIVER:\nAssume you are talking to an adult parent or caregiver unless they clearly say otherwise. Be practical, reassuring, and respectful of their role. You can use slightly more clinical language where helpful, but stay warm.`;
     } else if (audience === "learn") {
-      audienceHint = `\n\nCURRENT AUDIENCE — LEARN SECTION:\nThe user is reading the educational "Learn More" section, likely an older teen, parent, or curious adult. Be informative and clear, but still warm. Avoid overly childish phrasing unless they identify as a kid.`;
+      audienceHint = `${SILENT_RULE}\n\nCURRENT AUDIENCE (silent) — LEARN SECTION:\nThe user is likely an older teen, parent, or curious adult. Be informative and clear, but still warm. Avoid overly childish phrasing unless they identify as a kid.`;
     } else {
-      audienceHint = `\n\nCURRENT AUDIENCE — UNKNOWN:\nYou don't know yet whether you're talking to a kid, teen, or adult. Default to gentle, age-neutral language that works for anyone aged ~8 and up. If their message clearly signals they are a child (e.g. "my mum", "at school", simple wording) or an adult (e.g. "my child", "my student"), adapt your tone accordingly.`;
+      audienceHint = `${SILENT_RULE}\n\nCURRENT AUDIENCE (silent) — UNKNOWN:\nYou don't know yet whether you're talking to a kid, teen, or adult. Default to gentle, age-neutral language that works for anyone aged ~8 and up. If their message clearly signals they are a child (e.g. "my mum", "at school", simple wording) or an adult (e.g. "my child", "my student"), adapt your tone accordingly.`;
     }
 
     const systemPrompt = BASE_SYSTEM_PROMPT + audienceHint + feedbackContext;
