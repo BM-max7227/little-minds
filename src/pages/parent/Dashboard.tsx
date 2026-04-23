@@ -7,12 +7,17 @@ import { TrendingUp, MessageCircle, Lightbulb, Calendar, ArrowRight, BookOpen } 
 import { learnTopics } from "@/data/learnTopics";
 import { conversationStarters } from "@/data/parentContent";
 
-// Rotate content by week of the year
-function getWeekOfYear() {
+// Rotate content weekly, anchored to Monday.
+// Returns the number of whole weeks since a fixed Monday epoch,
+// so the value only changes at 00:00 each Monday (local time).
+function getWeekIndex() {
+  // Fixed Monday reference: 2024-01-01 was a Monday.
+  const epoch = new Date(2024, 0, 1).getTime();
   const now = new Date();
-  const start = new Date(now.getFullYear(), 0, 1);
-  const diff = now.getTime() - start.getTime();
-  return Math.ceil(diff / (7 * 24 * 60 * 60 * 1000));
+  // Snap "now" to start of today (local) to avoid mid-day rollovers.
+  const today = new Date(now.getFullYear(), now.getMonth(), now.getDate()).getTime();
+  const daysSinceEpoch = Math.floor((today - epoch) / (24 * 60 * 60 * 1000));
+  return Math.floor(daysSinceEpoch / 7);
 }
 
 const weeklyTips = [
