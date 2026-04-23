@@ -262,7 +262,7 @@ export function AIChatWidget() {
                 Authorization: `Bearer ${import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY}`,
                 apikey: import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY,
               },
-              body: JSON.stringify({ messages: allMessages }),
+              body: JSON.stringify({ messages: allMessages, audience: detectAudience() }),
             },
             REQUEST_TIMEOUT_MS,
           );
