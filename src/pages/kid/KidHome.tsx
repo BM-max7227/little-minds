@@ -3,7 +3,7 @@ import { SiteFooter } from "@/components/SiteFooter";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { getWordOfTheWeek, getDidYouKnow } from "@/data/kidEngagement";
+import { getWordOfTheDay, getDidYouKnow } from "@/data/kidEngagement";
 import { BookOpen, Lightbulb, ChevronDown, Sparkles, Wind } from "lucide-react";
 import { SuggestIdeasBanner } from "@/components/SuggestIdeasBanner";
 
@@ -22,7 +22,7 @@ const topicCards = [
 ];
 
 export default function KidHome() {
-  const wordOfWeek = getWordOfTheWeek();
+  const wordOfDay = getWordOfTheDay();
   const funFact = getDidYouKnow();
 
   return (
@@ -67,13 +67,13 @@ export default function KidHome() {
               <CardHeader className="pb-2">
                 <CardTitle className="text-sm font-medium flex items-center gap-2 text-primary">
                   <BookOpen className="h-4 w-4" />
-                  Word of the Week
+                  Word of the Day
                 </CardTitle>
               </CardHeader>
               <CardContent>
-                <p className="text-2xl font-bold mb-1">{wordOfWeek.word}</p>
-                <p className="text-sm text-muted-foreground mb-2">{wordOfWeek.definition}</p>
-                <p className="text-xs italic text-muted-foreground/80">💡 {wordOfWeek.example}</p>
+                <p className="text-2xl font-bold mb-1">{wordOfDay.word}</p>
+                <p className="text-sm text-muted-foreground mb-2">{wordOfDay.definition}</p>
+                <p className="text-xs italic text-muted-foreground/80">💡 {wordOfDay.example}</p>
               </CardContent>
             </Card>
             <Card className="border-secondary/20 bg-secondary/5">
