@@ -53,15 +53,19 @@ const emotionalWords = [
   { word: "Helpless", definition: "Feeling like there's nothing you can do to change a hard situation.", example: "Like watching a friend go through something tough and not knowing how to help." },
 ];
 
-function getDayOfYear() {
+// Days since a fixed epoch (2024-01-01 local). Increments at local midnight,
+// so the value truly changes once per calendar day and doesn't reset each year.
+function getDayIndex() {
+  const epoch = new Date(2024, 0, 1).getTime();
   const now = new Date();
-  const start = new Date(now.getFullYear(), 0, 0);
-  return Math.floor((now.getTime() - start.getTime()) / (1000 * 60 * 60 * 24));
+  const today = new Date(now.getFullYear(), now.getMonth(), now.getDate()).getTime();
+  return Math.floor((today - epoch) / (1000 * 60 * 60 * 24));
 }
 
 export function getWordOfTheDay() {
-  const day = getDayOfYear();
-  return emotionalWords[day % emotionalWords.length];
+  const day = getDayIndex();
+  // Offset prime so word + fact don't move together in lockstep
+  return emotionalWords[((day % emotionalWords.length) + emotionalWords.length) % emotionalWords.length];
 }
 
 // Backwards-compatible alias (now returns word of the day)
