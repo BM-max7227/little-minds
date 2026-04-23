@@ -12,6 +12,17 @@ const CHAT_URLS = [
   "/functions/v1/mental-health-chat",
 ];
 
+// Detect which section of the site the user is currently in, so the AI can
+// tailor its tone (kid-friendly vs. parent/adult).
+function detectAudience(): "kid" | "parent" | "learn" | "general" {
+  if (typeof window === "undefined") return "general";
+  const path = window.location.pathname.toLowerCase();
+  if (path.startsWith("/kid")) return "kid";
+  if (path.startsWith("/parent")) return "parent";
+  if (path.startsWith("/learn")) return "learn";
+  return "general";
+}
+
 export function AIChatWidget() {
   const [open, setOpen] = useState(false);
   const [fullscreen, setFullscreen] = useState(false);
