@@ -57,12 +57,12 @@ export const AccessibilityControls = () => {
   return (
     <Sheet>
       <SheetTrigger asChild>
-        <Button variant="ghost" size="sm" aria-label="Accessibility settings">
-          <Settings className="w-5 h-5" />
+        <Button variant="ghost" size="sm" aria-label="Accessibility settings" className="h-11 w-11 sm:h-9 sm:w-9 p-0">
+          <Settings className="w-6 h-6 sm:w-5 sm:h-5" />
         </Button>
       </SheetTrigger>
-      <SheetContent>
-        <SheetHeader>
+      <SheetContent className="w-full sm:max-w-md overflow-y-auto">
+        <SheetHeader className="pr-10">
           <SheetTitle>Accessibility Settings</SheetTitle>
         </SheetHeader>
         <div className="space-y-6 mt-6">
