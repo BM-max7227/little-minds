@@ -159,9 +159,10 @@ export function GlobalSearch() {
         variant="outline"
         size="sm"
         onClick={() => setOpen(true)}
-        className="relative h-9 w-9 p-0 xl:h-9 xl:w-60 xl:justify-start xl:px-3 xl:py-2"
+        aria-label="Search"
+        className="relative h-11 w-11 sm:h-9 sm:w-9 p-0 xl:h-9 xl:w-60 xl:justify-start xl:px-3 xl:py-2"
       >
-        <Search className="h-4 w-4 xl:mr-2" />
+        <Search className="h-5 w-5 sm:h-4 sm:w-4 xl:mr-2" />
         <span className="hidden xl:inline-flex">Search...</span>
       </Button>
 

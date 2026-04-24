@@ -95,10 +95,10 @@ export function Header({ audience }: HeaderProps) {
             variant="outline"
             size="sm"
             asChild
-            className="text-primary border-primary hover:bg-primary hover:text-primary-foreground h-9 w-9 p-0 sm:w-auto sm:px-3"
+            className="text-primary border-primary hover:bg-primary hover:text-primary-foreground h-11 w-11 sm:h-9 sm:w-9 p-0 sm:w-auto sm:px-3"
           >
-            <Link to="/donate">
-              <Heart className="h-4 w-4 sm:mr-2" />
+            <Link to="/donate" aria-label="Donate">
+              <Heart className="h-5 w-5 sm:h-4 sm:w-4 sm:mr-2" />
               <span className="hidden sm:inline">Donate</span>
             </Link>
           </Button>
@@ -106,8 +106,8 @@ export function Header({ audience }: HeaderProps) {
           {/* Help Now */}
           <Sheet>
             <SheetTrigger asChild>
-              <Button variant="destructive" size="sm" className="h-9 w-9 p-0 sm:w-auto sm:px-3">
-                <AlertCircle className="h-4 w-4 sm:mr-2" />
+              <Button variant="destructive" size="sm" className="h-11 w-11 sm:h-9 sm:w-9 p-0 sm:w-auto sm:px-3" aria-label="Help Now">
+                <AlertCircle className="h-5 w-5 sm:h-4 sm:w-4 sm:mr-2" />
                 <span className="hidden sm:inline">Help Now</span>
               </Button>
             </SheetTrigger>
@@ -120,8 +120,8 @@ export function Header({ audience }: HeaderProps) {
           {navLinks.length > 0 && (
             <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
               <SheetTrigger asChild>
-                <Button variant="ghost" size="sm" className="lg:hidden h-9 w-9 p-0">
-                  <Menu className="h-5 w-5" />
+                <Button variant="ghost" size="sm" className="lg:hidden h-11 w-11 sm:h-9 sm:w-9 p-0" aria-label="Open menu">
+                  <Menu className="h-6 w-6 sm:h-5 sm:w-5" />
                   <span className="sr-only">Menu</span>
                 </Button>
               </SheetTrigger>
