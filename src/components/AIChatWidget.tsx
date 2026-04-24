@@ -26,6 +26,7 @@ function detectAudience(): "kid" | "parent" | "learn" | "general" {
 export function AIChatWidget() {
   const [open, setOpen] = useState(false);
   const [fullscreen, setFullscreen] = useState(false);
+  const [showSafetyDetails, setShowSafetyDetails] = useState(false);
   const [messages, setMessages] = useState<Msg[]>([]);
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -420,7 +421,10 @@ export function AIChatWidget() {
       {/* Floating button */}
       {!open && (
         <button
-          onClick={() => setOpen(true)}
+          onClick={() => {
+            setShowSafetyDetails(false);
+            setOpen(true);
+          }}
           className="fixed bottom-5 right-5 sm:bottom-6 sm:right-6 z-50 flex items-center justify-center rounded-full bg-primary h-16 w-16 sm:h-14 sm:w-14 text-primary-foreground shadow-lg hover:bg-primary/90 transition-all hover:scale-105"
           aria-label="Open chat assistant"
         >
@@ -454,22 +458,40 @@ export function AIChatWidget() {
             </div>
           </div>
 
-          {/* Trust banner */}
-          <div className="flex items-center gap-2 bg-accent/50 px-4 py-2 border-b">
-            <ShieldCheck className="h-4 w-4 text-primary flex-shrink-0" />
-            <p className="text-xs text-foreground/70">
-              Safe & trusted — designed to only discuss children's mental health & wellbeing topics
-            </p>
+          {/* Safety banner */}
+          <div className="border-b bg-accent/40 px-4 py-2.5">
+            <div className="flex items-start gap-2">
+              <ShieldCheck className="mt-0.5 h-4 w-4 text-primary flex-shrink-0" />
+              <div className="min-w-0 flex-1">
+                <p className="text-xs leading-4 text-foreground/80">
+                  AI helper — not a doctor. Chats aren&apos;t saved. Don&apos;t share personal info.
+                </p>
+                <button
+                  type="button"
+                  onClick={() => setShowSafetyDetails((prev) => !prev)}
+                  className="mt-1 text-[11px] font-medium text-primary hover:underline"
+                >
+                  {showSafetyDetails ? "Hide details" : "What counts as personal info?"}
+                </button>
+              </div>
+            </div>
+            {showSafetyDetails && (
+              <p className="pt-2 text-[11px] leading-4 text-muted-foreground">
+                Don&apos;t share passwords, your full name, address, phone number, or school name. Always check important information with a trusted adult or professional.
+              </p>
+            )}
           </div>
 
           {/* Messages */}
           <div ref={scrollRef} className="flex-1 overflow-y-auto px-4 py-3 space-y-3">
             {messages.length === 0 && (
-              <div className="text-center text-muted-foreground text-sm py-6 space-y-3">
+              <div className="py-6 text-center text-sm text-muted-foreground space-y-4">
                 <Bot className="h-10 w-10 mx-auto text-primary/60" />
-                <p className="font-medium">Hi there! 👋</p>
+                <p className="font-medium text-foreground">Hi there! 👋</p>
                 <p>I'm here to help with anything about feelings, wellbeing, or mental health.</p>
-                <div className="flex flex-wrap gap-2 justify-center pt-1">
+                <div className="space-y-2">
+                  <p className="text-xs uppercase tracking-wide text-muted-foreground/80">Try asking</p>
+                  <div className="flex flex-wrap gap-2 justify-center">
                   {["How can I manage anxiety?", "Tips for parents", "What is mindfulness?"].map((q) => (
                     <button
                       key={q}
@@ -480,8 +502,6 @@ export function AIChatWidget() {
                     </button>
                   ))}
                 </div>
-                <div className="bg-muted/60 rounded-lg px-3 py-2 text-xs text-muted-foreground mx-2 mt-3">
-                  <p>🤖 I'm an AI assistant, not a real person or doctor. I don't save our chats. Please don't share personal secrets like passwords, your full name, address, phone number, or school name.</p>
                 </div>
               </div>
             )}
