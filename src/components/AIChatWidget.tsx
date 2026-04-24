@@ -458,51 +458,39 @@ export function AIChatWidget() {
             </div>
           </div>
 
-          {/* Safety banner */}
-          <div className="border-b bg-accent/40 px-4 py-2.5">
-            <div className="flex items-start gap-2">
-              <ShieldCheck className="mt-0.5 h-4 w-4 text-primary flex-shrink-0" />
-              <div className="min-w-0 flex-1">
-                <p className="text-xs leading-4 text-foreground/80">
-                  AI helper — not a doctor. Chats aren&apos;t saved. Don&apos;t share personal info.
-                </p>
-                <button
-                  type="button"
-                  onClick={() => setShowSafetyDetails((prev) => !prev)}
-                  className="mt-1 text-[11px] font-medium text-primary hover:underline"
-                >
-                  {showSafetyDetails ? "Hide details" : "What counts as personal info?"}
-                </button>
-              </div>
-            </div>
-            {showSafetyDetails && (
-              <p className="pt-2 text-[11px] leading-4 text-muted-foreground">
-                Don&apos;t share passwords, your full name, address, phone number, or school name. Always check important information with a trusted adult or professional.
-              </p>
-            )}
-          </div>
-
           {/* Messages */}
           <div ref={scrollRef} className="flex-1 overflow-y-auto px-4 py-3 space-y-3">
             {messages.length === 0 && (
-              <div className="py-6 text-center text-sm text-muted-foreground space-y-4">
-                <Bot className="h-10 w-10 mx-auto text-primary/60" />
-                <p className="font-medium text-foreground">Hi there! 👋</p>
-                <p>I'm here to help with anything about feelings, wellbeing, or mental health.</p>
-                <div className="space-y-2">
-                  <p className="text-xs uppercase tracking-wide text-muted-foreground/80">Try asking</p>
-                  <div className="flex flex-wrap gap-2 justify-center">
+              <div className="pt-3 pb-2 text-center text-sm text-muted-foreground space-y-3">
+                <div className="flex items-center justify-center gap-2">
+                  <Bot className="h-6 w-6 text-primary" />
+                  <p className="font-medium text-foreground">Hi there! 👋</p>
+                </div>
+                <p className="text-xs">Ask me anything about feelings, wellbeing, or mental health.</p>
+                <div className="flex flex-wrap gap-2 justify-center pt-1">
                   {["How can I manage anxiety?", "Tips for parents", "What is mindfulness?"].map((q) => (
                     <button
                       key={q}
                       onClick={() => { setInput(q); }}
-                      className="text-xs border rounded-full px-3 py-1 hover:bg-accent transition"
+                      className="text-xs border rounded-full px-3 py-1.5 hover:bg-accent transition"
                     >
                       {q}
                     </button>
                   ))}
                 </div>
-                </div>
+                <button
+                  type="button"
+                  onClick={() => setShowSafetyDetails((prev) => !prev)}
+                  className="inline-flex items-center gap-1 text-[11px] text-muted-foreground hover:text-foreground transition pt-2"
+                >
+                  <ShieldCheck className="h-3 w-3" />
+                  {showSafetyDetails ? "Hide safety info" : "Safety & privacy"}
+                </button>
+                {showSafetyDetails && (
+                  <p className="text-[11px] leading-4 text-muted-foreground px-2 max-w-xs mx-auto">
+                    AI helper — not a doctor or crisis support. Chats aren&apos;t saved. Don&apos;t share passwords, your full name, address, phone, or school. Always check important info with a trusted adult.
+                  </p>
+                )}
               </div>
             )}
 
