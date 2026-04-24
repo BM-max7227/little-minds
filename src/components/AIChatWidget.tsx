@@ -26,7 +26,6 @@ function detectAudience(): "kid" | "parent" | "learn" | "general" {
 export function AIChatWidget() {
   const [open, setOpen] = useState(false);
   const [fullscreen, setFullscreen] = useState(false);
-  const [showSafetyDetails, setShowSafetyDetails] = useState(false);
   const [messages, setMessages] = useState<Msg[]>([]);
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -421,10 +420,7 @@ export function AIChatWidget() {
       {/* Floating button */}
       {!open && (
         <button
-          onClick={() => {
-            setShowSafetyDetails(false);
-            setOpen(true);
-          }}
+          onClick={() => setOpen(true)}
           className="fixed bottom-5 right-5 sm:bottom-6 sm:right-6 z-50 flex items-center justify-center rounded-full bg-primary h-16 w-16 sm:h-14 sm:w-14 text-primary-foreground shadow-lg hover:bg-primary/90 transition-all hover:scale-105"
           aria-label="Open chat assistant"
         >
