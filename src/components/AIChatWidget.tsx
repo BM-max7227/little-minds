@@ -628,8 +628,8 @@ export function AIChatWidget() {
                 </Button>
               </div>
             )}
-            <p className={`text-muted-foreground text-center pb-2 px-3 ${fullscreen ? 'text-xs' : 'text-[10px]'}`}>
-              AI assistant — not therapy, counseling, or crisis support. Chats aren't saved. Don't share personal info (name, address, phone, school, passwords). Always check important info with a trusted adult or professional.
+            <p className="text-[10px] text-muted-foreground text-center pb-2 px-3">
+              AI helper — not a doctor. Don&apos;t share personal info.
             </p>
           </div>
         </div>
