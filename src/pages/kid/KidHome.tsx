@@ -23,8 +23,8 @@ const topicCards = [
 ];
 
 export default function KidHome() {
-  const wordOfDay = useDailyValue(getWordOfTheDay);
-  const funFact = useDailyValue(getDidYouKnow);
+  const wordOfDay = useDailyValue(getWordOfTheDay, "kid:wordOfDay");
+  const funFact = useDailyValue(getDidYouKnow, "kid:didYouKnow");
 
   return (
     <div className="min-h-screen flex flex-col">
