@@ -15,4 +15,20 @@ export default defineConfig(({ mode }) => ({
       "@": path.resolve(__dirname, "./src"),
     },
   },
+  build: {
+    // Split heavy/seldom-changing libs into their own chunks so they cache
+    // independently of app code and don't block first paint.
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          "react-vendor": ["react", "react-dom", "react-router-dom"],
+          "supabase": ["@supabase/supabase-js"],
+          "markdown": ["react-markdown"],
+          "query": ["@tanstack/react-query"],
+        },
+      },
+    },
+    // Slightly higher warning limit since we intentionally chunk vendors.
+    chunkSizeWarningLimit: 800,
+  },
 }));
