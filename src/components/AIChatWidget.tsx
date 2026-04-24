@@ -457,19 +457,17 @@ export function AIChatWidget() {
           {/* Messages */}
           <div ref={scrollRef} className="flex-1 overflow-y-auto px-4 py-3 space-y-3">
             {messages.length === 0 && (
-              <div className="pt-3 pb-2 text-sm text-muted-foreground flex flex-col items-center text-center space-y-3">
+              <div className="pt-3 pb-2 text-sm text-muted-foreground flex flex-col items-center text-center">
                 <div className="h-10 w-10 rounded-full bg-primary/10 flex items-center justify-center">
                   <Bot className="h-5 w-5 text-primary" />
                 </div>
-                <div className="space-y-0.5">
-                  <p className="font-medium text-foreground">Hi there! 👋</p>
-                  <p className="text-xs text-muted-foreground">Ask me anything about wellbeing.</p>
-                </div>
-                <p className="inline-flex items-center gap-1 text-[10.5px] leading-tight text-muted-foreground/80">
+                <p className="mt-1.5 font-medium text-foreground">Hi there! 👋</p>
+                <p className="mt-0.5 text-xs text-muted-foreground">Ask me anything about wellbeing.</p>
+                <p className="mt-1 inline-flex items-center gap-1 text-[10.5px] leading-tight text-muted-foreground/80">
                   <ShieldCheck className="h-3 w-3 text-primary/70" />
                   Safe &amp; private — chats aren&apos;t saved.
                 </p>
-                <div className="flex flex-wrap gap-1.5 justify-center pt-1">
+                <div className="mt-3 flex flex-wrap gap-1.5 justify-center">
                   {["How can I manage anxiety?", "Tips for parents", "What is mindfulness?"].map((q) => (
                     <button
                       key={q}
