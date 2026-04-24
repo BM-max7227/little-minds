@@ -100,7 +100,7 @@ export default function FindSupport() {
               <CardHeader>
                 <CardTitle>Find Help in Your Area</CardTitle>
                 <CardDescription>
-                  Select your country to find therapists, mental health services, and helplines near you
+                  Select your country to see local emergency numbers and crisis helplines. Available resources vary by country and may include mental health support lines, child and family services, or directories to find a therapist.
                 </CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">
