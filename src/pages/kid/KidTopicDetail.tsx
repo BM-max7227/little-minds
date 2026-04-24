@@ -9,6 +9,17 @@ import { topics } from "@/data/kidTopics";
 import { topicConversationStarters } from "@/data/topicConversationStarters";
 import { useState, useEffect } from "react";
 import { ArrowLeft, Heart, MessageCircle } from "lucide-react";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
 export default function KidTopicDetail() {
   const {
     topicId
