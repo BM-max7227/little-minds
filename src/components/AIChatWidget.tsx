@@ -421,19 +421,19 @@ export function AIChatWidget() {
       {!open && (
         <button
           onClick={() => setOpen(true)}
-          className="fixed bottom-6 right-6 z-50 flex items-center justify-center rounded-full bg-primary h-14 w-14 text-primary-foreground shadow-lg hover:bg-primary/90 transition-all hover:scale-105"
+          className="fixed bottom-5 right-5 sm:bottom-6 sm:right-6 z-50 flex items-center justify-center rounded-full bg-primary h-16 w-16 sm:h-14 sm:w-14 text-primary-foreground shadow-lg hover:bg-primary/90 transition-all hover:scale-105"
           aria-label="Open chat assistant"
         >
-          <MessageCircle className="h-6 w-6" />
+          <MessageCircle className="h-7 w-7 sm:h-6 sm:w-6" />
         </button>
       )}
 
-      {/* Chat panel */}
+      {/* Chat panel — full-screen on mobile, floating panel on sm+ */}
       {open && (
-        <div className={`fixed z-50 flex flex-col rounded-2xl border bg-background shadow-2xl overflow-hidden transition-all ${
+        <div className={`fixed z-50 flex flex-col border bg-background shadow-2xl overflow-hidden transition-all ${
           fullscreen
-            ? "inset-2 w-auto h-auto max-w-none max-h-none"
-            : "bottom-4 right-4 w-[360px] max-w-[calc(100vw-2rem)] h-[520px] max-h-[calc(100vh-2rem)]"
+            ? "inset-2 w-auto h-auto max-w-none max-h-none rounded-2xl"
+            : "inset-0 w-full h-full rounded-none sm:rounded-2xl sm:inset-auto sm:bottom-4 sm:right-4 sm:w-[360px] sm:max-w-[calc(100vw-2rem)] sm:h-[520px] sm:max-h-[calc(100vh-2rem)]"
         }`}>
           {/* Header */}
           <div className="flex items-center justify-between bg-primary px-4 py-3 text-primary-foreground">
