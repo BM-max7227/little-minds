@@ -85,10 +85,8 @@ export function Header({ audience }: HeaderProps) {
         <div className="flex items-center gap-1.5 sm:gap-2">
           <GlobalSearch />
 
-          {/* Accessibility - hide on very small screens */}
-          <div className="hidden sm:block">
-            <AccessibilityControls />
-          </div>
+          {/* Accessibility settings */}
+          <AccessibilityControls />
 
           {/* Donate - icon only on mobile, full on sm+ */}
           <Button
