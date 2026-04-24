@@ -63,7 +63,7 @@ export function Header({ audience }: HeaderProps) {
       <div className="container flex h-16 items-center justify-between px-4">
         {/* Logo */}
         <Link to="/" className="flex-shrink-0">
-          <img src={logo} alt="Little Minds Logo" className="h-20 sm:h-32 w-auto" />
+          <img src={logo} alt="Little Minds Logo" className="h-28 sm:h-32 w-auto" />
         </Link>
 
         {/* Desktop nav */}
