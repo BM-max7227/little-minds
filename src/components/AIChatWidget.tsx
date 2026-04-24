@@ -615,8 +615,8 @@ export function AIChatWidget() {
                 </Button>
               </div>
             )}
-            <p className="text-[10px] leading-4 text-muted-foreground text-center pb-2 px-3">
-              Not a doctor or crisis line. Don&apos;t share personal info.
+            <p className="text-[11px] leading-snug text-muted-foreground text-center pb-2 px-4">
+              This is not therapy, counseling, or crisis intervention. Little Minds Helper can make mistakes. Always check important information with a trusted adult or professional.
             </p>
           </div>
         </div>
