@@ -461,36 +461,43 @@ export function AIChatWidget() {
           {/* Messages */}
           <div ref={scrollRef} className="flex-1 overflow-y-auto px-4 py-3 space-y-3">
             {messages.length === 0 && (
-              <div className="pt-3 pb-2 text-center text-sm text-muted-foreground space-y-3">
-                <div className="flex items-center justify-center gap-2">
-                  <Bot className="h-6 w-6 text-primary" />
-                  <p className="font-medium text-foreground">Hi there! 👋</p>
+              <div className="pt-2 pb-2 text-sm text-muted-foreground space-y-3">
+                <div className="text-center space-y-1">
+                  <div className="flex items-center justify-center gap-2">
+                    <Bot className="h-6 w-6 text-primary" />
+                    <p className="font-medium text-foreground">Hi there! 👋</p>
+                  </div>
+                  <p className="text-xs">Ask me anything about feelings, wellbeing, or mental health.</p>
                 </div>
-                <p className="text-xs">Ask me anything about feelings, wellbeing, or mental health.</p>
-                <div className="flex flex-wrap gap-2 justify-center pt-1">
-                  {["How can I manage anxiety?", "Tips for parents", "What is mindfulness?"].map((q) => (
-                    <button
-                      key={q}
-                      onClick={() => { setInput(q); }}
-                      className="text-xs border rounded-full px-3 py-1.5 hover:bg-accent transition"
-                    >
-                      {q}
-                    </button>
-                  ))}
+
+                {/* Trust + safety card — always visible */}
+                <div className="rounded-xl border bg-accent/30 p-3 space-y-2 text-left">
+                  <div className="flex items-center gap-1.5 text-foreground">
+                    <ShieldCheck className="h-3.5 w-3.5 text-primary flex-shrink-0" />
+                    <p className="text-xs font-medium">Safe &amp; private</p>
+                  </div>
+                  <ul className="text-[11px] leading-snug space-y-1 text-muted-foreground">
+                    <li>• Trained only on child &amp; family wellbeing topics — not a doctor or crisis line.</li>
+                    <li>• Chats aren&apos;t saved or shared with anyone.</li>
+                    <li>• Don&apos;t share personal info (full name, address, phone, school, passwords).</li>
+                    <li>• Always check important info with a trusted adult or professional.</li>
+                  </ul>
                 </div>
-                <button
-                  type="button"
-                  onClick={() => setShowSafetyDetails((prev) => !prev)}
-                  className="inline-flex items-center gap-1 text-[11px] text-muted-foreground hover:text-foreground transition pt-2"
-                >
-                  <ShieldCheck className="h-3 w-3" />
-                  {showSafetyDetails ? "Hide safety info" : "Safety & privacy"}
-                </button>
-                {showSafetyDetails && (
-                  <p className="text-[11px] leading-4 text-muted-foreground px-2 max-w-xs mx-auto">
-                    AI helper — not a doctor or crisis support. Chats aren&apos;t saved. Don&apos;t share passwords, your full name, address, phone, or school. Always check important info with a trusted adult.
-                  </p>
-                )}
+
+                <div className="space-y-1.5">
+                  <p className="text-[11px] uppercase tracking-wide text-muted-foreground/80 text-center">Try asking</p>
+                  <div className="flex flex-wrap gap-2 justify-center">
+                    {["How can I manage anxiety?", "Tips for parents", "What is mindfulness?"].map((q) => (
+                      <button
+                        key={q}
+                        onClick={() => { setInput(q); }}
+                        className="text-xs border rounded-full px-3 py-1.5 hover:bg-accent transition"
+                      >
+                        {q}
+                      </button>
+                    ))}
+                  </div>
+                </div>
               </div>
             )}
 
