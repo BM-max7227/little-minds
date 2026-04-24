@@ -445,11 +445,11 @@ export function AIChatWidget() {
               </div>
             </div>
             <div className="flex items-center gap-1">
-              <button onClick={() => setFullscreen(!fullscreen)} className="hover:bg-primary-foreground/20 rounded p-1 transition" aria-label={fullscreen ? "Exit fullscreen" : "Fullscreen"}>
+              <button onClick={() => setFullscreen(!fullscreen)} className="hidden sm:block hover:bg-primary-foreground/20 rounded p-2 transition" aria-label={fullscreen ? "Exit fullscreen" : "Fullscreen"}>
                 {fullscreen ? <Minimize2 className="h-4 w-4" /> : <Maximize2 className="h-4 w-4" />}
               </button>
-              <button onClick={() => { setOpen(false); setFullscreen(false); }} className="hover:bg-primary-foreground/20 rounded p-1 transition">
-                <X className="h-4 w-4" />
+              <button onClick={() => { setOpen(false); setFullscreen(false); }} className="hover:bg-primary-foreground/20 rounded p-2 transition" aria-label="Close chat">
+                <X className="h-5 w-5 sm:h-4 sm:w-4" />
               </button>
             </div>
           </div>
