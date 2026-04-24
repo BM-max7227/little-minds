@@ -621,7 +621,7 @@ export function AIChatWidget() {
               </div>
             )}
             <p className={`text-muted-foreground text-center pb-2 px-3 ${fullscreen ? 'text-xs' : 'text-[10px]'}`}>
-              This is not therapy, counseling, or crisis intervention. Little Minds Helper can make mistakes. Always check important information with a trusted adult or professional.
+              AI assistant — not therapy, counseling, or crisis support. Chats aren't saved. Don't share personal info (name, address, phone, school, passwords). Always check important info with a trusted adult or professional.
             </p>
           </div>
         </div>
