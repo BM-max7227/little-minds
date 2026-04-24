@@ -9,6 +9,17 @@ import { topics } from "@/data/kidTopics";
 import { topicConversationStarters } from "@/data/topicConversationStarters";
 import { useState, useEffect } from "react";
 import { ArrowLeft, Heart, MessageCircle } from "lucide-react";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
 export default function KidTopicDetail() {
   const {
     topicId
@@ -145,13 +156,27 @@ export default function KidTopicDetail() {
                   <p className="text-xs text-muted-foreground">
                     Auto-saved to your device only
                   </p>
-                  <Button variant="outline" size="sm" onClick={() => {
-                  if (confirm("Are you sure you want to clear this journal entry?")) {
-                    saveJournal("");
-                  }
-                }}>
-                    Clear Entry
-                  </Button>
+                  <AlertDialog>
+                    <AlertDialogTrigger asChild>
+                      <Button variant="outline" size="sm">
+                        Clear Entry
+                      </Button>
+                    </AlertDialogTrigger>
+                    <AlertDialogContent>
+                      <AlertDialogHeader>
+                        <AlertDialogTitle>Clear your journal entry?</AlertDialogTitle>
+                        <AlertDialogDescription>
+                          This will erase what you've written here. You can't undo this.
+                        </AlertDialogDescription>
+                      </AlertDialogHeader>
+                      <AlertDialogFooter>
+                        <AlertDialogCancel>Keep writing</AlertDialogCancel>
+                        <AlertDialogAction onClick={() => saveJournal("")}>
+                          Yes, clear it
+                        </AlertDialogAction>
+                      </AlertDialogFooter>
+                    </AlertDialogContent>
+                  </AlertDialog>
                 </div>
               </CardContent>
             </Card>
