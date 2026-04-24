@@ -169,26 +169,25 @@ export default function Dashboard() {
                 Quick Access
               </h2>
               <div className="grid sm:grid-cols-2 gap-3">
-                <Button variant="outline" className="justify-start h-auto py-3" asChild>
-                  <Link to="/parent/quick-guide">
-                    📋 Quick Guide — 4 key steps to support your child
+                {[
+                  { to: "/parent/quick-guide", icon: "📋", title: "Quick Guide", desc: "4 key steps to support your child" },
+                  { to: "/parent/find-support", icon: "🤝", title: "Find Support", desc: "Professional help & how to choose" },
+                  { to: "/parent/tools", icon: "🛠️", title: "Tools & Templates", desc: "Checklists & planning downloads" },
+                  { to: "/parent/conversation-starters", icon: "💬", title: "All Conversation Starters", desc: "Age-appropriate phrases" },
+                ].map((item) => (
+                  <Link
+                    key={item.to}
+                    to={item.to}
+                    className="group flex items-center gap-3 rounded-md border border-input bg-background hover:bg-accent hover:text-accent-foreground px-4 py-3 text-left transition-colors"
+                  >
+                    <span className="text-2xl shrink-0" aria-hidden="true">{item.icon}</span>
+                    <span className="flex-1 min-w-0">
+                      <span className="block font-semibold text-sm leading-tight">{item.title}</span>
+                      <span className="block text-xs text-muted-foreground mt-0.5 leading-snug">{item.desc}</span>
+                    </span>
+                    <ArrowRight className="h-4 w-4 shrink-0 text-muted-foreground group-hover:text-foreground transition-colors" />
                   </Link>
-                </Button>
-                <Button variant="outline" className="justify-start h-auto py-3" asChild>
-                  <Link to="/parent/find-support">
-                    🤝 Find Support — Professional help & how to choose
-                  </Link>
-                </Button>
-                <Button variant="outline" className="justify-start h-auto py-3" asChild>
-                  <Link to="/parent/tools">
-                    🛠️ Tools & Templates — Checklists & planning downloads
-                  </Link>
-                </Button>
-                <Button variant="outline" className="justify-start h-auto py-3" asChild>
-                  <Link to="/parent/conversation-starters">
-                    💬 All Conversation Starters — Age-appropriate phrases
-                  </Link>
-                </Button>
+                ))}
               </div>
             </section>
           </div>
