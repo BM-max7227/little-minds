@@ -470,8 +470,9 @@ export function AIChatWidget() {
                 <p className="font-medium">Hi there! 👋</p>
                 <p>I'm here to help with anything about feelings, wellbeing, or mental health. Ask me anything!</p>
                 <div className="bg-muted/60 rounded-lg px-3 py-2 text-xs text-muted-foreground mx-2">
-                  <p>🤖 AI assistant — not a real person. Don't share personal info.</p>
+                  <p>🤖 I'm an AI assistant, not a real person or doctor. I don't save our chats. Please don't share personal secrets like passwords, your full name, address, phone number, or school name.</p>
                 </div>
+                <p className="text-[11px] text-muted-foreground/70 italic">↓ Scroll down for suggested questions</p>
                 <div className="flex flex-wrap gap-2 justify-center pt-2">
                   {["How can I manage anxiety?", "Tips for parents", "What is mindfulness?"].map((q) => (
                     <button
