@@ -457,31 +457,27 @@ export function AIChatWidget() {
           {/* Messages */}
           <div ref={scrollRef} className="flex-1 overflow-y-auto px-4 py-3 space-y-3">
             {messages.length === 0 && (
-              <div className="pt-2 pb-2 text-sm text-muted-foreground space-y-3">
-                <div className="text-center space-y-1">
+              <div className="pt-2 pb-2 text-sm text-muted-foreground space-y-2.5">
+                <div className="rounded-xl border bg-accent/30 p-3 text-center space-y-2">
                   <div className="flex items-center justify-center gap-2">
-                    <Bot className="h-6 w-6 text-primary" />
+                    <Bot className="h-5 w-5 text-primary" />
                     <p className="font-medium text-foreground">Hi there! 👋</p>
                   </div>
-                  <p className="text-xs">Ask me anything about feelings, wellbeing, or mental health.</p>
-                </div>
-
-                {/* Trust + safety card — always visible */}
-                <div className="rounded-xl border bg-accent/30 p-3 space-y-2 text-left">
-                  <div className="flex items-center gap-1.5 text-foreground">
-                    <ShieldCheck className="h-3.5 w-3.5 text-primary flex-shrink-0" />
-                    <p className="text-xs font-medium">Safe &amp; private</p>
+                  <p className="text-xs text-foreground">Ask me anything about feelings, wellbeing, or mental health.</p>
+                  <div className="space-y-1 text-[11px] leading-snug text-muted-foreground">
+                    <div className="flex items-start justify-center gap-1.5 text-left">
+                      <ShieldCheck className="mt-0.5 h-3.5 w-3.5 text-primary flex-shrink-0" />
+                      <p className="max-w-[28ch]">Safe and trusted — trained only on child and family wellbeing topics.</p>
+                    </div>
+                    <p>Not a doctor or crisis line.</p>
+                    <p>Chats aren&apos;t saved.</p>
+                    <p>Don&apos;t share personal info like your full name, address, phone, school, or passwords.</p>
+                    <p>Check important advice with a trusted adult or professional.</p>
                   </div>
-                  <ul className="text-[11px] leading-snug space-y-1 text-muted-foreground">
-                    <li>• Trained only on child &amp; family wellbeing topics — not a doctor or crisis line.</li>
-                    <li>• Chats aren&apos;t saved or shared with anyone.</li>
-                    <li>• Don&apos;t share personal info (full name, address, phone, school, passwords).</li>
-                    <li>• Always check important info with a trusted adult or professional.</li>
-                  </ul>
                 </div>
 
                 <div className="space-y-1.5">
-                  <p className="text-[11px] uppercase tracking-wide text-muted-foreground/80 text-center">Try asking</p>
+                  <p className="text-[11px] text-muted-foreground text-center">Try asking</p>
                   <div className="flex flex-wrap gap-2 justify-center">
                     {["How can I manage anxiety?", "Tips for parents", "What is mindfulness?"].map((q) => (
                       <button
@@ -631,8 +627,8 @@ export function AIChatWidget() {
                 </Button>
               </div>
             )}
-            <p className="text-[10px] text-muted-foreground text-center pb-2 px-3">
-              AI helper — not a doctor. Don&apos;t share personal info.
+            <p className="text-[10px] leading-4 text-muted-foreground text-center pb-2 px-3">
+              Not a doctor or crisis line. Don&apos;t share personal info.
             </p>
           </div>
         </div>
