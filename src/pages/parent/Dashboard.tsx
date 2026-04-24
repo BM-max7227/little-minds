@@ -49,7 +49,7 @@ const topicIcons: Record<string, string> = {
 
 export default function Dashboard() {
   // Re-evaluates whenever the local day changes (covers the Monday rollover too)
-  const week = useDailyValue(getWeekIndex);
+  const week = useDailyValue(getWeekIndex, "parent:weekIndex");
 
   // Rotate weekly content
   const tipOfWeek = weeklyTips[week % weeklyTips.length];
