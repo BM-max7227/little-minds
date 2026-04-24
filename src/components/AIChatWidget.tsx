@@ -454,25 +454,30 @@ export function AIChatWidget() {
             </div>
           </div>
 
+          {/* Trust banner */}
+          <div className="flex items-center gap-2 bg-accent/50 px-4 py-2 border-b">
+            <ShieldCheck className="h-4 w-4 text-primary flex-shrink-0" />
+            <p className="text-xs text-foreground/70">
+              Safe & trusted — designed to only discuss children's mental health & wellbeing topics
+            </p>
+          </div>
+
           {/* Messages */}
           <div ref={scrollRef} className="flex-1 overflow-y-auto px-4 py-3 space-y-3">
             {messages.length === 0 && (
-              <div className="pt-4 pb-2 text-sm text-muted-foreground flex flex-col items-center text-center">
-                <Bot className="h-8 w-8 text-primary" strokeWidth={1.75} />
-                <p className="mt-3 text-base font-medium text-foreground">Hi there! 👋</p>
-                <p className="mt-3 text-[15px] leading-snug text-foreground max-w-[36ch]">
-                  I&apos;m here to help with anything about feelings, wellbeing, or mental health. Ask me anything!
-                </p>
-                <div className="mt-4 w-full rounded-xl bg-muted/70 px-4 py-3 text-[13px] leading-snug text-muted-foreground">
-                  <span aria-hidden className="mr-1.5">🤖</span>
-                  AI assistant — not a real person. Don&apos;t share personal info.
+              <div className="text-center text-muted-foreground text-sm py-8 space-y-3">
+                <Bot className="h-10 w-10 mx-auto text-primary/60" />
+                <p className="font-medium">Hi there! 👋</p>
+                <p>I'm here to help with anything about feelings, wellbeing, or mental health. Ask me anything!</p>
+                <div className="bg-muted/60 rounded-lg px-3 py-2 text-xs text-muted-foreground mx-2">
+                  <p>🤖 AI assistant — not a real person. Don't share personal info.</p>
                 </div>
-                <div className="mt-4 flex flex-wrap gap-2 justify-center">
-                  {["How can I manage anxiety?", "Tips for parents"].map((q) => (
+                <div className="flex flex-wrap gap-2 justify-center pt-2">
+                  {["How can I manage anxiety?", "Tips for parents", "What is mindfulness?"].map((q) => (
                     <button
                       key={q}
                       onClick={() => { setInput(q); }}
-                      className="text-[13px] border rounded-full px-4 py-2 hover:bg-accent transition"
+                      className="text-xs border rounded-full px-3 py-1 hover:bg-accent transition"
                     >
                       {q}
                     </button>
@@ -615,7 +620,7 @@ export function AIChatWidget() {
                 </Button>
               </div>
             )}
-            <p className="text-[11px] leading-snug text-muted-foreground text-center pb-2 px-4">
+            <p className={`text-muted-foreground text-center pb-2 px-3 ${fullscreen ? 'text-xs' : 'text-[10px]'}`}>
               This is not therapy, counseling, or crisis intervention. Little Minds Helper can make mistakes. Always check important information with a trusted adult or professional.
             </p>
           </div>
