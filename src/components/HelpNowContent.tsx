@@ -23,7 +23,7 @@ export function HelpNowContent() {
       <div className="p-4 border rounded-lg space-y-3">
         <p className="font-semibold">Find help in your area</p>
         <p className="text-sm text-muted-foreground">
-          Select your country to see local crisis helplines and resources
+          Select your country to see local emergency numbers and crisis helplines. Available resources vary by country, and not every country is listed yet.
         </p>
         <CountryPicker selectedCode={countryCode || null} onSelect={setCountryCode} />
       </div>
