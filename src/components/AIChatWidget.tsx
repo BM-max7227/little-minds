@@ -457,32 +457,28 @@ export function AIChatWidget() {
           {/* Messages */}
           <div ref={scrollRef} className="flex-1 overflow-y-auto px-4 py-3 space-y-3">
             {messages.length === 0 && (
-              <div className="pt-2 pb-2 text-sm text-muted-foreground space-y-2.5">
-                <div className="rounded-xl border bg-accent/30 p-3 text-center space-y-2">
-                  <div className="flex items-center justify-center gap-2">
-                    <Bot className="h-5 w-5 text-primary" />
-                    <p className="font-medium text-foreground">Hi there! 👋</p>
-                  </div>
-                  <p className="text-xs text-foreground">Ask me anything about feelings, wellbeing, or mental health.</p>
-                  <div className="flex items-start justify-center gap-1.5 text-[11px] leading-snug text-muted-foreground text-left">
-                    <ShieldCheck className="mt-0.5 h-3.5 w-3.5 text-primary flex-shrink-0" />
-                    <p className="max-w-[32ch]">Safe &amp; trusted — trained only on child and family wellbeing topics. Chats aren&apos;t saved.</p>
-                  </div>
+              <div className="pt-3 pb-2 text-sm text-muted-foreground flex flex-col items-center text-center space-y-3">
+                <div className="h-10 w-10 rounded-full bg-primary/10 flex items-center justify-center">
+                  <Bot className="h-5 w-5 text-primary" />
                 </div>
-
-                <div className="space-y-1.5">
-                  <p className="text-[11px] text-muted-foreground text-center">Try asking</p>
-                  <div className="flex flex-wrap gap-2 justify-center">
-                    {["How can I manage anxiety?", "Tips for parents", "What is mindfulness?"].map((q) => (
-                      <button
-                        key={q}
-                        onClick={() => { setInput(q); }}
-                        className="text-xs border rounded-full px-3 py-1.5 hover:bg-accent transition"
-                      >
-                        {q}
-                      </button>
-                    ))}
-                  </div>
+                <div className="space-y-0.5">
+                  <p className="font-medium text-foreground">Hi there! 👋</p>
+                  <p className="text-xs text-muted-foreground">Ask me anything about wellbeing.</p>
+                </div>
+                <p className="inline-flex items-center gap-1 text-[10.5px] leading-tight text-muted-foreground/80">
+                  <ShieldCheck className="h-3 w-3 text-primary/70" />
+                  Safe &amp; private — chats aren&apos;t saved.
+                </p>
+                <div className="flex flex-wrap gap-1.5 justify-center pt-1">
+                  {["How can I manage anxiety?", "Tips for parents", "What is mindfulness?"].map((q) => (
+                    <button
+                      key={q}
+                      onClick={() => { setInput(q); }}
+                      className="text-xs border rounded-full px-3 py-1.5 hover:bg-accent transition"
+                    >
+                      {q}
+                    </button>
+                  ))}
                 </div>
               </div>
             )}
