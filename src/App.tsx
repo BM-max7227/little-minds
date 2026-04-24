@@ -1,7 +1,7 @@
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
-import { AIChatWidget } from "@/components/AIChatWidget";
+import { LazyAIChatWidget } from "@/components/LazyAIChatWidget";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import { useEffect, lazy, Suspense } from "react";
@@ -81,7 +81,7 @@ const App = () => (
             <Route path="*" element={<NotFound />} />
           </Routes>
         </Suspense>
-        <AIChatWidget />
+        <LazyAIChatWidget />
       </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>
