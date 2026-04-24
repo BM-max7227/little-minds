@@ -464,15 +464,9 @@ export function AIChatWidget() {
                     <p className="font-medium text-foreground">Hi there! 👋</p>
                   </div>
                   <p className="text-xs text-foreground">Ask me anything about feelings, wellbeing, or mental health.</p>
-                  <div className="space-y-1 text-[11px] leading-snug text-muted-foreground">
-                    <div className="flex items-start justify-center gap-1.5 text-left">
-                      <ShieldCheck className="mt-0.5 h-3.5 w-3.5 text-primary flex-shrink-0" />
-                      <p className="max-w-[28ch]">Safe and trusted — trained only on child and family wellbeing topics.</p>
-                    </div>
-                    <p>Not a doctor or crisis line.</p>
-                    <p>Chats aren&apos;t saved.</p>
-                    <p>Don&apos;t share personal info like your full name, address, phone, school, or passwords.</p>
-                    <p>Check important advice with a trusted adult or professional.</p>
+                  <div className="flex items-start justify-center gap-1.5 text-[11px] leading-snug text-muted-foreground text-left">
+                    <ShieldCheck className="mt-0.5 h-3.5 w-3.5 text-primary flex-shrink-0" />
+                    <p className="max-w-[32ch]">Safe &amp; trusted — trained only on child and family wellbeing topics. Chats aren&apos;t saved.</p>
                   </div>
                 </div>
 
