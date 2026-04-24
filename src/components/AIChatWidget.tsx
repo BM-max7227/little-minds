@@ -465,7 +465,7 @@ export function AIChatWidget() {
           {/* Messages */}
           <div ref={scrollRef} className="flex-1 overflow-y-auto px-4 py-3 space-y-3">
             {messages.length === 0 && (
-              <div className="text-center text-muted-foreground text-sm pt-2 pb-8 space-y-3">
+              <div className="text-center text-muted-foreground text-sm pt-0 pb-8 space-y-3">
                 <Bot className="h-10 w-10 mx-auto text-primary/60" />
                 <p className="font-medium">Hi there! 👋</p>
                 <p>I'm here to help with anything about feelings, wellbeing, or mental health. Ask me anything!</p>
