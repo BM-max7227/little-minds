@@ -96,6 +96,19 @@ export default function Disclaimer() {
             terms and privacy policies.
           </p>
 
+          <h2>Crisis Helplines and Local Resources</h2>
+          <p>
+            The "Help Now" drawer and the Parent "Find Support" page list emergency numbers,
+            crisis helplines, and other local resources for selected countries. The specific
+            resources available vary by country and may include mental health support lines, child
+            and family services, or directories that help you search for a therapist — Little Minds
+            does not provide therapy itself and cannot guarantee that any listed service will be
+            available, free, or suitable for your situation. Not every country is currently
+            listed, and details such as phone numbers and operating hours can change without notice.
+            Always verify information directly with the service provider, and in an emergency call
+            your local emergency number.
+          </p>
+
           <h2>Data Retention</h2>
           <p>
             Because Little Minds stores all information (such as journals, progress, favorites, and
