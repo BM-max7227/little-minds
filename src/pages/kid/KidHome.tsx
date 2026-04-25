@@ -35,7 +35,7 @@ export default function KidHome() {
           <div className="text-center mb-12">
             <h1 className="text-4xl md:text-5xl font-bold mb-4">You Are Not Alone</h1>
             <p className="text-xl text-muted-foreground mb-6">
-              Pick what you're dealing with. We'll show ideas, short videos, and tools you can try today.
+              Tap a topic below to see ideas, short videos, and tools you can try today.
             </p>
             <div className="flex flex-wrap justify-center gap-3">
               <Button
