@@ -146,8 +146,8 @@ export default function Terms() {
 
           <h2>Image Credits</h2>
           <p>
-            The hero photograph displayed on the Little Minds homepage — showing two children
-            sitting in a meadow reading a book together — is a stock photograph licensed via{" "}
+            The hero photograph displayed on the Little Minds homepage, showing two children
+            sitting in a meadow reading a book together, is a stock photograph licensed via{" "}
             <a href="https://www.pexels.com" target="_blank" rel="noopener noreferrer" className="text-primary underline underline-offset-2 hover:opacity-80">Pexels</a>{" "}
             under the free Pexels License, which permits commercial and non-commercial use without
             attribution. The children pictured are not affiliated with Little Minds and do not
