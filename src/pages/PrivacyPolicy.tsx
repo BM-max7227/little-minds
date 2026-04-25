@@ -98,7 +98,7 @@ export default function PrivacyPolicy() {
             short-lived processing of the chat request itself.
           </p>
 
-          <h3>Voice Input in the AI Chat (Optional Microphone)</h3>
+          <h3>Voice Input in the AI Chat</h3>
           <p>
             The Little Minds Helper chat includes an optional microphone button that lets you speak
             your message instead of typing it. This feature is completely optional. The chat works
