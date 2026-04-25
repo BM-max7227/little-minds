@@ -59,7 +59,7 @@ export default function Disclaimer() {
             otherwise inappropriate content; remove personal information (such as emails, phone
             numbers, addresses, or school names) from messages before they reach the AI; and
             automatically attach crisis hotline information when language suggesting self-harm or
-            suicide is detected. These filters are safety guardrails — they are <strong>not</strong>{" "}
+            suicide is detected. These filters are safety guardrails. They are <strong>not</strong>{" "}
             a substitute for emergency services or professional mental health care. If you or someone
             you know is in crisis, contact your local emergency services or a crisis hotline
             immediately. The crisis-language safety response is a best-effort feature and is not
@@ -75,7 +75,7 @@ export default function Disclaimer() {
           <p>
             Children (and all users) should be reminded never to type passwords, financial details,
             home addresses, phone numbers, school names, or other sensitive personal information into
-            any input field on this website — including the AI chat, the private journal, the contact
+            any input field on this website, including the AI chat, the private journal, the contact
             form, or the donation inquiry form. Little Minds will never ask for this information.
           </p>
           <p>
@@ -101,7 +101,7 @@ export default function Disclaimer() {
             The "Help Now" drawer and the Parent "Find Support" page list emergency numbers,
             crisis helplines, and other local resources for selected countries. The specific
             resources available vary by country and may include mental health support lines, child
-            and family services, or directories that help you search for a therapist — Little Minds
+            and family services, or directories that help you search for a therapist. Little Minds
             does not provide therapy itself and cannot guarantee that any listed service will be
             available, free, or suitable for your situation. Not every country is currently
             listed, and details such as phone numbers and operating hours can change without notice.

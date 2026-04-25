@@ -458,7 +458,7 @@ export function AIChatWidget() {
           <div className="flex items-center gap-2 bg-accent/50 px-4 py-2 border-b">
             <ShieldCheck className="h-4 w-4 text-primary flex-shrink-0" />
             <p className="text-xs text-foreground/70">
-              Safe & trusted — designed to only discuss children's mental health & wellbeing topics
+              Safe and trusted. Designed to only discuss children's mental health and wellbeing topics
             </p>
           </div>
 
@@ -470,7 +470,7 @@ export function AIChatWidget() {
                 <p className="font-medium">Hi there! 👋</p>
                 <p>I'm here to help with anything about feelings, wellbeing, or mental health. Ask me anything!</p>
                 <div className="bg-muted/60 rounded-lg px-3 py-2 text-xs text-muted-foreground mx-2">
-                  <p>🤖 AI assistant — not a real person. Don't share personal info.</p>
+                  <p>🤖 AI assistant, not a real person. Don't share personal info.</p>
                 </div>
                 <div className="flex flex-wrap gap-2 justify-center pt-2">
                   {["How can I manage anxiety?", "Tips for parents", "What is mindfulness?"].map((q) => (
