@@ -98,6 +98,21 @@ export default function PrivacyPolicy() {
             short-lived processing of the chat request itself.
           </p>
 
+          <h3>Voice Input in the AI Chat (Optional Microphone)</h3>
+          <p>
+            The Little Minds Helper chat includes an optional microphone button that lets you speak
+            your message instead of typing it. This feature is completely optional. The chat works
+            exactly the same if you never use it, and your browser will always ask for microphone
+            permission before it turns on.
+          </p>
+          <p>
+            When you use it, your voice is processed by your own browser or device using its
+            built-in speech recognition. Your audio is never sent to Little Minds, never stored by
+            Little Minds, and no recordings are kept. We only receive the text that your browser
+            transcribes, and that text is then treated like any other chat message (not saved once
+            the chat is closed or refreshed).
+          </p>
+
           <h3>Chat Feedback</h3>
           <p>
             If you choose to submit feedback on a chat response (thumbs up/down), a record is saved
