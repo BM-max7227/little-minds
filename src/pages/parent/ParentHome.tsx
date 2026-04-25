@@ -38,7 +38,7 @@ export default function ParentHome() {
                 </div>
                 <div className="flex-1">
                   <p className="font-semibold text-base">Your Weekly Dashboard</p>
-                  <p className="text-sm text-muted-foreground">Fresh tips, conversation starters, and topics — updated every week</p>
+                  <p className="text-sm text-muted-foreground">Fresh tips, conversation starters, and topics, updated every week</p>
                 </div>
                 <ArrowRight className="h-5 w-5 text-primary group-hover:translate-x-1 transition-transform flex-shrink-0" />
               </Link>
