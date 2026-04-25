@@ -75,7 +75,7 @@ export default function Disclaimer() {
           <p>
             Children (and all users) should be reminded never to type passwords, financial details,
             home addresses, phone numbers, school names, or other sensitive personal information into
-            any input field on this website — including the AI chat, the private journal, the contact
+            any input field on this website, including the AI chat, the private journal, the contact
             form, or the donation inquiry form. Little Minds will never ask for this information.
           </p>
           <p>
