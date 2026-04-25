@@ -32,7 +32,7 @@ export default function LearnHome() {
         <div className="mb-12 max-w-3xl">
           <h1 className="text-4xl font-bold mb-4">Understand the Issues</h1>
           <p className="text-lg text-muted-foreground">
-            Learn how mental health challenges look in kids and teens, with clear differences between adult and youth.
+            Learn how mental health challenges look in kids and teens. Tap any topic below to read more.
           </p>
         </div>
 

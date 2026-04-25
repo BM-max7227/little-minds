@@ -35,7 +35,7 @@ export default function KidHome() {
           <div className="text-center mb-12">
             <h1 className="text-4xl md:text-5xl font-bold mb-4">You Are Not Alone</h1>
             <p className="text-xl text-muted-foreground mb-6">
-              Pick what you're dealing with. We'll show ideas, short videos, and tools you can try today.
+              Tap a topic below to see ideas, short videos, and tools you can try today.
             </p>
             <div className="flex flex-wrap justify-center gap-3">
               <Button
@@ -45,7 +45,7 @@ export default function KidHome() {
                 onClick={() => document.getElementById("topic-grid")?.scrollIntoView({ behavior: "smooth" })}
               >
                 <ChevronDown className="h-5 w-5 mr-2" />
-                Pick What You're Dealing With
+                Tap a Topic Below
               </Button>
               <Button size="lg" variant="outline" asChild className="text-lg px-8 py-6 rounded-full">
                 <Link to="/kid/try-this">
