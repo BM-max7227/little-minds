@@ -83,15 +83,15 @@ export default function PrivacyPolicy() {
 
           <h3>Automated Safety Filters</h3>
           <p>
-            To keep the chat safe — especially for children — your messages are scanned by automated
+            To keep the chat safe, especially for children, your messages are scanned by automated
             filters <em>before</em> being sent to the AI. These filters run in real time, are not
             stored, and are not reviewed by any person. They include:
           </p>
           <ul>
-            <li><strong>Personal information detection</strong> — if your message appears to contain things like an email address, phone number, home address, or school name, that information is automatically removed before the AI ever sees it, and the AI is reminded to gently encourage you not to share personal details.</li>
-            <li><strong>Content safety filter</strong> — messages containing profanity, sexual content, graphic violence, drugs, or weapons are blocked before reaching the AI, and a kind, age-appropriate redirect is shown instead.</li>
-            <li><strong>Crisis-language safety response</strong> — if a message contains words suggesting self-harm or suicidal thoughts, the chat will attempt to show crisis hotline information at the top of the reply. This is a best-effort safety feature and may not catch every situation — nothing about the message is stored.</li>
-            <li><strong>Prompt-injection protection</strong> — common attempts to override the assistant's safety rules are blocked.</li>
+            <li><strong>Personal information detection:</strong> if your message appears to contain things like an email address, phone number, home address, or school name, that information is automatically removed before the AI ever sees it, and the AI is reminded to gently encourage you not to share personal details.</li>
+            <li><strong>Content safety filter:</strong> messages containing profanity, sexual content, graphic violence, drugs, or weapons are blocked before reaching the AI, and a kind, age-appropriate redirect is shown instead.</li>
+            <li><strong>Crisis-language safety response:</strong> if a message contains words suggesting self-harm or suicidal thoughts, the chat will attempt to show crisis hotline information at the top of the reply. This is a best-effort safety feature and may not catch every situation. Nothing about the message is stored.</li>
+            <li><strong>Prompt-injection protection:</strong> common attempts to override the assistant's safety rules are blocked.</li>
           </ul>
           <p>
             None of these filters store, log, or transmit your messages anywhere outside the
