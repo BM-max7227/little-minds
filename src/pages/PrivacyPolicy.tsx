@@ -49,7 +49,7 @@ export default function PrivacyPolicy() {
           <p>
             You can clear this data at any time by using the <strong>"Clear My Data"</strong> button
             in the Accessibility Settings panel (the gear icon), or by clearing your browser's local
-            storage or site data manually. No one — including us — can access this information.
+            storage or site data manually. No one, including us, can access this information.
           </p>
 
           <h2>Contact and Donation Forms</h2>
