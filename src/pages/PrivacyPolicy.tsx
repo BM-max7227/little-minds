@@ -38,13 +38,13 @@ export default function PrivacyPolicy() {
             any server. It includes:
           </p>
           <ul>
-            <li><strong>Audience preference</strong> — whether you chose the parent, kid, or learn section</li>
-            <li><strong>Activity progress</strong> — which activities or challenges you've completed</li>
-            <li><strong>Learning progress</strong> — which topics you've read</li>
-            <li><strong>Favorites</strong> — any content you've marked as a favorite</li>
-            <li><strong>Accessibility settings</strong> — such as high contrast or reduced motion preferences</li>
-            <li><strong>Country preference</strong> — your selected country for crisis helpline resources</li>
-            <li><strong>Private Journal</strong> — journal entries in the kids section are stored locally only and are completely private</li>
+            <li><strong>Audience preference:</strong> whether you chose the parent, kid, or learn section</li>
+            <li><strong>Activity progress:</strong> which activities or challenges you've completed</li>
+            <li><strong>Learning progress:</strong> which topics you've read</li>
+            <li><strong>Favorites:</strong> any content you've marked as a favorite</li>
+            <li><strong>Accessibility settings:</strong> such as high contrast or reduced motion preferences</li>
+            <li><strong>Country preference:</strong> your selected country for crisis helpline resources</li>
+            <li><strong>Private Journal:</strong> journal entries in the kids section are stored locally only and are completely private</li>
           </ul>
           <p>
             You can clear this data at any time by using the <strong>"Clear My Data"</strong> button
