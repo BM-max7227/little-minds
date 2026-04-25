@@ -59,7 +59,7 @@ export default function Disclaimer() {
             otherwise inappropriate content; remove personal information (such as emails, phone
             numbers, addresses, or school names) from messages before they reach the AI; and
             automatically attach crisis hotline information when language suggesting self-harm or
-            suicide is detected. These filters are safety guardrails — they are <strong>not</strong>{" "}
+            suicide is detected. These filters are safety guardrails. They are <strong>not</strong>{" "}
             a substitute for emergency services or professional mental health care. If you or someone
             you know is in crisis, contact your local emergency services or a crisis hotline
             immediately. The crisis-language safety response is a best-effort feature and is not
