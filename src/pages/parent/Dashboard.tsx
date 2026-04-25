@@ -26,7 +26,7 @@ const weeklyTips = [
   { title: "Routine check-in", tip: "Pick one consistent time each day (e.g., bedtime) to ask: 'What was the best and hardest part of today?'", icon: "🕐" },
   { title: "Model your feelings", tip: "Share your own emotions this week: 'I felt frustrated today when...' This teaches kids it's safe to express feelings.", icon: "💬" },
   { title: "Screen-free connection", tip: "Plan 20 minutes of phone-free time together this week. Play a game, take a walk, or just sit and chat.", icon: "📵" },
-  { title: "Celebrate small wins", tip: "Notice and name one positive thing your child does each day, no matter how small. 'I saw you were patient with your sister — that was great.'", icon: "🎉" },
+  { title: "Celebrate small wins", tip: "Notice and name one positive thing your child does each day, no matter how small. 'I saw you were patient with your sister. That was great.'", icon: "🎉" },
   { title: "Name the emotion", tip: "When your child is upset, try naming what you think they feel: 'It looks like you're feeling disappointed.' This builds emotional literacy.", icon: "🧠" },
   { title: "Practice together", tip: "Try a breathing exercise together this week. Even 2 minutes of deep breathing before bed can build a calming habit.", icon: "🌬️" },
   { title: "Reassure safety", tip: "Remind your child: 'You can always tell me anything. I'm on your team, no matter what.'", icon: "🛡️" },
