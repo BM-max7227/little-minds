@@ -133,7 +133,7 @@ export default function Terms() {
             supporting this project. You must be 18 years of age or older to submit a donation
             inquiry. No financial transactions take place on this website. If you submit a donation
             inquiry, we will contact you by email to discuss next steps. Little Minds is a free
-            personal project — not a registered charity or government entity — and donations are
+            personal project, not a registered charity or government entity, and donations are
             not tax deductible.
           </p>
 
