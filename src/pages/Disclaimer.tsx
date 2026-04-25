@@ -101,7 +101,7 @@ export default function Disclaimer() {
             The "Help Now" drawer and the Parent "Find Support" page list emergency numbers,
             crisis helplines, and other local resources for selected countries. The specific
             resources available vary by country and may include mental health support lines, child
-            and family services, or directories that help you search for a therapist — Little Minds
+            and family services, or directories that help you search for a therapist. Little Minds
             does not provide therapy itself and cannot guarantee that any listed service will be
             available, free, or suitable for your situation. Not every country is currently
             listed, and details such as phone numbers and operating hours can change without notice.
