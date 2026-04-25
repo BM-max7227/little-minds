@@ -2,7 +2,7 @@ export const faqData = [
   {
     question: "How do I know when to get help?",
     answer:
-      "Consider getting professional help when symptoms persist for more than a few weeks, interfere with daily activities like school or friendships, cause significant distress, or if your child expresses thoughts of self-harm. Trust your instincts—if you're concerned, it's worth reaching out to a professional.",
+      "Consider getting professional help when symptoms persist for more than a few weeks, interfere with daily activities like school or friendships, cause significant distress, or if your child expresses thoughts of self-harm. Trust your instincts. If you're concerned, it's worth reaching out to a professional.",
   },
   {
     question: "What if my child won't talk?",
@@ -32,21 +32,21 @@ export const faqData = [
   {
     question: "What if cost is a barrier?",
     answer:
-      "Many options exist for affordable mental health care: school counselors are free, community mental health centers offer sliding scale fees, some therapists offer reduced rates, and university training clinics provide low-cost services. Your insurance may cover more than you think—call to ask about children's mental health benefits.",
+      "Many options exist for affordable mental health care: school counselors are free, community mental health centers offer sliding scale fees, some therapists offer reduced rates, and university training clinics provide low-cost services. Your insurance may cover more than you think. Call to ask about children's mental health benefits.",
   },
   {
     question: "How can I look after myself as a parent?",
     answer:
-      "Supporting a struggling child is emotionally demanding. Prioritize your own basics: sleep, nutrition, movement, and connection. Take breaks when you can. Talk to other parents or a therapist yourself. Remember that taking care of yourself isn't selfish—it gives you the energy and patience to be there for your child.",
+      "Supporting a struggling child is emotionally demanding. Prioritize your own basics: sleep, nutrition, movement, and connection. Take breaks when you can. Talk to other parents or a therapist yourself. Remember that taking care of yourself isn't selfish. It gives you the energy and patience to be there for your child.",
   },
   {
     question: "How do I use these tools?",
     answer:
-      "Start with one tool that feels most relevant to your situation. Try it consistently for a week or two before deciding if it helps. Tools work best when paired with open communication and professional support when needed. It's okay if not every tool works for your family—use what fits.",
+      "Start with one tool that feels most relevant to your situation. Try it consistently for a week or two before deciding if it helps. Tools work best when paired with open communication and professional support when needed. It's okay if not every tool works for your family. Use what fits.",
   },
   {
     question: "When should I call emergency services?",
     answer:
-      "Call emergency services immediately if your child is in immediate danger, has harmed themselves, expresses intent to harm themselves or others, or is experiencing a mental health crisis where they cannot be kept safe at home. This is not an overreaction—it's appropriate and necessary care.",
+      "Call emergency services immediately if your child is in immediate danger, has harmed themselves, expresses intent to harm themselves or others, or is experiencing a mental health crisis where they cannot be kept safe at home. This is not an overreaction. It's appropriate and necessary care.",
   },
 ];

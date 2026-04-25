@@ -257,7 +257,7 @@ export const challengeData = [
       },
       {
         title: "Calm-Down Corner",
-        description: "Create a special space with calming items like soft pillows, stress balls, coloring books, or calming bottles. This isn't a punishment—it's a safe place to regulate emotions. Model using it yourself."
+        description: "Create a special space with calming items like soft pillows, stress balls, coloring books, or calming bottles. This isn't a punishment. It's a safe place to regulate emotions. Model using it yourself."
       },
       {
         title: "Teach the 'Stop and Think' Method",
