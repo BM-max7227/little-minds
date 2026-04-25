@@ -199,7 +199,7 @@ export default function KidTopicDetail() {
                       "{topicConversationStarters[topicId]}"
                     </blockquote>
                     <p className="text-xs text-muted-foreground mt-3">
-                      It's brave to speak up — you could say this out loud, or show them this page 💛
+                      It's brave to speak up. You could say this out loud, or show them this page 💛
                     </p>
                   </div>
                 </div>
