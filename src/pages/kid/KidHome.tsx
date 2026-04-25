@@ -45,7 +45,7 @@ export default function KidHome() {
                 onClick={() => document.getElementById("topic-grid")?.scrollIntoView({ behavior: "smooth" })}
               >
                 <ChevronDown className="h-5 w-5 mr-2" />
-                Pick What You're Dealing With
+                Tap a Topic Below
               </Button>
               <Button size="lg" variant="outline" asChild className="text-lg px-8 py-6 rounded-full">
                 <Link to="/kid/try-this">
