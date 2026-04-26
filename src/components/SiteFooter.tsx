@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { Instagram } from "lucide-react";
 
 export function SiteFooter() {
   return (
@@ -20,6 +21,18 @@ export function SiteFooter() {
             <Link to="/disclaimer" className="hover:text-foreground transition-colors">Disclaimer</Link>
             <Link to="/terms" className="hover:text-foreground transition-colors">Terms of Use</Link>
             <Link to="/privacy" className="hover:text-foreground transition-colors">Privacy Policy</Link>
+          </div>
+          <div className="flex justify-center pt-2">
+            <a
+              href="https://www.instagram.com/littleminds.care"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Follow Little Minds on Instagram"
+              className="inline-flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors"
+            >
+              <Instagram className="h-4 w-4" aria-hidden="true" />
+              <span className="text-xs">@littleminds.care</span>
+            </a>
           </div>
           <p className="text-xs pt-1">
             Made with care by Bode Munk.
