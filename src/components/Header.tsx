@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { AlertCircle, Heart, Instagram, Menu } from "lucide-react";
+import { AlertCircle, Heart, Menu } from "lucide-react";
 import { HelpNowContent } from "@/components/HelpNowContent";
 import { Link } from "react-router-dom";
 import { AccessibilityControls } from "@/components/AccessibilityControls";
@@ -87,23 +87,6 @@ export function Header({ audience }: HeaderProps) {
 
           {/* Accessibility settings */}
           <AccessibilityControls />
-
-          {/* Instagram */}
-          <Button
-            variant="ghost"
-            size="sm"
-            asChild
-            className="h-11 w-11 sm:h-9 sm:w-9 p-0 text-muted-foreground hover:text-foreground"
-          >
-            <a
-              href="https://www.instagram.com/littleminds.care"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Follow Little Minds on Instagram"
-            >
-              <Instagram className="h-5 w-5 sm:h-4 sm:w-4" />
-            </a>
-          </Button>
 
           {/* Donate - icon only on mobile, full on sm+ */}
           <Button
