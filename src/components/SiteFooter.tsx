@@ -22,16 +22,16 @@ export function SiteFooter() {
             <Link to="/terms" className="hover:text-foreground transition-colors">Terms of Use</Link>
             <Link to="/privacy" className="hover:text-foreground transition-colors">Privacy Policy</Link>
           </div>
-          <div className="flex justify-center pt-2">
+          <div className="flex justify-center pt-3">
             <a
               href="https://www.instagram.com/littleminds.care"
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Follow Little Minds on Instagram"
-              className="inline-flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors"
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-border hover:bg-accent hover:text-accent-foreground transition-colors"
             >
-              <Instagram className="h-4 w-4" aria-hidden="true" />
-              <span className="text-xs">@littleminds.care</span>
+              <Instagram className="h-5 w-5" aria-hidden="true" />
+              <span className="text-sm font-medium">Follow @littleminds.care</span>
             </a>
           </div>
           <p className="text-xs pt-1">
