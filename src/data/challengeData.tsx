@@ -61,9 +61,9 @@ export const challengeData = [
     ],
     videos: [
       {
-        title: "Anxiety in Children: What Parents Need to Know",
-        url: "https://www.youtube.com/watch?v=2s5a8Y7X0Yw",
-        description: "Child psychologist explains anxiety symptoms and evidence-based strategies for parents."
+        title: "Childhood Anxiety Explained: Signs, Support, Solutions",
+        url: "https://www.youtube.com/watch?v=mkEgHcm_nJo",
+        description: "Pediatrician explains childhood anxiety, signs to watch for, and evidence-based strategies for parents."
       },
       {
         title: "Breathing Exercises for Kids",
@@ -72,8 +72,8 @@ export const challengeData = [
       },
       {
         title: "Cosmic Kids Yoga - Anxiety Relief",
-        url: "https://www.youtube.com/watch?v=cH-7arVOYqI",
-        description: "Interactive yoga and mindfulness session designed to help kids manage worry and stress."
+        url: "https://www.youtube.com/watch?v=3TZXvhYylMo",
+        description: "Calm yoga and mindfulness session designed to help kids ease worry and stress."
       }
     ]
   },
@@ -140,19 +140,19 @@ export const challengeData = [
     ],
     videos: [
       {
-        title: "Understanding Depression in Children",
-        url: "https://www.youtube.com/watch?v=c4_cxqP7gNQ",
-        description: "Medical expert explains how depression presents differently in children and what parents should watch for."
+        title: "Depression in Children — Dr Billy Garvey",
+        url: "https://www.youtube.com/watch?v=OGqN7MhuWWo",
+        description: "Developmental paediatrician explains how depression looks in children and what parents can do."
       },
       {
-        title: "Helping Your Child with Depression",
-        url: "https://www.youtube.com/watch?v=2VRhfqIxZOk",
-        description: "Practical strategies from a child psychologist on supporting a child with depression."
+        title: "Helping Kids with Depression — UC Davis Health",
+        url: "https://www.youtube.com/watch?v=L2N6Ofb8HkE",
+        description: "Pediatricians discuss how to recognise and support a child experiencing depression."
       },
       {
-        title: "Kids Meditation: Boosting Happiness",
-        url: "https://www.youtube.com/watch?v=VG0NVFhwcTk",
-        description: "Guided meditation designed to help children cultivate positive emotions and mood."
+        title: "Peace Out: Guided Relaxation for Kids",
+        url: "https://www.youtube.com/watch?v=K1SVHDcQH7o",
+        description: "Calming guided meditation to help children let go of worries and lift mood."
       }
     ]
   },
@@ -218,19 +218,19 @@ export const challengeData = [
     ],
     videos: [
       {
-        title: "Teaching Kids Social Skills",
-        url: "https://www.youtube.com/watch?v=DfJv3JjHVYM",
-        description: "Practical guide for parents on helping children develop strong friendship skills."
+        title: "Social Skills For Kids — Practical Tips",
+        url: "https://www.youtube.com/watch?v=IcUR8NxLdG4",
+        description: "Friendly guide to building strong social skills for elementary and middle school kids."
       },
       {
-        title: "What to Do About Bullying",
-        url: "https://www.youtube.com/watch?v=Dyx9DP0DJY8",
-        description: "Expert advice on recognizing bullying and taking effective action as a parent."
+        title: "How to Support a Child Who Is Being Bullied",
+        url: "https://www.youtube.com/watch?v=rARr4BYLxu4",
+        description: "Child Mind Institute explains practical steps parents can take when their child is bullied."
       },
       {
-        title: "Making Friends - Social Skills for Kids",
-        url: "https://www.youtube.com/watch?v=TxL-C-qlcx8",
-        description: "Fun, animated video teaching children how to make and keep friends."
+        title: "How to Make Friends — For Kids",
+        url: "https://www.youtube.com/watch?v=LvvykdkIeiQ",
+        description: "Friendly, easy-to-follow video teaching children how to make and keep friends."
       }
     ]
   },
@@ -295,9 +295,9 @@ export const challengeData = [
     ],
     videos: [
       {
-        title: "Teaching Kids to Manage Big Emotions",
-        url: "https://www.youtube.com/watch?v=ckPRDjRwVBM",
-        description: "Psychologist explains age-appropriate strategies for emotion regulation."
+        title: "How to Help Children Calm Down — Child Mind Institute",
+        url: "https://www.youtube.com/watch?v=IbtPS421MCg",
+        description: "Psychologists share concrete strategies parents can use to help kids regulate big emotions."
       },
       {
         title: "Calm Down Breathing for Kids",
@@ -374,19 +374,19 @@ export const challengeData = [
     ],
     videos: [
       {
-        title: "Helping Children Heal from Trauma",
-        url: "https://www.youtube.com/watch?v=ZhSq9uGHOFk",
-        description: "Expert guidance on recognizing trauma in children and supporting their recovery."
+        title: "How to Help Your Child Heal After Trauma",
+        url: "https://www.youtube.com/watch?v=vcNxvaUpWFY",
+        description: "Mental health expert explains how trauma affects children and how parents can support healing."
       },
       {
-        title: "Trauma-Informed Care for Kids",
-        url: "https://www.youtube.com/watch?v=uHM3LKOZD2w",
-        description: "Understanding how trauma affects child development and what parents can do."
+        title: "Parenting After Trauma — Susan Stiffelman, MFT",
+        url: "https://www.youtube.com/watch?v=f9TVa6-7CwQ",
+        description: "Therapist offers compassionate guidance for parents supporting a child through trauma."
       },
       {
-        title: "Grounding Techniques for Kids",
-        url: "https://www.youtube.com/watch?v=sv5fNcmYAqo",
-        description: "Practical exercises to help children manage trauma-related anxiety and flashbacks."
+        title: "5-4-3-2-1 Grounding Technique — AAP",
+        url: "https://www.youtube.com/watch?v=E1GIg0tueWg",
+        description: "American Academy of Pediatrics walks through a simple grounding exercise to calm anxiety."
       }
     ]
   },
@@ -453,9 +453,9 @@ export const challengeData = [
     ],
     videos: [
       {
-        title: "Understanding Learning Disabilities",
-        url: "https://www.youtube.com/watch?v=2qYKcfFRHMU",
-        description: "Comprehensive overview of different types of learning disabilities and how they affect children."
+        title: "Learning Disabilities — What Are the Different Types?",
+        url: "https://www.youtube.com/watch?v=yG_xSBsFMPQ",
+        description: "National Center for Learning Disabilities explains common learning disabilities and how they affect children."
       },
       {
         title: "Supporting Kids with Dyslexia",
