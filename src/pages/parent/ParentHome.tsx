@@ -12,13 +12,13 @@ export default function ParentHome() {
       <Header audience="parent" />
       
       <main className="flex-1">
-        <section className="bg-muted/30 py-20">
+        <section className="bg-muted/30 py-10">
           <div className="container px-4">
             <div className="max-w-3xl mx-auto text-center">
-              <h1 className="text-4xl md:text-5xl font-bold mb-6">
+              <h1 className="text-4xl md:text-5xl font-bold mb-3">
                 Support Your Child with Confidence
               </h1>
-              <p className="text-xl text-muted-foreground mb-8">
+              <p className="text-xl text-muted-foreground mb-5">
                 Simple steps, real resources, and ways to talk about tough topics
               </p>
               <Button size="lg" variant="outline" onClick={() => document.getElementById('toolkit')?.scrollIntoView({ behavior: 'smooth' })}>
@@ -29,7 +29,7 @@ export default function ParentHome() {
         </section>
 
         {/* Dashboard CTA */}
-        <section className="py-8 bg-primary/5 border-b">
+        <section className="py-5 bg-primary/5 border-b">
           <div className="container px-4">
             <div className="max-w-3xl mx-auto">
               <Link to="/parent/dashboard" className="group flex items-center gap-4 rounded-xl border border-primary/20 bg-card p-5 hover:shadow-lg hover:border-primary/40 transition-all">
@@ -47,11 +47,11 @@ export default function ParentHome() {
         </section>
 
         {/* Quick Access Guides Section */}
-        <section id="toolkit" className="py-16">
+        <section id="toolkit" className="py-10">
           <div className="container px-4">
             <div className="max-w-5xl mx-auto">
               <h2 className="text-3xl font-bold mb-2 text-center">Your Toolkit</h2>
-              <p className="text-muted-foreground text-center mb-10">
+              <p className="text-muted-foreground text-center mb-6">
                 Everything you need, one tap away
               </p>
 
@@ -136,10 +136,10 @@ export default function ParentHome() {
           </div>
         </section>
 
-        <section className="bg-muted/30 py-16">
+        <section className="bg-muted/30 py-10">
           <div className="container px-4 max-w-3xl mx-auto text-center">
-            <h2 className="text-3xl font-bold mb-4">Remember</h2>
-            <p className="text-lg text-muted-foreground mb-8">
+            <h2 className="text-3xl font-bold mb-3">Remember</h2>
+            <p className="text-lg text-muted-foreground mb-5">
               You don't need to have all the answers. Showing up, listening, and seeking support when needed are already powerful steps.
             </p>
             <SuggestIdeasBanner message="Have a suggestion for a resource or topic we should add? We'd love to hear from you!" />
