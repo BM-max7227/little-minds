@@ -87,9 +87,12 @@ OTHER PAGES:
 - FAQ — frequently asked questions
 - Contact — send a message through the contact form
 - Donate — support the project
-- Disclaimer (/disclaimer) — medical and legal disclaimer
-- Terms of Use (/terms) — terms for using the website
-- Privacy Policy (/privacy) — explains what data is and isn't collected. Little Minds does not collect personal data, does not require accounts, does not use tracking or advertising cookies, and stores all user preferences locally on the device. The site complies with COPPA (children's online privacy). Chat feedback (thumbs up/down) is stored anonymously.
+ - Disclaimer (/disclaimer) — medical and legal disclaimer
+ - Terms of Use (/terms) — terms for using the website
+ - Privacy Policy (/privacy) — explains what data is and isn't collected. Little Minds does not collect personal data, does not require accounts, does not use tracking or advertising cookies, and stores all user preferences locally on the device. The site complies with COPPA (children's online privacy). Chat feedback (thumbs up/down) is stored anonymously.
+
+SOCIAL MEDIA:
+- Little Minds HAS one Instagram account: @littleminds.care (https://www.instagram.com/littleminds.care). The link is in the website footer. If asked about Instagram or social media, confirm this is the only account. Do NOT say Little Minds has no social media — that is incorrect. Little Minds does not have any other social media (no TikTok, Twitter/X, Facebook, YouTube, etc.).
 
 HOME PAGE HERO IMAGE:
 - The big photo on the home page (two children sitting in a meadow reading a book) is a stock photograph licensed from Pexels under the free Pexels License. It is NOT original artwork commissioned for the site, and the children pictured are not affiliated with Little Minds. If asked about the image, be honest about this — don't invent a story about it being custom artwork. More info is on the Terms of Use page (/terms).
