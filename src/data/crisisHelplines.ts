@@ -139,8 +139,9 @@ export const crisisHelplines: CountryHelplines[] = [
     code: "FR",
     emergency: "112",
     helplines: [
-      { name: "Fil Santé Jeunes", phone: "0 800 235 236", url: "https://www.filsantejeunes.com", description: "Health helpline for young people" },
-      { name: "SOS Amitié", phone: "09 72 39 40 50", url: "https://www.sosamitie.com", description: "24/7 listening service" },
+      { name: "3114 National Suicide Prevention Number", phone: "3114", url: "https://3114.fr", description: "Free 24/7 suicide prevention support across France" },
+      { name: "Fil Santé Jeunes", phone: "0 800 235 236", url: "https://www.filsantejeunes.com", description: "Free anonymous support for young people ages 12–25, 9am–11pm" },
+      { name: "SOS Amitié", phone: "09 72 39 40 50", url: "https://www.sosamitie.org/besoin-aide/telephone", description: "Emotional listening support from trained volunteers" },
     ],
     directories: [
       { name: "Psycom", url: "https://www.psycom.org" },
