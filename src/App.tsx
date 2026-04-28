@@ -12,7 +12,6 @@ import LearnHome from "./pages/learn/LearnHome";
 
 // Lazy load all secondary pages
 const NotFound = lazy(() => import("./pages/NotFound"));
-const Index = lazy(() => import("./pages/Index"));
 const QuickGuide = lazy(() => import("./pages/parent/QuickGuide"));
 const ConversationStarters = lazy(() => import("./pages/parent/ConversationStarters"));
 const FindSupport = lazy(() => import("./pages/parent/FindSupport"));
