@@ -26,7 +26,6 @@ export function Header({ audience }: HeaderProps) {
           { label: "Tools", path: "/parent/tools" },
           { label: "About Us", path: "/about" },
           { label: "Contact", path: "/contact" },
-          { label: "FAQ", path: "/faq" },
         ];
       case "kid":
         return [
@@ -35,7 +34,6 @@ export function Header({ audience }: HeaderProps) {
           { label: "Breathe", path: "/kid/breathe" },
           { label: "About Us", path: "/about" },
           { label: "Contact", path: "/contact" },
-          { label: "FAQ", path: "/faq" },
         ];
       case "learn":
         return [
@@ -43,7 +41,6 @@ export function Header({ audience }: HeaderProps) {
           { label: "Topics", path: "/learn" },
           { label: "About Us", path: "/about" },
           { label: "Contact", path: "/contact" },
-          { label: "FAQ", path: "/faq" },
         ];
       default:
         return [];
