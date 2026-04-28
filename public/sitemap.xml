@@ -14,7 +14,7 @@
   <url><loc>https://littleminds.care/about</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://littleminds.care/donate</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://littleminds.care/contact</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
-  <url><loc>https://littleminds.care/faq</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
+  
   <url><loc>https://littleminds.care/disclaimer</loc><changefreq>yearly</changefreq><priority>0.3</priority></url>
   <url><loc>https://littleminds.care/terms</loc><changefreq>yearly</changefreq><priority>0.3</priority></url>
   <url><loc>https://littleminds.care/privacy</loc><changefreq>yearly</changefreq><priority>0.3</priority></url>

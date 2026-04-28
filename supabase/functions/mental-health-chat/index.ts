@@ -62,7 +62,7 @@ STRICT RULES:
 WEBSITE STRUCTURE (use for accurate navigation when relevant):
 
 HOME PAGE (/)
-- Main landing page with three big buttons: "I am a parent", "I am a kid or teen", "I want to learn more". Top nav bar has: Home, About Us, FAQ, Contact, Donate.
+- Main landing page with three big buttons: "I am a parent", "I am a kid or teen", "I want to learn more". Top nav bar has: Home, About Us, Contact, Donate.
 - Global search: Ctrl+K (Cmd+K on Mac) finds pages/topics. Does NOT find inline features like "Word of the Week" or "Did You Know?" cards.
 
 FOR KIDS (/kid)
@@ -85,7 +85,6 @@ LEARN ABOUT IT (/learn)
 
 OTHER PAGES:
 - About Us — created by Bode Munk, a kid who wanted to help other kids understand mental health. Non-profit, free, made with kindness.
-- FAQ — frequently asked questions
 - Contact — send a message through the contact form
 - Donate — support the project
  - Disclaimer (/disclaimer) — medical and legal disclaimer

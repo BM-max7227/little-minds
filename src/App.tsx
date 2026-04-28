@@ -22,7 +22,6 @@ const TryThis = lazy(() => import("./pages/kid/TryThis"));
 const Breathe = lazy(() => import("./pages/kid/Breathe"));
 
 const LearnTopic = lazy(() => import("./pages/learn/LearnTopic"));
-const FAQ = lazy(() => import("./pages/FAQ"));
 const AboutUs = lazy(() => import("./pages/AboutUs"));
 const Donate = lazy(() => import("./pages/Donate"));
 const Contact = lazy(() => import("./pages/Contact"));
@@ -70,7 +69,6 @@ const App = () => (
             <Route path="/kid/breathe" element={<Breathe />} />
             <Route path="/learn" element={<LearnHome />} />
             <Route path="/learn/:topicId" element={<LearnTopic />} />
-            <Route path="/faq" element={<FAQ />} />
             <Route path="/about" element={<AboutUs />} />
             <Route path="/donate" element={<Donate />} />
             <Route path="/contact" element={<Contact />} />

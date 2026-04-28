@@ -12,7 +12,6 @@ import {
 } from "@/components/ui/command";
 import { topics } from "@/data/kidTopics";
 import { learnTopics } from "@/data/learnTopics";
-import { faqData } from "@/data/faqData";
 
 interface SearchResult {
   id: string;
@@ -81,17 +80,6 @@ export function GlobalSearch() {
       });
     });
 
-    faqData.forEach((faq, index) => {
-      results.push({
-        id: `faq-${index}`,
-        title: faq.question,
-        description: faq.answer.slice(0, 120) + "...",
-        path: "/faq",
-        category: "FAQ",
-        keywords: ["faq", "questions", "help"],
-      });
-    });
-
     const staticPages: SearchResult[] = [
       { id: "home", title: "Home", description: "Welcome to Little Minds", path: "/", category: "Pages", keywords: ["landing", "start"] },
       { id: "parent-home", title: "Parent Home", description: "Resources and guides for parents", path: "/parent", category: "Pages", keywords: ["parent", "caregiver", "family"] },
@@ -103,7 +91,6 @@ export function GlobalSearch() {
       { id: "conversation-starters", title: "Conversation Starters", description: "How to talk to your child about mental health", path: "/parent/conversation-starters", category: "Pages", keywords: ["talk", "conversation", "communication"] },
       { id: "tools", title: "Tools", description: "Helpful tools and resources for parents", path: "/parent/tools", category: "Pages", keywords: ["tools", "resources", "parent help"] },
       { id: "about", title: "About Us", description: "Learn about Little Minds and our mission", path: "/about", category: "Pages", keywords: ["about", "mission", "team", "nonprofit"] },
-      { id: "faq-page", title: "FAQ", description: "Frequently asked questions about mental health", path: "/faq", category: "Pages", keywords: ["faq", "questions", "answers"] },
       { id: "donate", title: "Donate", description: "Support Little Minds with a donation", path: "/donate", category: "Pages", keywords: ["donation", "give", "support", "fund"] },
       { id: "contact", title: "Contact", description: "Get in touch with the Little Minds team", path: "/contact", category: "Pages", keywords: ["contact", "email", "message", "reach out"] },
     ];
@@ -176,7 +163,7 @@ export function GlobalSearch() {
         <CommandInput
           value={query}
           onValueChange={setQuery}
-          placeholder="Search the whole site (pages, topics, FAQs)..."
+          placeholder="Search the whole site (pages, topics)..."
         />
         <CommandList>
           <CommandEmpty>No results found.</CommandEmpty>
