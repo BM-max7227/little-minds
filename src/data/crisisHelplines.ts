@@ -67,7 +67,7 @@ export const crisisHelplines: CountryHelplines[] = [
       { name: "Lifeline", phone: "13 11 14", text: "Text 0477 13 11 14", url: "https://www.lifeline.org.au", description: "24/7 crisis support" },
     ],
     directories: [
-      { name: "Head to Health", url: "https://www.headtohealth.gov.au" },
+      { name: "Medicare Mental Health", url: "https://www.medicarementalhealth.gov.au" },
     ],
   },
   {
@@ -140,7 +140,7 @@ export const crisisHelplines: CountryHelplines[] = [
     emergency: "112",
     helplines: [
       { name: "Fil Santé Jeunes", phone: "0 800 235 236", url: "https://www.filsantejeunes.com", description: "Health helpline for young people" },
-      { name: "SOS Amitié", phone: "09 72 39 40 50", url: "https://www.sos-amitie.com", description: "24/7 listening service" },
+      { name: "SOS Amitié", phone: "09 72 39 40 50", url: "https://www.sosamitie.com", description: "24/7 listening service" },
     ],
     directories: [
       { name: "Psycom", url: "https://www.psycom.org" },
@@ -267,7 +267,7 @@ export const crisisHelplines: CountryHelplines[] = [
     code: "NO",
     emergency: "112",
     helplines: [
-      { name: "Alarmtelefonen for barn og unge", phone: "116 111", url: "https://www.telefonforbarnogunge.no", description: "Helpline for children and young people" },
+      { name: "Alarmtelefonen for barn og unge", phone: "116 111", url: "https://www.116111.no", description: "Helpline for children and young people" },
       { name: "Mental Helse", phone: "116 123", url: "https://www.mentalhelse.no", description: "Mental health support" },
     ],
     directories: [],
@@ -357,7 +357,7 @@ export const crisisHelplines: CountryHelplines[] = [
     code: "AR",
     emergency: "911",
     helplines: [
-      { name: "Centro de Asistencia al Suicida", phone: "135", url: "https://www.casbuenosaires.com.ar", description: "24/7 suicide prevention" },
+      { name: "Centro de Asistencia al Suicida", phone: "135", url: "https://www.asistenciaalsuicida.org.ar", description: "24/7 suicide prevention" },
       { name: "Línea 102 (Children)", phone: "102", description: "Helpline for children and teens" },
     ],
     directories: [],
@@ -657,7 +657,7 @@ export const crisisHelplines: CountryHelplines[] = [
     code: "UG",
     emergency: "999",
     helplines: [
-      { name: "Childline Uganda", phone: "116", url: "https://www.uchl.org", description: "Free helpline for children" },
+      { name: "Childline Uganda", phone: "116", description: "Free helpline for children" },
     ],
     directories: [],
   },
@@ -722,7 +722,7 @@ export const crisisHelplines: CountryHelplines[] = [
     emergency: "999",
     helplines: [
       { name: "Child Helpline 1098", phone: "1098", description: "National child helpline" },
-      { name: "Kaan Pete Roi", phone: "+1-888-568-1112", url: "https://www.kaanpeteroi.com", description: "Bengali emotional support" },
+      { name: "Kaan Pete Roi", phone: "9612 119 911", description: "Bengali emotional support" },
     ],
     directories: [],
   },
@@ -751,7 +751,7 @@ export const crisisHelplines: CountryHelplines[] = [
     emergency: "191",
     helplines: [
       { name: "Childline Thailand", phone: "1387", description: "Child protection helpline" },
-      { name: "Samaritans Thailand", phone: "02-713-6793", url: "https://www.samaritansofthailand.org", description: "24/7 emotional support" },
+      { name: "Samaritans Thailand", phone: "02-713-6793", description: "24/7 emotional support" },
     ],
     directories: [],
   },
@@ -915,7 +915,7 @@ export const crisisHelplines: CountryHelplines[] = [
     code: "MT",
     emergency: "112",
     helplines: [
-      { name: "Supportline 179", phone: "179", url: "https://www.supportline179.gov.mt", description: "Mental health and emotional support" },
+      { name: "Supportline 179", phone: "179", description: "Mental health and emotional support" },
       { name: "Kellimni.com", url: "https://www.kellimni.com", description: "Online chat support for young people" },
     ],
     directories: [],
