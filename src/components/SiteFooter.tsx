@@ -3,9 +3,9 @@ import { Instagram } from "lucide-react";
 
 export function SiteFooter() {
   return (
-    <footer className="border-t py-8 mt-12">
+    <footer className="border-t py-5 mt-6">
       <div className="container mx-auto px-4 max-w-4xl">
-        <div className="text-center space-y-3 text-sm text-muted-foreground">
+        <div className="text-center space-y-2 text-sm text-muted-foreground">
           <p>
             This website provides general information about mental health and wellbeing.
             It is <strong>not a substitute</strong> for professional medical advice, diagnosis, or treatment.
@@ -13,7 +13,7 @@ export function SiteFooter() {
           <p>
             If you or someone you know is in crisis or danger, please contact your local emergency services immediately.
           </p>
-          <div className="flex flex-wrap justify-center gap-4 pt-2 text-xs">
+          <div className="flex flex-wrap justify-center gap-4 pt-1 text-xs">
             <Link to="/" className="hover:text-foreground transition-colors">Home</Link>
             <Link to="/about" className="hover:text-foreground transition-colors">About Us</Link>
             <Link to="/contact" className="hover:text-foreground transition-colors">Contact</Link>
@@ -21,7 +21,7 @@ export function SiteFooter() {
             <Link to="/terms" className="hover:text-foreground transition-colors">Terms of Use</Link>
             <Link to="/privacy" className="hover:text-foreground transition-colors">Privacy Policy</Link>
           </div>
-          <div className="flex justify-center pt-3">
+          <div className="flex justify-center pt-1">
             <a
               href="https://www.instagram.com/littleminds.care"
               target="_blank"
@@ -33,7 +33,7 @@ export function SiteFooter() {
               <span className="text-sm font-medium">Follow @littleminds.care</span>
             </a>
           </div>
-          <p className="text-xs pt-1">
+          <p className="text-xs">
             Made with care by Bode Munk.
           </p>
         </div>
