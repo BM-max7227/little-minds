@@ -85,19 +85,19 @@ export default function Donate() {
       <Header audience="learn" />
 
       <main className="flex-1">
-        <section className="bg-gradient-to-b from-primary/10 to-background py-20">
+        <section className="bg-gradient-to-b from-primary/10 to-background py-10">
           <div className="container px-4">
             <div className="max-w-3xl mx-auto text-center">
-              <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-primary/20 mb-6">
+              <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-primary/20 mb-4">
                 <Heart className="h-8 w-8 text-primary" />
               </div>
-              <h1 className="text-4xl md:text-5xl font-bold mb-6">
+              <h1 className="text-4xl md:text-5xl font-bold mb-3">
                 Support Little Minds
               </h1>
-              <p className="text-xl text-muted-foreground mb-4">
+              <p className="text-xl text-muted-foreground mb-2">
                 Your donation helps us provide free mental health resources for children and families who need them most.
               </p>
-              <p className="text-sm text-muted-foreground mb-4">
+              <p className="text-sm text-muted-foreground mb-3">
                 Little Minds is operated by Bode Munk.
               </p>
               <p className="text-sm font-bold text-muted-foreground inline-flex items-center gap-1.5 bg-muted/50 rounded-full px-4 py-1.5">
@@ -108,7 +108,7 @@ export default function Donate() {
           </div>
         </section>
 
-        <section className="py-16">
+        <section className="py-8">
           <div className="container px-4">
             <div className="max-w-md mx-auto">
               <Card className="border-2">
@@ -254,7 +254,7 @@ export default function Donate() {
           </div>
         </section>
 
-        <section className="bg-muted/30 py-16">
+        <section className="bg-muted/30 py-10">
           <div className="container px-4">
             <div className="max-w-3xl mx-auto">
               <h2 className="text-2xl font-bold text-center mb-8">How Your Donation Helps</h2>
@@ -291,9 +291,9 @@ export default function Donate() {
           </div>
         </section>
 
-        <section className="py-16">
+        <section className="py-10">
           <div className="container px-4 max-w-3xl mx-auto text-center">
-            <h2 className="text-2xl font-bold mb-4">Thank You</h2>
+            <h2 className="text-2xl font-bold mb-3">Thank You</h2>
             <p className="text-muted-foreground">
               Every donation, no matter the size, makes a difference. Thank you for supporting children's mental health.
             </p>

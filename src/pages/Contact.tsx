@@ -79,16 +79,16 @@ export default function Contact() {
       <Header audience="learn" />
 
       <main className="flex-1">
-        <section className="bg-gradient-to-b from-primary/10 to-background py-20">
+        <section className="bg-gradient-to-b from-primary/10 to-background py-10">
           <div className="container px-4">
             <div className="max-w-3xl mx-auto text-center">
-              <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-primary/20 mb-6">
+              <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-primary/20 mb-4">
                 <Mail className="h-8 w-8 text-primary" />
               </div>
-              <h1 className="text-4xl md:text-5xl font-bold mb-6">
+              <h1 className="text-4xl md:text-5xl font-bold mb-3">
                 Contact Us
               </h1>
-              <p className="text-xl text-muted-foreground mb-4">
+              <p className="text-xl text-muted-foreground mb-2">
                 Have a question, idea, or just want to say hello? We would love to hear from you!
               </p>
               <p className="text-sm text-muted-foreground">
@@ -98,7 +98,7 @@ export default function Contact() {
           </div>
         </section>
 
-        <section className="py-16">
+        <section className="py-8">
           <div className="container px-4">
             <div className="max-w-lg mx-auto">
               <Card className="border-2">
