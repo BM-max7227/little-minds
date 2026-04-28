@@ -114,7 +114,7 @@ export const crisisHelplines: CountryHelplines[] = [
     code: "IN",
     emergency: "112",
     helplines: [
-      { name: "Childline India", phone: "1098", url: "https://www.childlineindia.org", description: "24/7 helpline for children in distress" },
+      { name: "Childline India", phone: "1098", description: "24/7 government helpline for children in distress" },
       { name: "iCall", phone: "9152987821", url: "https://icallhelpline.org", description: "Psychosocial support helpline" },
       { name: "Vandrevala Foundation", phone: "1860 2662 345", url: "https://www.vandrevalafoundation.com", description: "24/7 mental health support" },
     ],
