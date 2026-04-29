@@ -3,9 +3,9 @@ import { SiteFooter } from "@/components/SiteFooter";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { getWordOfTheDay, getDidYouKnow } from "@/data/kidEngagement";
+import { getWordOfTheDay } from "@/data/kidEngagement";
 import { useDailyValue } from "@/hooks/useDailyValue";
-import { BookOpen, Lightbulb, ChevronDown, Sparkles, Wind } from "lucide-react";
+import { BookOpen, ChevronDown, Sparkles, Wind } from "lucide-react";
 import { SuggestIdeasBanner } from "@/components/SuggestIdeasBanner";
 
 const topicCards = [
@@ -24,7 +24,6 @@ const topicCards = [
 
 export default function KidHome() {
   const wordOfDay = useDailyValue(getWordOfTheDay, "kid:wordOfDay");
-  const funFact = useDailyValue(getDidYouKnow, "kid:didYouKnow");
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -62,8 +61,8 @@ export default function KidHome() {
             </div>
           </div>
 
-          {/* Word of the Week + Did You Know row */}
-          <div className="grid sm:grid-cols-2 gap-4 mb-10">
+          {/* Word of the Day */}
+          <div className="mb-10">
             <Card className="border-primary/20 bg-primary/5">
               <CardHeader className="pb-2">
                 <CardTitle className="text-sm font-medium flex items-center gap-2 text-primary">
@@ -75,17 +74,6 @@ export default function KidHome() {
                 <p className="text-2xl font-bold mb-1">{wordOfDay.word}</p>
                 <p className="text-sm text-muted-foreground mb-2">{wordOfDay.definition}</p>
                 <p className="text-xs italic text-muted-foreground/80">💡 {wordOfDay.example}</p>
-              </CardContent>
-            </Card>
-            <Card className="border-secondary/20 bg-secondary/5">
-              <CardHeader className="pb-2">
-                <CardTitle className="text-sm font-medium flex items-center gap-2 text-secondary-foreground">
-                  <Lightbulb className="h-4 w-4" />
-                  Did You Know?
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-sm leading-relaxed">{funFact}</p>
               </CardContent>
             </Card>
           </div>
