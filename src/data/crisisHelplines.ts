@@ -1013,19 +1013,6 @@ export const crisisHelplines: CountryHelplines[] = [
     ],
     directories: [],
   },
-  {
-    country: "Algeria",
-    code: "DZ",
-    emergency: "Police 1548 · Fire 14 · Ambulance 1021",
-    helplines: [
-      { name: "Je t'écoute (NADA)", phone: "3033", text: "+213 770 847 724 (WhatsApp)", description: "Free national helpline for children, run by the Algerian Network for the Defence of Children's Rights" },
-      { name: "Numéro vert violences faites aux femmes", phone: "1026", description: "Free national line to report violence against women" },
-    ],
-    directories: [
-      { name: "Find a Helpline – Algeria", url: "https://findahelpline.com/countries/dz" },
-      { name: "Ministry of Health Algeria", url: "https://www.sante.gov.dz" },
-    ],
-  },
 ];
 
 const COUNTRY_STORAGE_KEY = "little-minds-country";
