@@ -44,8 +44,6 @@ const topicIcons: Record<string, string> = {
   bodyimage: "💪",
   bullying: "🛡️",
   grief: "💔",
-  depression: "🌫️",
-  eating: "🍎",
   other: "❓",
 };
 

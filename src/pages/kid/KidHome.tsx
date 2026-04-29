@@ -19,8 +19,6 @@ const topicCards = [
   { id: "bodyimage", title: "Body Image Worries", icon: "💪" },
   { id: "bullying", title: "Bullying", icon: "🛡️" },
   { id: "grief", title: "Grief and Loss", icon: "🕊️" },
-  { id: "depression", title: "Depression", icon: "🌫️" },
-  { id: "eating", title: "Food and Eating Worries", icon: "🍎" },
   { id: "other", title: "Other", icon: "✨" },
 ];
 
