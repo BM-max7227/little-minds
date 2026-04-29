@@ -1013,6 +1013,19 @@ export const crisisHelplines: CountryHelplines[] = [
     ],
     directories: [],
   },
+  {
+    country: "Algeria",
+    code: "DZ",
+    emergency: "14 (police) / 14 (SAMU)",
+    helplines: [
+      { name: "SOS Détresse Algérie", phone: "0560 10 65 10", description: "Listening and emotional support line" },
+      { name: "Sidra (Forem)", phone: "3033", description: "Free support line for children and families" },
+      { name: "Nada Network for Child Rights", phone: "3033", url: "https://www.nadarights.org", description: "Child protection helpline" },
+    ],
+    directories: [
+      { name: "Ministry of Health Algeria", url: "https://www.sante.gov.dz" },
+    ],
+  },
 ];
 
 const COUNTRY_STORAGE_KEY = "little-minds-country";
