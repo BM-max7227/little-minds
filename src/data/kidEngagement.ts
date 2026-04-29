@@ -81,7 +81,7 @@ export function getDidYouKnow() {
     "Your brain doesn't stop growing and changing until you're about 25 years old 🌱",
     "Spending just 20 minutes outside in nature can reduce stress hormones 🌿",
     "Listening to music you love releases the same happy chemicals as eating chocolate 🎵",
-    "Smiling, even when you don't feel like it, can actually trick your brain into feeling happier 😊",
+    
     "Kids who talk about their feelings are better at solving problems 💬",
     "Exercise doesn't just help your body. It grows new brain cells too! 🏃",
     "Writing a thank-you note can boost your mood for an entire month 💌",
