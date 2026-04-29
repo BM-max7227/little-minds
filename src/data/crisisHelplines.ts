@@ -1016,13 +1016,13 @@ export const crisisHelplines: CountryHelplines[] = [
   {
     country: "Algeria",
     code: "DZ",
-    emergency: "14 (police) / 14 (SAMU)",
+    emergency: "Police 1548 · Fire 14 · Ambulance 1021",
     helplines: [
-      { name: "SOS Détresse Algérie", phone: "0560 10 65 10", description: "Listening and emotional support line" },
-      { name: "Sidra (Forem)", phone: "3033", description: "Free support line for children and families" },
-      { name: "Nada Network for Child Rights", phone: "3033", url: "https://www.nadarights.org", description: "Child protection helpline" },
+      { name: "Je t'écoute (NADA)", phone: "3033", text: "+213 770 847 724 (WhatsApp)", description: "Free national helpline for children, run by the Algerian Network for the Defence of Children's Rights" },
+      { name: "Numéro vert violences faites aux femmes", phone: "1026", description: "Free national line to report violence against women" },
     ],
     directories: [
+      { name: "Find a Helpline – Algeria", url: "https://findahelpline.com/countries/dz" },
       { name: "Ministry of Health Algeria", url: "https://www.sante.gov.dz" },
     ],
   },
