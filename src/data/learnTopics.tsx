@@ -446,6 +446,122 @@ export const learnTopics: Record<string, LearnTopic> = {
       },
     ],
   },
+  depression: {
+    id: "depression",
+    title: "Depression",
+    description: "Depression in children and teens is more than passing sadness. It is a persistent low mood, loss of interest, or hopelessness that lasts at least two weeks and interferes with daily life. Depression in young people often looks different than in adults — it may show up as irritability, anger, withdrawal, school decline, or physical complaints rather than visible sadness. Depression is treatable, and early support makes a real difference.",
+    howItFeels: {
+      feelings: [
+        "Persistent sadness, emptiness, or hopelessness",
+        "Loss of interest in activities they used to enjoy",
+        "Feeling worthless or excessively guilty",
+        "Irritability, frustration, or anger over small things",
+      ],
+      behaviors: [
+        "Withdrawing from family and friends",
+        "Drop in school grades or motivation",
+        "Sleeping too much or too little",
+        "Changes in appetite or weight",
+        "Talking about death, dying, or self-harm",
+      ],
+      bodySigns: [
+        "Low energy or fatigue most of the day",
+        "Slowed movement or restlessness",
+        "Frequent unexplained aches and pains",
+        "Difficulty concentrating or making decisions",
+      ],
+    },
+    whatHelps: {
+      atHome: [
+        "Take their feelings seriously and listen without trying to fix everything",
+        "Keep gentle routines around sleep, meals, and movement",
+        "Encourage small, doable activities rather than big plans",
+        "Limit isolation while respecting their need for space",
+        "Connect with a pediatrician or mental health professional",
+      ],
+      atSchool: [
+        "Inform school counselors so they can offer support and check-ins",
+        "Request reasonable accommodations for assignments or attendance",
+        "Watch for declining grades or social withdrawal as warning signs",
+        "Encourage one trusted adult or peer connection at school",
+      ],
+      whenToSeekHelp: [
+        "Symptoms last more than two weeks",
+        "Sleep, appetite, or energy levels change significantly",
+        "Your child stops doing things they used to enjoy",
+        "Any mention of death, self-harm, or suicide — seek help immediately",
+        "Daily functioning at home or school is clearly affected",
+      ],
+    },
+    mythsAndFacts: [
+      {
+        myth: "Kids and teens are too young to be truly depressed",
+        fact: "Depression can affect children of any age and is a real medical condition that benefits from professional treatment",
+      },
+      {
+        myth: "They will just snap out of it",
+        fact: "Depression rarely resolves on its own and typically requires support, therapy, and sometimes medication to improve",
+      },
+    ],
+  },
+  eating: {
+    id: "eating",
+    title: "Eating Disorders and Food Concerns",
+    description: "Eating disorders are serious mental health conditions involving disturbed eating behaviors, intense thoughts about food or body weight, and significant distress. They affect children and teens of all genders, body sizes, and backgrounds. Early signs are often subtle — preoccupation with healthy eating, skipping meals, body checking, or sudden changes in food rules. Eating disorders are not a phase or a choice; they are treatable medical conditions, and early intervention dramatically improves outcomes.",
+    howItFeels: {
+      feelings: [
+        "Intense fear of weight gain or feeling fat",
+        "Preoccupation with food, calories, or body shape",
+        "Shame, guilt, or anxiety around eating",
+        "Feeling out of control with eating, or rigidly in control",
+      ],
+      behaviors: [
+        "Skipping meals, restricting foods, or new strict diet rules",
+        "Eating in secret or large amounts in a short time (binging)",
+        "Going to the bathroom right after meals",
+        "Excessive exercise or distress when unable to exercise",
+        "Frequent body checking, weighing, or mirror-avoidance",
+      ],
+      bodySigns: [
+        "Noticeable weight changes (loss, gain, or fluctuations)",
+        "Fatigue, dizziness, or fainting",
+        "Cold hands and feet, hair thinning, or brittle nails",
+        "Stomach pain, constipation, or irregular periods",
+      ],
+    },
+    whatHelps: {
+      atHome: [
+        "Avoid commenting on weight, body size, or appearance — yours or theirs",
+        "Model a balanced, non-judgmental relationship with food",
+        "Eat meals together when possible without making it a battle",
+        "Express concern about feelings and behaviors, not body or food itself",
+        "Reach out early to a pediatrician or eating disorder specialist",
+      ],
+      atSchool: [
+        "Loop in school counselors and the school nurse",
+        "Watch for skipped lunches or bathroom trips after meals",
+        "Request supportive accommodations during treatment",
+        "Encourage activities that build identity beyond appearance or sport",
+      ],
+      whenToSeekHelp: [
+        "You notice food restriction, binging, purging, or compulsive exercise",
+        "Significant weight change or growth that has stalled",
+        "Your child becomes withdrawn, anxious, or depressed around meals",
+        "Any signs of fainting, chest pain, or medical complications — seek help immediately",
+        "When in doubt, consult a professional — early treatment works best",
+      ],
+    },
+    mythsAndFacts: [
+      {
+        myth: "Eating disorders only affect thin teenage girls",
+        fact: "Eating disorders affect people of all genders, ages, body sizes, and backgrounds — you cannot tell by looking at someone",
+      },
+      {
+        myth: "It's just a diet phase they'll grow out of",
+        fact: "Eating disorders are serious illnesses with the highest mortality rate of any mental health condition and require professional treatment",
+      },
+    ],
+  },
   other: {
     id: "other",
     title: "When You Are Not Sure What You Feel",
