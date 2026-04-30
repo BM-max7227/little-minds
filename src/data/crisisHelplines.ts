@@ -218,7 +218,7 @@ export const crisisHelplines: CountryHelplines[] = [
     code: "PH",
     emergency: "911",
     helplines: [
-      { name: "Bantay Bata (Children)", phone: "163", url: "https://bantaybata163.com", description: "Child welfare helpline" },
+      { name: "Bantay Bata (Children)", phone: "163", url: "https://www.abs-cbnfoundation.org/child-welfare-programs/", description: "Child welfare helpline" },
       { name: "NCMH Crisis Hotline", phone: "0917-899-8727", description: "Mental health crisis support" },
     ],
     directories: [],
