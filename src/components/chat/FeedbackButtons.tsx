@@ -215,7 +215,7 @@ export function FeedbackButtons({ userMessage, assistantMessage, messageId }: Fe
           <textarea
             value={details}
             onChange={(e) => setDetails(e.target.value)}
-            placeholder="Share details (optional)"
+            placeholder="Optional: add detail. Please don't include personal or sensitive info."
             className="w-full text-xs bg-background border rounded-lg px-2.5 py-1.5 resize-none outline-none focus:ring-1 focus:ring-primary placeholder:text-muted-foreground"
             rows={2}
           />
