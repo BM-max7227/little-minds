@@ -10,11 +10,32 @@
   <url><loc>https://littleminds.care/kid</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
   <url><loc>https://littleminds.care/kid/try-this</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>
   <url><loc>https://littleminds.care/kid/breathe</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://littleminds.care/kid/anxiety</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://littleminds.care/kid/stress</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://littleminds.care/kid/sad</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://littleminds.care/kid/sleep</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://littleminds.care/kid/conflict</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://littleminds.care/kid/socialmedia</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://littleminds.care/kid/anger</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://littleminds.care/kid/bodyimage</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://littleminds.care/kid/bullying</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://littleminds.care/kid/grief</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://littleminds.care/kid/other</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://littleminds.care/learn</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://littleminds.care/learn/anxiety</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://littleminds.care/learn/sleep</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://littleminds.care/learn/stress</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://littleminds.care/learn/sad</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://littleminds.care/learn/conflict</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://littleminds.care/learn/socialmedia</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://littleminds.care/learn/anger</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://littleminds.care/learn/bodyimage</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://littleminds.care/learn/bullying</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://littleminds.care/learn/grief</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://littleminds.care/learn/other</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://littleminds.care/about</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://littleminds.care/donate</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
   <url><loc>https://littleminds.care/contact</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
-  
   <url><loc>https://littleminds.care/disclaimer</loc><changefreq>yearly</changefreq><priority>0.3</priority></url>
   <url><loc>https://littleminds.care/terms</loc><changefreq>yearly</changefreq><priority>0.3</priority></url>
   <url><loc>https://littleminds.care/privacy</loc><changefreq>yearly</changefreq><priority>0.3</priority></url>
