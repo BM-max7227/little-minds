@@ -1,9 +1,11 @@
 import { Header } from "@/components/Header";
+import { SEO } from "@/components/SEO";
 import { SiteFooter } from "@/components/SiteFooter";
 
 export default function PrivacyPolicy() {
   return (
     <div className="min-h-screen flex flex-col">
+      <SEO title={"Privacy Policy — Little Minds"} description={"How Little Minds protects your privacy. No tracking, no accounts, COPPA-compliant by design."} path="/privacy" />
       <Header audience="learn" />
 
       <main className="flex-1 py-12">

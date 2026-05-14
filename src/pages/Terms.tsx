@@ -1,9 +1,11 @@
 import { Header } from "@/components/Header";
+import { SEO } from "@/components/SEO";
 import { SiteFooter } from "@/components/SiteFooter";
 
 export default function Terms() {
   return (
     <div className="min-h-screen flex flex-col">
+      <SEO title={"Terms of Use — Little Minds"} description={"Terms and conditions for using the Little Minds children's mental health website."} path="/terms" />
       <Header audience="learn" />
 
       <main className="flex-1 py-12">

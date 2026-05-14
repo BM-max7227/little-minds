@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/button";
+import { SEO } from "@/components/SEO";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Header } from "@/components/Header";
 import { SiteFooter } from "@/components/SiteFooter";
@@ -9,6 +10,7 @@ import { SuggestIdeasBanner } from "@/components/SuggestIdeasBanner";
 export default function ParentHome() {
   return (
     <div className="min-h-screen flex flex-col">
+      <SEO title={"For Parents — Little Minds"} description={"Tools, guides, and conversation starters to help parents support their child's mental health and wellbeing."} path="/parent" />
       <Header audience="parent" />
       
       <main className="flex-1">

@@ -1,4 +1,5 @@
 import { Header } from "@/components/Header";
+import { SEO } from "@/components/SEO";
 import { SiteFooter } from "@/components/SiteFooter";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -68,6 +69,7 @@ export default function Dashboard() {
 
   return (
     <div className="min-h-screen flex flex-col">
+      <SEO title={"Weekly Dashboard for Parents — Little Minds"} description={"A weekly dashboard with a tip, conversation starter, and topics to explore for parents."} path="/parent/dashboard" />
       <Header audience="parent" />
 
       <main className="flex-1">

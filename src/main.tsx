@@ -1,4 +1,5 @@
 import { createRoot } from "react-dom/client";
+import { HelmetProvider } from "react-helmet-async";
 import App from "./App.tsx";
 import heroHomePreload from "./assets/hero-home-hq.webp";
 import "./index.css";
@@ -10,4 +11,8 @@ heroPreload.href = heroHomePreload;
 (heroPreload as HTMLLinkElement & { fetchPriority?: string }).fetchPriority = "high";
 document.head.appendChild(heroPreload);
 
-createRoot(document.getElementById("root")!).render(<App />);
+createRoot(document.getElementById("root")!).render(
+  <HelmetProvider>
+    <App />
+  </HelmetProvider>
+);

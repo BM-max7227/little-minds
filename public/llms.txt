@@ -1,0 +1,49 @@
+# Little Minds
+
+> Free, non-profit children's mental health and wellbeing resource for kids, teens, and parents. Made by Bode Munk. No tracking, no accounts, COPPA-compliant.
+
+Little Minds offers plain-language guides, calming activities, conversation starters for parents, and crisis support links for 30+ countries. Content is written for children, teenagers, and the adults who care for them.
+
+## Main sections
+
+- [Home](/): Overview and entry points for kids, parents, and learners.
+- [For Kids and Teens](/kid): Topic cards, activity toolkit, and a breathing tool.
+- [For Parents](/parent): Quick guide, conversation starters, professional support, tools, and a weekly dashboard.
+- [Learn About It](/learn): Plain-language guides to anxiety, sleep, stress, sadness, anger, bullying, grief, and more.
+- [About Us](/about): Who made Little Minds and why.
+- [Contact](/contact): Send a message via the contact form.
+- [Donate](/donate): Support the project.
+
+## Kid topic pages
+
+- [Anxiety (kids)](/kid/anxiety): Ideas and skills for feeling worried a lot.
+- [Stress about school (kids)](/kid/stress)
+- [Sad or low (kids)](/kid/sad)
+- [Trouble sleeping (kids)](/kid/sleep)
+- [Family or friend conflict (kids)](/kid/conflict)
+- [Online or social media pressure (kids)](/kid/socialmedia)
+- [Feeling angry a lot (kids)](/kid/anger)
+- [Body image worries (kids)](/kid/bodyimage)
+- [Bullying (kids)](/kid/bullying)
+- [Grief and loss (kids)](/kid/grief)
+- [Activity Toolkit](/kid/try-this): Breathing, journaling, gratitude, mindfulness with progress tracking.
+- [Take a Breath](/kid/breathe): Interactive breathing tool and 5-4-3-2-1 grounding.
+
+## Learn topic pages
+
+- [Anxiety (learn)](/learn/anxiety)
+- [Sleep problems (learn)](/learn/sleep)
+- [Stress about school (learn)](/learn/stress)
+- [Feeling sad or low (learn)](/learn/sad)
+- [Family or friend conflict (learn)](/learn/conflict)
+- [Online or social media pressure (learn)](/learn/socialmedia)
+- [Feeling angry a lot (learn)](/learn/anger)
+- [Body image worries (learn)](/learn/bodyimage)
+- [Bullying (learn)](/learn/bullying)
+- [Grief and loss (learn)](/learn/grief)
+
+## Optional
+
+- [Disclaimer](/disclaimer): Medical and legal disclaimer.
+- [Terms of Use](/terms)
+- [Privacy Policy](/privacy)

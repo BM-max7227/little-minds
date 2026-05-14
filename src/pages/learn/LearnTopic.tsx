@@ -1,5 +1,6 @@
 import { useParams, useNavigate } from "react-router-dom";
 import { Header } from "@/components/Header";
+import { SEO } from "@/components/SEO";
 import { SiteFooter } from "@/components/SiteFooter";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -49,8 +50,42 @@ export default function LearnTopic() {
     );
   }
 
+  const seoTitle = `${topic.title} — Learn About It — Little Minds`;
+  const seoDesc = topic.description.length > 160 ? topic.description.slice(0, 157) + "..." : topic.description;
+  const path = `/learn/${topic.id}`;
+  const jsonLd = [
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      headline: topic.title,
+      description: seoDesc,
+      author: { "@type": "Person", name: "Bode Munk" },
+      publisher: { "@type": "Organization", name: "Little Minds" },
+      mainEntityOfPage: `https://littleminds.care${path}`,
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        { "@type": "ListItem", position: 1, name: "Home", item: "https://littleminds.care/" },
+        { "@type": "ListItem", position: 2, name: "Learn About It", item: "https://littleminds.care/learn" },
+        { "@type": "ListItem", position: 3, name: topic.title, item: `https://littleminds.care${path}` },
+      ],
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      mainEntity: topic.mythsAndFacts.map((mf) => ({
+        "@type": "Question",
+        name: `Myth: ${mf.myth}`,
+        acceptedAnswer: { "@type": "Answer", text: mf.fact },
+      })),
+    },
+  ];
+
   return (
     <div className="min-h-screen bg-background">
+      <SEO title={seoTitle} description={seoDesc} path={path} type="article" jsonLd={jsonLd} />
       <Header audience="learn" />
       <main className="container mx-auto px-4 py-8 max-w-4xl">
         <Button

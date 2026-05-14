@@ -1,4 +1,5 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { SEO } from "@/components/SEO";
 import { Button } from "@/components/ui/button";
 import { Header } from "@/components/Header";
 import { SiteFooter } from "@/components/SiteFooter";
@@ -14,6 +15,7 @@ import {
 export default function QuickGuide() {
   return (
     <div className="min-h-screen flex flex-col">
+      <SEO title={"Quick Guide for Parents — Little Minds"} description={"A quick guide for parents: signs to watch for, how to talk, and what to do next about your child's mental health."} path="/parent/quick-guide" />
       <Header audience="parent" />
       
       <main className="flex-1 py-12">

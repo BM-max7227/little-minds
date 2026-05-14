@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { SEO } from "@/components/SEO";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -82,6 +83,7 @@ export default function Donate() {
 
   return (
     <div className="min-h-screen flex flex-col">
+      <SEO title={"Donate to Little Minds — Support Free Kids Mental Health"} description={"Help keep Little Minds free for kids and families everywhere. Every donation supports new content and tools."} path="/donate" />
       <Header audience="learn" />
 
       <main className="flex-1">

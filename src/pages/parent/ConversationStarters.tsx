@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { SEO } from "@/components/SEO";
 import { Header } from "@/components/Header";
 import { SiteFooter } from "@/components/SiteFooter";
 import { Button } from "@/components/ui/button";
@@ -13,6 +14,7 @@ export default function ConversationStarters() {
 
   return (
     <div className="min-h-screen flex flex-col">
+      <SEO title={"Conversation Starters for Parents — Little Minds"} description={"Age-appropriate ways to start hard conversations with your child about feelings, friends, school, and more."} path="/parent/conversation-starters" />
       <Header audience="parent" />
       
       <main className="flex-1 py-12">

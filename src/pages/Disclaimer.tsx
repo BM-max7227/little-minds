@@ -1,9 +1,11 @@
 import { Header } from "@/components/Header";
+import { SEO } from "@/components/SEO";
 import { SiteFooter } from "@/components/SiteFooter";
 
 export default function Disclaimer() {
   return (
     <div className="min-h-screen flex flex-col">
+      <SEO title={"Disclaimer — Little Minds"} description={"Medical and legal disclaimer for the Little Minds children's mental health website."} path="/disclaimer" />
       <Header audience="learn" />
 
       <main className="flex-1 py-12">
