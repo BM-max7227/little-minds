@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { SEO } from "@/components/SEO";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -76,6 +77,7 @@ export default function Contact() {
 
   return (
     <div className="min-h-screen flex flex-col">
+      <SEO title={"Contact Little Minds — Send Us a Message"} description={"Get in touch with Little Minds. Share feedback, ideas, or ask a question through our contact form."} path="/contact" />
       <Header audience="learn" />
 
       <main className="flex-1">

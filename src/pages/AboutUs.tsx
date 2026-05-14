@@ -1,4 +1,5 @@
 import { Header } from "@/components/Header";
+import { SEO } from "@/components/SEO";
 import { SiteFooter } from "@/components/SiteFooter";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Link } from "react-router-dom";
@@ -7,6 +8,7 @@ import { Mail } from "lucide-react";
 export default function AboutUs() {
   return (
     <div className="min-h-screen flex flex-col">
+      <SEO title={"About Little Minds — Free Kids Mental Health Resource"} description={"Little Minds is a free, non-profit mental health website made by Bode Munk to help kids, teens, and parents."} path="/about" />
       <Header audience="learn" />
       
       <main className="flex-1 py-12">

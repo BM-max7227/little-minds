@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { SEO } from "@/components/SEO";
 import { SiteFooter } from "@/components/SiteFooter";
 import { Header } from "@/components/Header";
 import { Card, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -27,6 +28,7 @@ export default function LearnHome() {
 
   return (
     <div className="min-h-screen bg-background">
+      <SEO title={"Learn About It — Little Minds"} description={"Plain-language guides to anxiety, sleep, stress, sadness, anger, bullying, grief, body image, and more."} path="/learn" />
       <Header audience="learn" />
       <main className="container mx-auto px-4 py-8 max-w-6xl">
         <div className="mb-12 max-w-3xl">

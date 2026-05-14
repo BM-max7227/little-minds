@@ -1,4 +1,5 @@
 import { useState, useCallback } from "react";
+import { SEO } from "@/components/SEO";
 import { Header } from "@/components/Header";
 import { SiteFooter } from "@/components/SiteFooter";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -77,6 +78,7 @@ export default function TryThis() {
 
   return (
     <div className="min-h-screen bg-background">
+      <SEO title={"Activity Toolkit — Try This — Little Minds"} description={"Calming activities for kids: breathing, journaling, gratitude, and mindfulness with progress tracking."} path="/kid/try-this" />
       <Header audience="kid" />
       <main className="container mx-auto px-4 py-8 max-w-6xl">
         <div className="mb-8">

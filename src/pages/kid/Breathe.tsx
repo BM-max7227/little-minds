@@ -1,4 +1,5 @@
 import { useState, useEffect, useCallback } from "react";
+import { SEO } from "@/components/SEO";
 import { Header } from "@/components/Header";
 import { SiteFooter } from "@/components/SiteFooter";
 import { Button } from "@/components/ui/button";
@@ -252,6 +253,7 @@ export default function Breathe() {
 
   return (
     <div className="min-h-screen flex flex-col">
+      <SEO title={"Take a Breath — Little Minds"} description={"Interactive breathing tool and 5-4-3-2-1 grounding exercise to help you feel calm right now."} path="/kid/breathe" />
       <Header audience="kid" />
 
       <main className="flex-1 py-6">

@@ -1,4 +1,5 @@
 import { Header } from "@/components/Header";
+import { SEO } from "@/components/SEO";
 import { SiteFooter } from "@/components/SiteFooter";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -192,6 +193,7 @@ export default function Tools() {
     <p>What to adjust next week: _______________________________</p>
   `;
   return <div className="min-h-screen flex flex-col">
+      <SEO title={"Tools and Templates for Parents — Little Minds"} description={"Printable templates and tools for parents — feelings charts, routines, and conversation guides."} path="/parent/tools" />
       <Header audience="parent" />
       
       <main className="flex-1 py-12">

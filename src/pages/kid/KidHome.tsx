@@ -1,4 +1,5 @@
 import { Header } from "@/components/Header";
+import { SEO } from "@/components/SEO";
 import { SiteFooter } from "@/components/SiteFooter";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Link } from "react-router-dom";
@@ -28,6 +29,7 @@ export default function KidHome() {
 
   return (
     <div className="min-h-screen flex flex-col">
+      <SEO title={"For Kids and Teens — Little Minds"} description={"Tap a topic to explore feelings, get ideas you can try today, and watch short videos. You are not alone."} path="/kid" />
       <Header audience="kid" />
       
       <main className="flex-1 py-12">

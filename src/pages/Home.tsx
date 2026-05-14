@@ -1,4 +1,5 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { SEO } from "@/components/SEO";
 import { Header } from "@/components/Header";
 import { SiteFooter } from "@/components/SiteFooter";
 import { Heart, Sparkles, BookOpen, ChevronDown } from "lucide-react";
@@ -9,6 +10,7 @@ import heroImageSmall from "@/assets/hero-home-1280.webp";
 export default function Home() {
   return (
     <div className="min-h-screen flex flex-col bg-background">
+      <SEO title={"Little Minds: Kids Mental Health & Wellbeing"} description={"Free, non-profit mental health resource for kids, teens, and parents — guides, calming activities, and crisis support."} path="/" />
       <Header />
 
       <section className="relative min-h-[calc(100vh-4rem)] flex items-center justify-center overflow-hidden bg-muted">

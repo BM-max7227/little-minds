@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { SEO } from "@/components/SEO";
 import { Header } from "@/components/Header";
 import { SiteFooter } from "@/components/SiteFooter";
 import { Button } from "@/components/ui/button";
@@ -16,6 +17,7 @@ export default function FindSupport() {
 
   return (
     <div className="min-h-screen flex flex-col">
+      <SEO title={"Find Professional Support — Little Minds"} description={"Find therapists, helplines, and crisis resources in 30+ countries to support your child's mental health."} path="/parent/find-support" />
       <Header audience="parent" />
 
       <main className="flex-1 py-12">
