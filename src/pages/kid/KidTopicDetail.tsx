@@ -1,5 +1,6 @@
 import { useParams, useNavigate, Link } from "react-router-dom";
 import { Header } from "@/components/Header";
+import { SEO } from "@/components/SEO";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -53,7 +54,31 @@ export default function KidTopicDetail() {
         </main>
       </div>;
   }
+  const seoTitle = `${topic.title} for Kids and Teens — Little Minds`;
+  const seoDesc = topic.subtitle.length > 160 ? topic.subtitle.slice(0, 157) + "..." : topic.subtitle;
+  const path = `/kid/${topic.id}`;
+  const jsonLd = [
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      headline: topic.title,
+      description: seoDesc,
+      author: { "@type": "Person", name: "Bode Munk" },
+      publisher: { "@type": "Organization", name: "Little Minds" },
+      mainEntityOfPage: `https://littleminds.care${path}`,
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        { "@type": "ListItem", position: 1, name: "Home", item: "https://littleminds.care/" },
+        { "@type": "ListItem", position: 2, name: "For Kids", item: "https://littleminds.care/kid" },
+        { "@type": "ListItem", position: 3, name: topic.title, item: `https://littleminds.care${path}` },
+      ],
+    },
+  ];
   return <div className="min-h-screen bg-background">
+      <SEO title={seoTitle} description={seoDesc} path={path} type="article" jsonLd={jsonLd} />
       <Header audience="kid" />
       <main className="container mx-auto px-4 py-8 max-w-4xl">
         <Button variant="ghost" onClick={() => navigate("/kid")} className="mb-4">
