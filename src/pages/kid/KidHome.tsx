@@ -62,13 +62,13 @@ export default function KidHome() {
             </div>
           </div>
 
-          {/* Word of the Day + Did You Know row */}
+          {/* Word of the Week + Did You Know row */}
           <div className="grid sm:grid-cols-2 gap-4 mb-10">
             <Card className="border-primary/20 bg-primary/5">
               <CardHeader className="pb-2">
                 <CardTitle className="text-sm font-medium flex items-center gap-2 text-primary">
                   <BookOpen className="h-4 w-4" />
-                  Word of the Day
+                  Word of the Week
                 </CardTitle>
               </CardHeader>
               <CardContent>
