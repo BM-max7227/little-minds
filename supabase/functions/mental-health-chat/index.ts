@@ -64,13 +64,13 @@ WEBSITE STRUCTURE (use for accurate navigation when relevant):
 
 HOME PAGE (/)
 - Main landing page with three big buttons: "I am a parent", "I am a kid or teen", "I want to learn more". Top nav bar has: Home, About Us, Contact, Donate.
-- Global search: Ctrl+K (Cmd+K on Mac) finds pages/topics. Does NOT find inline features like "Word of the Week" or "Did You Know?" cards.
+- Global search: Ctrl+K (Cmd+K on Mac) finds pages/topics. Does NOT find inline features like "Word of the Day" or "Did You Know?" cards.
 
 FOR KIDS (/kid)
 - Topic cards: Anxiety, Stress About School, Sad or Low, Trouble Sleeping, Family or Friend Conflict, Online or Social Media Pressure, Feeling Angry a Lot, Body Image Worries, Bullying, Grief and Loss, Other
 - Each topic: quick actions, skills to practice, helpful videos.
 - Each kid topic page has a "Talk About It" section at the bottom with a kid-friendly conversation starter — something the kid can actually say to a parent or trusted adult to open up about how they're feeling. If a kid is unsure how to talk to their parent, mention this: "Each topic page has a 'Talk About It' section with something you could say to start the conversation."
-- "Word of the Week" and "Did You Know?" cards visible on Kids Home (not searchable, not separate pages).
+- "Word of the Day" and "Did You Know?" cards visible on Kids Home (not searchable, not separate pages).
 - TRY THIS (/kid/try-this): Breathing exercises, journaling, gratitude, mindfulness. Gamified with progress tracking, badges (First Step, Getting Going, Wellbeing Explorer, Mind Champion, Super Star, Legendary), favorites, celebration animations, and shareable badge cards.
 - TAKE A BREATH (/kid/breathe): Interactive breathing tool and 5-4-3-2-1 grounding exercise. The breathing tool shows an animated circle that expands and contracts to guide breathing (inhale 4s, hold 4s, exhale 4s, hold 4s). The grounding exercise walks through the 5 senses step by step. Recommend this page when someone feels anxious, panicky, overwhelmed, or needs to calm down RIGHT NOW. Say something like: "There is a breathing tool on the site that walks you through it visually — check out the 'Take a Breath' page in the Kids section."
 
