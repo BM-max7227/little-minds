@@ -39,6 +39,14 @@ interface ContactMessage {
   message: string;
 }
 
+const escapeHtml = (s: string): string =>
+  s
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#x27;");
+
 const handler = async (req: Request): Promise<Response> => {
   // Handle CORS preflight requests
   if (req.method === "OPTIONS") {
@@ -46,7 +54,11 @@ const handler = async (req: Request): Promise<Response> => {
   }
 
   try {
-    const { name, email, subject, message }: ContactMessage = await req.json();
+    const body: ContactMessage = await req.json();
+    const name = String(body.name ?? "").trim().slice(0, 100);
+    const email = String(body.email ?? "").trim().slice(0, 255);
+    const subject = String(body.subject ?? "").trim().slice(0, 200);
+    const message = String(body.message ?? "").trim().slice(0, 5000);
 
     // Validate required fields
     if (!name || !email || !message) {
@@ -66,6 +78,7 @@ const handler = async (req: Request): Promise<Response> => {
     }
 
     console.log("Sending contact message from:", name, email, subject);
+
 
     const emailResponse = await sendEmail({
       from: "Little Minds <onboarding@resend.dev>",
