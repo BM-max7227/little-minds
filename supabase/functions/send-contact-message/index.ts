@@ -39,6 +39,14 @@ interface ContactMessage {
   message: string;
 }
 
+const escapeHtml = (s: string): string =>
+  s
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#x27;");
+
 const handler = async (req: Request): Promise<Response> => {
   // Handle CORS preflight requests
   if (req.method === "OPTIONS") {
@@ -46,7 +54,11 @@ const handler = async (req: Request): Promise<Response> => {
   }
 
   try {
-    const { name, email, subject, message }: ContactMessage = await req.json();
+    const body: ContactMessage = await req.json();
+    const name = String(body.name ?? "").trim().slice(0, 100);
+    const email = String(body.email ?? "").trim().slice(0, 255);
+    const subject = String(body.subject ?? "").trim().slice(0, 200);
+    const message = String(body.message ?? "").trim().slice(0, 5000);
 
     // Validate required fields
     if (!name || !email || !message) {
@@ -67,27 +79,28 @@ const handler = async (req: Request): Promise<Response> => {
 
     console.log("Sending contact message from:", name, email, subject);
 
+
     const emailResponse = await sendEmail({
       from: "Little Minds <onboarding@resend.dev>",
       to: ["bodemunk2010@gmail.com"],
-      subject: `[Little Minds Contact] ${subject || "New Message"}`,
+      subject: `[Little Minds Contact] ${escapeHtml(subject || "New Message")}`,
       html: `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
           <h1 style="color: #7c3aed;">New Contact Message</h1>
           <p>You've received a new message from the Little Minds website.</p>
           
           <div style="background-color: #f3f4f6; padding: 20px; border-radius: 8px; margin: 20px 0;">
-            <p><strong>Name:</strong> ${name}</p>
-            <p><strong>Email:</strong> ${email}</p>
-            <p><strong>Subject:</strong> ${subject || "General Inquiry"}</p>
+            <p><strong>Name:</strong> ${escapeHtml(name)}</p>
+            <p><strong>Email:</strong> ${escapeHtml(email)}</p>
+            <p><strong>Subject:</strong> ${escapeHtml(subject || "General Inquiry")}</p>
           </div>
           
           <div style="padding: 20px; border-left: 4px solid #7c3aed; background-color: #faf5ff; margin: 20px 0;">
             <p><strong>Message:</strong></p>
-            <p style="white-space: pre-wrap;">${message}</p>
+            <p style="white-space: pre-wrap;">${escapeHtml(message)}</p>
           </div>
           
-          <p>You can reply directly to this person at: <a href="mailto:${email}">${email}</a></p>
+          <p>You can reply directly to this person at: <a href="mailto:${encodeURIComponent(email)}">${escapeHtml(email)}</a></p>
           
           <hr style="border: none; border-top: 1px solid #e5e7eb; margin: 20px 0;" />
           <p style="color: #6b7280; font-size: 12px;">This email was sent from the Little Minds contact form.</p>
@@ -95,6 +108,7 @@ const handler = async (req: Request): Promise<Response> => {
       `,
       replyTo: email,
     });
+
 
     console.log("Contact message email sent successfully:", emailResponse);
 

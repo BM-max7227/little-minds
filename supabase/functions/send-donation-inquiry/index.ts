@@ -41,6 +41,14 @@ interface DonationInquiry {
   message?: string;
 }
 
+const escapeHtml = (s: string): string =>
+  s
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#x27;");
+
 const handler = async (req: Request): Promise<Response> => {
   // Handle CORS preflight requests
   if (req.method === "OPTIONS") {
@@ -48,7 +56,11 @@ const handler = async (req: Request): Promise<Response> => {
   }
 
   try {
-    const { donorName, donorEmail, amount, message }: DonationInquiry = await req.json();
+    const body: DonationInquiry = await req.json();
+    const donorName = String(body.donorName ?? "").trim().slice(0, 100);
+    const donorEmail = String(body.donorEmail ?? "").trim().slice(0, 255);
+    const amount = String(body.amount ?? "").trim().slice(0, 10);
+    const message = body.message ? String(body.message).trim().slice(0, 2000) : "";
 
     // Validate required fields
     if (!donorName || !donorEmail || !amount) {
@@ -80,20 +92,20 @@ const handler = async (req: Request): Promise<Response> => {
     const emailResponse = await sendEmail({
       from: "Little Minds <onboarding@resend.dev>",
       to: ["bodemunk2010@gmail.com"],
-      subject: `New Donation Inquiry from ${donorName}`,
+      subject: `New Donation Inquiry from ${escapeHtml(donorName)}`,
       html: `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
           <h1 style="color: #7c3aed;">New Donation Inquiry</h1>
           <p>You've received a new donation inquiry from the Little Minds website.</p>
           
           <div style="background-color: #f3f4f6; padding: 20px; border-radius: 8px; margin: 20px 0;">
-            <p><strong>Name:</strong> ${donorName}</p>
-            <p><strong>Email:</strong> ${donorEmail}</p>
-            <p><strong>Donation Amount:</strong> £${amount}</p>
-            ${message ? `<p><strong>Message:</strong> ${message}</p>` : ''}
+            <p><strong>Name:</strong> ${escapeHtml(donorName)}</p>
+            <p><strong>Email:</strong> ${escapeHtml(donorEmail)}</p>
+            <p><strong>Donation Amount:</strong> £${escapeHtml(amount)}</p>
+            ${message ? `<p><strong>Message:</strong> ${escapeHtml(message)}</p>` : ''}
           </div>
           
-          <p>You can reply directly to this person at: <a href="mailto:${donorEmail}">${donorEmail}</a></p>
+          <p>You can reply directly to this person at: <a href="mailto:${encodeURIComponent(donorEmail)}">${escapeHtml(donorEmail)}</a></p>
           
           <hr style="border: none; border-top: 1px solid #e5e7eb; margin: 20px 0;" />
           <p style="color: #6b7280; font-size: 12px;">This email was sent from the Little Minds donation form.</p>
@@ -101,6 +113,7 @@ const handler = async (req: Request): Promise<Response> => {
       `,
       replyTo: donorEmail,
     });
+
 
     console.log("Donation inquiry email sent successfully:", emailResponse);
 

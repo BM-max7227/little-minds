@@ -332,16 +332,40 @@ serve(async (req) => {
   }
 
   try {
-    const { messages, audience } = await req.json();
+    const { messages: rawMessages, audience } = await req.json();
     const LOVABLE_API_KEY = Deno.env.get("LOVABLE_API_KEY");
     if (!LOVABLE_API_KEY) throw new Error("LOVABLE_API_KEY is not configured");
 
+    // Validate + bound the incoming conversation history.
+    if (!Array.isArray(rawMessages) || rawMessages.length === 0) {
+      return new Response(JSON.stringify({ error: "Invalid messages" }), {
+        status: 400,
+        headers: { ...corsHeaders, "Content-Type": "application/json" },
+      });
+    }
+    const MAX_MESSAGES = 20;
+    const MAX_MSG_LENGTH = 2000;
+    const messages = rawMessages
+      .filter((m: { role?: string; content?: unknown }) =>
+        m && (m.role === "user" || m.role === "assistant") && typeof m.content === "string"
+      )
+      .slice(-MAX_MESSAGES)
+      .map((m: { role: string; content: string }) => ({
+        role: m.role,
+        content: String(m.content).slice(0, MAX_MSG_LENGTH),
+      }));
+
+    if (messages.length === 0) {
+      return new Response(JSON.stringify({ error: "Invalid messages" }), {
+        status: 400,
+        headers: { ...corsHeaders, "Content-Type": "application/json" },
+      });
+    }
+
     // Kid-safety pre-filter: scan the latest user message for inappropriate content.
-    // If it matches, return a friendly redirect as a streamed response — never call the AI.
-    const latestUser = Array.isArray(messages)
-      ? [...messages].reverse().find((m: { role?: string; content?: string }) => m?.role === "user")
-      : null;
+    const latestUser = [...messages].reverse().find((m) => m.role === "user") ?? null;
     const latestUserContent = latestUser?.content ?? "";
+
 
     const safetyCheck = checkContentSafety(latestUserContent);
     if (!safetyCheck.safe) {
@@ -359,15 +383,15 @@ serve(async (req) => {
       : "";
 
     // Build the messages array sent to the AI with the scrubbed latest message.
-    const safeMessages = piiFound.length > 0 && Array.isArray(messages)
-      ? messages.map((m: { role?: string; content?: string }, idx: number, arr: any[]) => {
-          // Only replace the LAST user message (the one we scrubbed)
+    const safeMessages = piiFound.length > 0
+      ? messages.map((m, idx, arr) => {
           if (m === latestUser && idx === arr.lastIndexOf(latestUser)) {
             return { ...m, content: scrubbedContent + piiNotice };
           }
           return m;
         })
       : messages;
+
 
     // Crisis detection — flag self-harm / suicide language for force-prepended Help Now banner.
     const isCrisis = isCrisisMessage(latestUserContent);
