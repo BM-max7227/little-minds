@@ -383,15 +383,15 @@ serve(async (req) => {
       : "";
 
     // Build the messages array sent to the AI with the scrubbed latest message.
-    const safeMessages = piiFound.length > 0 && Array.isArray(messages)
-      ? messages.map((m: { role?: string; content?: string }, idx: number, arr: any[]) => {
-          // Only replace the LAST user message (the one we scrubbed)
+    const safeMessages = piiFound.length > 0
+      ? messages.map((m, idx, arr) => {
           if (m === latestUser && idx === arr.lastIndexOf(latestUser)) {
             return { ...m, content: scrubbedContent + piiNotice };
           }
           return m;
         })
       : messages;
+
 
     // Crisis detection — flag self-harm / suicide language for force-prepended Help Now banner.
     const isCrisis = isCrisisMessage(latestUserContent);
