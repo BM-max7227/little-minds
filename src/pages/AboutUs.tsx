@@ -1,9 +1,8 @@
 import { Header } from "@/components/Header";
 import { SEO } from "@/components/SEO";
 import { SiteFooter } from "@/components/SiteFooter";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Link } from "react-router-dom";
-import { Mail, Sprout, HeartHandshake, BookOpen } from "lucide-react";
+import { Mail } from "lucide-react";
 
 export default function AboutUs() {
   return (
@@ -38,37 +37,7 @@ export default function AboutUs() {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-6 mb-12">
-            <Card>
-              <CardHeader>
-                <Sprout className="h-10 w-10 text-primary mb-3" />
-                <CardTitle>Kids are different</CardTitle>
-                <CardDescription>
-                  Mental health shows up differently in children and teens than in adults. We explain what it really looks like in young minds.
-                </CardDescription>
-              </CardHeader>
-            </Card>
 
-            <Card>
-              <CardHeader>
-                <HeartHandshake className="h-10 w-10 text-primary mb-3" />
-                <CardTitle>Approach matters</CardTitle>
-                <CardDescription>
-                  We help parents respond with calm and care instead of frustration — because how you show up makes all the difference.
-                </CardDescription>
-              </CardHeader>
-            </Card>
-
-            <Card>
-              <CardHeader>
-                <BookOpen className="h-10 w-10 text-primary mb-3" />
-                <CardTitle>Tools for kids</CardTitle>
-                <CardDescription>
-                  Kids facing these feelings get resources made just for them, so they can learn, cope, and feel understood.
-                </CardDescription>
-              </CardHeader>
-            </Card>
-          </div>
 
           <div className="prose prose-lg max-w-none mb-12 space-y-6">
             <p>
