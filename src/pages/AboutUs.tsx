@@ -1,9 +1,8 @@
 import { Header } from "@/components/Header";
 import { SEO } from "@/components/SEO";
 import { SiteFooter } from "@/components/SiteFooter";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Link } from "react-router-dom";
-import { Mail, Sprout, HeartHandshake, BookOpen } from "lucide-react";
+import { Mail } from "lucide-react";
 
 export default function AboutUs() {
   return (
