@@ -12,6 +12,7 @@ import { Link } from "react-router-dom";
 import { Mail, Loader2, CheckCircle, Send } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
+import { suggestEmail } from "@/lib/emailSuggestion";
 
 export default function Contact() {
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -25,6 +26,7 @@ export default function Contact() {
     message: "",
   });
   const { toast } = useToast();
+  const [emailSuggestion, setEmailSuggestion] = useState<string | null>(null);
 
   const isValidEmail = (email: string) => /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(email);
 
@@ -166,10 +168,30 @@ export default function Contact() {
                           type="email"
                           placeholder="your@email.com"
                           value={formData.email}
-                          onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                          onChange={(e) => {
+                            setFormData({ ...formData, email: e.target.value });
+                            if (emailSuggestion) setEmailSuggestion(null);
+                          }}
+                          onBlur={(e) => setEmailSuggestion(suggestEmail(e.target.value))}
                           maxLength={255}
                           required
                         />
+                        {emailSuggestion && (
+                          <p className="text-xs text-muted-foreground">
+                            Did you mean{" "}
+                            <button
+                              type="button"
+                              className="underline font-medium text-foreground hover:text-primary transition-colors"
+                              onClick={() => {
+                                setFormData({ ...formData, email: emailSuggestion });
+                                setEmailSuggestion(null);
+                              }}
+                            >
+                              {emailSuggestion}
+                            </button>
+                            ?
+                          </p>
+                        )}
                       </div>
 
                       <div className="space-y-2">
