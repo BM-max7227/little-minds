@@ -26,15 +26,15 @@ export default function AboutUs() {
             </p>
 
             <p>
-              Bode started Little Minds because he saw how different mental health looks in kids compared to grown-ups. The way a child experiences worry, sadness, or stress isn't the same as it is for an adult — and it often shows up in ways that are easy to miss or misunderstand. He wanted a place dedicated just to that: a space that explains what mental health really looks like in kids and teens, in words that actually make sense.
+              Bode started Little Minds because he saw how different mental health looks in kids compared to adults. The way a child feels worry, sadness, or pressure is not the same as it is for an adult, and it often shows up in ways that are easy to miss. Something as everyday as school stress, friendship trouble, or feeling like they are never good enough can weigh on a young mind in ways that are hard to put into words. He wanted a place dedicated just to that, a space that explains what mental health really looks like in kids and teens, in language that actually makes sense.
             </p>
 
             <p>
-              He also believes that parents deserve real help, not guesswork. Supporting a child through a hard time isn't about screaming or trying to fix everything at once — there are specific, gentle ways to notice what's going on, start a conversation, and respond with care. <em>How</em> you approach a child matters just as much as what you say.
+              He also believes that parents deserve real help, not guesswork. Supporting a child through a hard time is not about shouting or trying to fix everything at once. There are calm, specific ways to notice what is going on, start a conversation, and respond with care. The way you approach a child matters just as much as what you say, and small changes in how you show up can change everything.
             </p>
 
             <p>
-              And just as importantly, the kids going through these feelings deserve resources of their own — tools and explanations made for them, so they can learn about what they're feeling and know they're not alone.
+              And just as importantly, the kids living with these feelings deserve resources made for them. Whether it is exam pressure, a tough day at school, or a worry they cannot shake, they should have tools and explanations they can understand, so they can learn about what they are feeling and know they are never alone.
             </p>
           </div>
 
