@@ -38,7 +38,6 @@ export function Header({ audience }: HeaderProps) {
       case "learn":
         return [
           { label: "Home", path: "/learn" },
-          { label: "Topics", path: "/learn" },
           { label: "About Us", path: "/about" },
           { label: "Contact", path: "/contact" },
         ];
