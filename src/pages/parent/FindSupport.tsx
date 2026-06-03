@@ -93,6 +93,9 @@ export default function FindSupport() {
                     <li key={index}>• {tip}</li>
                   ))}
                 </ul>
+                <p className="text-xs text-muted-foreground pt-4">
+                  These are general pointers, not financial advice. Coverage, costs, and what is free vary a lot by country and provider, so always check the details directly with your insurer, school, or the service you are looking into.
+                </p>
               </CardContent>
             </Card>
           </section>
