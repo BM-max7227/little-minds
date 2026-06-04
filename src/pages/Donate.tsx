@@ -285,27 +285,27 @@ export default function Donate() {
             <div className="max-w-3xl mx-auto">
               <h2 className="text-2xl font-bold text-center mb-8">How Your Donation Helps</h2>
               <div className="grid sm:grid-cols-3 gap-6">
-                <div className="text-center">
-                  <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-primary/20 mb-4">
-                    <BookOpen className="h-6 w-6 text-primary" />
+                <div className="text-center group">
+                  <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-sky-100 mb-4 transition-transform duration-300 group-hover:-translate-y-1">
+                    <BookOpen className="h-7 w-7 text-sky-600" />
                   </div>
                   <h3 className="font-semibold mb-2">Free Resources</h3>
                   <p className="text-sm text-muted-foreground">
                     Creates more educational materials for children and parents
                   </p>
                 </div>
-                <div className="text-center">
-                  <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-primary/20 mb-4">
-                    <Users className="h-6 w-6 text-primary" />
+                <div className="text-center group">
+                  <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-teal-100 mb-4 transition-transform duration-300 group-hover:-translate-y-1">
+                    <Users className="h-7 w-7 text-teal-600" />
                   </div>
                   <h3 className="font-semibold mb-2">Reach More Families</h3>
                   <p className="text-sm text-muted-foreground">
                     Helps us reach more children and families in need
                   </p>
                 </div>
-                <div className="text-center">
-                  <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-primary/20 mb-4">
-                    <Heart className="h-6 w-6 text-primary" />
+                <div className="text-center group">
+                  <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-rose-100 mb-4 transition-transform duration-300 group-hover:-translate-y-1">
+                    <Heart className="h-7 w-7 text-rose-600" />
                   </div>
                   <h3 className="font-semibold mb-2">Support Services</h3>
                   <p className="text-sm text-muted-foreground">

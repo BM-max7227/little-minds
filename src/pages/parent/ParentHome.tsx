@@ -59,10 +59,10 @@ export default function ParentHome() {
 
               <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
                 <Link to="/parent/quick-guide" className="group">
-                  <Card className="h-full transition-all duration-200 hover:shadow-lg hover:border-primary/40 group-hover:-translate-y-1">
+                  <Card className="h-full rounded-3xl border-2 border-transparent shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-sky-200/50">
                     <CardHeader className="pb-3">
-                      <div className="h-12 w-12 rounded-xl bg-primary/10 flex items-center justify-center mb-3">
-                        <Eye className="h-6 w-6 text-primary" />
+                      <div className="h-12 w-12 rounded-2xl bg-sky-100 flex items-center justify-center mb-3">
+                        <Eye className="h-6 w-6 text-sky-600" />
                       </div>
                       <CardTitle className="text-lg">Quick Guide</CardTitle>
                       <CardDescription>
@@ -78,10 +78,10 @@ export default function ParentHome() {
                 </Link>
 
                 <Link to="/parent/conversation-starters" className="group">
-                  <Card className="h-full transition-all duration-200 hover:shadow-lg hover:border-primary/40 group-hover:-translate-y-1">
+                  <Card className="h-full rounded-3xl border-2 border-transparent shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-amber-200/50">
                     <CardHeader className="pb-3">
-                      <div className="h-12 w-12 rounded-xl bg-primary/10 flex items-center justify-center mb-3">
-                        <MessageCircle className="h-6 w-6 text-primary" />
+                      <div className="h-12 w-12 rounded-2xl bg-amber-100 flex items-center justify-center mb-3">
+                        <MessageCircle className="h-6 w-6 text-amber-600" />
                       </div>
                       <CardTitle className="text-lg">Conversation Starters</CardTitle>
                       <CardDescription>
@@ -97,10 +97,10 @@ export default function ParentHome() {
                 </Link>
 
                 <Link to="/parent/find-support" className="group">
-                  <Card className="h-full transition-all duration-200 hover:shadow-lg hover:border-primary/40 group-hover:-translate-y-1">
+                  <Card className="h-full rounded-3xl border-2 border-transparent shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-teal-200/50">
                     <CardHeader className="pb-3">
-                      <div className="h-12 w-12 rounded-xl bg-primary/10 flex items-center justify-center mb-3">
-                        <Users className="h-6 w-6 text-primary" />
+                      <div className="h-12 w-12 rounded-2xl bg-teal-100 flex items-center justify-center mb-3">
+                        <Users className="h-6 w-6 text-teal-600" />
                       </div>
                       <CardTitle className="text-lg">Find Support</CardTitle>
                       <CardDescription>
@@ -116,10 +116,10 @@ export default function ParentHome() {
                 </Link>
 
                 <Link to="/parent/tools" className="group">
-                  <Card className="h-full transition-all duration-200 hover:shadow-lg hover:border-primary/40 group-hover:-translate-y-1">
+                  <Card className="h-full rounded-3xl border-2 border-transparent shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-rose-200/50">
                     <CardHeader className="pb-3">
-                      <div className="h-12 w-12 rounded-xl bg-primary/10 flex items-center justify-center mb-3">
-                        <Wrench className="h-6 w-6 text-primary" />
+                      <div className="h-12 w-12 rounded-2xl bg-rose-100 flex items-center justify-center mb-3">
+                        <Wrench className="h-6 w-6 text-rose-600" />
                       </div>
                       <CardTitle className="text-lg">Tools & Templates</CardTitle>
                       <CardDescription>
