@@ -119,7 +119,7 @@ export default function Donate() {
                 <CardHeader className="text-center">
                   <CardTitle className="flex items-center justify-center gap-2">
                     <Heart className="h-5 w-5 text-primary" />
-                    Make a Donation
+                    Make a Donation Inquiry
                   </CardTitle>
                   <CardDescription>
                     Fill in your details and we'll get in touch about your donation
