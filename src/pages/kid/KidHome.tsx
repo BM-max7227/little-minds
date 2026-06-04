@@ -95,9 +95,15 @@ export default function KidHome() {
           <div id="topic-grid" className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 scroll-mt-8">
             {topicCards.map((topic) => (
               <Link key={topic.id} to={`/kid/${topic.id}`} className="block group">
-                <Card className="h-full transition-all hover:shadow-lg hover:border-primary cursor-pointer">
-                  <CardHeader className="text-center pb-2">
-                    <div className="text-5xl mb-2">{topic.icon}</div>
+                <Card
+                  className={`h-full rounded-3xl border-2 border-transparent shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl ${topic.glow} cursor-pointer`}
+                >
+                  <CardHeader className="text-center pb-4 pt-6">
+                    <div
+                      className={`mx-auto mb-3 flex h-16 w-16 items-center justify-center rounded-2xl text-4xl transition-transform duration-300 group-hover:scale-105 ${topic.tile}`}
+                    >
+                      {topic.icon}
+                    </div>
                     <CardTitle className="text-base">{topic.title}</CardTitle>
                   </CardHeader>
                 </Card>
