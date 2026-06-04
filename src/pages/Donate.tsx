@@ -115,10 +115,12 @@ export default function Donate() {
         <section className="py-8">
           <div className="container px-4">
             <div className="max-w-md mx-auto">
-              <Card className="border-2">
+              <Card className="border-2 rounded-3xl bg-rose-50/60 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-rose-200/50">
                 <CardHeader className="text-center">
+                  <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-rose-100 mb-3 mx-auto">
+                    <Heart className="h-7 w-7 text-rose-600" />
+                  </div>
                   <CardTitle className="flex items-center justify-center gap-2">
-                    <Heart className="h-5 w-5 text-primary" />
                     Make a Donation Inquiry
                   </CardTitle>
                   <CardDescription>
