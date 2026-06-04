@@ -95,6 +95,9 @@ export function GlobalSearch() {
       { id: "about", title: "About Us", description: "Learn about Little Minds and our mission", path: "/about", category: "Pages", keywords: ["about", "mission", "team", "nonprofit"] },
       { id: "donate", title: "Donate", description: "Support Little Minds with a donation", path: "/donate", category: "Pages", keywords: ["donation", "give", "support", "fund"] },
       { id: "contact", title: "Contact", description: "Get in touch with the Little Minds team", path: "/contact", category: "Pages", keywords: ["contact", "email", "message", "reach out"] },
+      { id: "disclaimer", title: "Disclaimer", description: "Important information about using this site", path: "/disclaimer", category: "Pages", keywords: ["disclaimer", "legal", "medical disclaimer"] },
+      { id: "terms", title: "Terms of Use", description: "Terms and conditions for using Little Minds", path: "/terms", category: "Pages", keywords: ["terms", "legal", "terms of use", "conditions"] },
+      { id: "privacy", title: "Privacy Policy", description: "How we handle your privacy and data", path: "/privacy", category: "Pages", keywords: ["privacy", "legal", "data", "policy"] },
     ];
 
     results.push(...staticPages);
