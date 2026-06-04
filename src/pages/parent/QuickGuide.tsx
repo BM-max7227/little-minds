@@ -28,9 +28,11 @@ export default function QuickGuide() {
           </div>
 
           <div className="grid md:grid-cols-2 gap-6">
-            <Card>
+            <Card className="rounded-3xl border-2 border-transparent shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-sky-200/50">
               <CardHeader>
-                <Eye className="h-10 w-10 text-primary mb-3" />
+                <div className="h-12 w-12 rounded-2xl bg-sky-100 flex items-center justify-center mb-3">
+                  <Eye className="h-6 w-6 text-sky-600" />
+                </div>
                 <CardTitle>Notice</CardTitle>
                 <CardDescription>
                   Common signs to watch for in mood, sleep, school, friends, and online time
@@ -57,9 +59,11 @@ export default function QuickGuide() {
               </CardContent>
             </Card>
 
-            <Card>
+            <Card className="rounded-3xl border-2 border-transparent shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-amber-200/50">
               <CardHeader>
-                <MessageSquare className="h-10 w-10 text-primary mb-3" />
+                <div className="h-12 w-12 rounded-2xl bg-amber-100 flex items-center justify-center mb-3">
+                  <MessageSquare className="h-6 w-6 text-amber-600" />
+                </div>
                 <CardTitle>Talk</CardTitle>
                 <CardDescription>
                   How to start the conversation and keep it going
@@ -105,9 +109,11 @@ export default function QuickGuide() {
               </CardContent>
             </Card>
 
-            <Card>
+            <Card className="rounded-3xl border-2 border-transparent shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-teal-200/50">
               <CardHeader>
-                <FileText className="h-10 w-10 text-primary mb-3" />
+                <div className="h-12 w-12 rounded-2xl bg-teal-100 flex items-center justify-center mb-3">
+                  <FileText className="h-6 w-6 text-teal-600" />
+                </div>
                 <CardTitle>Plan</CardTitle>
                 <CardDescription>
                   Create a simple support plan at home
@@ -153,9 +159,11 @@ export default function QuickGuide() {
               </CardContent>
             </Card>
 
-            <Card>
+            <Card className="rounded-3xl border-2 border-transparent shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-rose-200/50">
               <CardHeader>
-                <Phone className="h-10 w-10 text-primary mb-3" />
+                <div className="h-12 w-12 rounded-2xl bg-rose-100 flex items-center justify-center mb-3">
+                  <Phone className="h-6 w-6 text-rose-600" />
+                </div>
                 <CardTitle>Get Help</CardTitle>
                 <CardDescription>
                   When and how to contact a therapist or counselor
