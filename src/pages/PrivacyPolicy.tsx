@@ -147,7 +147,7 @@ export default function PrivacyPolicy() {
             Parents and guardians are encouraged to supervise their children's use of the internet,
             including this website. If you are a parent or guardian and have questions about how this
             website handles privacy, please contact us through our{" "}
-            <a href="/contact">contact page</a>.
+            <a href="/contact" className="text-primary underline underline-offset-2 hover:opacity-80">contact page</a>.
           </p>
 
           <h2>Hosting and Third-Party Services</h2>
@@ -186,7 +186,7 @@ export default function PrivacyPolicy() {
             Since we do not collect or store personal data, there is generally no personal
             information for us to delete, correct, or provide. If you have questions about any
             information you submitted through our forms, you may contact us through our{" "}
-            <a href="/contact">contact page</a> and we will do our best to assist.
+            <a href="/contact" className="text-primary underline underline-offset-2 hover:opacity-80">contact page</a> and we will do our best to assist.
           </p>
 
           <h2>Changes to This Policy</h2>
@@ -199,7 +199,7 @@ export default function PrivacyPolicy() {
           <h2>Contact</h2>
           <p>
             If you have questions about this Privacy Policy, please reach out through our{" "}
-            <a href="/contact">contact page</a>.
+            <a href="/contact" className="text-primary underline underline-offset-2 hover:opacity-80">contact page</a>.
           </p>
 
           <p className="text-xs text-muted-foreground mt-8">

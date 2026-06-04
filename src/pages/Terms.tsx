@@ -165,7 +165,7 @@ export default function Terms() {
           <h2>Contact</h2>
           <p>
             If you have questions about these Terms of Use, please reach out through our{" "}
-            <a href="/contact">contact page</a>.
+            <a href="/contact" className="text-primary underline underline-offset-2 hover:opacity-80">contact page</a>.
           </p>
 
           <p className="text-xs text-muted-foreground mt-8">
