@@ -86,13 +86,18 @@ export function GlobalSearch() {
       { id: "kid-home", title: "Kid Home", description: "Resources and activities for kids", path: "/kid", category: "Pages", keywords: ["kid", "child", "children"] },
       { id: "learn-home", title: "Learn Home", description: "Educational mental health resources", path: "/learn", category: "Pages", keywords: ["learn", "education", "articles"] },
       { id: "try-this", title: "Try This", description: "Quick activities and coping skills", path: "/kid/try-this", category: "Pages", keywords: ["activities", "skills", "coping"] },
+      { id: "breathe", title: "Take a Breath", description: "Calming breathing exercises for kids", path: "/kid/breathe", category: "Pages", keywords: ["breathe", "breathing", "calm", "relax", "take a breath", "breath"] },
       { id: "find-support", title: "Find Support", description: "Find professional help and support services", path: "/parent/find-support", category: "Pages", keywords: ["support", "help", "therapy", "counselor"] },
+      { id: "dashboard", title: "Parent Dashboard", description: "Track progress and saved resources", path: "/parent/dashboard", category: "Pages", keywords: ["dashboard", "progress", "saved", "favorites"] },
       { id: "quick-guide", title: "Quick Guides", description: "Parenting guides for mental health", path: "/parent/quick-guide", category: "Pages", keywords: ["guide", "tips", "parenting"] },
       { id: "conversation-starters", title: "Conversation Starters", description: "How to talk to your child about mental health", path: "/parent/conversation-starters", category: "Pages", keywords: ["talk", "conversation", "communication"] },
       { id: "tools", title: "Tools", description: "Helpful tools and resources for parents", path: "/parent/tools", category: "Pages", keywords: ["tools", "resources", "parent help"] },
       { id: "about", title: "About Us", description: "Learn about Little Minds and our mission", path: "/about", category: "Pages", keywords: ["about", "mission", "team", "nonprofit"] },
       { id: "donate", title: "Donate", description: "Support Little Minds with a donation", path: "/donate", category: "Pages", keywords: ["donation", "give", "support", "fund"] },
       { id: "contact", title: "Contact", description: "Get in touch with the Little Minds team", path: "/contact", category: "Pages", keywords: ["contact", "email", "message", "reach out"] },
+      { id: "disclaimer", title: "Disclaimer", description: "Important information about using this site", path: "/disclaimer", category: "Pages", keywords: ["disclaimer", "legal", "medical disclaimer"] },
+      { id: "terms", title: "Terms of Use", description: "Terms and conditions for using Little Minds", path: "/terms", category: "Pages", keywords: ["terms", "legal", "terms of use", "conditions"] },
+      { id: "privacy", title: "Privacy Policy", description: "How we handle your privacy and data", path: "/privacy", category: "Pages", keywords: ["privacy", "legal", "data", "policy"] },
     ];
 
     results.push(...staticPages);
