@@ -2,16 +2,50 @@ import { Link } from "react-router-dom";
 import { SEO } from "@/components/SEO";
 import { SiteFooter } from "@/components/SiteFooter";
 import { Header } from "@/components/Header";
-import { Card, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
 import { learnTopics } from "@/data/learnTopics";
 import { SuggestIdeasBanner } from "@/components/SuggestIdeasBanner";
 import { useLearnProgress } from "@/hooks/useLearnProgress";
-import { CheckCircle, BookOpen, Trophy } from "lucide-react";
+import {
+  CheckCircle,
+  BookOpen,
+  Trophy,
+  ArrowRight,
+  Cloud,
+  Moon,
+  Backpack,
+  CloudRain,
+  Users,
+  Smartphone,
+  Flame,
+  Smile,
+  Shield,
+  HeartCrack,
+  HelpCircle,
+  type LucideIcon,
+} from "lucide-react";
 import { useEffect, useRef } from "react";
 import { triggerCelebration } from "@/lib/celebration";
 
 const topicKeys = Object.keys(learnTopics);
+
+// Per-topic icon + soft accent tint. Tints are gentle, calm, and AA-friendly.
+const topicStyles: Record<string, { icon: LucideIcon; tile: string; iconColor: string; glow: string }> = {
+  anxiety: { icon: Cloud, tile: "bg-sky-100", iconColor: "text-sky-600", glow: "hover:shadow-sky-200/50" },
+  sleep: { icon: Moon, tile: "bg-indigo-100", iconColor: "text-indigo-600", glow: "hover:shadow-indigo-200/50" },
+  stress: { icon: Backpack, tile: "bg-amber-100", iconColor: "text-amber-600", glow: "hover:shadow-amber-200/50" },
+  sad: { icon: CloudRain, tile: "bg-blue-100", iconColor: "text-blue-600", glow: "hover:shadow-blue-200/50" },
+  conflict: { icon: Users, tile: "bg-teal-100", iconColor: "text-teal-600", glow: "hover:shadow-teal-200/50" },
+  socialmedia: { icon: Smartphone, tile: "bg-violet-100", iconColor: "text-violet-600", glow: "hover:shadow-violet-200/50" },
+  anger: { icon: Flame, tile: "bg-orange-100", iconColor: "text-orange-600", glow: "hover:shadow-orange-200/50" },
+  bodyimage: { icon: Smile, tile: "bg-rose-100", iconColor: "text-rose-600", glow: "hover:shadow-rose-200/50" },
+  bullying: { icon: Shield, tile: "bg-emerald-100", iconColor: "text-emerald-600", glow: "hover:shadow-emerald-200/50" },
+  grief: { icon: HeartCrack, tile: "bg-purple-100", iconColor: "text-purple-600", glow: "hover:shadow-purple-200/50" },
+  other: { icon: HelpCircle, tile: "bg-green-100", iconColor: "text-green-600", glow: "hover:shadow-green-200/50" },
+};
+
+const fallbackStyle = { icon: BookOpen, tile: "bg-muted", iconColor: "text-primary", glow: "hover:shadow-primary/20" };
 
 export default function LearnHome() {
   const { completed, isRead } = useLearnProgress(topicKeys.length);
@@ -65,20 +99,34 @@ export default function LearnHome() {
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {Object.values(learnTopics).map((topic) => {
             const read = isRead(topic.id);
+            const style = topicStyles[topic.id] ?? fallbackStyle;
+            const Icon = style.icon;
             return (
-              <Link key={topic.id} to={`/learn/${topic.id}`}>
-                <Card className={`h-full transition-all hover:shadow-md hover:scale-[1.02] ${read ? "border-primary/30 bg-primary/5" : ""}`}>
-                  <CardHeader>
-                    <div className="flex items-start justify-between">
-                      <CardTitle className="text-xl">{topic.title}</CardTitle>
-                      {read && (
-                        <CheckCircle className="h-5 w-5 text-primary flex-shrink-0" />
-                      )}
-                    </div>
-                    <CardDescription className="line-clamp-3">
-                      {topic.description.substring(0, 120)}...
-                    </CardDescription>
-                  </CardHeader>
+              <Link key={topic.id} to={`/learn/${topic.id}`} className="group">
+                <Card
+                  className={`relative h-full flex flex-col p-7 rounded-3xl border-2 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl ${style.glow} ${
+                    read ? "border-primary/40 bg-primary/5" : "border-transparent shadow-sm"
+                  }`}
+                >
+                  {read && (
+                    <span className="absolute top-5 right-5 flex items-center gap-1 text-xs font-semibold text-primary">
+                      <CheckCircle className="h-4 w-4" /> Read
+                    </span>
+                  )}
+
+                  <div className={`w-12 h-12 rounded-2xl flex items-center justify-center mb-5 ${style.tile}`}>
+                    <Icon className={`h-6 w-6 ${style.iconColor}`} aria-hidden="true" />
+                  </div>
+
+                  <h2 className="text-xl font-bold mb-2 text-foreground">{topic.title}</h2>
+                  <p className="text-sm text-muted-foreground leading-relaxed line-clamp-3 flex-grow">
+                    {topic.description}
+                  </p>
+
+                  <span className="mt-5 inline-flex items-center gap-1 text-sm font-semibold text-primary">
+                    {read ? "Revisit topic" : "Read more"}
+                    <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                  </span>
                 </Card>
               </Link>
             );
