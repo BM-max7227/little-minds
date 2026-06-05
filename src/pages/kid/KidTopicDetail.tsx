@@ -82,32 +82,30 @@ export default function KidTopicDetail() {
   return <div className="min-h-screen bg-background">
       <SEO title={seoTitle} description={seoDesc} path={path} type="article" jsonLd={jsonLd} />
       <Header audience="kid" />
-      <main className="container mx-auto px-4 py-8 max-w-4xl">
-        <Button variant="ghost" onClick={() => navigate("/kid")} className="mb-4">
+      <main className="container mx-auto px-4 py-6 max-w-4xl">
+        <Button variant="ghost" onClick={() => navigate("/kid")} className="mb-3">
           <ArrowLeft className="w-4 h-4 mr-2" />
           Back to Topics
         </Button>
 
-        <div className={`mb-8 rounded-3xl border-2 ${color.border} ${color.softBg} p-6 sm:p-8`}>
-          <div className="flex items-center gap-4 mb-2">
-            <span className={`flex h-16 w-16 items-center justify-center rounded-2xl text-4xl ${color.tile}`}>{topic.icon}</span>
-            <h1 className="text-3xl font-bold">{topic.title}</h1>
+        <div className="mb-5 flex items-center gap-3">
+          <span className={`flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-2xl text-2xl ${color.tile}`}>{topic.icon}</span>
+          <div>
+            <h1 className="text-2xl font-bold leading-tight">{topic.title}</h1>
+            <p className="text-sm text-muted-foreground line-clamp-1">{topic.subtitle}</p>
           </div>
-          <p className="text-lg text-muted-foreground">{topic.subtitle}</p>
         </div>
 
         <Tabs defaultValue="quick" className="w-full">
-          <TabsList className="grid w-full grid-cols-4">
-            <TabsTrigger value="quick" className="text-xs sm:text-sm">Try This Today</TabsTrigger>
-            <TabsTrigger value="skills" className="text-xs sm:text-sm">Learn a Skill</TabsTrigger>
-            <TabsTrigger value="videos" className="text-xs sm:text-sm">Watch</TabsTrigger>
-            <TabsTrigger value="journal" className="text-xs sm:text-sm">Journal</TabsTrigger>
+          <TabsList className={`grid w-full grid-cols-4 h-auto rounded-2xl p-1 ${color.softBg} ${color.border} border-2`}>
+            <TabsTrigger value="quick" className={`text-xs sm:text-sm rounded-xl data-[state=active]:shadow-sm ${color.tabActive}`}>🌟 Try Now</TabsTrigger>
+            <TabsTrigger value="skills" className={`text-xs sm:text-sm rounded-xl data-[state=active]:shadow-sm ${color.tabActive}`}>🧠 Skills</TabsTrigger>
+            <TabsTrigger value="videos" className={`text-xs sm:text-sm rounded-xl data-[state=active]:shadow-sm ${color.tabActive}`}>🎬 Watch</TabsTrigger>
+            <TabsTrigger value="journal" className={`text-xs sm:text-sm rounded-xl data-[state=active]:shadow-sm ${color.tabActive}`}>📓 Journal</TabsTrigger>
           </TabsList>
 
           <TabsContent value="quick" className="space-y-4 mt-6">
-            <p className="text-muted-foreground mb-4">
-              Quick actions you can do right now to feel better
-            </p>
+            <p className="text-sm font-medium text-muted-foreground mb-2">Pick one to try right now 👇</p>
             <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
               {topic.quickActions.map((action, index) => <Card key={index} className={`rounded-2xl border-2 ${color.border} ${color.softBg} transition-all duration-300 hover:-translate-y-1 hover:shadow-lg ${color.glow}`}>
                   <CardHeader>
@@ -122,9 +120,7 @@ export default function KidTopicDetail() {
           </TabsContent>
 
           <TabsContent value="skills" className="space-y-6 mt-6">
-            <p className="text-muted-foreground mb-4">
-              Practice these skills to build long-term coping strategies
-            </p>
+            <p className="text-sm font-medium text-muted-foreground mb-2">Cool tricks to practice 💪</p>
             {topic.skills.map((skill, index) => <Card key={index} className={`rounded-2xl border-2 ${color.border} ${color.softBg}`}>
                 <CardHeader>
                   <CardTitle>{skill.title}</CardTitle>
@@ -140,9 +136,7 @@ export default function KidTopicDetail() {
           </TabsContent>
 
           <TabsContent value="videos" className="space-y-6 mt-6">
-            <p className="text-muted-foreground mb-4">
-              Short videos to help you understand and cope
-            </p>
+            <p className="text-sm font-medium text-muted-foreground mb-2">Short videos just for you 🎬</p>
             {topic.videos.map((video, index) => <Card key={index} className={`rounded-2xl border-2 ${color.border} ${color.softBg}`}>
                 <CardHeader>
                   <CardTitle>{video.title}</CardTitle>

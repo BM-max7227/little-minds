@@ -44,7 +44,8 @@ export default function PrivacyPolicy() {
             <li><strong>Activity progress:</strong> which activities or challenges you've completed</li>
             <li><strong>Learning progress:</strong> which topics you've read</li>
             <li><strong>Favorites:</strong> any content you've marked as a favorite</li>
-            <li><strong>Accessibility settings:</strong> such as high contrast or reduced motion preferences</li>
+            <li><strong>Badges and streaks:</strong> achievements you've earned and daily streaks in the kids section. Shareable badge "cards" are generated as images directly on your device and are never uploaded or sent anywhere</li>
+            <li><strong>Accessibility settings:</strong> such as high contrast, reduced motion, or Read Aloud preferences</li>
             <li><strong>Country preference:</strong> your selected country for crisis helpline resources</li>
             <li><strong>Private Journal:</strong> journal entries in the kids section are stored locally only and are completely private</li>
           </ul>
@@ -113,6 +114,14 @@ export default function PrivacyPolicy() {
             Little Minds, and no recordings are kept. We only receive the text that your browser
             transcribes, and that text is then treated like any other chat message (not saved once
             the chat is closed or refreshed).
+          </p>
+
+          <h3>Read Aloud (Text-to-Speech)</h3>
+          <p>
+            Little Minds offers an optional "Read Aloud" accessibility feature that can speak page
+            text out loud. Like voice input, this uses your own browser or device's built-in
+            speech engine. No text or audio is sent to or stored by Little Minds, and the feature
+            is entirely optional.
           </p>
 
           <h3>Chat Feedback</h3>
@@ -203,7 +212,7 @@ export default function PrivacyPolicy() {
           </p>
 
           <p className="text-xs text-muted-foreground mt-8">
-            Last updated: April 2026
+            Last updated: June 2026
           </p>
         </div>
       </main>

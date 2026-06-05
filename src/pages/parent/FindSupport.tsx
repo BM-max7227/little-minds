@@ -28,12 +28,47 @@ export default function FindSupport() {
         <div className="container px-4 max-w-4xl mx-auto">
           <div className="mb-8">
             <h1 className="text-4xl font-bold mb-4">Find Professional Support</h1>
-            <p className="text-xl text-muted-foreground">
-              Find a therapist for your child, plus how to choose the right help
+            <p className="text-xl text-muted-foreground mb-6">
+              Whether you already know you want a therapist or you're just starting to look into help, here's how to find the right support for your child.
             </p>
+            <nav aria-label="Jump to a section" className="flex flex-wrap gap-2">
+              {[
+                { id: "types", label: "Types of help" },
+                { id: "find-therapist", label: "Find a therapist" },
+                { id: "choose", label: "How to choose" },
+                { id: "cost", label: "Costs & insurance" },
+              ].map((item) => (
+                <a
+                  key={item.id}
+                  href={`#${item.id}`}
+                  className="rounded-full border border-primary/30 bg-primary/5 px-4 py-1.5 text-sm font-medium text-primary transition hover:bg-primary hover:text-primary-foreground"
+                >
+                  {item.label}
+                </a>
+              ))}
+            </nav>
           </div>
 
-          <section className="mb-12">
+          <section id="types" className="mb-12 scroll-mt-24">
+            <h2 className="text-2xl font-bold mb-6">Types of Professional Help</h2>
+            <div className="grid md:grid-cols-2 gap-6">
+              {professionalSupportTypes.map((type) => (
+                <Card key={type.title}>
+                  <CardHeader>
+                    <CardTitle>{type.title}</CardTitle>
+                    <CardDescription>{type.description}</CardDescription>
+                  </CardHeader>
+                  <CardContent>
+                    <p className="text-sm text-muted-foreground">
+                      <span className="font-semibold">When to use:</span> {type.when}
+                    </p>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          </section>
+
+          <section id="find-therapist" className="mb-12 scroll-mt-24">
             <Card className="border-2 border-primary/30 bg-primary/5 rounded-3xl shadow-sm">
               <CardHeader>
                 <CardTitle className="text-2xl">Find a Therapist Near You</CardTitle>
@@ -71,26 +106,7 @@ export default function FindSupport() {
             </Card>
           </section>
 
-          <section className="mb-12">
-            <h2 className="text-2xl font-bold mb-6">Types of Professional Help</h2>
-            <div className="grid md:grid-cols-2 gap-6">
-              {professionalSupportTypes.map((type) => (
-                <Card key={type.title}>
-                  <CardHeader>
-                    <CardTitle>{type.title}</CardTitle>
-                    <CardDescription>{type.description}</CardDescription>
-                  </CardHeader>
-                  <CardContent>
-                    <p className="text-sm text-muted-foreground">
-                      <span className="font-semibold">When to use:</span> {type.when}
-                    </p>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
-          </section>
-
-          <section className="mb-12">
+          <section id="choose" className="mb-12 scroll-mt-24">
             <Card>
               <CardHeader>
                 <CardTitle>How to Choose a Therapist</CardTitle>
@@ -124,7 +140,7 @@ export default function FindSupport() {
             </Card>
           </section>
 
-          <section className="mb-12">
+          <section id="cost" className="mb-12 scroll-mt-24">
             <Card>
               <CardHeader>
                 <CardTitle>{insuranceAndCost.title}</CardTitle>
