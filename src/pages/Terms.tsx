@@ -95,10 +95,10 @@ export default function Terms() {
           <h2>External Links</h2>
           <p>
             This website may contain links to third party websites, including the therapist
-            directories listed on the Parent "Find Support" page and any resources suggested by the
-            AI chat. These links are provided for your convenience only. Little Minds has no control
-            over the content of external sites and is not responsible for their content, services,
-            availability, or any outcomes resulting from their use.
+            directories listed on the Parent "Find Support" page. These links are provided for your
+            convenience only. Little Minds has no control over the content of external sites and is
+            not responsible for their content, services, availability, or any outcomes resulting
+            from their use.
           </p>
 
           <h2>Termination of Use</h2>
