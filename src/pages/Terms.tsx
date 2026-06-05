@@ -123,10 +123,11 @@ export default function Terms() {
 
           <h2>Data and Storage</h2>
           <p>
-            Because your journals, progress, and favorites are stored only on your local device,
-            Little Minds cannot recover, move, or back up this data. You are solely responsible for
-            maintaining your device and browser settings. We are not responsible for any loss of data
-            caused by clearing your browser cache, device damage, or any other reason.
+            Because your journals, progress, favorites, badges, and streaks are stored only on your
+            local device, Little Minds cannot recover, move, or back up this data. Any shareable
+            badge images are generated on your own device and are not uploaded to us. You are solely
+            responsible for maintaining your device and browser settings. We are not responsible for
+            any loss of data caused by clearing your browser cache, device damage, or any other reason.
           </p>
 
           <h2>Donations</h2>
