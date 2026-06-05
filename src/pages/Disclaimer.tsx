@@ -67,6 +67,15 @@ export default function Disclaimer() {
             immediately. The crisis-language safety response is a best-effort feature and is not
             guaranteed to detect every situation.
           </p>
+          <p>
+            To be helpful, Little Minds Helper may suggest external resources and include clickable
+            links, for example therapist directories or support organisations. These links lead to
+            third party websites that Little Minds does not own, control, endorse, or guarantee.
+            Because responses are generated automatically, a suggested link may occasionally be
+            inaccurate, out of date, or not relevant to your situation. Always check that a resource
+            is appropriate and verify details directly with the provider before relying on it, and
+            see "Third Party Links and Resources" below.
+          </p>
 
           <h2>Content Aimed at Children</h2>
           <p>
