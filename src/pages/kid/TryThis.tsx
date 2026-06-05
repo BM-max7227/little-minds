@@ -6,6 +6,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { topics, QuickAction, Skill } from "@/data/kidTopics";
+import { getKidTopicColor } from "@/data/kidTopicColors";
 import { Clock, Search, CheckCircle2, Circle, Heart } from "lucide-react";
 import { useActivityProgress } from "@/hooks/useActivityProgress";
 import { useFavorites } from "@/hooks/useFavorites";
