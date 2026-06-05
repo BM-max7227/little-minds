@@ -136,9 +136,7 @@ export default function KidTopicDetail() {
           </TabsContent>
 
           <TabsContent value="videos" className="space-y-6 mt-6">
-            <p className="text-muted-foreground mb-4">
-              Short videos to help you understand and cope
-            </p>
+            <p className="text-sm font-medium text-muted-foreground mb-2">Short videos just for you 🎬</p>
             {topic.videos.map((video, index) => <Card key={index} className={`rounded-2xl border-2 ${color.border} ${color.softBg}`}>
                 <CardHeader>
                   <CardTitle>{video.title}</CardTitle>
