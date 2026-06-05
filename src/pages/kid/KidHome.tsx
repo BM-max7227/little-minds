@@ -5,6 +5,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { getWordOfTheDay, getDidYouKnow } from "@/data/kidEngagement";
+import { getKidTopicColor } from "@/data/kidTopicColors";
 import { useDailyValue } from "@/hooks/useDailyValue";
 import { BookOpen, Lightbulb, ChevronDown, Sparkles, Wind } from "lucide-react";
 import { SuggestIdeasBanner } from "@/components/SuggestIdeasBanner";
@@ -93,10 +94,12 @@ export default function KidHome() {
           </div>
 
           <div id="topic-grid" className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 scroll-mt-8">
-            {topicCards.map((topic) => (
+            {topicCards.map((topic) => {
+              const color = getKidTopicColor(topic.id);
+              return (
               <Link key={topic.id} to={`/kid/${topic.id}`} className="block group">
                 <Card
-                  className={`h-full rounded-3xl border-2 border-transparent shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl ${topic.glow} cursor-pointer`}
+                  className={`h-full rounded-3xl border-2 ${color.border} ${color.softBg} shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl ${topic.glow} cursor-pointer`}
                 >
                   <CardHeader className="text-center pb-4 pt-6">
                     <div
@@ -108,7 +111,8 @@ export default function KidHome() {
                   </CardHeader>
                 </Card>
               </Link>
-            ))}
+              );
+            })}
           </div>
 
           <div className="mt-12">

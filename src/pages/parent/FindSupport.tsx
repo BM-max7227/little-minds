@@ -103,21 +103,21 @@ export default function FindSupport() {
           <section className="mb-12">
             <Card>
               <CardHeader>
-                <CardTitle>Find Help in Your Area</CardTitle>
+                <CardTitle>Find a Therapist Near You</CardTitle>
                 <CardDescription>
-                  Select your country to see local emergency numbers and crisis helplines. Available resources vary by country and may include mental health support lines, child and family services, or directories to find a therapist.
+                  Select your country to see directories you can use to find a therapist or counsellor. Available directories vary by country.
                 </CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">
                 <CountryPicker selectedCode={countryCode || null} onSelect={setCountryCode} />
 
                 {countryData && (
-                  <HelplineDisplay data={countryData} showDirectories />
+                  <HelplineDisplay data={countryData} directoriesOnly />
                 )}
 
                 {!countryData && (
                   <p className="text-sm text-muted-foreground">
-                    Select a country above to see local resources. You can also visit{" "}
+                    Select a country above to see therapist directories. You can also visit{" "}
                     <a href="https://findahelpline.com" target="_blank" rel="noopener noreferrer" className="text-primary underline">
                       findahelpline.com
                     </a>{" "}
@@ -125,7 +125,15 @@ export default function FindSupport() {
                   </p>
                 )}
 
-                <p className="text-xs text-muted-foreground pt-2">
+                <div className="rounded-lg bg-destructive/5 border border-destructive/20 p-3">
+                  <p className="text-sm">
+                    <span className="font-semibold text-destructive">Need urgent help?</span>{" "}
+                    For emergency numbers and crisis helplines, use the{" "}
+                    <span className="font-semibold">Help Now</span> button at the top of any page.
+                  </p>
+                </div>
+
+                <p className="text-xs text-muted-foreground pt-1">
                   This information is provided for guidance only. Always verify details directly with the service provider. Little Minds is not affiliated with these organisations.
                 </p>
               </CardContent>

@@ -6,6 +6,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { topics, QuickAction, Skill } from "@/data/kidTopics";
+import { getKidTopicColor } from "@/data/kidTopicColors";
 import { Clock, Search, CheckCircle2, Circle, Heart } from "lucide-react";
 import { useActivityProgress } from "@/hooks/useActivityProgress";
 import { useFavorites } from "@/hooks/useFavorites";
@@ -171,9 +172,10 @@ export default function TryThis() {
             const activityId = getActivityId(action);
             const completed = isCompleted(activityId);
             const favorited = isFavorite(activityId);
+            const color = getKidTopicColor(action.topicId);
 
             return (
-              <Card key={activityId} className={`transition-all ${completed ? "border-primary/40 bg-primary/5" : ""}`}>
+              <Card key={activityId} className={`rounded-2xl border-2 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg ${color.glow} ${completed ? "border-primary/40 bg-primary/5" : `${color.border} ${color.softBg}`}`}>
                 <CardHeader>
                   <div className="flex items-start justify-between">
                     <CardTitle className="text-lg flex items-center gap-2">

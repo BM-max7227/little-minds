@@ -5,9 +5,37 @@ import { Button } from "@/components/ui/button";
 interface HelplineDisplayProps {
   data: CountryHelplines;
   showDirectories?: boolean;
+  /** When true, only render the "find a therapist" directories (no emergency number or crisis helplines). */
+  directoriesOnly?: boolean;
 }
 
-export function HelplineDisplay({ data, showDirectories = false }: HelplineDisplayProps) {
+export function HelplineDisplay({ data, showDirectories = false, directoriesOnly = false }: HelplineDisplayProps) {
+  if (directoriesOnly) {
+    if (data.directories.length === 0) {
+      return (
+        <p className="text-sm text-muted-foreground">
+          No therapist directories are listed for this country yet. Try{" "}
+          <a href="https://findahelpline.com" target="_blank" rel="noopener noreferrer" className="text-primary underline">
+            findahelpline.com
+          </a>{" "}
+          or ask your child's school or doctor for a referral.
+        </p>
+      );
+    }
+    return (
+      <div className="space-y-2">
+        {data.directories.map((d) => (
+          <Button key={d.name} variant="outline" className="w-full justify-between" size="sm" asChild>
+            <a href={d.url} target="_blank" rel="noopener noreferrer">
+              {d.name}
+              <ExternalLink className="h-3.5 w-3.5" />
+            </a>
+          </Button>
+        ))}
+      </div>
+    );
+  }
+
   return (
     <div className="space-y-3">
       <div className="p-4 rounded-lg bg-destructive/10 border border-destructive/20 text-center space-y-1">

@@ -8,6 +8,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Timer } from "@/components/Timer";
 import { topics } from "@/data/kidTopics";
 import { topicConversationStarters } from "@/data/topicConversationStarters";
+import { getKidTopicColor } from "@/data/kidTopicColors";
 import { useState, useEffect } from "react";
 import { ArrowLeft, Heart, MessageCircle } from "lucide-react";
 import {
@@ -77,6 +78,7 @@ export default function KidTopicDetail() {
       ],
     },
   ];
+  const color = getKidTopicColor(topicId);
   return <div className="min-h-screen bg-background">
       <SEO title={seoTitle} description={seoDesc} path={path} type="article" jsonLd={jsonLd} />
       <Header audience="kid" />
@@ -86,9 +88,9 @@ export default function KidTopicDetail() {
           Back to Topics
         </Button>
 
-        <div className="mb-8">
-          <div className="flex items-center gap-3 mb-2">
-            <span className="text-4xl">{topic.icon}</span>
+        <div className={`mb-8 rounded-3xl border-2 ${color.border} ${color.softBg} p-6 sm:p-8`}>
+          <div className="flex items-center gap-4 mb-2">
+            <span className={`flex h-16 w-16 items-center justify-center rounded-2xl text-4xl ${color.tile}`}>{topic.icon}</span>
             <h1 className="text-3xl font-bold">{topic.title}</h1>
           </div>
           <p className="text-lg text-muted-foreground">{topic.subtitle}</p>
@@ -107,7 +109,7 @@ export default function KidTopicDetail() {
               Quick actions you can do right now to feel better
             </p>
             <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-              {topic.quickActions.map((action, index) => <Card key={index}>
+              {topic.quickActions.map((action, index) => <Card key={index} className={`rounded-2xl border-2 ${color.border} ${color.softBg} transition-all duration-300 hover:-translate-y-1 hover:shadow-lg ${color.glow}`}>
                   <CardHeader>
                     <CardTitle className="text-lg">{action.title}</CardTitle>
                     <CardDescription>{action.time} min</CardDescription>
@@ -123,7 +125,7 @@ export default function KidTopicDetail() {
             <p className="text-muted-foreground mb-4">
               Practice these skills to build long-term coping strategies
             </p>
-            {topic.skills.map((skill, index) => <Card key={index}>
+            {topic.skills.map((skill, index) => <Card key={index} className={`rounded-2xl border-2 ${color.border} ${color.softBg}`}>
                 <CardHeader>
                   <CardTitle>{skill.title}</CardTitle>
                   <CardDescription>{skill.description} • {skill.time} min</CardDescription>
@@ -141,7 +143,7 @@ export default function KidTopicDetail() {
             <p className="text-muted-foreground mb-4">
               Short videos to help you understand and cope
             </p>
-            {topic.videos.map((video, index) => <Card key={index}>
+            {topic.videos.map((video, index) => <Card key={index} className={`rounded-2xl border-2 ${color.border} ${color.softBg}`}>
                 <CardHeader>
                   <CardTitle>{video.title}</CardTitle>
                   <CardDescription>{video.summary}</CardDescription>
@@ -211,7 +213,7 @@ export default function KidTopicDetail() {
         <div className="mt-12 space-y-6">
           {/* Talk About It prompt */}
           {topicId && topicConversationStarters[topicId] && (
-            <Card className="border-primary/20 bg-primary/5">
+            <Card className={`rounded-2xl border-2 ${color.border} ${color.softBg}`}>
               <CardContent className="pt-6">
                 <div className="flex items-start gap-3">
                   <div className="h-10 w-10 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
@@ -232,7 +234,7 @@ export default function KidTopicDetail() {
             </Card>
           )}
 
-          <Card className="bg-primary/5 border-primary/20">
+          <Card className={`rounded-2xl border-2 ${color.border} ${color.tile}`}>
             <CardContent className="pt-6">
               <p className="text-center text-lg font-medium italic">
                 {topicId === "anxiety" && "Asking for help is not a sign of weakness, it is a sign of strength"}
