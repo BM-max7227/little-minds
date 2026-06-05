@@ -68,13 +68,13 @@ export default function Disclaimer() {
             guaranteed to detect every situation.
           </p>
           <p>
-            To be helpful, Little Minds Helper may suggest external resources and include clickable
-            links, for example therapist directories or support organisations. These links lead to
-            third party websites that Little Minds does not own, control, endorse, or guarantee.
-            Because responses are generated automatically, a suggested link may occasionally be
-            inaccurate, out of date, or not relevant to your situation. Always check that a resource
-            is appropriate and verify details directly with the provider before relying on it, and
-            see "Third Party Links and Resources" below.
+            To help you find your way around, Little Minds Helper may include clickable links to
+            other pages on this website (for example, it may point you to the Parent "Find Support"
+            page if you ask about finding a therapist, rather than recommending a specific provider).
+            The assistant only links to pages within this website; it does not recommend or link to
+            outside organisations. The pages it points to, including the "Find Support" page, may in
+            turn list third party directories. Those external directories are covered under "Third
+            Party Links and Resources" and "Crisis Helplines and Local Resources" below.
           </p>
 
           <h2>Content Aimed at Children</h2>
