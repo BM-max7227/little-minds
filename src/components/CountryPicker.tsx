@@ -64,7 +64,9 @@ export function CountryPicker({ selectedCode, onSelect, onlyWithDirectories = fa
         ))}
         {filtered.length === 0 && (
           <p className="text-xs text-muted-foreground px-3 py-2">
-            Country not found. Visit <a href="https://findahelpline.com" target="_blank" rel="noopener noreferrer" className="text-primary underline">findahelpline.com</a> for worldwide resources.
+            We don't have a confirmed directory for that country yet. Try the{" "}
+            <a href="https://www.psychologytoday.com/country-selector" target="_blank" rel="noopener noreferrer" className="text-primary underline">Psychology Today directory</a>{" "}
+            or ask your child's school or doctor for a referral.
           </p>
         )}
       </div>
