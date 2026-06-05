@@ -113,7 +113,15 @@ export default function FindSupport() {
                 </CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">
-                <CountryPicker selectedCode={countryCode || null} onSelect={setCountryCode} />
+                <CountryPicker selectedCode={countryCode || null} onSelect={setCountryCode} onlyWithDirectories />
+
+                <p className="text-xs text-muted-foreground">
+                  Only countries with a confirmed therapist directory are listed here. Don't see yours? Visit{" "}
+                  <a href="https://findahelpline.com" target="_blank" rel="noopener noreferrer" className="text-primary underline">
+                    findahelpline.com
+                  </a>{" "}
+                  or ask your child's school or doctor for a referral.
+                </p>
 
                 {countryData && (
                   <HelplineDisplay data={countryData} directoriesOnly />
