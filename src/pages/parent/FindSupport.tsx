@@ -142,53 +142,7 @@ export default function FindSupport() {
             </Card>
           </section>
 
-          <section className="mb-12">
-            <Card>
-              <CardHeader>
-                <CardTitle>Find a Therapist Near You</CardTitle>
-                <CardDescription>
-                  Select your country to see directories you can use to find a therapist or counsellor. Available directories vary by country.
-                </CardDescription>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                <CountryPicker selectedCode={countryCode || null} onSelect={setCountryCode} onlyWithDirectories />
 
-                <p className="text-xs text-muted-foreground">
-                  Only countries with a confirmed therapist directory are listed here. Don't see yours? Visit{" "}
-                  <a href="https://findahelpline.com" target="_blank" rel="noopener noreferrer" className="text-primary underline">
-                    findahelpline.com
-                  </a>{" "}
-                  or ask your child's school or doctor for a referral.
-                </p>
-
-                {countryData && (
-                  <HelplineDisplay data={countryData} directoriesOnly />
-                )}
-
-                {!countryData && (
-                  <p className="text-sm text-muted-foreground">
-                    Select a country above to see therapist directories. You can also visit{" "}
-                    <a href="https://findahelpline.com" target="_blank" rel="noopener noreferrer" className="text-primary underline">
-                      findahelpline.com
-                    </a>{" "}
-                    for worldwide support.
-                  </p>
-                )}
-
-                <div className="rounded-lg bg-destructive/5 border border-destructive/20 p-3">
-                  <p className="text-sm">
-                    <span className="font-semibold text-destructive">Need urgent help?</span>{" "}
-                    For emergency numbers and crisis helplines, use the{" "}
-                    <span className="font-semibold">Help Now</span> button at the top of any page.
-                  </p>
-                </div>
-
-                <p className="text-xs text-muted-foreground pt-1">
-                  This information is provided for guidance only. Always verify details directly with the service provider. Little Minds is not affiliated with these organisations.
-                </p>
-              </CardContent>
-            </Card>
-          </section>
 
           <div className="text-center">
             <Button asChild size="lg">
