@@ -138,6 +138,28 @@ export default function ParentHome() {
           </div>
         </section>
 
+        {/* Learn About the Issues CTA */}
+        <section className="py-8">
+          <div className="container px-4">
+            <div className="max-w-5xl mx-auto">
+              <Link to="/learn" className="group flex flex-col sm:flex-row items-start sm:items-center gap-4 rounded-3xl border-2 border-primary/20 bg-primary/5 p-6 sm:p-8 hover:shadow-xl hover:border-primary/40 transition-all">
+                <div className="h-14 w-14 rounded-2xl bg-primary/10 flex items-center justify-center flex-shrink-0">
+                  <BookOpen className="h-7 w-7 text-primary" />
+                </div>
+                <div className="flex-1">
+                  <p className="font-bold text-xl mb-1">Learn About the Issues</p>
+                  <p className="text-muted-foreground">
+                    Plain-language guides to anxiety, sleep, stress, bullying, grief, and more — so you can understand what your child is going through.
+                  </p>
+                </div>
+                <span className="text-sm font-semibold text-primary inline-flex items-center gap-1 group-hover:gap-2 transition-all flex-shrink-0">
+                  Start learning <ArrowRight className="h-4 w-4" />
+                </span>
+              </Link>
+            </div>
+          </div>
+        </section>
+
         <section className="bg-muted/30 py-10">
           <div className="container px-4 max-w-3xl mx-auto text-center">
             <h2 className="text-3xl font-bold mb-3">Remember</h2>
