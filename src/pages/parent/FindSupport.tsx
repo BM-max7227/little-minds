@@ -140,7 +140,7 @@ export default function FindSupport() {
             </Card>
           </section>
 
-          <section className="mb-12">
+          <section id="cost" className="mb-12 scroll-mt-24">
             <Card>
               <CardHeader>
                 <CardTitle>{insuranceAndCost.title}</CardTitle>
