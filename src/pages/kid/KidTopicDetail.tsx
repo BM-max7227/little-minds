@@ -213,7 +213,7 @@ export default function KidTopicDetail() {
         <div className="mt-12 space-y-6">
           {/* Talk About It prompt */}
           {topicId && topicConversationStarters[topicId] && (
-            <Card className="border-primary/20 bg-primary/5">
+            <Card className={`rounded-2xl border-2 ${color.border} ${color.softBg}`}>
               <CardContent className="pt-6">
                 <div className="flex items-start gap-3">
                   <div className="h-10 w-10 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
