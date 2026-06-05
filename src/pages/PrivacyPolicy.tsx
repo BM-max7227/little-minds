@@ -44,7 +44,8 @@ export default function PrivacyPolicy() {
             <li><strong>Activity progress:</strong> which activities or challenges you've completed</li>
             <li><strong>Learning progress:</strong> which topics you've read</li>
             <li><strong>Favorites:</strong> any content you've marked as a favorite</li>
-            <li><strong>Accessibility settings:</strong> such as high contrast or reduced motion preferences</li>
+            <li><strong>Badges and streaks:</strong> achievements you've earned and daily streaks in the kids section. Shareable badge "cards" are generated as images directly on your device and are never uploaded or sent anywhere</li>
+            <li><strong>Accessibility settings:</strong> such as high contrast, reduced motion, or Read Aloud preferences</li>
             <li><strong>Country preference:</strong> your selected country for crisis helpline resources</li>
             <li><strong>Private Journal:</strong> journal entries in the kids section are stored locally only and are completely private</li>
           </ul>
