@@ -66,6 +66,7 @@ export default function KidHome() {
           </div>
 
           {/* Word of the Day + Did You Know row */}
+          <h2 className="sr-only">Today's highlights</h2>
           <div className="grid sm:grid-cols-2 gap-4 mb-10">
             <Card className="border-primary/20 bg-primary/5">
               <CardHeader className="pb-2">
@@ -93,6 +94,7 @@ export default function KidHome() {
             </Card>
           </div>
 
+          <h2 className="text-2xl font-bold mb-4">Explore Topics</h2>
           <div id="topic-grid" className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 scroll-mt-8">
             {topicCards.map((topic) => {
               const color = getKidTopicColor(topic.id);

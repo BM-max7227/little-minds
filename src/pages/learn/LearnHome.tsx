@@ -124,7 +124,7 @@ export default function LearnHome() {
                   </p>
 
                   <span className="mt-5 inline-flex items-center gap-1 text-sm font-semibold text-primary">
-                    {read ? "Revisit topic" : "Read more"}
+                    {read ? "Revisit topic" : "Read topic"}
                     <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
                   </span>
                 </Card>
