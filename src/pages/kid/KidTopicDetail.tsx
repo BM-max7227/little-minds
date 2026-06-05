@@ -105,7 +105,7 @@ export default function KidTopicDetail() {
           </TabsList>
 
           <TabsContent value="quick" className="space-y-4 mt-6">
-            <p className="text-sm font-medium text-muted-foreground mb-2">Pick one to try right now 👇</p>
+            <h2 className="text-sm font-medium text-muted-foreground mb-2">Pick one to try right now 👇</h2>
             <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
               {topic.quickActions.map((action, index) => <Card key={index} className={`rounded-2xl border-2 ${color.border} ${color.softBg} transition-all duration-300 hover:-translate-y-1 hover:shadow-lg ${color.glow}`}>
                   <CardHeader>
@@ -120,7 +120,7 @@ export default function KidTopicDetail() {
           </TabsContent>
 
           <TabsContent value="skills" className="space-y-6 mt-6">
-            <p className="text-sm font-medium text-muted-foreground mb-2">Cool tricks to practice 💪</p>
+            <h2 className="text-sm font-medium text-muted-foreground mb-2">Cool tricks to practice 💪</h2>
             {topic.skills.map((skill, index) => <Card key={index} className={`rounded-2xl border-2 ${color.border} ${color.softBg}`}>
                 <CardHeader>
                   <CardTitle>{skill.title}</CardTitle>
@@ -136,7 +136,7 @@ export default function KidTopicDetail() {
           </TabsContent>
 
           <TabsContent value="videos" className="space-y-6 mt-6">
-            <p className="text-sm font-medium text-muted-foreground mb-2">Short videos just for you 🎬</p>
+            <h2 className="text-sm font-medium text-muted-foreground mb-2">Short videos just for you 🎬</h2>
             {topic.videos.map((video, index) => <Card key={index} className={`rounded-2xl border-2 ${color.border} ${color.softBg}`}>
                 <CardHeader>
                   <CardTitle>{video.title}</CardTitle>
@@ -154,6 +154,7 @@ export default function KidTopicDetail() {
           </TabsContent>
 
           <TabsContent value="journal" className="space-y-4 mt-6">
+            <h2 className="sr-only">Your private journal</h2>
             <Card>
               <CardHeader>
                 <CardTitle>Your Private Journal</CardTitle>
