@@ -5,6 +5,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { getWordOfTheDay, getDidYouKnow } from "@/data/kidEngagement";
+import { getKidTopicColor } from "@/data/kidTopicColors";
 import { useDailyValue } from "@/hooks/useDailyValue";
 import { BookOpen, Lightbulb, ChevronDown, Sparkles, Wind } from "lucide-react";
 import { SuggestIdeasBanner } from "@/components/SuggestIdeasBanner";
