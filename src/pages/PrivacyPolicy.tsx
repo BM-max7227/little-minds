@@ -212,7 +212,7 @@ export default function PrivacyPolicy() {
           </p>
 
           <p className="text-xs text-muted-foreground mt-8">
-            Last updated: April 2026
+            Last updated: June 2026
           </p>
         </div>
       </main>
