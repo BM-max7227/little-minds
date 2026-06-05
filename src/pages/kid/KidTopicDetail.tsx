@@ -105,9 +105,7 @@ export default function KidTopicDetail() {
           </TabsList>
 
           <TabsContent value="quick" className="space-y-4 mt-6">
-            <p className="text-muted-foreground mb-4">
-              Quick actions you can do right now to feel better
-            </p>
+            <p className="text-sm font-medium text-muted-foreground mb-2">Pick one to try right now 👇</p>
             <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
               {topic.quickActions.map((action, index) => <Card key={index} className={`rounded-2xl border-2 ${color.border} ${color.softBg} transition-all duration-300 hover:-translate-y-1 hover:shadow-lg ${color.glow}`}>
                   <CardHeader>
