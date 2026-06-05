@@ -110,7 +110,8 @@ export default function KidHome() {
                   </CardHeader>
                 </Card>
               </Link>
-            ))}
+              );
+            })}
           </div>
 
           <div className="mt-12">
