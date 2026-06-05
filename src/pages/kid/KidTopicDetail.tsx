@@ -109,7 +109,7 @@ export default function KidTopicDetail() {
               Quick actions you can do right now to feel better
             </p>
             <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-              {topic.quickActions.map((action, index) => <Card key={index}>
+              {topic.quickActions.map((action, index) => <Card key={index} className={`rounded-2xl border-2 ${color.border} ${color.softBg} transition-all duration-300 hover:-translate-y-1 hover:shadow-lg ${color.glow}`}>
                   <CardHeader>
                     <CardTitle className="text-lg">{action.title}</CardTitle>
                     <CardDescription>{action.time} min</CardDescription>
