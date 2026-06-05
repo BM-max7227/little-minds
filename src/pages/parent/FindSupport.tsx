@@ -12,7 +12,11 @@ import { HelplineDisplay } from "@/components/HelplineDisplay";
 import { getHelplinesForCountry, getSavedCountry } from "@/data/crisisHelplines";
 
 export default function FindSupport() {
-  const [countryCode, setCountryCode] = useState<string>(getSavedCountry() || "");
+  // Only honour a saved country here if it actually has therapist directories,
+  // so this page never lands on a country with no confirmed directories.
+  const savedCountry = getSavedCountry();
+  const savedHasDirectories = savedCountry && (getHelplinesForCountry(savedCountry)?.directories.length ?? 0) > 0;
+  const [countryCode, setCountryCode] = useState<string>(savedHasDirectories ? savedCountry : "");
   const countryData = countryCode ? getHelplinesForCountry(countryCode) : null;
 
   return (
@@ -109,7 +113,15 @@ export default function FindSupport() {
                 </CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">
-                <CountryPicker selectedCode={countryCode || null} onSelect={setCountryCode} />
+                <CountryPicker selectedCode={countryCode || null} onSelect={setCountryCode} onlyWithDirectories />
+
+                <p className="text-xs text-muted-foreground">
+                  Only countries with a confirmed therapist directory are listed here. Don't see yours? Visit{" "}
+                  <a href="https://findahelpline.com" target="_blank" rel="noopener noreferrer" className="text-primary underline">
+                    findahelpline.com
+                  </a>{" "}
+                  or ask your child's school or doctor for a referral.
+                </p>
 
                 {countryData && (
                   <HelplineDisplay data={countryData} directoriesOnly />

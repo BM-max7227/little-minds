@@ -5,16 +5,23 @@ import { Search, MapPin } from "lucide-react";
 interface CountryPickerProps {
   selectedCode: string | null;
   onSelect: (code: string) => void;
+  /** When true, only list countries that have at least one confirmed therapist directory. */
+  onlyWithDirectories?: boolean;
 }
 
-export function CountryPicker({ selectedCode, onSelect }: CountryPickerProps) {
+export function CountryPicker({ selectedCode, onSelect, onlyWithDirectories = false }: CountryPickerProps) {
   const [search, setSearch] = useState("");
 
+  const baseList = useMemo(
+    () => (onlyWithDirectories ? crisisHelplines.filter((c) => c.directories.length > 0) : crisisHelplines),
+    [onlyWithDirectories]
+  );
+
   const filtered = useMemo(() => {
-    if (!search.trim()) return crisisHelplines;
+    if (!search.trim()) return baseList;
     const q = search.toLowerCase();
-    return crisisHelplines.filter((c) => c.country.toLowerCase().includes(q));
-  }, [search]);
+    return baseList.filter((c) => c.country.toLowerCase().includes(q));
+  }, [search, baseList]);
 
   const selected = crisisHelplines.find((c) => c.code === selectedCode);
 
