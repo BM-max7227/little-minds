@@ -98,10 +98,10 @@ export default function KidTopicDetail() {
 
         <Tabs defaultValue="quick" className="w-full">
           <TabsList className={`grid w-full grid-cols-4 h-auto rounded-2xl p-1 ${color.softBg} ${color.border} border-2`}>
-            <TabsTrigger value="quick" className={`text-xs sm:text-sm rounded-xl data-[state=active]:${color.tile} data-[state=active]:${color.text} data-[state=active]:shadow-sm`}>🌟 Try Now</TabsTrigger>
-            <TabsTrigger value="skills" className={`text-xs sm:text-sm rounded-xl data-[state=active]:${color.tile} data-[state=active]:${color.text} data-[state=active]:shadow-sm`}>🧠 Skills</TabsTrigger>
-            <TabsTrigger value="videos" className={`text-xs sm:text-sm rounded-xl data-[state=active]:${color.tile} data-[state=active]:${color.text} data-[state=active]:shadow-sm`}>🎬 Watch</TabsTrigger>
-            <TabsTrigger value="journal" className={`text-xs sm:text-sm rounded-xl data-[state=active]:${color.tile} data-[state=active]:${color.text} data-[state=active]:shadow-sm`}>📓 Journal</TabsTrigger>
+            <TabsTrigger value="quick" className={`text-xs sm:text-sm rounded-xl data-[state=active]:shadow-sm ${color.tabActive}`}>🌟 Try Now</TabsTrigger>
+            <TabsTrigger value="skills" className={`text-xs sm:text-sm rounded-xl data-[state=active]:shadow-sm ${color.tabActive}`}>🧠 Skills</TabsTrigger>
+            <TabsTrigger value="videos" className={`text-xs sm:text-sm rounded-xl data-[state=active]:shadow-sm ${color.tabActive}`}>🎬 Watch</TabsTrigger>
+            <TabsTrigger value="journal" className={`text-xs sm:text-sm rounded-xl data-[state=active]:shadow-sm ${color.tabActive}`}>📓 Journal</TabsTrigger>
           </TabsList>
 
           <TabsContent value="quick" className="space-y-4 mt-6">
