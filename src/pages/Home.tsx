@@ -31,7 +31,7 @@ export default function Home() {
         {/* Hero content */}
         <div className="relative z-10 text-center px-4 max-w-3xl mx-auto">
           <h1 className="text-4xl md:text-6xl font-bold text-white mb-3 drop-shadow-lg">
-            Welcome to Little Minds
+            Little Minds — Kids Mental Health &amp; Wellbeing
           </h1>
           <p className="text-lg md:text-xl text-white/90 mb-8 drop-shadow-md leading-relaxed">
             A safe place for kids, parents, and anyone who wants to learn about mental health
