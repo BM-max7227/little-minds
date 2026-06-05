@@ -164,6 +164,7 @@ export function GlobalSearch() {
           setOpen(nextOpen);
           if (!nextOpen) setQuery("");
         }}
+        contentClassName="top-[12%] translate-y-0 max-w-[calc(100%-1.5rem)] sm:top-1/2 sm:-translate-y-1/2 sm:max-w-lg"
       >
         <CommandInput
           value={query}

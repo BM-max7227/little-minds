@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
+import { Link } from "react-router-dom";
 import { ThumbsUp, ThumbsDown, X } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 
@@ -163,23 +164,32 @@ export function FeedbackButtons({ userMessage, assistantMessage, messageId }: Fe
   return (
     <div className="mt-1.5">
       {!showForm && (
-        <div className="flex items-center gap-1.5">
-          <button
-            onClick={handleThumbsUp}
-            className="inline-flex h-6 w-6 items-center justify-center rounded-md transition focus-visible:outline-none"
-            aria-label="Good response"
-          >
-            <ThumbsUp className="h-4 w-4 text-muted-foreground hover:text-foreground" />
-          </button>
-          <button
-            onClick={handleThumbsDown}
-            className="inline-flex h-6 w-6 items-center justify-center rounded-md transition focus-visible:outline-none"
-            aria-label="Bad response"
-          >
-            <ThumbsDown className="h-4 w-4 text-muted-foreground hover:text-foreground" />
-          </button>
+        <div>
+          <div className="flex items-center gap-1.5">
+            <button
+              onClick={handleThumbsUp}
+              className="inline-flex h-6 w-6 items-center justify-center rounded-md transition focus-visible:outline-none"
+              aria-label="Good response"
+            >
+              <ThumbsUp className="h-4 w-4 text-muted-foreground hover:text-foreground" />
+            </button>
+            <button
+              onClick={handleThumbsDown}
+              className="inline-flex h-6 w-6 items-center justify-center rounded-md transition focus-visible:outline-none"
+              aria-label="Bad response"
+            >
+              <ThumbsDown className="h-4 w-4 text-muted-foreground hover:text-foreground" />
+            </button>
+          </div>
+          <p className="mt-1 text-[10px] leading-snug text-muted-foreground max-w-[260px]">
+            By rating, you agree to our{" "}
+            <Link to="/privacy" className="underline hover:text-foreground transition-colors">Privacy Policy</Link>{" "}
+            and{" "}
+            <Link to="/terms" className="underline hover:text-foreground transition-colors">Terms of Use</Link>.
+          </p>
         </div>
       )}
+
 
       {showForm && (
         <div className="bg-muted rounded-xl p-3 mt-1 space-y-2 max-w-[280px]">
@@ -228,6 +238,13 @@ export function FeedbackButtons({ userMessage, assistantMessage, messageId }: Fe
               Submit
             </button>
           </div>
+
+          <p className="text-[10px] leading-snug text-muted-foreground">
+            By submitting, you agree to our{" "}
+            <Link to="/privacy" className="underline hover:text-foreground transition-colors">Privacy Policy</Link>{" "}
+            and{" "}
+            <Link to="/terms" className="underline hover:text-foreground transition-colors">Terms of Use</Link>.
+          </p>
         </div>
       )}
     </div>
