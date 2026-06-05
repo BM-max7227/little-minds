@@ -41,7 +41,7 @@ export default function FindSupport() {
                 <a
                   key={item.id}
                   href={`#${item.id}`}
-                  className="rounded-full border border-primary/30 bg-primary/5 px-4 py-1.5 text-sm font-medium text-primary transition hover:bg-primary hover:text-primary-foreground"
+                  className="inline-flex items-center justify-center rounded-full border border-primary/30 bg-primary/5 px-4 py-1.5 text-sm font-medium leading-none text-primary transition hover:bg-primary hover:text-primary-foreground"
                 >
                   {item.label}
                 </a>
