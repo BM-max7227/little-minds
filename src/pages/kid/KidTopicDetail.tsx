@@ -120,9 +120,7 @@ export default function KidTopicDetail() {
           </TabsContent>
 
           <TabsContent value="skills" className="space-y-6 mt-6">
-            <p className="text-muted-foreground mb-4">
-              Practice these skills to build long-term coping strategies
-            </p>
+            <p className="text-sm font-medium text-muted-foreground mb-2">Cool tricks to practice 💪</p>
             {topic.skills.map((skill, index) => <Card key={index} className={`rounded-2xl border-2 ${color.border} ${color.softBg}`}>
                 <CardHeader>
                   <CardTitle>{skill.title}</CardTitle>
