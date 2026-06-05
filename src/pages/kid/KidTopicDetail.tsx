@@ -125,7 +125,7 @@ export default function KidTopicDetail() {
             <p className="text-muted-foreground mb-4">
               Practice these skills to build long-term coping strategies
             </p>
-            {topic.skills.map((skill, index) => <Card key={index}>
+            {topic.skills.map((skill, index) => <Card key={index} className={`rounded-2xl border-2 ${color.border} ${color.softBg}`}>
                 <CardHeader>
                   <CardTitle>{skill.title}</CardTitle>
                   <CardDescription>{skill.description} • {skill.time} min</CardDescription>
@@ -143,7 +143,7 @@ export default function KidTopicDetail() {
             <p className="text-muted-foreground mb-4">
               Short videos to help you understand and cope
             </p>
-            {topic.videos.map((video, index) => <Card key={index}>
+            {topic.videos.map((video, index) => <Card key={index} className={`rounded-2xl border-2 ${color.border} ${color.softBg}`}>
                 <CardHeader>
                   <CardTitle>{video.title}</CardTitle>
                   <CardDescription>{video.summary}</CardDescription>
