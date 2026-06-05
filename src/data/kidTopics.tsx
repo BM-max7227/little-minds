@@ -400,14 +400,14 @@ export const topics: Record<string, Topic> = {
     ],
     videos: [
       {
-        title: "Social Media and Mental Health for Teens",
-        url: "https://www.youtube.com/embed/zuaeyV29-Cs",
-        summary: "Learn how screen time affects your emotions and what you can do about it",
+        title: "Netiquette: Internet Rules for Kids",
+        url: "https://www.youtube.com/embed/kZOfLN4YqhY",
+        summary: "Fun ways to be kind and safe when you are online",
       },
       {
-        title: "Social Media and Mental Health for Teens",
-        url: "https://www.youtube.com/embed/EKCkxhAI9Sk",
-        summary: "Understanding how social media affects your mental health and wellbeing",
+        title: "What You See Online Is Not Always Real",
+        url: "https://www.youtube.com/embed/z2T-Rh838GA",
+        summary: "See how photos online get changed and why you are great as you are",
       },
     ],
     journalPrompts: [
@@ -661,9 +661,9 @@ export const topics: Record<string, Topic> = {
         summary: "Different ways to cope with grief after losing someone you love",
       },
       {
-        title: "Helping Children Deal with Grief",
-        url: "https://www.youtube.com/embed/8xbm3_IWthQ",
-        summary: "Learn how to process grief and feel safe while healing",
+        title: "Grief for Kids: Coping With Loss",
+        url: "https://www.youtube.com/embed/F5lN1ZXU_Q0",
+        summary: "A kid-friendly guide to understanding grief and feeling better",
       },
     ],
     journalPrompts: [
