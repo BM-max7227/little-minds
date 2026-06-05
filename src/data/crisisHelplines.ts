@@ -26,8 +26,9 @@ export const crisisHelplines: CountryHelplines[] = [
       { name: "SHOUT Crisis Text Line", text: "Text SHOUT to 85258", url: "https://giveusashout.org", description: "Free 24/7 text support" },
     ],
     directories: [
-      { name: "NHS Mental Health Services", url: "https://www.nhs.uk/mental-health/children-and-young-adults/mental-health-support/" },
+      { name: "Psychology Today UK", url: "https://www.psychologytoday.com/gb/counselling" },
       { name: "Counselling Directory", url: "https://www.counselling-directory.org.uk" },
+      { name: "BACP — Find a Therapist", url: "https://www.bacp.co.uk/search/Therapists" },
     ],
   },
   {
@@ -41,7 +42,7 @@ export const crisisHelplines: CountryHelplines[] = [
       { name: "NAMI Helpline", phone: "1-800-950-6264", url: "https://www.nami.org", description: "Mental health information and referrals" },
     ],
     directories: [
-      { name: "Psychology Today Therapist Finder", url: "https://www.psychologytoday.com/us/therapists" },
+      { name: "Psychology Today — Find a Therapist", url: "https://www.psychologytoday.com/us/therapists" },
       { name: "SAMHSA Treatment Locator", url: "https://findtreatment.gov" },
     ],
   },
@@ -67,6 +68,7 @@ export const crisisHelplines: CountryHelplines[] = [
       { name: "Lifeline", phone: "13 11 14", text: "Text 0477 13 11 14", url: "https://www.lifeline.org.au", description: "24/7 crisis support" },
     ],
     directories: [
+      { name: "Psychology Today Australia", url: "https://www.psychologytoday.com/au/counselling" },
       { name: "Medicare Mental Health", url: "https://www.medicarementalhealth.gov.au" },
     ],
   },
@@ -80,7 +82,7 @@ export const crisisHelplines: CountryHelplines[] = [
       { name: "Lifeline NZ", phone: "0800 543 354", url: "https://www.lifeline.org.nz", description: "24/7 crisis support" },
     ],
     directories: [
-      { name: "Mental Health Foundation NZ", url: "https://mentalhealth.org.nz" },
+      { name: "Psychology Today New Zealand", url: "https://www.psychologytoday.com/nz/counselling" },
     ],
   },
   {
@@ -93,7 +95,7 @@ export const crisisHelplines: CountryHelplines[] = [
       { name: "Jigsaw", url: "https://jigsaw.ie", description: "Youth mental health support" },
     ],
     directories: [
-      { name: "HSE Mental Health Services", url: "https://www2.hse.ie/mental-health/" },
+      { name: "Psychology Today Ireland", url: "https://www.psychologytoday.com/ie/counselling" },
     ],
   },
   {
@@ -106,6 +108,7 @@ export const crisisHelplines: CountryHelplines[] = [
       { name: "Lifeline South Africa", phone: "0861 322 322", url: "https://lifelinesa.co.za", description: "24/7 crisis support" },
     ],
     directories: [
+      { name: "Psychology Today South Africa", url: "https://www.psychologytoday.com/za/counselling" },
       { name: "SADAG Find Help", url: "https://www.sadag.org/index.php?option=com_content&view=article&id=2841&Itemid=494" },
     ],
   },
@@ -118,9 +121,7 @@ export const crisisHelplines: CountryHelplines[] = [
       { name: "iCall", phone: "9152987821", url: "https://icallhelpline.org", description: "Psychosocial support helpline" },
       { name: "Vandrevala Foundation", phone: "1860 2662 345", url: "https://www.vandrevalafoundation.com", description: "24/7 mental health support" },
     ],
-    directories: [
-      { name: "NIMHANS", url: "https://nimhans.ac.in" },
-    ],
+    directories: [],
   },
   {
     country: "Germany",
@@ -131,7 +132,8 @@ export const crisisHelplines: CountryHelplines[] = [
       { name: "Telefonseelsorge", phone: "0800 111 0 111", url: "https://www.telefonseelsorge.de", description: "24/7 crisis support" },
     ],
     directories: [
-      { name: "Deutsche Depressionshilfe", url: "https://www.deutsche-depressionshilfe.de" },
+      { name: "Psychologenportal (BDP)", url: "https://www.psychologenportal.de/" },
+      { name: "DPtV Psychotherapist Search", url: "https://www.dptv.de/psychotherapie/psychotherapeutensuche" },
     ],
   },
   {
@@ -144,7 +146,7 @@ export const crisisHelplines: CountryHelplines[] = [
       { name: "SOS Amitié", phone: "09 72 39 40 50", url: "https://www.sosamitie.org/besoin-aide/telephone", description: "Emotional listening support from trained volunteers" },
     ],
     directories: [
-      { name: "Psycom", url: "https://www.psycom.org" },
+      { name: "Psychology Today France", url: "https://www.psychologytoday.com/fr/psychologues" },
     ],
   },
   {
@@ -156,7 +158,7 @@ export const crisisHelplines: CountryHelplines[] = [
       { name: "113 Zelfmoordpreventie", phone: "0900 0113", url: "https://www.113.nl", description: "Crisis support" },
     ],
     directories: [
-      { name: "GGZ Netherlands", url: "https://www.ggzstandaarden.nl" },
+      { name: "NVP — Find a Psychotherapist", url: "https://www.psychotherapie.nl/clienten-en-belangstellenden/zoek-een-psychotherapeut" },
     ],
   },
   {
@@ -168,7 +170,7 @@ export const crisisHelplines: CountryHelplines[] = [
       { name: "ANAR Foundation (Children)", phone: "900 20 20 10", url: "https://www.anar.org", description: "Helpline for children and teens" },
     ],
     directories: [
-      { name: "ANAR Foundation", url: "https://www.anar.org" },
+      { name: "Psychology Today Spain", url: "https://www.psychologytoday.com/es/psicologos-psicoterapeutas" },
     ],
   },
   {
@@ -189,9 +191,7 @@ export const crisisHelplines: CountryHelplines[] = [
       { name: "Childline Japan", phone: "0120 99 7777", url: "https://childline.or.jp", description: "Free helpline for children" },
       { name: "TELL Lifeline", phone: "03-5774-0992", url: "https://telljp.com", description: "Support in English and Japanese" },
     ],
-    directories: [
-      { name: "TELL Japan", url: "https://telljp.com" },
-    ],
+    directories: [],
   },
   {
     country: "Brazil",
@@ -211,7 +211,9 @@ export const crisisHelplines: CountryHelplines[] = [
       { name: "Línea de la Vida", phone: "800 911 2000", description: "24/7 crisis support" },
       { name: "SAPTEL", phone: "55 5259 8121", url: "https://www.saptel.org.mx", description: "Emotional support helpline" },
     ],
-    directories: [],
+    directories: [
+      { name: "Psychology Today Mexico", url: "https://www.psychologytoday.com/mx/psicologos" },
+    ],
   },
   {
     country: "Philippines",
@@ -231,7 +233,9 @@ export const crisisHelplines: CountryHelplines[] = [
       { name: "Tinkle Friend (Children)", phone: "1800 274 4788", url: "https://www.tinklefriend.sg", description: "Helpline for primary school children" },
       { name: "Samaritans of Singapore", phone: "1-767", url: "https://www.sos.org.sg", description: "24/7 crisis support" },
     ],
-    directories: [],
+    directories: [
+      { name: "Psychology Today Singapore", url: "https://www.psychologytoday.com/sg/counselling" },
+    ],
   },
   {
     country: "Malaysia",
@@ -261,7 +265,9 @@ export const crisisHelplines: CountryHelplines[] = [
       { name: "BRIS (Children)", phone: "116 111", url: "https://www.bris.se", description: "Helpline for children and young people" },
       { name: "Mind Självmordslinjen", phone: "90101", url: "https://mind.se", description: "Crisis support" },
     ],
-    directories: [],
+    directories: [
+      { name: "Psychology Today Sweden", url: "https://www.psychologytoday.com/en-se/therapists" },
+    ],
   },
   {
     country: "Norway",
@@ -281,7 +287,9 @@ export const crisisHelplines: CountryHelplines[] = [
       { name: "Børnetelefonen", phone: "116 111", url: "https://bornetelefonen.dk", description: "Helpline for children" },
       { name: "Livslinien", phone: "70 201 201", url: "https://www.livslinien.dk", description: "Crisis support" },
     ],
-    directories: [],
+    directories: [
+      { name: "Psychology Today Denmark", url: "https://www.psychologytoday.com/en-dk/therapists" },
+    ],
   },
   {
     country: "Finland",
@@ -361,7 +369,9 @@ export const crisisHelplines: CountryHelplines[] = [
       { name: "Centro de Asistencia al Suicida", phone: "135", url: "https://www.asistenciaalsuicida.org.ar", description: "24/7 suicide prevention" },
       { name: "Línea 102 (Children)", phone: "102", description: "Helpline for children and teens" },
     ],
-    directories: [],
+    directories: [
+      { name: "Psychology Today Argentina", url: "https://www.psychologytoday.com/ar/psicologos" },
+    ],
   },
   {
     country: "Chile",
@@ -371,7 +381,9 @@ export const crisisHelplines: CountryHelplines[] = [
       { name: "Fono Infancia", phone: "800 200 818", url: "https://www.fonoinfancia.cl", description: "Support for children and families" },
       { name: "Salud Responde", phone: "600 360 7777", description: "Health and mental health support" },
     ],
-    directories: [],
+    directories: [
+      { name: "Psychology Today Chile", url: "https://www.psychologytoday.com/cl/psicologos" },
+    ],
   },
   {
     country: "Colombia",
@@ -381,7 +393,9 @@ export const crisisHelplines: CountryHelplines[] = [
       { name: "Línea 106 (Children)", phone: "106", description: "Helpline for children and teens" },
       { name: "Línea 141 ICBF", phone: "141", description: "Child welfare support" },
     ],
-    directories: [],
+    directories: [
+      { name: "Psychology Today Colombia", url: "https://www.psychologytoday.com/co/psicologos" },
+    ],
   },
   {
     country: "Peru",
@@ -391,7 +405,9 @@ export const crisisHelplines: CountryHelplines[] = [
       { name: "Línea 100", phone: "100", description: "Family violence and child abuse helpline" },
       { name: "Infosalud", phone: "113", description: "Mental health support" },
     ],
-    directories: [],
+    directories: [
+      { name: "Psychology Today Peru", url: "https://www.psychologytoday.com/pe/psicologos" },
+    ],
   },
   {
     country: "Ecuador",
@@ -419,7 +435,9 @@ export const crisisHelplines: CountryHelplines[] = [
       { name: "Línea 1147 (Children)", phone: "1147", description: "Helpline for children and teens" },
       { name: "Aquí Estoy", phone: "2272-3774", description: "Emotional crisis support" },
     ],
-    directories: [],
+    directories: [
+      { name: "Psychology Today Costa Rica", url: "https://www.psychologytoday.com/cr/psicologos" },
+    ],
   },
   {
     country: "Uruguay",
@@ -429,7 +447,9 @@ export const crisisHelplines: CountryHelplines[] = [
       { name: "Línea Azul (Children)", phone: "0800 5050", description: "Child abuse and support helpline" },
       { name: "Último Recurso", phone: "0800 0767", url: "https://www.ultimorecurso.com.uy", description: "Crisis support" },
     ],
-    directories: [],
+    directories: [
+      { name: "Psychology Today Uruguay", url: "https://www.psychologytoday.com/uy/psicologos" },
+    ],
   },
   {
     country: "Paraguay",
@@ -456,7 +476,9 @@ export const crisisHelplines: CountryHelplines[] = [
     helplines: [
       { name: "Línea 1546 PGN", phone: "1546", description: "Child protection helpline" },
     ],
-    directories: [],
+    directories: [
+      { name: "Psychology Today Guatemala", url: "https://www.psychologytoday.com/gt/psicologos" },
+    ],
   },
   {
     country: "Panama",
@@ -465,7 +487,9 @@ export const crisisHelplines: CountryHelplines[] = [
     helplines: [
       { name: "Línea 147 (Children)", phone: "147", description: "Child and family support" },
     ],
-    directories: [],
+    directories: [
+      { name: "Psychology Today Panama", url: "https://www.psychologytoday.com/pa/psicologos" },
+    ],
   },
   {
     country: "Dominican Republic",
@@ -485,7 +509,9 @@ export const crisisHelplines: CountryHelplines[] = [
       { name: "Rat auf Draht (Children)", phone: "147", url: "https://www.rataufdraht.at", description: "Helpline for children and teens" },
       { name: "Telefonseelsorge", phone: "142", description: "24/7 crisis support" },
     ],
-    directories: [],
+    directories: [
+      { name: "Psychology Today Austria", url: "https://www.psychologytoday.com/en-at/therapists" },
+    ],
   },
   {
     country: "Switzerland",
@@ -495,7 +521,9 @@ export const crisisHelplines: CountryHelplines[] = [
       { name: "Pro Juventute (Children)", phone: "147", url: "https://www.projuventute.ch", description: "Helpline for children and teens" },
       { name: "Die Dargebotene Hand", phone: "143", url: "https://www.143.ch", description: "24/7 crisis support" },
     ],
-    directories: [],
+    directories: [
+      { name: "Psychology Today Switzerland", url: "https://www.psychologytoday.com/en-ch/therapists" },
+    ],
   },
   {
     country: "Belgium",
@@ -506,7 +534,9 @@ export const crisisHelplines: CountryHelplines[] = [
       { name: "Centre de Prévention du Suicide", phone: "0800 32 123", url: "https://www.preventionsuicide.be", description: "Crisis support (French)" },
       { name: "Zelfmoordlijn", phone: "1813", url: "https://www.zelfmoord1813.be", description: "Crisis support (Dutch)" },
     ],
-    directories: [],
+    directories: [
+      { name: "Psychology Today Belgium", url: "https://www.psychologytoday.com/en-be/therapists" },
+    ],
   },
   {
     country: "Czech Republic",
@@ -793,7 +823,9 @@ export const crisisHelplines: CountryHelplines[] = [
       { name: "Samaritans Hong Kong", phone: "2389 2222", url: "https://www.samaritans.org.hk", description: "24/7 emotional support" },
       { name: "Suicide Prevention Services", phone: "2382 0000", url: "https://www.sps.org.hk", description: "Crisis support" },
     ],
-    directories: [],
+    directories: [
+      { name: "Psychology Today Hong Kong", url: "https://www.psychologytoday.com/hk/counselling" },
+    ],
   },
   {
     country: "China",

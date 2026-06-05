@@ -14,9 +14,9 @@ export function HelplineDisplay({ data, showDirectories = false, directoriesOnly
     if (data.directories.length === 0) {
       return (
         <p className="text-sm text-muted-foreground">
-          No therapist directories are listed for this country yet. Try{" "}
-          <a href="https://findahelpline.com" target="_blank" rel="noopener noreferrer" className="text-primary underline">
-            findahelpline.com
+          No therapist directories are listed for this country yet. Try the{" "}
+          <a href="https://www.psychologytoday.com/country-selector" target="_blank" rel="noopener noreferrer" className="text-primary underline">
+            Psychology Today directory
           </a>{" "}
           or ask your child's school or doctor for a referral.
         </p>
