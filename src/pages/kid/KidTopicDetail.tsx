@@ -234,7 +234,7 @@ export default function KidTopicDetail() {
             </Card>
           )}
 
-          <Card className="bg-primary/5 border-primary/20">
+          <Card className={`rounded-2xl border-2 ${color.border} ${color.tile}`}>
             <CardContent className="pt-6">
               <p className="text-center text-lg font-medium italic">
                 {topicId === "anxiety" && "Asking for help is not a sign of weakness, it is a sign of strength"}
