@@ -177,11 +177,11 @@ export default function PrivacyPolicy() {
           <h2>Third-Party Links</h2>
           <p>
             This website may contain links to external resources and websites, including the
-            therapist directories listed on the Parent "Find Support" page and any resources or
-            links the AI chat may suggest. When you follow one of these links you leave Little Minds
-            and visit a third party site that we do not control. Little Minds is not responsible for
-            the privacy practices of third-party sites, and we encourage you to review the privacy
-            policy of any external site you visit.
+            therapist directories listed on the Parent "Find Support" page. (Note: the AI chat only
+            links to other pages within this website, not to outside sites.) When you follow an
+            external link you leave Little Minds and visit a third party site that we do not control.
+            Little Minds is not responsible for the privacy practices of third-party sites, and we
+            encourage you to review the privacy policy of any external site you visit.
           </p>
 
           <h2>Data Security</h2>
