@@ -124,7 +124,7 @@ export default function Donate() {
                     Make a Donation Inquiry
                   </CardTitle>
                   <CardDescription>
-                    Fill in your details and we'll get in touch about your donation
+                    Fill in your details and we'll get in touch about your donation. Please only submit if you're genuinely planning to donate.
                   </CardDescription>
                 </CardHeader>
                 <CardContent>
