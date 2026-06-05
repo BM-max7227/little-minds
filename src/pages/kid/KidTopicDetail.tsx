@@ -78,6 +78,7 @@ export default function KidTopicDetail() {
       ],
     },
   ];
+  const color = getKidTopicColor(topicId);
   return <div className="min-h-screen bg-background">
       <SEO title={seoTitle} description={seoDesc} path={path} type="article" jsonLd={jsonLd} />
       <Header audience="kid" />
@@ -87,9 +88,9 @@ export default function KidTopicDetail() {
           Back to Topics
         </Button>
 
-        <div className="mb-8">
-          <div className="flex items-center gap-3 mb-2">
-            <span className="text-4xl">{topic.icon}</span>
+        <div className={`mb-8 rounded-3xl border-2 ${color.border} ${color.softBg} p-6 sm:p-8`}>
+          <div className="flex items-center gap-4 mb-2">
+            <span className={`flex h-16 w-16 items-center justify-center rounded-2xl text-4xl ${color.tile}`}>{topic.icon}</span>
             <h1 className="text-3xl font-bold">{topic.title}</h1>
           </div>
           <p className="text-lg text-muted-foreground">{topic.subtitle}</p>
