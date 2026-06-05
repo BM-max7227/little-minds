@@ -229,6 +229,13 @@ export function FeedbackButtons({ userMessage, assistantMessage, messageId }: Fe
               Submit
             </button>
           </div>
+
+          <p className="text-[10px] leading-snug text-muted-foreground">
+            By submitting, you agree to our{" "}
+            <Link to="/privacy" className="underline hover:text-foreground transition-colors">Privacy Policy</Link>{" "}
+            and{" "}
+            <Link to="/terms" className="underline hover:text-foreground transition-colors">Terms of Use</Link>.
+          </p>
         </div>
       )}
     </div>
