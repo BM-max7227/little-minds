@@ -12,7 +12,11 @@ import { HelplineDisplay } from "@/components/HelplineDisplay";
 import { getHelplinesForCountry, getSavedCountry } from "@/data/crisisHelplines";
 
 export default function FindSupport() {
-  const [countryCode, setCountryCode] = useState<string>(getSavedCountry() || "");
+  // Only honour a saved country here if it actually has therapist directories,
+  // so this page never lands on a country with no confirmed directories.
+  const savedCountry = getSavedCountry();
+  const savedHasDirectories = savedCountry && (getHelplinesForCountry(savedCountry)?.directories.length ?? 0) > 0;
+  const [countryCode, setCountryCode] = useState<string>(savedHasDirectories ? savedCountry : "");
   const countryData = countryCode ? getHelplinesForCountry(countryCode) : null;
 
   return (
