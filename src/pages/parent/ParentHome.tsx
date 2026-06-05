@@ -149,7 +149,7 @@ export default function ParentHome() {
                 <div className="flex-1">
                   <p className="font-bold text-xl mb-1">Learn About the Issues</p>
                   <p className="text-muted-foreground">
-                    Plain-language guides to anxiety, sleep, stress, bullying, grief, and more — so you can understand what your child is going through.
+                    Clear, detailed guides to anxiety, sleep, stress, and so much more — plus myths vs. facts — so you can understand exactly what your child is going through.
                   </p>
                 </div>
                 <span className="text-sm font-semibold text-primary inline-flex items-center gap-1 group-hover:gap-2 transition-all flex-shrink-0">
