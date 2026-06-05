@@ -27,6 +27,7 @@ export default function QuickGuide() {
             </p>
           </div>
 
+          <h2 className="sr-only">Four key steps</h2>
           <div className="grid md:grid-cols-2 gap-6">
             <Card className="rounded-3xl border-2 border-transparent shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-sky-200/50">
               <CardHeader>
