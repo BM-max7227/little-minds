@@ -26,12 +26,50 @@ export default function FindSupport() {
 
       <main className="flex-1 py-12">
         <div className="container px-4 max-w-4xl mx-auto">
-          <div className="mb-12">
+          <div className="mb-8">
             <h1 className="text-4xl font-bold mb-4">Find Professional Support</h1>
             <p className="text-xl text-muted-foreground">
-              Understanding your options and how to choose the right help
+              Find a therapist for your child, plus how to choose the right help
             </p>
           </div>
+
+          <section className="mb-12">
+            <Card className="border-2 border-primary/30 bg-primary/5 rounded-3xl shadow-sm">
+              <CardHeader>
+                <CardTitle className="text-2xl">Find a Therapist Near You</CardTitle>
+                <CardDescription>
+                  Choose your country to see trusted directories where you can search for a therapist or counsellor.
+                </CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <CountryPicker selectedCode={countryCode || null} onSelect={setCountryCode} onlyWithDirectories />
+
+                {countryData && <HelplineDisplay data={countryData} directoriesOnly />}
+
+                {!countryData && (
+                  <p className="text-sm text-muted-foreground">
+                    Only countries with a confirmed therapist directory are listed. Don't see yours? Try the{" "}
+                    <a href="https://www.psychologytoday.com/country-selector" target="_blank" rel="noopener noreferrer" className="text-primary underline">
+                      Psychology Today directory
+                    </a>{" "}
+                    or ask your child's school or doctor for a referral.
+                  </p>
+                )}
+
+                <div className="rounded-lg bg-destructive/5 border border-destructive/20 p-3">
+                  <p className="text-sm">
+                    <span className="font-semibold text-destructive">Need urgent help?</span>{" "}
+                    For emergency numbers and crisis helplines, use the{" "}
+                    <span className="font-semibold">Help Now</span> button at the top of any page.
+                  </p>
+                </div>
+
+                <p className="text-xs text-muted-foreground pt-1">
+                  This information is provided for guidance only. Always verify details directly with the service provider. Little Minds is not affiliated with these organisations.
+                </p>
+              </CardContent>
+            </Card>
+          </section>
 
           <section className="mb-12">
             <h2 className="text-2xl font-bold mb-6">Types of Professional Help</h2>
