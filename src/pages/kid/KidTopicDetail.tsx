@@ -8,6 +8,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Timer } from "@/components/Timer";
 import { topics } from "@/data/kidTopics";
 import { topicConversationStarters } from "@/data/topicConversationStarters";
+import { getKidTopicColor } from "@/data/kidTopicColors";
 import { useState, useEffect } from "react";
 import { ArrowLeft, Heart, MessageCircle } from "lucide-react";
 import {
