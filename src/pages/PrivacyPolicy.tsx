@@ -116,6 +116,14 @@ export default function PrivacyPolicy() {
             the chat is closed or refreshed).
           </p>
 
+          <h3>Read Aloud (Text-to-Speech)</h3>
+          <p>
+            Little Minds offers an optional "Read Aloud" accessibility feature that can speak page
+            text out loud. Like voice input, this uses your own browser or device's built-in
+            speech engine. No text or audio is sent to or stored by Little Minds, and the feature
+            is entirely optional.
+          </p>
+
           <h3>Chat Feedback</h3>
           <p>
             If you choose to submit feedback on a chat response (thumbs up/down), a record is saved
