@@ -105,10 +105,12 @@ export default function Contact() {
         <section className="py-8">
           <div className="container px-4">
             <div className="max-w-lg mx-auto">
-              <Card className="border-2">
+              <Card className="border-2 rounded-3xl bg-sky-50/60 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-sky-200/50">
                 <CardHeader className="text-center">
+                  <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-sky-100 mb-3 mx-auto">
+                    <Send className="h-7 w-7 text-sky-600" />
+                  </div>
                   <CardTitle className="flex items-center justify-center gap-2">
-                    <Send className="h-5 w-5 text-primary" />
                     Send a Message
                   </CardTitle>
                   <CardDescription>
