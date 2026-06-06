@@ -541,6 +541,21 @@ export function AIChatWidget() {
                             components={{
                               a: ({ href, children }) => {
                                 const url = href || "";
+                                const isHelpNow = url === "#help-now";
+                                if (isHelpNow) {
+                                  return (
+                                    <a
+                                      href="#help-now"
+                                      onClick={(e) => {
+                                        e.preventDefault();
+                                        window.dispatchEvent(new CustomEvent("littleminds:open-help"));
+                                      }}
+                                      className="font-medium text-primary underline underline-offset-2 hover:text-primary/80"
+                                    >
+                                      {children}
+                                    </a>
+                                  );
+                                }
                                 const isInternal = url.startsWith("/");
                                 return (
                                   <a
