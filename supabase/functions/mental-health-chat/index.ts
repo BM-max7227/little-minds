@@ -246,7 +246,7 @@ function isCrisisMessage(text: string): boolean {
 
 const CRISIS_BANNER = `💛 **I hear you, and I'm really glad you told me.** What you're feeling matters, and you don't have to go through this alone.
 
-**Please reach out right now** — tap the **Help Now** button at the top of the page for free, confidential support in your country. A few you can call or text any time:
+**Please reach out right now** — tap [Help Now](#help-now) (the button at the top right of every page) for free, confidential support in your country. A few you can call or text any time:
 
 - 🇺🇸 US — call or text **988** (Suicide & Crisis Lifeline)
 - 🇬🇧 UK — call **116 123** (Samaritans, free)
