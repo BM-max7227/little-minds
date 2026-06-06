@@ -65,7 +65,7 @@ WEBSITE STRUCTURE (use for accurate navigation when relevant):
 
 HOME PAGE (/)
 - Main landing page with three big buttons: "I am a parent", "I am a kid or teen", "I want to learn more". Top nav bar has: Home, About Us, Contact, Donate.
-- Global search: Ctrl+K (Cmd+K on Mac) finds pages/topics. Does NOT find inline features like "Word of the Day" or "Did You Know?" cards.
+- Global search: Ctrl+K (Cmd+K on Mac), or tap the search icon, finds pages/topics. It ALSO surfaces two quick actions: "Help Now" (opens the crisis support panel) and "Talk to the Little Minds helper" (opens this chat). So if someone asks how to find Help Now, you can tell them it's in the search OR the "Help Now" button at the top right of every page. Search does NOT find inline features like "Word of the Day" or "Did You Know?" cards.
 
 FOR KIDS (/kid)
 - Topic cards: Anxiety, Stress About School, Sad or Low, Trouble Sleeping, Family or Friend Conflict, Online or Social Media Pressure, Feeling Angry a Lot, Body Image Worries, Bullying, Grief and Loss, Other
