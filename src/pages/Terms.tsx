@@ -37,14 +37,13 @@ export default function Terms() {
             at any time without notice.
           </p>
           <p>
-            This includes the website's safety and support features — such as the "Help Now" button,
-            the crisis helpline information, and any links, buttons, or navigation provided by the
-            website or the AI chat (including the link that opens the "Help Now" panel). These
-            features are provided on a best-effort, "as is" basis and may at times fail to load, be
-            delayed, be out of date, or be unavailable. They depend on your own device, browser, and
-            internet connection. You must never rely on this website, its links, or its features as
-            your only or primary way to get help in an emergency. If you or someone else is in danger
-            or in crisis, call your local emergency number or a crisis line directly.
+            This includes all buttons, links, navigation, tools, and other features of the website
+            (including any links provided by the AI chat). These depend on your device, browser, and
+            internet connection, and may at times fail to load, be delayed, behave unexpectedly, be
+            out of date, or be unavailable. We do not guarantee that any feature or link will always
+            work or take you where expected. You should never rely on this website, any single
+            feature, link, or page as your only way to get help in an urgent situation — in an
+            emergency, call your local emergency number or a crisis line directly.
           </p>
 
 
