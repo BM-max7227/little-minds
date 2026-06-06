@@ -14,6 +14,14 @@ interface HeaderProps {
 
 export function Header({ audience }: HeaderProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [helpNowOpen, setHelpNowOpen] = useState(false);
+
+  // Allow other parts of the app (e.g. global search) to open Help Now.
+  useEffect(() => {
+    const openHelp = () => setHelpNowOpen(true);
+    window.addEventListener("littleminds:open-help", openHelp);
+    return () => window.removeEventListener("littleminds:open-help", openHelp);
+  }, []);
 
   const getNavLinks = () => {
     switch (audience) {
