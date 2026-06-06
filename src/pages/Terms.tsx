@@ -36,6 +36,17 @@ export default function Terms() {
             or error-free. Little Minds may modify, suspend, or discontinue any part of the website
             at any time without notice.
           </p>
+          <p>
+            This includes the website's safety and support features — such as the "Help Now" button,
+            the crisis helpline information, and any links, buttons, or navigation provided by the
+            website or the AI chat (including the link that opens the "Help Now" panel). These
+            features are provided on a best-effort, "as is" basis and may at times fail to load, be
+            delayed, be out of date, or be unavailable. They depend on your own device, browser, and
+            internet connection. You must never rely on this website, its links, or its features as
+            your only or primary way to get help in an emergency. If you or someone else is in danger
+            or in crisis, call your local emergency number or a crisis line directly.
+          </p>
+
 
           <h2>Accuracy of Information</h2>
           <p>
