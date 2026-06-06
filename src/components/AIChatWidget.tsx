@@ -48,6 +48,13 @@ export function AIChatWidget() {
 
   const supportsVoice = typeof window !== "undefined" && ("SpeechRecognition" in window || "webkitSpeechRecognition" in window);
 
+  // Allow other parts of the app (e.g. global search) to open the chat.
+  useEffect(() => {
+    const openChat = () => setOpen(true);
+    window.addEventListener("littleminds:open-chat", openChat);
+    return () => window.removeEventListener("littleminds:open-chat", openChat);
+  }, []);
+
   // Lock background page scroll while the chat is taking over the screen
   // (full-screen on mobile, or when the user expands it on desktop).
   useEffect(() => {
