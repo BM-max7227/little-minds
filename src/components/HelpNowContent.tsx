@@ -52,7 +52,7 @@ export function HelpNowContent() {
       </div>
 
       <p className="text-xs text-muted-foreground">
-        This information is provided for guidance only. In an emergency, always call your local emergency number. Little Minds is not a crisis service.
+        This information is provided for guidance only and may be incomplete or out of date. This feature and its links may not always work or load. Please don't rely on it as your only way to get help — in an emergency, always call your local emergency number directly. Little Minds is not a crisis service.
       </p>
     </div>
   );
