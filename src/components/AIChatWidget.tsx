@@ -48,6 +48,21 @@ export function AIChatWidget() {
 
   const supportsVoice = typeof window !== "undefined" && ("SpeechRecognition" in window || "webkitSpeechRecognition" in window);
 
+  // Lock background page scroll while the chat is taking over the screen
+  // (full-screen on mobile, or when the user expands it on desktop).
+  useEffect(() => {
+    if (typeof document === "undefined") return;
+    const isMobile = window.matchMedia("(max-width: 639px)").matches;
+    const shouldLock = open && (fullscreen || isMobile);
+    if (shouldLock) {
+      const prev = document.body.style.overflow;
+      document.body.style.overflow = "hidden";
+      return () => {
+        document.body.style.overflow = prev;
+      };
+    }
+  }, [open, fullscreen]);
+
   const stopListening = useCallback(() => {
     recognitionRef.current?.stop();
     recognitionRef.current = null;
@@ -432,7 +447,7 @@ export function AIChatWidget() {
       {open && (
         <div className={`fixed z-50 flex flex-col border bg-background shadow-2xl overflow-hidden transition-all ${
           fullscreen
-            ? "inset-2 w-auto h-auto max-w-none max-h-none rounded-2xl"
+            ? "inset-0 w-full h-full max-w-none max-h-none rounded-none"
             : "inset-0 w-full h-full rounded-none sm:rounded-2xl sm:inset-auto sm:bottom-4 sm:right-4 sm:w-[360px] sm:max-w-[calc(100vw-2rem)] sm:h-[520px] sm:max-h-[calc(100vh-2rem)]"
         }`}>
           {/* Header */}
