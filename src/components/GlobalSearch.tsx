@@ -20,6 +20,7 @@ interface SearchResult {
   path: string;
   category: string;
   keywords?: string[];
+  action?: "open-help" | "open-chat";
 }
 
 const normalize = (text: string) => text.toLowerCase().trim();
@@ -100,6 +101,12 @@ export function GlobalSearch() {
       { id: "privacy", title: "Privacy Policy", description: "How we handle your privacy and data", path: "/privacy", category: "Pages", keywords: ["privacy", "legal", "data", "policy"] },
     ];
 
+    const quickActions: SearchResult[] = [
+      { id: "action-help-now", title: "Help Now", description: "Crisis helplines and emergency support", path: "", category: "Get Help", keywords: ["help", "crisis", "emergency", "suicide", "danger", "urgent", "talk to someone", "support"], action: "open-help" },
+      { id: "action-ai-chat", title: "Talk to the Little Minds helper", description: "Chat with our caring AI helper", path: "", category: "Get Help", keywords: ["chat", "ai", "helper", "talk", "assistant", "little minds helper", "bot"], action: "open-chat" },
+    ];
+
+    results.push(...quickActions);
     results.push(...staticPages);
     return results;
   }, []);
@@ -139,10 +146,18 @@ export function GlobalSearch() {
     [rankedResults],
   );
 
-  const handleSelect = (path: string) => {
+  const handleSelect = (result: SearchResult) => {
     setOpen(false);
     setQuery("");
-    navigate(path);
+    if (result.action === "open-help") {
+      window.dispatchEvent(new CustomEvent("littleminds:open-help"));
+      return;
+    }
+    if (result.action === "open-chat") {
+      window.dispatchEvent(new CustomEvent("littleminds:open-chat"));
+      return;
+    }
+    navigate(result.path);
   };
 
   return (
@@ -179,7 +194,7 @@ export function GlobalSearch() {
                 <CommandItem
                   key={result.id}
                   value={result.title}
-                  onSelect={() => handleSelect(result.path)}
+                  onSelect={() => handleSelect(result)}
                 >
                   <div className="flex flex-col">
                     <span className="font-medium">{result.title}</span>

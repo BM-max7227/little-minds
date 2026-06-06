@@ -14,6 +14,14 @@ interface HeaderProps {
 
 export function Header({ audience }: HeaderProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [helpNowOpen, setHelpNowOpen] = useState(false);
+
+  // Allow other parts of the app (e.g. global search) to open Help Now.
+  useEffect(() => {
+    const openHelp = () => setHelpNowOpen(true);
+    window.addEventListener("littleminds:open-help", openHelp);
+    return () => window.removeEventListener("littleminds:open-help", openHelp);
+  }, []);
 
   const getNavLinks = () => {
     switch (audience) {
@@ -99,7 +107,7 @@ export function Header({ audience }: HeaderProps) {
           </Button>
 
           {/* Help Now */}
-          <Sheet>
+          <Sheet open={helpNowOpen} onOpenChange={setHelpNowOpen}>
             <SheetTrigger asChild>
               <Button variant="destructive" size="sm" className="h-11 w-11 sm:h-9 sm:w-9 p-0 sm:w-auto sm:px-3" aria-label="Help Now">
                 <AlertCircle className="h-5 w-5 sm:h-4 sm:w-4 sm:mr-2" />
