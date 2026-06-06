@@ -120,10 +120,21 @@ export default function Disclaimer() {
             your local emergency number.
           </p>
 
-
-
+          <h2>Website Features and Links</h2>
+          <p>
+            The buttons, links, navigation, tools, and other features of this website (including any
+            links provided by the AI chat) are offered on a best-effort, "as is" basis. They depend
+            on your device, browser, and internet connection, and may at times fail to load, be
+            delayed, behave unexpectedly, be out of date, or be unavailable. Little Minds does not
+            guarantee that any feature or link will always work or take you where expected, and is
+            not responsible for any consequences arising from a feature or link being unavailable,
+            delayed, or not working as intended. This applies to all features, and you should never
+            rely on any single feature, link, or page of this website as your only way to get help
+            in an urgent situation — in an emergency, call your local emergency number directly.
+          </p>
 
           <h2>Data Retention</h2>
+
           <p>
             Because Little Minds stores all information (such as journals, progress, favorites, and
             preferences) locally on your device using your browser's storage, we cannot recover or
