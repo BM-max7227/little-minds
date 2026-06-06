@@ -119,6 +119,20 @@ export default function Disclaimer() {
             Always verify information directly with the service provider, and in an emergency call
             your local emergency number.
           </p>
+          <p>
+            These safety features — including the "Help Now" button, any links, buttons, or
+            navigation provided by the website or the AI chat (such as the link that opens the
+            "Help Now" panel), and the helpline numbers and resources displayed — are provided on a
+            best-effort, "as is" basis. They may at times fail to load, be delayed, contain errors,
+            be out of date, or be unavailable, and they depend on your device, browser, and internet
+            connection working correctly. You must never rely on this website, its buttons, its
+            links, or the AI chat as your only or primary means of obtaining help in an emergency. If
+            you or someone else is in danger or experiencing a crisis, call your local emergency
+            number or a crisis line directly. Little Minds is not responsible for any consequences
+            arising from a feature, link, or resource being unavailable, delayed, inaccurate, or not
+            working as expected.
+          </p>
+
 
           <h2>Data Retention</h2>
           <p>
