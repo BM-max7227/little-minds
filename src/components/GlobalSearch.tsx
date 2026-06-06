@@ -194,7 +194,7 @@ export function GlobalSearch() {
                 <CommandItem
                   key={result.id}
                   value={result.title}
-                  onSelect={() => handleSelect(result.path)}
+                  onSelect={() => handleSelect(result)}
                 >
                   <div className="flex flex-col">
                     <span className="font-medium">{result.title}</span>
