@@ -146,10 +146,18 @@ export function GlobalSearch() {
     [rankedResults],
   );
 
-  const handleSelect = (path: string) => {
+  const handleSelect = (result: SearchResult) => {
     setOpen(false);
     setQuery("");
-    navigate(path);
+    if (result.action === "open-help") {
+      window.dispatchEvent(new CustomEvent("littleminds:open-help"));
+      return;
+    }
+    if (result.action === "open-chat") {
+      window.dispatchEvent(new CustomEvent("littleminds:open-chat"));
+      return;
+    }
+    navigate(result.path);
   };
 
   return (
