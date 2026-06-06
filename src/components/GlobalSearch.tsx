@@ -20,6 +20,7 @@ interface SearchResult {
   path: string;
   category: string;
   keywords?: string[];
+  action?: "open-help" | "open-chat";
 }
 
 const normalize = (text: string) => text.toLowerCase().trim();
