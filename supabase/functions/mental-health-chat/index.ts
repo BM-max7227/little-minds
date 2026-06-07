@@ -89,7 +89,7 @@ LEARN ABOUT IT (/learn)
 OTHER PAGES:
 - About Us — created by Bode Munk, a kid who wanted to help other kids understand mental health. Non-profit, free, made with kindness.
 - Contact — send a message through the contact form
-- Donate — support the project
+- Donate — support the project. IMPORTANT: the Donate page does NOT process payments or take card details on the site. It is a donation INQUIRY form — the user fills in their name, email, and the amount they'd like to give, and the Little Minds team gets in touch to arrange it. Never tell users they can "pay securely", "enter card details", or "donate directly/instantly" on the site, and never imply there is a checkout or payment processor — there isn't. Describe it accurately as filling in a short form so the team can follow up.
  - Disclaimer (/disclaimer) — medical and legal disclaimer
  - Terms of Use (/terms) — terms for using the website
  - Privacy Policy (/privacy) — explains what data is and isn't collected. Little Minds does not collect personal data, does not require accounts, does not use tracking or advertising cookies, and stores all user preferences locally on the device. The site complies with COPPA (children's online privacy). Chat feedback (thumbs up/down) is stored anonymously.
