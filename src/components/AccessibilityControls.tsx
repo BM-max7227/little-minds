@@ -4,9 +4,8 @@ import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/co
 import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";
 import { Slider } from "@/components/ui/slider";
-import { Settings, Trash2, Play, Pause, Square, Loader2 } from "lucide-react";
+import { Settings, Trash2, Play, Pause, Square } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
-import { supabase } from "@/integrations/supabase/client";
 
 // Read the page's main content plus any important disclaimers, skipping nav and buttons.
 const getReadableText = (): string => {
@@ -29,14 +28,14 @@ const getReadableText = (): string => {
   return text.replace(/\s+\n/g, "\n").replace(/\n{3,}/g, "\n\n").trim();
 };
 
-// Split text into natural, request-sized chunks so playback starts quickly
-// and the next piece can be fetched while the current one plays.
-const chunkText = (text: string, maxLen = 600): string[] => {
+// Split into sentence-sized pieces. Browser speechSynthesis becomes unreliable with
+// long utterances (Chrome stops early / skips words), so short chunks keep it smooth.
+const chunkText = (text: string, maxLen = 180): string[] => {
   const sentences = text.match(/[^.!?\n]+[.!?]?(?:\s|$)|\n+/g) || [text];
   const chunks: string[] = [];
   let current = "";
   for (const raw of sentences) {
-    const s = raw.trim();
+    const s = raw.replace(/\s+/g, " ").trim();
     if (!s) continue;
     if ((current + " " + s).trim().length > maxLen && current) {
       chunks.push(current.trim());
@@ -49,28 +48,72 @@ const chunkText = (text: string, maxLen = 600): string[] => {
   return chunks;
 };
 
+// Pick the most natural-sounding English voice the device offers.
+const pickBestVoice = (voices: SpeechSynthesisVoice[]): SpeechSynthesisVoice | null => {
+  if (!voices.length) return null;
+  const en = voices.filter((v) => v.lang?.toLowerCase().startsWith("en"));
+  const pool = en.length ? en : voices;
+  // Preferred high-quality voices by name across platforms.
+  const preferred = [
+    "Google US English",
+    "Microsoft Aria",
+    "Microsoft Jenny",
+    "Microsoft Zira",
+    "Samantha",
+    "Karen",
+    "Daniel",
+    "Google UK English Female",
+  ];
+  for (const name of preferred) {
+    const match = pool.find((v) => v.name === name) || pool.find((v) => v.name.includes(name));
+    if (match) return match;
+  }
+  // Prefer non-"compact"/local-quality voices, then default, then first.
+  const nice = pool.find((v) => !/compact|eloquence/i.test(v.name));
+  return nice || pool.find((v) => v.default) || pool[0];
+};
+
 export const AccessibilityControls = () => {
   const [highContrast, setHighContrast] = useState(false);
   const [reduceMotion, setReduceMotion] = useState(false);
   const [confirmClear, setConfirmClear] = useState(false);
   const [isSpeaking, setIsSpeaking] = useState(false);
   const [isPaused, setIsPaused] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
   const [rate, setRate] = useState(1);
   const [open, setOpen] = useState(false);
 
   const rateRef = useRef(rate);
-  const audioRef = useRef<HTMLAudioElement | null>(null);
   const chunksRef = useRef<string[]>([]);
   const indexRef = useRef(0);
-  const cacheRef = useRef<Map<number, string>>(new Map());
-  const sessionRef = useRef(0); // bumped on stop to cancel in-flight work
+  const sessionRef = useRef(0); // bumped on stop to cancel queued speech
+  const voiceRef = useRef<SpeechSynthesisVoice | null>(null);
   const { toast } = useToast();
 
-  // Apply a new speed instantly and smoothly to the playing audio.
+  const supported = typeof window !== "undefined" && "speechSynthesis" in window;
+
+  // Load voices (they populate asynchronously on most browsers).
+  useEffect(() => {
+    if (!supported) return;
+    const load = () => {
+      voiceRef.current = pickBestVoice(window.speechSynthesis.getVoices());
+    };
+    load();
+    window.speechSynthesis.onvoiceschanged = load;
+    return () => {
+      window.speechSynthesis.onvoiceschanged = null;
+    };
+  }, [supported]);
+
+  // Apply a new speed instantly by re-speaking the current chunk at the new rate.
   useEffect(() => {
     rateRef.current = rate;
-    if (audioRef.current) audioRef.current.playbackRate = rate;
+    if (isSpeaking && !isPaused && supported) {
+      const session = sessionRef.current;
+      window.speechSynthesis.cancel();
+      // Resume from the current chunk so the change feels immediate.
+      window.setTimeout(() => speakFrom(indexRef.current, session), 0);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [rate]);
 
   useEffect(() => {
@@ -87,7 +130,7 @@ export const AccessibilityControls = () => {
 
   useEffect(() => {
     return () => {
-      cleanupAudio();
+      if (supported) window.speechSynthesis.cancel();
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -111,35 +154,9 @@ export const AccessibilityControls = () => {
     }
   }, [highContrast, reduceMotion, rate]);
 
-  const cleanupAudio = () => {
-    if (audioRef.current) {
-      audioRef.current.pause();
-      audioRef.current.src = "";
-      audioRef.current = null;
-    }
-    cacheRef.current.forEach((url) => URL.revokeObjectURL(url));
-    cacheRef.current.clear();
-  };
-
-  // Fetch one chunk's audio from the AI voice service and cache the blob URL.
-  const fetchChunk = async (i: number, session: number): Promise<string | null> => {
-    if (i < 0 || i >= chunksRef.current.length) return null;
-    const cached = cacheRef.current.get(i);
-    if (cached) return cached;
-
-    const { data, error } = await supabase.functions.invoke("read-aloud", {
-      body: { text: chunksRef.current[i] },
-    });
-
-    if (session !== sessionRef.current) return null; // stopped meanwhile
-    if (error || !data?.audioContent) return null;
-
-    const url = `data:audio/mpeg;base64,${data.audioContent}`;
-    cacheRef.current.set(i, url);
-    return url;
-  };
-
-  const playChunk = async (i: number, session: number) => {
+  // Speak the chunk list starting at index `i` for a given session.
+  const speakFrom = (i: number, session: number) => {
+    if (!supported) return;
     if (session !== sessionRef.current) return;
     if (i >= chunksRef.current.length) {
       setIsSpeaking(false);
@@ -147,38 +164,36 @@ export const AccessibilityControls = () => {
       return;
     }
     indexRef.current = i;
-    setIsLoading(true);
-    const url = await fetchChunk(i, session);
-    if (session !== sessionRef.current) return;
-    setIsLoading(false);
 
-    if (!url) {
-      toast({
-        title: "Read Aloud unavailable",
-        description: "Couldn't generate the audio just now. Please try again.",
-      });
-      setIsSpeaking(false);
-      setIsPaused(false);
-      return;
+    const utter = new SpeechSynthesisUtterance(chunksRef.current[i]);
+    if (voiceRef.current) {
+      utter.voice = voiceRef.current;
+      utter.lang = voiceRef.current.lang;
     }
+    utter.rate = rateRef.current;
+    utter.pitch = 1;
+    utter.volume = 1;
 
-    // Prefetch the next chunk so playback is seamless.
-    void fetchChunk(i + 1, session);
+    utter.onend = () => {
+      if (session !== sessionRef.current) return;
+      speakFrom(i + 1, session);
+    };
+    utter.onerror = () => {
+      if (session !== sessionRef.current) return;
+      speakFrom(i + 1, session);
+    };
 
-    const audio = audioRef.current || new Audio();
-    audioRef.current = audio;
-    audio.src = url;
-    audio.playbackRate = rateRef.current;
-    audio.onended = () => playChunk(i + 1, session);
-    audio.onerror = () => playChunk(i + 1, session);
-    try {
-      await audio.play();
-    } catch {
-      /* play() can reject if interrupted; ignored */
-    }
+    window.speechSynthesis.speak(utter);
   };
 
   const startReading = () => {
+    if (!supported) {
+      toast({
+        title: "Read Aloud unavailable",
+        description: "This browser doesn't support text-to-speech.",
+      });
+      return;
+    }
     // Close the settings panel first so it's clear we're reading the page itself.
     setOpen(false);
 
@@ -188,33 +203,33 @@ export const AccessibilityControls = () => {
         toast({ title: "Nothing to read", description: "No readable text was found on this page." });
         return;
       }
-      cleanupAudio();
+      window.speechSynthesis.cancel();
       const session = sessionRef.current + 1;
       sessionRef.current = session;
       chunksRef.current = chunkText(text);
       indexRef.current = 0;
+      if (!voiceRef.current) voiceRef.current = pickBestVoice(window.speechSynthesis.getVoices());
       setIsSpeaking(true);
       setIsPaused(false);
-      void playChunk(0, session);
+      speakFrom(0, session);
     }, 350);
   };
 
   const pauseReading = () => {
-    audioRef.current?.pause();
+    if (supported) window.speechSynthesis.pause();
     setIsPaused(true);
   };
 
   const resumeReading = () => {
-    audioRef.current?.play().catch(() => {});
+    if (supported) window.speechSynthesis.resume();
     setIsPaused(false);
   };
 
   const stopReading = () => {
-    sessionRef.current += 1; // invalidate any in-flight fetch/playback
-    cleanupAudio();
+    sessionRef.current += 1; // invalidate queued speech
+    if (supported) window.speechSynthesis.cancel();
     setIsSpeaking(false);
     setIsPaused(false);
-    setIsLoading(false);
   };
 
   return (
@@ -255,7 +270,7 @@ export const AccessibilityControls = () => {
             <div className="flex flex-col gap-1">
               <span className="font-medium">Read Aloud</span>
               <span className="text-sm text-muted-foreground">
-                Reads the main content of this page out loud in a clear, natural voice.
+                Reads the main content of this page out loud in a clear voice.
               </span>
             </div>
 
@@ -282,9 +297,6 @@ export const AccessibilityControls = () => {
                     <Square className="h-4 w-4" />
                     Stop
                   </Button>
-                  {isLoading && (
-                    <Loader2 className="h-4 w-4 animate-spin text-muted-foreground" aria-label="Loading audio" />
-                  )}
                 </>
               )}
             </div>
