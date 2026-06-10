@@ -62,6 +62,7 @@ export const AccessibilityControls = () => {
   const chunksRef = useRef<string[]>([]);
   const indexRef = useRef(0);
   const voiceRef = useRef<SpeechSynthesisVoice | null>(null);
+  const utteranceRef = useRef<SpeechSynthesisUtterance | null>(null);
   const { toast } = useToast();
 
   useEffect(() => {
@@ -124,6 +125,7 @@ export const AccessibilityControls = () => {
 
     const speakNext = () => {
       if (indexRef.current >= chunksRef.current.length) {
+        utteranceRef.current = null;
         setIsSpeaking(false);
         setIsPaused(false);
         return;
@@ -146,10 +148,14 @@ export const AccessibilityControls = () => {
         indexRef.current += 1;
         speakNext();
       };
+      // Keep a live reference so the browser doesn't garbage-collect the
+      // utterance mid-sentence (the main cause of skipped/dropped words).
+      utteranceRef.current = utterance;
       window.speechSynthesis.speak(utterance);
     };
 
-    speakNext();
+    // A short gap after cancel() avoids a Chrome race that swallows the first words.
+    window.setTimeout(speakNext, 60);
   };
 
   const startReading = () => {
