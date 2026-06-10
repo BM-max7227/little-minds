@@ -47,6 +47,7 @@ export const AccessibilityControls = () => {
   const [isSpeaking, setIsSpeaking] = useState(false);
   const [isPaused, setIsPaused] = useState(false);
   const [rate, setRate] = useState(1);
+  const [open, setOpen] = useState(false);
   const rateRef = useRef(rate);
   const { toast } = useToast();
 
