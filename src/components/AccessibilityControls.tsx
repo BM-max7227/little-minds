@@ -59,10 +59,18 @@ export const AccessibilityControls = () => {
   const [rate, setRate] = useState(1);
   const [open, setOpen] = useState(false);
   const rateRef = useRef(rate);
+  const chunksRef = useRef<string[]>([]);
+  const indexRef = useRef(0);
+  const voiceRef = useRef<SpeechSynthesisVoice | null>(null);
   const { toast } = useToast();
 
   useEffect(() => {
     rateRef.current = rate;
+    // Apply a new speed immediately by restarting from the current sentence.
+    if (isSpeaking && !isPaused) {
+      speakFromCurrent();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [rate]);
 
   useEffect(() => {
