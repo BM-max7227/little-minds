@@ -1,15 +1,58 @@
-import { useState } from "react";
-import { AlertCircle } from "lucide-react";
+import { useState, useRef } from "react";
+import { AlertCircle, Play, Pause, Square } from "lucide-react";
 import { CountryPicker } from "@/components/CountryPicker";
 import { HelplineDisplay } from "@/components/HelplineDisplay";
 import { getHelplinesForCountry, getSavedCountry } from "@/data/crisisHelplines";
+import { Button } from "@/components/ui/button";
+import { useReadAloud } from "@/hooks/useReadAloud";
 
 export function HelpNowContent() {
   const [countryCode, setCountryCode] = useState<string>(getSavedCountry() || "");
   const countryData = countryCode ? getHelplinesForCountry(countryCode) : null;
+  const contentRef = useRef<HTMLDivElement>(null);
+
+  const { supported, isSpeaking, isPaused, speak, pause, resume, stop } = useReadAloud();
+
+  const readThis = () => {
+    const el = contentRef.current;
+    if (!el) return;
+    const clone = el.cloneNode(true) as HTMLElement;
+    clone.querySelectorAll("button, [aria-hidden='true']").forEach((n) => n.remove());
+    const text = clone.innerText.replace(/\s+\n/g, "\n").replace(/\n{3,}/g, "\n\n").trim();
+    speak(text);
+  };
 
   return (
-    <div className="space-y-5 pt-6">
+    <div className="space-y-5 pt-6" ref={contentRef}>
+      {supported && (
+        <div className="flex items-center gap-2">
+          {!isSpeaking ? (
+            <Button size="sm" variant="secondary" className="gap-2" onClick={readThis}>
+              <Play className="h-4 w-4" />
+              Read this aloud
+            </Button>
+          ) : (
+            <>
+              {isPaused ? (
+                <Button size="sm" variant="secondary" className="gap-2" onClick={resume}>
+                  <Play className="h-4 w-4" />
+                  Resume
+                </Button>
+              ) : (
+                <Button size="sm" variant="secondary" className="gap-2" onClick={pause}>
+                  <Pause className="h-4 w-4" />
+                  Pause
+                </Button>
+              )}
+              <Button size="sm" variant="outline" className="gap-2" onClick={stop}>
+                <Square className="h-4 w-4" />
+                Stop
+              </Button>
+            </>
+          )}
+        </div>
+      )}
+
       <div className="flex items-start space-x-3 p-4 border border-destructive rounded-lg bg-destructive/5">
         <AlertCircle className="h-5 w-5 text-destructive flex-shrink-0 mt-0.5" />
         <div className="text-sm">
