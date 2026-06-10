@@ -62,6 +62,7 @@ export const AccessibilityControls = () => {
   const chunksRef = useRef<string[]>([]);
   const indexRef = useRef(0);
   const voiceRef = useRef<SpeechSynthesisVoice | null>(null);
+  const utteranceRef = useRef<SpeechSynthesisUtterance | null>(null);
   const { toast } = useToast();
 
   useEffect(() => {
