@@ -87,7 +87,25 @@ export const AccessibilityControls = () => {
   const indexRef = useRef(0);
   const sessionRef = useRef(0); // bumped on stop to cancel queued speech
   const voiceRef = useRef<SpeechSynthesisVoice | null>(null);
+  const keepAliveRef = useRef<number | null>(null);
   const { toast } = useToast();
+
+  // Chrome silently stops/skips after ~15s; a periodic pause+resume keeps it alive.
+  const startKeepAlive = () => {
+    stopKeepAlive();
+    keepAliveRef.current = window.setInterval(() => {
+      if (window.speechSynthesis.speaking && !window.speechSynthesis.paused) {
+        window.speechSynthesis.pause();
+        window.speechSynthesis.resume();
+      }
+    }, 5000);
+  };
+  const stopKeepAlive = () => {
+    if (keepAliveRef.current !== null) {
+      window.clearInterval(keepAliveRef.current);
+      keepAliveRef.current = null;
+    }
+  };
 
   const supported = typeof window !== "undefined" && "speechSynthesis" in window;
 
