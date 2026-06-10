@@ -105,41 +105,47 @@ export const AccessibilityControls = () => {
       });
       return;
     }
-    const text = getReadableText();
-    if (!text) {
-      toast({ title: "Nothing to read", description: "No readable text was found on this page." });
-      return;
-    }
-    window.speechSynthesis.cancel();
+    // Close the settings panel first so it's clear we're reading the page itself.
+    setOpen(false);
 
-    // Speak in sentence-sized chunks so longer pages don't get cut off.
-    const chunks = text.match(/[^.!?\n]+[.!?]?(\s|$)|\n+/g) || [text];
-    const voice = pickBestVoice();
-    let index = 0;
-
-    const speakNext = () => {
-      if (index >= chunks.length) {
-        setIsSpeaking(false);
-        setIsPaused(false);
+    // Wait for the panel to close before grabbing the page text.
+    window.setTimeout(() => {
+      const text = getReadableText();
+      if (!text) {
+        toast({ title: "Nothing to read", description: "No readable text was found on this page." });
         return;
       }
-      const chunk = chunks[index++].trim();
-      if (!chunk) {
-        speakNext();
-        return;
-      }
-      const utterance = new SpeechSynthesisUtterance(chunk);
-      if (voice) utterance.voice = voice;
-      utterance.rate = rateRef.current;
-      utterance.pitch = 1;
-      utterance.onend = speakNext;
-      utterance.onerror = speakNext;
-      window.speechSynthesis.speak(utterance);
-    };
+      window.speechSynthesis.cancel();
 
-    setIsSpeaking(true);
-    setIsPaused(false);
-    speakNext();
+      // Speak in sentence-sized chunks so longer pages don't get cut off.
+      const chunks = text.match(/[^.!?\n]+[.!?]?(\s|$)|\n+/g) || [text];
+      const voice = pickBestVoice();
+      let index = 0;
+
+      const speakNext = () => {
+        if (index >= chunks.length) {
+          setIsSpeaking(false);
+          setIsPaused(false);
+          return;
+        }
+        const chunk = chunks[index++].trim();
+        if (!chunk) {
+          speakNext();
+          return;
+        }
+        const utterance = new SpeechSynthesisUtterance(chunk);
+        if (voice) utterance.voice = voice;
+        utterance.rate = rateRef.current;
+        utterance.pitch = 1;
+        utterance.onend = speakNext;
+        utterance.onerror = speakNext;
+        window.speechSynthesis.speak(utterance);
+      };
+
+      setIsSpeaking(true);
+      setIsPaused(false);
+      speakNext();
+    }, 350);
   };
 
   const pauseReading = () => {
