@@ -10,6 +10,7 @@ import { ExternalLink } from "lucide-react";
 import { CountryPicker } from "@/components/CountryPicker";
 import { HelplineDisplay } from "@/components/HelplineDisplay";
 import { getHelplinesForCountry, getSavedCountry } from "@/data/crisisHelplines";
+import { AskHelperPrompt } from "@/components/AskHelperPrompt";
 
 export default function FindSupport() {
   // Only honour a saved country here if it actually has therapist directories,
@@ -159,6 +160,12 @@ export default function FindSupport() {
           </section>
 
 
+
+          <AskHelperPrompt
+            className="mb-8"
+            title="Not sure where to begin?"
+            description="Our helper can offer general guidance and help you navigate these support options."
+          />
 
           <div className="text-center">
             <Button asChild size="lg">

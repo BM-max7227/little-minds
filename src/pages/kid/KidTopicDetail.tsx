@@ -11,6 +11,7 @@ import { topicConversationStarters } from "@/data/topicConversationStarters";
 import { getKidTopicColor } from "@/data/kidTopicColors";
 import { useState, useEffect } from "react";
 import { ArrowLeft, Heart, MessageCircle } from "lucide-react";
+import { AskHelperPrompt } from "@/components/AskHelperPrompt";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -246,6 +247,12 @@ export default function KidTopicDetail() {
               </p>
             </CardContent>
           </Card>
+
+          <AskHelperPrompt
+            title="Want to talk it through?"
+            description="Our helper is here if you'd like to chat about how you're feeling right now."
+            buttonLabel="Chat with the helper"
+          />
 
           <div className="flex justify-center">
             <Button onClick={() => navigate(`/learn/${topicId}`)} variant="outline" size="lg">

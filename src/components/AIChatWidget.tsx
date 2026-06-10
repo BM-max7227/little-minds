@@ -32,6 +32,8 @@ export function AIChatWidget() {
   const [isListening, setIsListening] = useState(false);
   const [voiceTranscript, setVoiceTranscript] = useState("");
   const [audioLevels, setAudioLevels] = useState<number[]>([]);
+  // A gentle, one-time nudge so first-time visitors notice the helper exists.
+  const [showNudge, setShowNudge] = useState(false);
   const scrollRef = useRef<HTMLDivElement>(null);
   const lastUserMsgRef = useRef<HTMLDivElement>(null);
   const userHasScrolledUpRef = useRef(false);
@@ -54,6 +56,38 @@ export function AIChatWidget() {
     window.addEventListener("littleminds:open-chat", openChat);
     return () => window.removeEventListener("littleminds:open-chat", openChat);
   }, []);
+
+  // Show a quiet, one-time nudge bubble for first-time visitors.
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    try {
+      if (localStorage.getItem("littleminds:chat-nudge-seen")) return;
+    } catch {
+      return;
+    }
+    const t = window.setTimeout(() => setShowNudge(true), 4000);
+    return () => window.clearTimeout(t);
+  }, []);
+
+  // Once the chat is opened (any way), the nudge has done its job — never show it again.
+  useEffect(() => {
+    if (!open) return;
+    setShowNudge(false);
+    try {
+      localStorage.setItem("littleminds:chat-nudge-seen", "1");
+    } catch {
+      /* ignore storage errors */
+    }
+  }, [open]);
+
+  const dismissNudge = () => {
+    setShowNudge(false);
+    try {
+      localStorage.setItem("littleminds:chat-nudge-seen", "1");
+    } catch {
+      /* ignore storage errors */
+    }
+  };
 
   // Lock background page scroll while the chat is taking over the screen
   // (full-screen on mobile, or when the user expands it on desktop).
@@ -441,14 +475,34 @@ export function AIChatWidget() {
     <>
       {/* Floating button */}
       {!open && (
-        <button
-          onClick={() => setOpen(true)}
-          className="fixed bottom-5 right-5 sm:bottom-6 sm:right-6 z-50 flex items-center justify-center rounded-full bg-primary h-12 w-12 sm:h-14 sm:w-14 text-primary-foreground shadow-lg hover:bg-primary/90 transition-all hover:scale-105"
-          aria-label="Open chat assistant"
-        >
-          <MessageCircle className="h-5 w-5 sm:h-6 sm:w-6" />
-        </button>
+        <div className="fixed bottom-5 right-5 sm:bottom-6 sm:right-6 z-50 flex flex-col items-end gap-3">
+          {showNudge && (
+            <div className="relative max-w-[220px] rounded-2xl rounded-br-sm border bg-background px-3 py-2 pr-7 shadow-lg animate-fade-in">
+              <button
+                onClick={dismissNudge}
+                className="absolute top-1 right-1 rounded p-1 text-muted-foreground hover:text-foreground transition"
+                aria-label="Dismiss"
+              >
+                <X className="h-3.5 w-3.5" />
+              </button>
+              <button onClick={() => setOpen(true)} className="text-left">
+                <p className="text-sm font-medium">Hi there! 👋</p>
+                <p className="text-xs text-muted-foreground">
+                  Have a question? I'm here to help with feelings and wellbeing.
+                </p>
+              </button>
+            </div>
+          )}
+          <button
+            onClick={() => setOpen(true)}
+            className="flex items-center justify-center rounded-full bg-primary h-12 w-12 sm:h-14 sm:w-14 text-primary-foreground shadow-lg hover:bg-primary/90 transition-all hover:scale-105"
+            aria-label="Open chat assistant"
+          >
+            <MessageCircle className="h-5 w-5 sm:h-6 sm:w-6" />
+          </button>
+        </div>
       )}
+
 
       {/* Chat panel — full-screen on mobile, floating panel on sm+ */}
       {open && (

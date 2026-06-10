@@ -9,6 +9,7 @@ import { getKidTopicColor } from "@/data/kidTopicColors";
 import { useDailyValue } from "@/hooks/useDailyValue";
 import { BookOpen, Lightbulb, ChevronDown, Sparkles, Wind } from "lucide-react";
 import { SuggestIdeasBanner } from "@/components/SuggestIdeasBanner";
+import { AskHelperPrompt } from "@/components/AskHelperPrompt";
 
 const topicCards = [
   { id: "anxiety", title: "Anxiety", icon: "🌊", tile: "bg-sky-100", glow: "hover:shadow-sky-200/50" },
@@ -118,6 +119,14 @@ export default function KidHome() {
           </div>
 
           <div className="mt-12">
+            <AskHelperPrompt
+              title="Not sure where to start?"
+              description="You can chat with our friendly helper about how you're feeling, anytime."
+              buttonLabel="Chat with the helper"
+            />
+          </div>
+
+          <div className="mt-6">
             <SuggestIdeasBanner message="Don't see what you're looking for? Let us know and we'll try to add it!" />
           </div>
         </div>

@@ -8,6 +8,7 @@ import { Separator } from "@/components/ui/separator";
 import { learnTopics } from "@/data/learnTopics";
 import { useLearnProgress } from "@/hooks/useLearnProgress";
 import { ArrowLeft, AlertCircle, CheckCircle } from "lucide-react";
+import { AskHelperPrompt } from "@/components/AskHelperPrompt";
 import { useEffect, useRef } from "react";
 
 const topicKeys = Object.keys(learnTopics);
@@ -250,6 +251,12 @@ export default function LearnTopic() {
             </div>
           <div ref={bottomRef} />
           </section>
+
+          <AskHelperPrompt
+            className="mb-4"
+            title="Still have a question about this?"
+            description="Our helper can talk through this topic in plain language, anytime you need."
+          />
         </article>
       </main>
       <SiteFooter />
