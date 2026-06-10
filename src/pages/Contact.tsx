@@ -111,6 +111,7 @@ export default function Contact() {
                 description="The form may take a little while to hear back. For quick questions about wellbeing, our helper can chat with you now."
               />
             </div>
+            <div className="max-w-lg mx-auto">
               <Card className="border-2 rounded-3xl bg-sky-50/60 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-sky-200/50">
                 <CardHeader className="text-center">
                   <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-sky-100 mb-3 mx-auto">
