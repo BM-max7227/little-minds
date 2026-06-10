@@ -255,7 +255,7 @@ export default function LearnTopic() {
           <AskHelperPrompt
             className="mb-4"
             title="Still have a question about this?"
-            description="Our helper can talk through this topic in plain language, anytime you need."
+            description="Our AI helper can talk through this topic in plain language, anytime you need."
           />
         </article>
       </main>

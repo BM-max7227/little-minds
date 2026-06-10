@@ -121,8 +121,8 @@ export default function KidHome() {
           <div className="mt-12">
             <AskHelperPrompt
               title="Not sure where to start?"
-              description="You can chat with our friendly helper about how you're feeling, anytime."
-              buttonLabel="Chat with the helper"
+              description="You can chat with our friendly AI helper about how you're feeling, anytime."
+              buttonLabel="Chat with the AI helper"
             />
           </div>
 

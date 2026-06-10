@@ -145,7 +145,7 @@ export default function ParentHome() {
             <div className="max-w-5xl mx-auto">
               <AskHelperPrompt
                 title="Have a parenting question on your mind?"
-                description="Chat with our helper for gentle, general guidance and to find the right resource on the site."
+                description="Chat with our AI helper for gentle, general guidance and to find the right resource on the site."
               />
             </div>
           </div>

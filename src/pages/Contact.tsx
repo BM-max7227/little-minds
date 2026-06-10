@@ -108,7 +108,7 @@ export default function Contact() {
             <div className="max-w-lg mx-auto mb-6">
               <AskHelperPrompt
                 title="Need an answer right away?"
-                description="The form may take a little while to hear back. For quick questions about wellbeing, our helper can chat with you now."
+                description="The form may take a little while to hear back. For quick questions about wellbeing, our AI helper can chat with you now."
               />
             </div>
             <div className="max-w-lg mx-auto">

@@ -137,7 +137,7 @@ export default function LearnHome() {
         <div className="mt-12">
           <AskHelperPrompt
             title="Want to ask about something specific?"
-            description="Our helper can explain wellbeing topics in plain language and point you to the right page."
+            description="Our AI helper can explain wellbeing topics in plain language and point you to the right page."
           />
         </div>
 
