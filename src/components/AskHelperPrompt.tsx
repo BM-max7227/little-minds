@@ -18,8 +18,8 @@ type AskHelperPromptProps = {
  */
 export function AskHelperPrompt({
   title = "Have a question right now?",
-  description = "Our gentle helper can talk things through, suggest calming activities, and point you to the right place.",
-  buttonLabel = "Ask the helper",
+  description = "Our AI helper can talk things through, suggest calming activities, and point you to the right place.",
+  buttonLabel = "Ask the AI helper",
   className = "",
 }: AskHelperPromptProps) {
   const openChat = () => {
