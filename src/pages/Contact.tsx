@@ -13,6 +13,7 @@ import { Mail, Loader2, CheckCircle, Send } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
 import { suggestEmail } from "@/lib/emailSuggestion";
+import { AskHelperPrompt } from "@/components/AskHelperPrompt";
 
 export default function Contact() {
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -104,7 +105,12 @@ export default function Contact() {
 
         <section className="py-8">
           <div className="container px-4">
-            <div className="max-w-lg mx-auto">
+            <div className="max-w-lg mx-auto mb-6">
+              <AskHelperPrompt
+                title="Need an answer right away?"
+                description="The form may take a little while to hear back. For quick questions about wellbeing, our helper can chat with you now."
+              />
+            </div>
               <Card className="border-2 rounded-3xl bg-sky-50/60 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-sky-200/50">
                 <CardHeader className="text-center">
                   <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-sky-100 mb-3 mx-auto">
