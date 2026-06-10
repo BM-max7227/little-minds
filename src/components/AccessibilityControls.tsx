@@ -128,8 +128,8 @@ export const AccessibilityControls = () => {
     if (isSpeaking && !isPaused && supported) {
       const session = sessionRef.current;
       window.speechSynthesis.cancel();
-      // Resume from the current chunk so the change feels immediate.
-      window.setTimeout(() => speakFrom(indexRef.current, session), 0);
+      // Small delay: Chrome drops the first words if you speak right after cancel().
+      window.setTimeout(() => speakFrom(indexRef.current, session), 130);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [rate]);
