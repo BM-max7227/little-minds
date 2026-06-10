@@ -247,7 +247,7 @@ export const AccessibilityControls = () => {
               <Slider
                 id="read-rate"
                 min={0.5}
-                max={2}
+                max={1.5}
                 step={0.25}
                 value={[rate]}
                 onValueChange={(v) => setRate(Math.round(v[0] * 4) / 4)}
@@ -255,7 +255,7 @@ export const AccessibilityControls = () => {
               />
               <div className="flex justify-between text-xs text-muted-foreground">
                 <span>Slower</span>
-                <span>Normal</span>
+                <span>Normal (1×)</span>
                 <span>Faster</span>
               </div>
             </div>
