@@ -29,7 +29,7 @@ const pickBestVoice = (): SpeechSynthesisVoice | null => {
   return pool.find((v) => v.localService) || pool[0];
 };
 
-// Read only the page's main content, skipping nav, buttons, and footer.
+// Read the page's main content plus any important disclaimers, skipping nav and buttons.
 const getReadableText = (): string => {
   const main = document.querySelector("main");
   const source = (main as HTMLElement) || document.body;
@@ -37,7 +37,17 @@ const getReadableText = (): string => {
   clone
     .querySelectorAll("nav, header, footer, button, script, style, [aria-hidden='true']")
     .forEach((el) => el.remove());
-  return clone.innerText.replace(/\s+\n/g, "\n").replace(/\n{3,}/g, "\n\n").trim();
+  let text = clone.innerText;
+
+  // Always include site-wide disclaimers (they live in the footer, outside <main>).
+  const disclaimers = Array.from(document.querySelectorAll<HTMLElement>("[data-readable]"))
+    .map((el) => el.innerText.trim())
+    .filter(Boolean);
+  if (disclaimers.length) {
+    text += "\n\nPlease remember: " + disclaimers.join(" ");
+  }
+
+  return text.replace(/\s+\n/g, "\n").replace(/\n{3,}/g, "\n\n").trim();
 };
 
 export const AccessibilityControls = () => {
