@@ -108,6 +108,42 @@ export const AccessibilityControls = () => {
     }
   }, [highContrast, reduceMotion, rate]);
 
+  // Speak the queued chunks starting at the current position, using the latest rate.
+  const speakFromCurrent = () => {
+    if (!supportsSpeech) return;
+    window.speechSynthesis.cancel();
+    const voice = voiceRef.current;
+
+    const speakNext = () => {
+      if (indexRef.current >= chunksRef.current.length) {
+        setIsSpeaking(false);
+        setIsPaused(false);
+        return;
+      }
+      const chunk = chunksRef.current[indexRef.current].trim();
+      if (!chunk) {
+        indexRef.current += 1;
+        speakNext();
+        return;
+      }
+      const utterance = new SpeechSynthesisUtterance(chunk);
+      if (voice) utterance.voice = voice;
+      utterance.rate = rateRef.current;
+      utterance.pitch = 1;
+      utterance.onend = () => {
+        indexRef.current += 1;
+        speakNext();
+      };
+      utterance.onerror = () => {
+        indexRef.current += 1;
+        speakNext();
+      };
+      window.speechSynthesis.speak(utterance);
+    };
+
+    speakNext();
+  };
+
   const startReading = () => {
     if (!supportsSpeech) {
       toast({
@@ -126,36 +162,13 @@ export const AccessibilityControls = () => {
         toast({ title: "Nothing to read", description: "No readable text was found on this page." });
         return;
       }
-      window.speechSynthesis.cancel();
-
       // Speak in sentence-sized chunks so longer pages don't get cut off.
-      const chunks = text.match(/[^.!?\n]+[.!?]?(\s|$)|\n+/g) || [text];
-      const voice = pickBestVoice();
-      let index = 0;
-
-      const speakNext = () => {
-        if (index >= chunks.length) {
-          setIsSpeaking(false);
-          setIsPaused(false);
-          return;
-        }
-        const chunk = chunks[index++].trim();
-        if (!chunk) {
-          speakNext();
-          return;
-        }
-        const utterance = new SpeechSynthesisUtterance(chunk);
-        if (voice) utterance.voice = voice;
-        utterance.rate = rateRef.current;
-        utterance.pitch = 1;
-        utterance.onend = speakNext;
-        utterance.onerror = speakNext;
-        window.speechSynthesis.speak(utterance);
-      };
-
+      chunksRef.current = text.match(/[^.!?\n]+[.!?]?(\s|$)|\n+/g) || [text];
+      indexRef.current = 0;
+      voiceRef.current = pickBestVoice();
       setIsSpeaking(true);
       setIsPaused(false);
-      speakNext();
+      speakFromCurrent();
     }, 350);
   };
 
