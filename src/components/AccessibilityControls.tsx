@@ -251,6 +251,7 @@ export const AccessibilityControls = () => {
 
   const stopReading = () => {
     sessionRef.current += 1; // invalidate queued speech
+    stopKeepAlive();
     if (supported) window.speechSynthesis.cancel();
     setIsSpeaking(false);
     setIsPaused(false);
