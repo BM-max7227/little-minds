@@ -250,8 +250,8 @@ export default function KidTopicDetail() {
 
           <AskHelperPrompt
             title="Want to talk it through?"
-            description="Our helper is here if you'd like to chat about how you're feeling right now."
-            buttonLabel="Chat with the helper"
+            description="Our AI helper is here if you'd like to chat about how you're feeling right now."
+            buttonLabel="Chat with the AI helper"
           />
 
           <div className="flex justify-center">

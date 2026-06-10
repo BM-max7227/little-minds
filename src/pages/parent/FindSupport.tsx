@@ -164,7 +164,7 @@ export default function FindSupport() {
           <AskHelperPrompt
             className="mb-8"
             title="Not sure where to begin?"
-            description="Our helper can offer general guidance and help you navigate these support options."
+            description="Our AI helper can offer general guidance and help you navigate these support options."
           />
 
           <div className="text-center">
