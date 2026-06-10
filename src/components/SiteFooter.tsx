@@ -6,11 +6,11 @@ export function SiteFooter() {
     <footer className="border-t py-5 mt-6">
       <div className="container mx-auto px-4 max-w-4xl">
         <div className="text-center space-y-2 text-sm text-muted-foreground">
-          <p>
+          <p data-readable>
             This website provides general information about mental health and wellbeing.
             It is <strong>not a substitute</strong> for professional medical advice, diagnosis, or treatment.
           </p>
-          <p>
+          <p data-readable>
             If you or someone you know is in crisis or danger, please contact your local emergency services immediately.
           </p>
           <div className="flex flex-wrap justify-center gap-4 pt-1 text-xs">
