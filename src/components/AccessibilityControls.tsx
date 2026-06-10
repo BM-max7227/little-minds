@@ -29,7 +29,7 @@ const pickBestVoice = (): SpeechSynthesisVoice | null => {
   return pool.find((v) => v.localService) || pool[0];
 };
 
-// Read only the page's main content, skipping nav, buttons, and footer.
+// Read the page's main content plus any important disclaimers, skipping nav and buttons.
 const getReadableText = (): string => {
   const main = document.querySelector("main");
   const source = (main as HTMLElement) || document.body;
@@ -37,7 +37,17 @@ const getReadableText = (): string => {
   clone
     .querySelectorAll("nav, header, footer, button, script, style, [aria-hidden='true']")
     .forEach((el) => el.remove());
-  return clone.innerText.replace(/\s+\n/g, "\n").replace(/\n{3,}/g, "\n\n").trim();
+  let text = clone.innerText;
+
+  // Always include site-wide disclaimers (they live in the footer, outside <main>).
+  const disclaimers = Array.from(document.querySelectorAll<HTMLElement>("[data-readable]"))
+    .map((el) => el.innerText.trim())
+    .filter(Boolean);
+  if (disclaimers.length) {
+    text += "\n\nPlease remember: " + disclaimers.join(" ");
+  }
+
+  return text.replace(/\s+\n/g, "\n").replace(/\n{3,}/g, "\n\n").trim();
 };
 
 export const AccessibilityControls = () => {
@@ -49,10 +59,18 @@ export const AccessibilityControls = () => {
   const [rate, setRate] = useState(1);
   const [open, setOpen] = useState(false);
   const rateRef = useRef(rate);
+  const chunksRef = useRef<string[]>([]);
+  const indexRef = useRef(0);
+  const voiceRef = useRef<SpeechSynthesisVoice | null>(null);
   const { toast } = useToast();
 
   useEffect(() => {
     rateRef.current = rate;
+    // Apply a new speed immediately by restarting from the current sentence.
+    if (isSpeaking && !isPaused) {
+      speakFromCurrent();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [rate]);
 
   useEffect(() => {
@@ -98,6 +116,42 @@ export const AccessibilityControls = () => {
     }
   }, [highContrast, reduceMotion, rate]);
 
+  // Speak the queued chunks starting at the current position, using the latest rate.
+  const speakFromCurrent = () => {
+    if (!supportsSpeech) return;
+    window.speechSynthesis.cancel();
+    const voice = voiceRef.current;
+
+    const speakNext = () => {
+      if (indexRef.current >= chunksRef.current.length) {
+        setIsSpeaking(false);
+        setIsPaused(false);
+        return;
+      }
+      const chunk = chunksRef.current[indexRef.current].trim();
+      if (!chunk) {
+        indexRef.current += 1;
+        speakNext();
+        return;
+      }
+      const utterance = new SpeechSynthesisUtterance(chunk);
+      if (voice) utterance.voice = voice;
+      utterance.rate = rateRef.current;
+      utterance.pitch = 1;
+      utterance.onend = () => {
+        indexRef.current += 1;
+        speakNext();
+      };
+      utterance.onerror = () => {
+        indexRef.current += 1;
+        speakNext();
+      };
+      window.speechSynthesis.speak(utterance);
+    };
+
+    speakNext();
+  };
+
   const startReading = () => {
     if (!supportsSpeech) {
       toast({
@@ -116,36 +170,13 @@ export const AccessibilityControls = () => {
         toast({ title: "Nothing to read", description: "No readable text was found on this page." });
         return;
       }
-      window.speechSynthesis.cancel();
-
       // Speak in sentence-sized chunks so longer pages don't get cut off.
-      const chunks = text.match(/[^.!?\n]+[.!?]?(\s|$)|\n+/g) || [text];
-      const voice = pickBestVoice();
-      let index = 0;
-
-      const speakNext = () => {
-        if (index >= chunks.length) {
-          setIsSpeaking(false);
-          setIsPaused(false);
-          return;
-        }
-        const chunk = chunks[index++].trim();
-        if (!chunk) {
-          speakNext();
-          return;
-        }
-        const utterance = new SpeechSynthesisUtterance(chunk);
-        if (voice) utterance.voice = voice;
-        utterance.rate = rateRef.current;
-        utterance.pitch = 1;
-        utterance.onend = speakNext;
-        utterance.onerror = speakNext;
-        window.speechSynthesis.speak(utterance);
-      };
-
+      chunksRef.current = text.match(/[^.!?\n]+[.!?]?(\s|$)|\n+/g) || [text];
+      indexRef.current = 0;
+      voiceRef.current = pickBestVoice();
       setIsSpeaking(true);
       setIsPaused(false);
-      speakNext();
+      speakFromCurrent();
     }, 350);
   };
 
