@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 import { Switch } from "@/components/ui/switch";
@@ -6,6 +6,7 @@ import { Label } from "@/components/ui/label";
 import { Slider } from "@/components/ui/slider";
 import { Settings, Trash2, Play, Pause, Square } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import { useReadAloud } from "@/hooks/useReadAloud";
 
 // Read the page's main content plus any important disclaimers, skipping nav and buttons.
 const getReadableText = (): string => {
@@ -28,111 +29,14 @@ const getReadableText = (): string => {
   return text.replace(/\s+\n/g, "\n").replace(/\n{3,}/g, "\n\n").trim();
 };
 
-// Split into sentence-sized pieces. Browser speechSynthesis becomes unreliable with
-// long utterances (Chrome stops early / skips words), so short chunks keep it smooth.
-const chunkText = (text: string, maxLen = 180): string[] => {
-  const sentences = text.match(/[^.!?\n]+[.!?]?(?:\s|$)|\n+/g) || [text];
-  const chunks: string[] = [];
-  let current = "";
-  for (const raw of sentences) {
-    const s = raw.replace(/\s+/g, " ").trim();
-    if (!s) continue;
-    if ((current + " " + s).trim().length > maxLen && current) {
-      chunks.push(current.trim());
-      current = s;
-    } else {
-      current = (current + " " + s).trim();
-    }
-  }
-  if (current.trim()) chunks.push(current.trim());
-  return chunks;
-};
-
-// Pick the most natural-sounding English voice the device offers.
-const pickBestVoice = (voices: SpeechSynthesisVoice[]): SpeechSynthesisVoice | null => {
-  if (!voices.length) return null;
-  const en = voices.filter((v) => v.lang?.toLowerCase().startsWith("en"));
-  const pool = en.length ? en : voices;
-  // Preferred high-quality voices by name across platforms.
-  const preferred = [
-    "Google US English",
-    "Microsoft Aria",
-    "Microsoft Jenny",
-    "Microsoft Zira",
-    "Samantha",
-    "Karen",
-    "Daniel",
-    "Google UK English Female",
-  ];
-  for (const name of preferred) {
-    const match = pool.find((v) => v.name === name) || pool.find((v) => v.name.includes(name));
-    if (match) return match;
-  }
-  // Prefer non-"compact"/local-quality voices, then default, then first.
-  const nice = pool.find((v) => !/compact|eloquence/i.test(v.name));
-  return nice || pool.find((v) => v.default) || pool[0];
-};
-
 export const AccessibilityControls = () => {
   const [highContrast, setHighContrast] = useState(false);
   const [reduceMotion, setReduceMotion] = useState(false);
   const [confirmClear, setConfirmClear] = useState(false);
-  const [isSpeaking, setIsSpeaking] = useState(false);
-  const [isPaused, setIsPaused] = useState(false);
-  const [rate, setRate] = useState(1);
   const [open, setOpen] = useState(false);
 
-  const rateRef = useRef(rate);
-  const chunksRef = useRef<string[]>([]);
-  const indexRef = useRef(0);
-  const sessionRef = useRef(0); // bumped on stop to cancel queued speech
-  const voiceRef = useRef<SpeechSynthesisVoice | null>(null);
-  const keepAliveRef = useRef<number | null>(null);
+  const { supported, isSpeaking, isPaused, rate, setRate, speak, pause, resume, stop } = useReadAloud();
   const { toast } = useToast();
-
-  // Chrome silently stops/skips after ~15s; a periodic pause+resume keeps it alive.
-  const startKeepAlive = () => {
-    stopKeepAlive();
-    keepAliveRef.current = window.setInterval(() => {
-      if (window.speechSynthesis.speaking && !window.speechSynthesis.paused) {
-        window.speechSynthesis.pause();
-        window.speechSynthesis.resume();
-      }
-    }, 5000);
-  };
-  const stopKeepAlive = () => {
-    if (keepAliveRef.current !== null) {
-      window.clearInterval(keepAliveRef.current);
-      keepAliveRef.current = null;
-    }
-  };
-
-  const supported = typeof window !== "undefined" && "speechSynthesis" in window;
-
-  // Load voices (they populate asynchronously on most browsers).
-  useEffect(() => {
-    if (!supported) return;
-    const load = () => {
-      voiceRef.current = pickBestVoice(window.speechSynthesis.getVoices());
-    };
-    load();
-    window.speechSynthesis.onvoiceschanged = load;
-    return () => {
-      window.speechSynthesis.onvoiceschanged = null;
-    };
-  }, [supported]);
-
-  // Apply a new speed instantly by re-speaking the current chunk at the new rate.
-  useEffect(() => {
-    rateRef.current = rate;
-    if (isSpeaking && !isPaused && supported) {
-      const session = sessionRef.current;
-      window.speechSynthesis.cancel();
-      // Small delay: Chrome drops the first words if you speak right after cancel().
-      window.setTimeout(() => speakFrom(indexRef.current, session), 130);
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [rate]);
 
   useEffect(() => {
     const saved = localStorage.getItem("accessibility-prefs");
@@ -140,24 +44,15 @@ export const AccessibilityControls = () => {
       const prefs = JSON.parse(saved);
       setHighContrast(prefs.highContrast || false);
       setReduceMotion(prefs.reduceMotion || false);
-      if (typeof prefs.readRate === "number") {
-        setRate(Math.min(1.5, Math.max(0.5, Math.round(prefs.readRate * 4) / 4)));
-      }
     }
   }, []);
 
   useEffect(() => {
-    return () => {
-      stopKeepAlive();
-      if (supported) window.speechSynthesis.cancel();
-    };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  useEffect(() => {
+    const saved = localStorage.getItem("accessibility-prefs");
+    const prefs = saved ? JSON.parse(saved) : {};
     localStorage.setItem(
       "accessibility-prefs",
-      JSON.stringify({ highContrast, reduceMotion, readRate: rate })
+      JSON.stringify({ ...prefs, highContrast, reduceMotion })
     );
 
     if (highContrast) {
@@ -171,43 +66,7 @@ export const AccessibilityControls = () => {
     } else {
       document.documentElement.classList.remove("reduce-motion");
     }
-  }, [highContrast, reduceMotion, rate]);
-
-  // Speak the chunk list starting at index `i` for a given session.
-  const speakFrom = (i: number, session: number) => {
-    if (!supported) return;
-    if (session !== sessionRef.current) return;
-    if (i >= chunksRef.current.length) {
-      stopKeepAlive();
-      setIsSpeaking(false);
-      setIsPaused(false);
-      return;
-    }
-    indexRef.current = i;
-
-    const utter = new SpeechSynthesisUtterance(chunksRef.current[i]);
-    if (voiceRef.current) {
-      utter.voice = voiceRef.current;
-      utter.lang = voiceRef.current.lang;
-    }
-    utter.rate = rateRef.current;
-    utter.pitch = 1;
-    utter.volume = 1;
-
-    let advanced = false;
-    const next = () => {
-      if (advanced) return;
-      advanced = true;
-      if (session !== sessionRef.current) return;
-      speakFrom(i + 1, session);
-    };
-    utter.onend = next;
-    utter.onerror = next;
-
-    window.speechSynthesis.speak(utter);
-    startKeepAlive();
-  };
-
+  }, [highContrast, reduceMotion]);
 
   const startReading = () => {
     if (!supported) {
@@ -226,35 +85,8 @@ export const AccessibilityControls = () => {
         toast({ title: "Nothing to read", description: "No readable text was found on this page." });
         return;
       }
-      window.speechSynthesis.cancel();
-      const session = sessionRef.current + 1;
-      sessionRef.current = session;
-      chunksRef.current = chunkText(text);
-      indexRef.current = 0;
-      if (!voiceRef.current) voiceRef.current = pickBestVoice(window.speechSynthesis.getVoices());
-      setIsSpeaking(true);
-      setIsPaused(false);
-      // Small delay after cancel() so Chrome doesn't drop the opening words.
-      window.setTimeout(() => speakFrom(0, session), 130);
+      speak(text);
     }, 350);
-  };
-
-  const pauseReading = () => {
-    if (supported) window.speechSynthesis.pause();
-    setIsPaused(true);
-  };
-
-  const resumeReading = () => {
-    if (supported) window.speechSynthesis.resume();
-    setIsPaused(false);
-  };
-
-  const stopReading = () => {
-    sessionRef.current += 1; // invalidate queued speech
-    stopKeepAlive();
-    if (supported) window.speechSynthesis.cancel();
-    setIsSpeaking(false);
-    setIsPaused(false);
   };
 
   return (
@@ -308,17 +140,17 @@ export const AccessibilityControls = () => {
               ) : (
                 <>
                   {isPaused ? (
-                    <Button size="sm" variant="secondary" className="gap-2" onClick={resumeReading}>
+                    <Button size="sm" variant="secondary" className="gap-2" onClick={resume}>
                       <Play className="h-4 w-4" />
                       Resume
                     </Button>
                   ) : (
-                    <Button size="sm" variant="secondary" className="gap-2" onClick={pauseReading}>
+                    <Button size="sm" variant="secondary" className="gap-2" onClick={pause}>
                       <Pause className="h-4 w-4" />
                       Pause
                     </Button>
                   )}
-                  <Button size="sm" variant="outline" className="gap-2" onClick={stopReading}>
+                  <Button size="sm" variant="outline" className="gap-2" onClick={stop}>
                     <Square className="h-4 w-4" />
                     Stop
                   </Button>
@@ -339,7 +171,7 @@ export const AccessibilityControls = () => {
                 max={1.5}
                 step={0.25}
                 value={[rate]}
-                onValueChange={(v) => setRate(Math.round(v[0] * 4) / 4)}
+                onValueChange={(v) => setRate(v[0])}
                 aria-label="Reading speed"
               />
               <div className="flex justify-between text-xs text-muted-foreground">
@@ -377,7 +209,7 @@ export const AccessibilityControls = () => {
                     sessionStorage.clear();
                     setHighContrast(false);
                     setReduceMotion(false);
-                    stopReading();
+                    stop();
                     setRate(1);
                     setConfirmClear(false);
                     document.documentElement.classList.remove("high-contrast", "reduce-motion");
