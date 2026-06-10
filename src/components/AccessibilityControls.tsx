@@ -274,7 +274,8 @@ export const AccessibilityControls = () => {
                     sessionStorage.clear();
                     setHighContrast(false);
                     setReduceMotion(false);
-                    setReadAloud(false);
+                    stopReading();
+                    setRate(1);
                     setConfirmClear(false);
                     document.documentElement.classList.remove("high-contrast", "reduce-motion");
                     toast({
