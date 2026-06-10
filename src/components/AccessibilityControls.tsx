@@ -193,16 +193,58 @@ export const AccessibilityControls = () => {
               onCheckedChange={setReduceMotion}
             />
           </div>
-          <div className="flex items-center justify-between">
-            <Label htmlFor="read-aloud" className="flex flex-col gap-1">
+          <div className="space-y-3">
+            <div className="flex flex-col gap-1">
               <span className="font-medium">Read Aloud</span>
-              <span className="text-sm text-muted-foreground">Use browser speech to read page content</span>
-            </Label>
-            <Switch
-              id="read-aloud"
-              checked={readAloud}
-              onCheckedChange={handleReadAloud}
-            />
+              <span className="text-sm text-muted-foreground">
+                Reads the main content of this page out loud using your device's voice.
+              </span>
+            </div>
+
+            <div className="flex items-center gap-2">
+              {!isSpeaking ? (
+                <Button size="sm" variant="secondary" className="gap-2" onClick={startReading}>
+                  <Play className="h-4 w-4" />
+                  Read this page
+                </Button>
+              ) : (
+                <>
+                  {isPaused ? (
+                    <Button size="sm" variant="secondary" className="gap-2" onClick={resumeReading}>
+                      <Play className="h-4 w-4" />
+                      Resume
+                    </Button>
+                  ) : (
+                    <Button size="sm" variant="secondary" className="gap-2" onClick={pauseReading}>
+                      <Pause className="h-4 w-4" />
+                      Pause
+                    </Button>
+                  )}
+                  <Button size="sm" variant="outline" className="gap-2" onClick={stopReading}>
+                    <Square className="h-4 w-4" />
+                    Stop
+                  </Button>
+                </>
+              )}
+            </div>
+
+            <div className="flex flex-col gap-2 pt-1">
+              <div className="flex items-center justify-between">
+                <Label htmlFor="read-rate" className="text-sm text-muted-foreground">
+                  Reading speed
+                </Label>
+                <span className="text-sm font-medium">{rate.toFixed(1)}×</span>
+              </div>
+              <Slider
+                id="read-rate"
+                min={0.6}
+                max={1.4}
+                step={0.1}
+                value={[rate]}
+                onValueChange={(v) => setRate(v[0])}
+                aria-label="Reading speed"
+              />
+            </div>
           </div>
 
           <div className="border-t pt-6 mt-6 space-y-3">
