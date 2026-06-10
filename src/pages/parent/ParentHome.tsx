@@ -6,6 +6,7 @@ import { SiteFooter } from "@/components/SiteFooter";
 import { Link } from "react-router-dom";
 import { BookOpen, Users, Wrench, MessageCircle, Eye, FileText, ArrowRight, LayoutDashboard, Heart } from "lucide-react";
 import { SuggestIdeasBanner } from "@/components/SuggestIdeasBanner";
+import { AskHelperPrompt } from "@/components/AskHelperPrompt";
 
 export default function ParentHome() {
   return (
@@ -134,6 +135,18 @@ export default function ParentHome() {
                   </Card>
                 </Link>
               </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Ask the Helper */}
+        <section className="py-4">
+          <div className="container px-4">
+            <div className="max-w-5xl mx-auto">
+              <AskHelperPrompt
+                title="Have a parenting question on your mind?"
+                description="Chat with our helper for gentle, general guidance and to find the right resource on the site."
+              />
             </div>
           </div>
         </section>
