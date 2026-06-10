@@ -87,7 +87,25 @@ export const AccessibilityControls = () => {
   const indexRef = useRef(0);
   const sessionRef = useRef(0); // bumped on stop to cancel queued speech
   const voiceRef = useRef<SpeechSynthesisVoice | null>(null);
+  const keepAliveRef = useRef<number | null>(null);
   const { toast } = useToast();
+
+  // Chrome silently stops/skips after ~15s; a periodic pause+resume keeps it alive.
+  const startKeepAlive = () => {
+    stopKeepAlive();
+    keepAliveRef.current = window.setInterval(() => {
+      if (window.speechSynthesis.speaking && !window.speechSynthesis.paused) {
+        window.speechSynthesis.pause();
+        window.speechSynthesis.resume();
+      }
+    }, 5000);
+  };
+  const stopKeepAlive = () => {
+    if (keepAliveRef.current !== null) {
+      window.clearInterval(keepAliveRef.current);
+      keepAliveRef.current = null;
+    }
+  };
 
   const supported = typeof window !== "undefined" && "speechSynthesis" in window;
 
@@ -110,8 +128,8 @@ export const AccessibilityControls = () => {
     if (isSpeaking && !isPaused && supported) {
       const session = sessionRef.current;
       window.speechSynthesis.cancel();
-      // Resume from the current chunk so the change feels immediate.
-      window.setTimeout(() => speakFrom(indexRef.current, session), 0);
+      // Small delay: Chrome drops the first words if you speak right after cancel().
+      window.setTimeout(() => speakFrom(indexRef.current, session), 130);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [rate]);
@@ -130,6 +148,7 @@ export const AccessibilityControls = () => {
 
   useEffect(() => {
     return () => {
+      stopKeepAlive();
       if (supported) window.speechSynthesis.cancel();
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -159,6 +178,7 @@ export const AccessibilityControls = () => {
     if (!supported) return;
     if (session !== sessionRef.current) return;
     if (i >= chunksRef.current.length) {
+      stopKeepAlive();
       setIsSpeaking(false);
       setIsPaused(false);
       return;
@@ -174,17 +194,20 @@ export const AccessibilityControls = () => {
     utter.pitch = 1;
     utter.volume = 1;
 
-    utter.onend = () => {
+    let advanced = false;
+    const next = () => {
+      if (advanced) return;
+      advanced = true;
       if (session !== sessionRef.current) return;
       speakFrom(i + 1, session);
     };
-    utter.onerror = () => {
-      if (session !== sessionRef.current) return;
-      speakFrom(i + 1, session);
-    };
+    utter.onend = next;
+    utter.onerror = next;
 
     window.speechSynthesis.speak(utter);
+    startKeepAlive();
   };
+
 
   const startReading = () => {
     if (!supported) {
@@ -211,7 +234,8 @@ export const AccessibilityControls = () => {
       if (!voiceRef.current) voiceRef.current = pickBestVoice(window.speechSynthesis.getVoices());
       setIsSpeaking(true);
       setIsPaused(false);
-      speakFrom(0, session);
+      // Small delay after cancel() so Chrome doesn't drop the opening words.
+      window.setTimeout(() => speakFrom(0, session), 130);
     }, 350);
   };
 
@@ -227,6 +251,7 @@ export const AccessibilityControls = () => {
 
   const stopReading = () => {
     sessionRef.current += 1; // invalidate queued speech
+    stopKeepAlive();
     if (supported) window.speechSynthesis.cancel();
     setIsSpeaking(false);
     setIsPaused(false);
