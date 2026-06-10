@@ -32,6 +32,8 @@ export function AIChatWidget() {
   const [isListening, setIsListening] = useState(false);
   const [voiceTranscript, setVoiceTranscript] = useState("");
   const [audioLevels, setAudioLevels] = useState<number[]>([]);
+  // A gentle, one-time nudge so first-time visitors notice the helper exists.
+  const [showNudge, setShowNudge] = useState(false);
   const scrollRef = useRef<HTMLDivElement>(null);
   const lastUserMsgRef = useRef<HTMLDivElement>(null);
   const userHasScrolledUpRef = useRef(false);
@@ -54,6 +56,38 @@ export function AIChatWidget() {
     window.addEventListener("littleminds:open-chat", openChat);
     return () => window.removeEventListener("littleminds:open-chat", openChat);
   }, []);
+
+  // Show a quiet, one-time nudge bubble for first-time visitors.
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    try {
+      if (localStorage.getItem("littleminds:chat-nudge-seen")) return;
+    } catch {
+      return;
+    }
+    const t = window.setTimeout(() => setShowNudge(true), 4000);
+    return () => window.clearTimeout(t);
+  }, []);
+
+  // Once the chat is opened (any way), the nudge has done its job — never show it again.
+  useEffect(() => {
+    if (!open) return;
+    setShowNudge(false);
+    try {
+      localStorage.setItem("littleminds:chat-nudge-seen", "1");
+    } catch {
+      /* ignore storage errors */
+    }
+  }, [open]);
+
+  const dismissNudge = () => {
+    setShowNudge(false);
+    try {
+      localStorage.setItem("littleminds:chat-nudge-seen", "1");
+    } catch {
+      /* ignore storage errors */
+    }
+  };
 
   // Lock background page scroll while the chat is taking over the screen
   // (full-screen on mobile, or when the user expands it on desktop).
