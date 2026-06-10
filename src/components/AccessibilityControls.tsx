@@ -60,7 +60,9 @@ export const AccessibilityControls = () => {
       const prefs = JSON.parse(saved);
       setHighContrast(prefs.highContrast || false);
       setReduceMotion(prefs.reduceMotion || false);
-      if (typeof prefs.readRate === "number") setRate(prefs.readRate);
+      if (typeof prefs.readRate === "number") {
+        setRate(Math.min(2, Math.max(0.5, Math.round(prefs.readRate * 4) / 4)));
+      }
     }
   }, []);
 
