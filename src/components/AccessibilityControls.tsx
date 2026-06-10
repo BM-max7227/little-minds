@@ -47,6 +47,7 @@ export const AccessibilityControls = () => {
   const [isSpeaking, setIsSpeaking] = useState(false);
   const [isPaused, setIsPaused] = useState(false);
   const [rate, setRate] = useState(1);
+  const [open, setOpen] = useState(false);
   const rateRef = useRef(rate);
   const { toast } = useToast();
 
@@ -61,7 +62,7 @@ export const AccessibilityControls = () => {
       setHighContrast(prefs.highContrast || false);
       setReduceMotion(prefs.reduceMotion || false);
       if (typeof prefs.readRate === "number") {
-        setRate(Math.min(2, Math.max(0.5, Math.round(prefs.readRate * 4) / 4)));
+        setRate(Math.min(1.5, Math.max(0.5, Math.round(prefs.readRate * 4) / 4)));
       }
     }
   }, []);
@@ -105,41 +106,47 @@ export const AccessibilityControls = () => {
       });
       return;
     }
-    const text = getReadableText();
-    if (!text) {
-      toast({ title: "Nothing to read", description: "No readable text was found on this page." });
-      return;
-    }
-    window.speechSynthesis.cancel();
+    // Close the settings panel first so it's clear we're reading the page itself.
+    setOpen(false);
 
-    // Speak in sentence-sized chunks so longer pages don't get cut off.
-    const chunks = text.match(/[^.!?\n]+[.!?]?(\s|$)|\n+/g) || [text];
-    const voice = pickBestVoice();
-    let index = 0;
-
-    const speakNext = () => {
-      if (index >= chunks.length) {
-        setIsSpeaking(false);
-        setIsPaused(false);
+    // Wait for the panel to close before grabbing the page text.
+    window.setTimeout(() => {
+      const text = getReadableText();
+      if (!text) {
+        toast({ title: "Nothing to read", description: "No readable text was found on this page." });
         return;
       }
-      const chunk = chunks[index++].trim();
-      if (!chunk) {
-        speakNext();
-        return;
-      }
-      const utterance = new SpeechSynthesisUtterance(chunk);
-      if (voice) utterance.voice = voice;
-      utterance.rate = rateRef.current;
-      utterance.pitch = 1;
-      utterance.onend = speakNext;
-      utterance.onerror = speakNext;
-      window.speechSynthesis.speak(utterance);
-    };
+      window.speechSynthesis.cancel();
 
-    setIsSpeaking(true);
-    setIsPaused(false);
-    speakNext();
+      // Speak in sentence-sized chunks so longer pages don't get cut off.
+      const chunks = text.match(/[^.!?\n]+[.!?]?(\s|$)|\n+/g) || [text];
+      const voice = pickBestVoice();
+      let index = 0;
+
+      const speakNext = () => {
+        if (index >= chunks.length) {
+          setIsSpeaking(false);
+          setIsPaused(false);
+          return;
+        }
+        const chunk = chunks[index++].trim();
+        if (!chunk) {
+          speakNext();
+          return;
+        }
+        const utterance = new SpeechSynthesisUtterance(chunk);
+        if (voice) utterance.voice = voice;
+        utterance.rate = rateRef.current;
+        utterance.pitch = 1;
+        utterance.onend = speakNext;
+        utterance.onerror = speakNext;
+        window.speechSynthesis.speak(utterance);
+      };
+
+      setIsSpeaking(true);
+      setIsPaused(false);
+      speakNext();
+    }, 350);
   };
 
   const pauseReading = () => {
@@ -162,7 +169,7 @@ export const AccessibilityControls = () => {
   };
 
   return (
-    <Sheet>
+    <Sheet open={open} onOpenChange={setOpen}>
       <SheetTrigger asChild>
         <Button variant="ghost" size="sm" aria-label="Accessibility settings" className="h-11 w-11 sm:h-9 sm:w-9 p-0">
           <Settings className="w-6 h-6 sm:w-5 sm:h-5" />
@@ -240,7 +247,7 @@ export const AccessibilityControls = () => {
               <Slider
                 id="read-rate"
                 min={0.5}
-                max={2}
+                max={1.5}
                 step={0.25}
                 value={[rate]}
                 onValueChange={(v) => setRate(Math.round(v[0] * 4) / 4)}
@@ -248,7 +255,7 @@ export const AccessibilityControls = () => {
               />
               <div className="flex justify-between text-xs text-muted-foreground">
                 <span>Slower</span>
-                <span>Normal</span>
+                <span>Normal (1×)</span>
                 <span>Faster</span>
               </div>
             </div>
