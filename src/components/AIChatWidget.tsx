@@ -488,7 +488,7 @@ export function AIChatWidget() {
               <button onClick={() => setOpen(true)} className="text-left">
                 <p className="text-sm font-medium">Hi there! 👋</p>
                 <p className="text-xs text-muted-foreground">
-                  Have a question? I'm here to help with feelings and wellbeing.
+                  I'm the Little Minds AI helper. Have a question about feelings or wellbeing?
                 </p>
               </button>
             </div>
