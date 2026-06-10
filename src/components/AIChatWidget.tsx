@@ -475,14 +475,34 @@ export function AIChatWidget() {
     <>
       {/* Floating button */}
       {!open && (
-        <button
-          onClick={() => setOpen(true)}
-          className="fixed bottom-5 right-5 sm:bottom-6 sm:right-6 z-50 flex items-center justify-center rounded-full bg-primary h-12 w-12 sm:h-14 sm:w-14 text-primary-foreground shadow-lg hover:bg-primary/90 transition-all hover:scale-105"
-          aria-label="Open chat assistant"
-        >
-          <MessageCircle className="h-5 w-5 sm:h-6 sm:w-6" />
-        </button>
+        <div className="fixed bottom-5 right-5 sm:bottom-6 sm:right-6 z-50 flex flex-col items-end gap-3">
+          {showNudge && (
+            <div className="relative max-w-[220px] rounded-2xl rounded-br-sm border bg-background px-3 py-2 pr-7 shadow-lg animate-fade-in">
+              <button
+                onClick={dismissNudge}
+                className="absolute top-1 right-1 rounded p-1 text-muted-foreground hover:text-foreground transition"
+                aria-label="Dismiss"
+              >
+                <X className="h-3.5 w-3.5" />
+              </button>
+              <button onClick={() => setOpen(true)} className="text-left">
+                <p className="text-sm font-medium">Hi there! 👋</p>
+                <p className="text-xs text-muted-foreground">
+                  Have a question? I'm here to help with feelings and wellbeing.
+                </p>
+              </button>
+            </div>
+          )}
+          <button
+            onClick={() => setOpen(true)}
+            className="flex items-center justify-center rounded-full bg-primary h-12 w-12 sm:h-14 sm:w-14 text-primary-foreground shadow-lg hover:bg-primary/90 transition-all hover:scale-105"
+            aria-label="Open chat assistant"
+          >
+            <MessageCircle className="h-5 w-5 sm:h-6 sm:w-6" />
+          </button>
+        </div>
       )}
+
 
       {/* Chat panel — full-screen on mobile, floating panel on sm+ */}
       {open && (
