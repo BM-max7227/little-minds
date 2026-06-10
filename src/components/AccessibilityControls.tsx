@@ -234,7 +234,8 @@ export const AccessibilityControls = () => {
       if (!voiceRef.current) voiceRef.current = pickBestVoice(window.speechSynthesis.getVoices());
       setIsSpeaking(true);
       setIsPaused(false);
-      speakFrom(0, session);
+      // Small delay after cancel() so Chrome doesn't drop the opening words.
+      window.setTimeout(() => speakFrom(0, session), 130);
     }, 350);
   };
 
