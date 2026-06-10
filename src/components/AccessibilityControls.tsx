@@ -1,17 +1,58 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";
-import { Settings, Trash2 } from "lucide-react";
+import { Slider } from "@/components/ui/slider";
+import { Settings, Trash2, Play, Pause, Square } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+
+const supportsSpeech = typeof window !== "undefined" && "speechSynthesis" in window;
+
+// Pick the most natural-sounding English voice available on the device.
+const pickBestVoice = (): SpeechSynthesisVoice | null => {
+  if (!supportsSpeech) return null;
+  const voices = window.speechSynthesis.getVoices();
+  if (!voices.length) return null;
+  const english = voices.filter((v) => v.lang?.toLowerCase().startsWith("en"));
+  const pool = english.length ? english : voices;
+  // Prefer higher-quality voices by common naming conventions.
+  const preferred = [
+    "natural", "neural", "premium", "enhanced", "google",
+    "samantha", "aria", "jenny", "libby", "sonia",
+  ];
+  for (const keyword of preferred) {
+    const match = pool.find((v) => v.name.toLowerCase().includes(keyword));
+    if (match) return match;
+  }
+  // Otherwise favor a local (offline) voice for reliability.
+  return pool.find((v) => v.localService) || pool[0];
+};
+
+// Read only the page's main content, skipping nav, buttons, and footer.
+const getReadableText = (): string => {
+  const main = document.querySelector("main");
+  const source = (main as HTMLElement) || document.body;
+  const clone = source.cloneNode(true) as HTMLElement;
+  clone
+    .querySelectorAll("nav, header, footer, button, script, style, [aria-hidden='true']")
+    .forEach((el) => el.remove());
+  return clone.innerText.replace(/\s+\n/g, "\n").replace(/\n{3,}/g, "\n\n").trim();
+};
 
 export const AccessibilityControls = () => {
   const [highContrast, setHighContrast] = useState(false);
   const [reduceMotion, setReduceMotion] = useState(false);
-  const [readAloud, setReadAloud] = useState(false);
   const [confirmClear, setConfirmClear] = useState(false);
+  const [isSpeaking, setIsSpeaking] = useState(false);
+  const [isPaused, setIsPaused] = useState(false);
+  const [rate, setRate] = useState(1);
+  const rateRef = useRef(rate);
   const { toast } = useToast();
+
+  useEffect(() => {
+    rateRef.current = rate;
+  }, [rate]);
 
   useEffect(() => {
     const saved = localStorage.getItem("accessibility-prefs");
@@ -19,14 +60,26 @@ export const AccessibilityControls = () => {
       const prefs = JSON.parse(saved);
       setHighContrast(prefs.highContrast || false);
       setReduceMotion(prefs.reduceMotion || false);
-      setReadAloud(prefs.readAloud || false);
+      if (typeof prefs.readRate === "number") setRate(prefs.readRate);
     }
+  }, []);
+
+  // Warm up the voice list (loads asynchronously in most browsers).
+  useEffect(() => {
+    if (!supportsSpeech) return;
+    const load = () => window.speechSynthesis.getVoices();
+    load();
+    window.speechSynthesis.addEventListener("voiceschanged", load);
+    return () => {
+      window.speechSynthesis.removeEventListener("voiceschanged", load);
+      window.speechSynthesis.cancel();
+    };
   }, []);
 
   useEffect(() => {
     localStorage.setItem(
       "accessibility-prefs",
-      JSON.stringify({ highContrast, reduceMotion, readAloud })
+      JSON.stringify({ highContrast, reduceMotion, readRate: rate })
     );
 
     if (highContrast) {
@@ -40,18 +93,70 @@ export const AccessibilityControls = () => {
     } else {
       document.documentElement.classList.remove("reduce-motion");
     }
-  }, [highContrast, reduceMotion, readAloud]);
+  }, [highContrast, reduceMotion, rate]);
 
-  const handleReadAloud = (enabled: boolean) => {
-    setReadAloud(enabled);
-    if (enabled && 'speechSynthesis' in window) {
-      const text = document.body.innerText;
-      const utterance = new SpeechSynthesisUtterance(text);
-      utterance.rate = 0.9;
-      window.speechSynthesis.speak(utterance);
-    } else if (!enabled && 'speechSynthesis' in window) {
-      window.speechSynthesis.cancel();
+  const startReading = () => {
+    if (!supportsSpeech) {
+      toast({
+        title: "Read Aloud not available",
+        description: "Your browser doesn't support speech. Try a different browser.",
+      });
+      return;
     }
+    const text = getReadableText();
+    if (!text) {
+      toast({ title: "Nothing to read", description: "No readable text was found on this page." });
+      return;
+    }
+    window.speechSynthesis.cancel();
+
+    // Speak in sentence-sized chunks so longer pages don't get cut off.
+    const chunks = text.match(/[^.!?\n]+[.!?]?(\s|$)|\n+/g) || [text];
+    const voice = pickBestVoice();
+    let index = 0;
+
+    const speakNext = () => {
+      if (index >= chunks.length) {
+        setIsSpeaking(false);
+        setIsPaused(false);
+        return;
+      }
+      const chunk = chunks[index++].trim();
+      if (!chunk) {
+        speakNext();
+        return;
+      }
+      const utterance = new SpeechSynthesisUtterance(chunk);
+      if (voice) utterance.voice = voice;
+      utterance.rate = rateRef.current;
+      utterance.pitch = 1;
+      utterance.onend = speakNext;
+      utterance.onerror = speakNext;
+      window.speechSynthesis.speak(utterance);
+    };
+
+    setIsSpeaking(true);
+    setIsPaused(false);
+    speakNext();
+  };
+
+  const pauseReading = () => {
+    if (!supportsSpeech) return;
+    window.speechSynthesis.pause();
+    setIsPaused(true);
+  };
+
+  const resumeReading = () => {
+    if (!supportsSpeech) return;
+    window.speechSynthesis.resume();
+    setIsPaused(false);
+  };
+
+  const stopReading = () => {
+    if (!supportsSpeech) return;
+    window.speechSynthesis.cancel();
+    setIsSpeaking(false);
+    setIsPaused(false);
   };
 
   return (
