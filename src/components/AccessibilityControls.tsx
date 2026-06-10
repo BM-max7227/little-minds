@@ -60,7 +60,9 @@ export const AccessibilityControls = () => {
       const prefs = JSON.parse(saved);
       setHighContrast(prefs.highContrast || false);
       setReduceMotion(prefs.reduceMotion || false);
-      if (typeof prefs.readRate === "number") setRate(prefs.readRate);
+      if (typeof prefs.readRate === "number") {
+        setRate(Math.min(2, Math.max(0.5, Math.round(prefs.readRate * 4) / 4)));
+      }
     }
   }, []);
 
@@ -233,17 +235,22 @@ export const AccessibilityControls = () => {
                 <Label htmlFor="read-rate" className="text-sm text-muted-foreground">
                   Reading speed
                 </Label>
-                <span className="text-sm font-medium">{rate.toFixed(1)}×</span>
+                <span className="text-sm font-medium">{rate}×</span>
               </div>
               <Slider
                 id="read-rate"
-                min={0.6}
-                max={1.4}
-                step={0.1}
+                min={0.5}
+                max={2}
+                step={0.25}
                 value={[rate]}
-                onValueChange={(v) => setRate(v[0])}
+                onValueChange={(v) => setRate(Math.round(v[0] * 4) / 4)}
                 aria-label="Reading speed"
               />
+              <div className="flex justify-between text-xs text-muted-foreground">
+                <span>Slower</span>
+                <span>Normal</span>
+                <span>Faster</span>
+              </div>
             </div>
           </div>
 
