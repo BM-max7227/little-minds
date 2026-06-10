@@ -6,6 +6,7 @@ import { Card } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
 import { learnTopics } from "@/data/learnTopics";
 import { SuggestIdeasBanner } from "@/components/SuggestIdeasBanner";
+import { AskHelperPrompt } from "@/components/AskHelperPrompt";
 import { useLearnProgress } from "@/hooks/useLearnProgress";
 import {
   CheckCircle,
@@ -134,6 +135,13 @@ export default function LearnHome() {
         </div>
 
         <div className="mt-12">
+          <AskHelperPrompt
+            title="Want to ask about something specific?"
+            description="Our helper can explain wellbeing topics in plain language and point you to the right page."
+          />
+        </div>
+
+        <div className="mt-6">
           <SuggestIdeasBanner message="Want us to cover a topic we haven't included? Reach out and let us know!" />
         </div>
       </main>
