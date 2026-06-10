@@ -1,5 +1,5 @@
 import { corsHeaders } from "npm:@supabase/supabase-js@2/cors";
-import { encode as base64Encode } from "https://deno.land/std@0.224.0/encoding/base64.ts";
+import { encodeBase64 } from "https://deno.land/std@0.224.0/encoding/base64.ts";
 
 // Warm, calm narrator voice ("Sarah") — friendly and reassuring for this audience.
 const VOICE_ID = "EXAVITQu4vr4xnSDxMaL";
