@@ -178,6 +178,7 @@ export const AccessibilityControls = () => {
     if (!supported) return;
     if (session !== sessionRef.current) return;
     if (i >= chunksRef.current.length) {
+      stopKeepAlive();
       setIsSpeaking(false);
       setIsPaused(false);
       return;
@@ -193,17 +194,20 @@ export const AccessibilityControls = () => {
     utter.pitch = 1;
     utter.volume = 1;
 
-    utter.onend = () => {
+    let advanced = false;
+    const next = () => {
+      if (advanced) return;
+      advanced = true;
       if (session !== sessionRef.current) return;
       speakFrom(i + 1, session);
     };
-    utter.onerror = () => {
-      if (session !== sessionRef.current) return;
-      speakFrom(i + 1, session);
-    };
+    utter.onend = next;
+    utter.onerror = next;
 
     window.speechSynthesis.speak(utter);
+    startKeepAlive();
   };
+
 
   const startReading = () => {
     if (!supported) {
